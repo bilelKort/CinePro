@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/entities/reservation.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/utils/cineproConnexion.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/entities/reservation_place.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/cineProMain.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/ReservationController.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/interfaces/entityCRUD.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/reservation_placeCRUD.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/reservation_snackCRUD.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/tests/MainClass.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/reservationCRUD.java</file>
+        </group>
+    </open-files>
+</project-private>

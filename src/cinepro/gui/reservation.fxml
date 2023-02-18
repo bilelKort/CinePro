@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.ReservationController">
+   <children>
+      <Label layoutX="102.0" layoutY="82.0" prefHeight="17.0" prefWidth="67.0" text="Prix" />
+      <Label layoutX="102.0" layoutY="149.0" prefHeight="17.0" prefWidth="67.0" text="id_user" />
+      <Label layoutX="102.0" layoutY="216.0" prefHeight="17.0" prefWidth="67.0" text="id_film" />
+      <Label layoutX="102.0" layoutY="298.0" prefHeight="17.0" prefWidth="67.0" text="state" />
+      <TextField fx:id="resprix" layoutX="245.0" layoutY="78.0" prefHeight="25.0" prefWidth="221.0" />
+      <TextField fx:id="residuser" layoutX="245.0" layoutY="145.0" prefHeight="25.0" prefWidth="221.0" />
+      <TextField fx:id="residfilm" layoutX="245.0" layoutY="212.0" prefHeight="25.0" prefWidth="221.0" />
+      <TextField fx:id="resstate" layoutX="245.0" layoutY="294.0" prefHeight="25.0" prefWidth="221.0" />
+      <Button fx:id="btn" layoutX="257.0" layoutY="346.0" mnemonicParsing="false" onAction="#saveReservation" prefHeight="25.0" prefWidth="87.0" text="OK" />
+   </children>
+</AnchorPane>
