@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.web.WebView?>
+
+<AnchorPane minHeight="600.0" minWidth="800.0" prefHeight="739.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.AjoutMovieController">
+   <children>
+      <Label layoutX="41.0" layoutY="55.0" text="Lien IMDB">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <TextField fx:id="search" layoutX="151.0" layoutY="48.0" prefHeight="44.0" prefWidth="469.0" promptText="https://www.imdb.com/title/tt#####" AnchorPane.leftAnchor="151.0" AnchorPane.rightAnchor="180.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </TextField>
+      <Button fx:id="searchBtn" layoutX="657.0" layoutY="48.0" mnemonicParsing="false" onAction="#searchMovie" prefHeight="44.0" prefWidth="109.0" text="Search" AnchorPane.rightAnchor="34.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="54.0" layoutY="198.0" text="Name">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="name" layoutX="122.0" layoutY="192.0" prefHeight="39.0" prefWidth="261.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="967.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="59.0" layoutY="251.0" text="Date">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="date" layoutX="122.0" layoutY="245.0" prefHeight="39.0" prefWidth="261.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="967.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="43.0" layoutY="306.0" text="RunTime">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="runTime" layoutX="122.0" layoutY="300.0" prefHeight="39.0" prefWidth="261.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="967.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="50.0" layoutY="365.0" text="Genres">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="categories" layoutX="122.0" layoutY="359.0" prefHeight="39.0" prefWidth="261.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="967.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="59.0" layoutY="423.0" text="Desc">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextArea fx:id="desc" layoutX="122.0" layoutY="423.0" prefHeight="212.0" prefWidth="261.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="967.0">
+         <font>
+            <Font size="18.0" />
+         </font></TextArea>
+      <HBox layoutX="401.0" layoutY="192.0" />
+      <Label fx:id="error" layoutX="1166.0" layoutY="118.0" prefHeight="27.0" prefWidth="109.0" textAlignment="RIGHT" textFill="RED" AnchorPane.rightAnchor="34.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <ImageView fx:id="poster" fitHeight="450.0" fitWidth="303.0" layoutX="393.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
+      <WebView fx:id="trailer" layoutX="706.0" layoutY="248.0" prefHeight="341.0" prefWidth="623.0" AnchorPane.rightAnchor="21.0" />
+      <Button fx:id="ajoutBtn" layoutX="1170.0" layoutY="653.0" mnemonicParsing="false" onAction="#ajouterFilm" text="Ajouter Film" AnchorPane.rightAnchor="44.0">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="415.0" layoutY="661.0" text="Actors" AnchorPane.leftAnchor="415.0" AnchorPane.rightAnchor="884.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="actors" layoutX="484.0" layoutY="655.0" prefHeight="39.0" prefWidth="446.0" AnchorPane.rightAnchor="420.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+      <Label layoutX="46.0" layoutY="661.0" text="Director">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <TextField fx:id="directors" layoutX="122.0" layoutY="655.0" prefHeight="39.0" prefWidth="261.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="967.0">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </TextField>
+   </children>
+</AnchorPane>
