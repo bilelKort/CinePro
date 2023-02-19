@@ -43,14 +43,25 @@ public class ReservationController implements Initializable {
  
     @FXML
     private void saveReservation(ActionEvent event) {
-        float prix = Float.valueOf(resprix.getText());
+        //float prix = Float.valueOf(resprix.getText());
         int iduser = Integer.valueOf(residuser.getText());
         int idfilm = Integer.valueOf(residfilm.getText());
         boolean state = Boolean.valueOf(resstate.getText());
         
         reservationCRUD pcd = new reservationCRUD();
-        reservation res = new reservation(prix,iduser,idfilm,state);
+        reservation res = new reservation(0.0f,iduser,idfilm,state);
         pcd.addEntity(res);
+        
+       FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation_place.fxml"));
+       try{
+       Parent root = loader.load(); 
+
+        btn.getScene().setRoot(root);
+
+       }catch(IOException ex){
+       
+        System.out.println(ex.getMessage());
+    } 
        
        
     }

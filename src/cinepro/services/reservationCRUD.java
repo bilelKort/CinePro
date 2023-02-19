@@ -23,16 +23,16 @@ public class reservationCRUD implements entityCRUD<reservation>{
     @Override
     public void addEntity(reservation r) {
         try {
-            String requete = "INSERT INTO reservation (id_user,id_film,state)" + "VALUES (?, ?, ?)";
+            String requete = "INSERT INTO reservation (Prix_final,id_user,id_film,state)" + "VALUES (? ,?, ?, ?)";
             
             //+ "SELECT SUM(rp.prix + rs.prix) as prix_final FROM reservation_place rp JOIN reservation_snack rs ON rp.id_reservation = rs.id_reservation" 
             PreparedStatement st = cineproConnexion.getInstance().getCnx()
                     .prepareStatement(requete);
             
-            
-            st.setInt(1, r.getId_user());
-            st.setInt(2, r.getId_film());
-            st.setBoolean(3, r.isState());
+            st.setFloat(1, 0f);
+            st.setInt(2, r.getId_user());
+            st.setInt(3, r.getId_film());
+            st.setBoolean(4, r.isState());
 
             st.executeUpdate();
             
