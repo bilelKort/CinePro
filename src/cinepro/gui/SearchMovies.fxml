@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="739.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.AddProjectionController">
+   <children>
+      <TextField fx:id="search" alignment="CENTER" layoutX="113.0" layoutY="48.0" onInputMethodTextChanged="#searchMovie" prefHeight="51.0" prefWidth="1125.0" promptText="Search" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="112.0">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </TextField>
+      <HBox layoutY="137.0" prefHeight="602.0" prefWidth="1350.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="137.0">
+         <children>
+            <ScrollPane prefHeight="602.0" prefWidth="1350.0" />
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>
