@@ -48,8 +48,16 @@ public class ReservationSnackController implements Initializable {
         float Prix = Float.valueOf(prixsnack.getText());
         int idRes = Integer.valueOf(idres.getText());
         
+        if(idSnack>0 && Prix>0){
         reservation_snack res =new reservation_snack(idSnack,Prix,idRes);
         reservation_snackCRUD pcd = new reservation_snackCRUD();
         pcd.addEntity(res);
+        }
+        else{
+            System.out.println("Invalid champ");
+        }
     }
 }
+
+
+

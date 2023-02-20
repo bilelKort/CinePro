@@ -48,6 +48,7 @@ public class ReservationController implements Initializable {
         int idfilm = Integer.valueOf(residfilm.getText());
         boolean state = Boolean.valueOf(resstate.getText());
         
+        if(iduser>0 && idfilm>0){
         reservationCRUD pcd = new reservationCRUD();
         reservation res = new reservation(0.0f,iduser,idfilm,state);
         pcd.addEntity(res);
@@ -57,12 +58,15 @@ public class ReservationController implements Initializable {
        Parent root = loader.load(); 
 
         btn.getScene().setRoot(root);
-
+       
        }catch(IOException ex){
        
         System.out.println(ex.getMessage());
     } 
-       
+        }
+        else{
+           System.out.println("Invalid champ");
+        }
        
     }
 }

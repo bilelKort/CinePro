@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package cinepro.entities;
+import java.sql.Timestamp;
 
 /**
  *
@@ -13,26 +14,34 @@ public class reservation_place {
    private String coordonnee;
    private float prix;
    private int id_reservation;
+   private Timestamp start_time;
+   private Timestamp end_time;
+   
 
     public reservation_place() {
     }
 
-    public reservation_place(String coordonnee, float prix, int id_reservation) {
+    public reservation_place(String coordonnee, float prix, int id_reservation,Timestamp start_time,Timestamp end_time) {
         this.coordonnee = coordonnee;
         this.prix = prix;
         this.id_reservation = id_reservation;
+        this.start_time = start_time;
+        this.end_time = end_time;
     }
 
-    public reservation_place(int id_res_place, String coordonnee, float prix, int id_reservation) {
+    public reservation_place(int id_res_place, String coordonnee, float prix, int id_reservation,Timestamp start_time,Timestamp end_time) {
         this.id_res_place = id_res_place;
         this.coordonnee = coordonnee;
         this.prix = prix;
         this.id_reservation = id_reservation;
+        this.start_time = start_time;
+        this.end_time = end_time;
     }
 
-    public reservation_place(String coordonnee, float prix) {
+    public reservation_place(String coordonnee, float prix,Timestamp start_time,Timestamp end_time) {
         this.coordonnee = coordonnee;
         this.prix = prix;
+        
     }
 
     
@@ -66,6 +75,22 @@ public class reservation_place {
 
     public void setId_reservation(int id_reservation) {
         this.id_reservation = id_reservation;
+    }
+
+    public Timestamp getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(Timestamp start_time) {
+        this.start_time = start_time;
+    }
+
+    public Timestamp getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Timestamp end_time) {
+        this.end_time = end_time;
     }
 
     @Override

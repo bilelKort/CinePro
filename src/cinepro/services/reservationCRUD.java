@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -20,13 +22,65 @@ import java.util.List;
  */
 public class reservationCRUD implements entityCRUD<reservation>{
 
+    public int checkUser(reservation r){
+        int count=0;
+        try {
+            String requete = "SELECT COUNT(*) FROM user u WHERE u.id_user = ? ";
+                                
+                               
+            
+            PreparedStatement stmp = cineproConnexion.getInstance().getCnx()
+                    .prepareStatement(requete);
+            
+            stmp.setInt(1, r.getId_user());
+            
+            ResultSet rs = stmp.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(reservationCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           return count;
+
+    }
+    
+public int checkFilm(reservation r){
+   int count=0;
+        try {
+            String requete = "SELECT COUNT(*) FROM film f WHERE f.id_film = ?";
+ 
+            PreparedStatement stmp = cineproConnexion.getInstance().getCnx()
+                    .prepareStatement(requete);
+            
+            stmp.setInt(1, r.getId_film());
+            
+            ResultSet rs = stmp.executeQuery();
+            rs.next();
+            count = rs.getInt(1);
+        } catch (SQLException ex) {
+            Logger.getLogger(reservationCRUD.class.getName()).log(Level.SEVERE, null, ex);
+        }
+           return count;  
+}
+    
+    
     @Override
     public void addEntity(reservation r) {
         try {
             String requete = "INSERT INTO reservation (Prix_final,id_user,id_film,state)" + "VALUES (? ,?, ?, ?)";
+            int count = checkUser(r);
+            int count2=checkFilm(r);
             
-            //+ "SELECT SUM(rp.prix + rs.prix) as prix_final FROM reservation_place rp JOIN reservation_snack rs ON rp.id_reservation = rs.id_reservation" 
-            PreparedStatement st = cineproConnexion.getInstance().getCnx()
+            if (count == 0) {
+                System.out.println("user doesn't exists");
+            }
+            
+            if(count2==0){
+                System.out.println("film doesn't exists"); 
+            }
+            
+            else if(count>0 && count2>0){
+               PreparedStatement st = cineproConnexion.getInstance().getCnx()
                     .prepareStatement(requete);
             
             st.setFloat(1, 0f);
@@ -36,8 +90,8 @@ public class reservationCRUD implements entityCRUD<reservation>{
 
             st.executeUpdate();
             
-            System.out.println("reservation ajoute");
-            
+            System.out.println("reservation ajoute"); 
+            }        
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }

@@ -12,8 +12,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,52 +24,87 @@ import java.util.List;
  */
 public class reservation_placeCRUD implements entityCRUD<reservation_place>{
 
-    @Override
-    public void addEntity(reservation_place r) {
-        ResultSet rs = null;
+    
+     public boolean check1(reservation_place r){
+       ResultSet rs = null;
         try {
              String query = "SELECT COUNT(*) FROM reservation_place " +
                        "WHERE coordonnee = ? AND id_reservation = ?";
-              PreparedStatement stmp = cineproConnexion.getInstance().getCnx()
-                    .prepareStatement(query);
-              
-        stmp.setString(1, r.getCoordonnee());
-        stmp.setInt(2, r.getId_reservation());
+              PreparedStatement stmp;
+               stmp = cineproConnexion.getInstance().getCnx()
+                       .prepareStatement(query);
+               
+               stmp.setString(1, r.getCoordonnee());
+               stmp.setInt(2, r.getId_reservation());
         //st.setTimestamp(4, Timestamp.valueOf(startTime.plusMinutes(120))); // End time of new reservation
         //st.setTimestamp(5, Timestamp.valueOf(startTime)); // Start time of new reservation
         rs = stmp.executeQuery();
 
         if (rs.next() && rs.getInt(1) > 0) {
             System.out.println("You have already reserved a seat for another film at the same time.");
-        }
-            
-        else{
-           String requete = "INSERT INTO reservation_place (coordonnee,prix,id_reservation)" + "VALUES (?, ?, ?)";
-            
-            PreparedStatement st = cineproConnexion.getInstance().getCnx()
-                    .prepareStatement(requete);
-            
-            st.setString(1, r.getCoordonnee());
-            st.setFloat(2, r.getPrix());
-            st.setInt(3, r.getId_reservation());
-
-            st.executeUpdate();
+            return false;
+        } 
+           }catch (SQLException ex) {
+               Logger.getLogger(reservation_placeCRUD.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        return true;
+     } 
+    
+     public boolean check2(reservation_place r){
+         ResultSet rs = null;
+         try {
+             String requete = "SELECT id_reservation FROM reservation_place WHERE coordonnee = ? AND id_reservation <> ?";
+             PreparedStatement stmp;
              
-             String requete2 = "UPDATE reservation SET prix_final = (prix_final + ?) WHERE (id_reservation=?)";
-             PreparedStatement st2 = cineproConnexion.getInstance().getCnx()
-                    .prepareStatement(requete2);
-
-             st2.setFloat(1, r.getPrix());             
-             st2.setInt(2, r.getId_reservation());
+             stmp = cineproConnexion.getInstance().getCnx()
+                     .prepareStatement(requete);
              
-             st2.executeUpdate();
-             System.out.println("reservation ajoute");
+             stmp.setString(1, r.getCoordonnee());
+             stmp.setInt(2, r.getId_reservation());
+             rs = stmp.executeQuery();
+             
+             if (rs.next()) {
+                 System.out.println("A reservation with the same coordonnee already exists for this id_reservation.");
+                 return false;
+             }} catch (SQLException ex) {
+             Logger.getLogger(reservation_placeCRUD.class.getName()).log(Level.SEVERE, null, ex);
+         }
+            return true;
+     }
+     
+    @Override
+    public void addEntity(reservation_place r) { 
+        if(check1(r) && check2(r)){
+            try {
+                String requete = "INSERT INTO reservation_place (coordonnee,prix,id_reservation,start_time,end_time)" + "VALUES (?, ?, ?, ?, ?)";
+                
+                PreparedStatement st = cineproConnexion.getInstance().getCnx()
+                        .prepareStatement(requete);
+                
+                st.setString(1, r.getCoordonnee());
+                st.setFloat(2, r.getPrix());
+                st.setInt(3, r.getId_reservation());
+                st.setTimestamp(4,r.getStart_time());
+                st.setTimestamp(5, r.getEnd_time());
+                
+                st.executeUpdate();
+                
+                String requete2 = "UPDATE reservation SET prix_final = (prix_final + ?) WHERE (id_reservation=?)";
+                PreparedStatement st2 = cineproConnexion.getInstance().getCnx()
+                        .prepareStatement(requete2);
+                
+                st2.setFloat(1, r.getPrix());
+                st2.setInt(2, r.getId_reservation());
+                
+                st2.executeUpdate();
+                System.out.println("reservation ajoute");
+            } catch (SQLException ex) {
+                Logger.getLogger(reservation_placeCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
+        } 
+      
+    
     @Override
     public List<reservation_place> entitiesList() {
          ArrayList<reservation_place> myList = new ArrayList();
@@ -106,9 +144,36 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
         }
      }
 
-     public void updateEntity(int id_res_place,String coordonnee,float prix,int id_reservation){
-        try{
-        String requete = "UPDATE reservation_place set id_res_place=?,coordonnee=?,prix=?,id_reservation=?";
+     
+     /*public boolean checkUpdate(int id_res_place,String coordonnee,float prix,int id_reservation,Timestamp start_time,Timestamp end_time){
+       ResultSet rs = null;
+        try {
+             String query = "SELECT COUNT(*) FROM reservation_place " +
+                       "WHERE coordonnee = ? AND id_reservation = ?";
+              PreparedStatement stmp;
+               stmp = cineproConnexion.getInstance().getCnx()
+                       .prepareStatement(query);
+               
+               stmp.setString(1, );
+               stmp.setInt(2, r.getId_reservation());
+        //st.setTimestamp(4, Timestamp.valueOf(startTime.plusMinutes(120))); // End time of new reservation
+        //st.setTimestamp(5, Timestamp.valueOf(startTime)); // Start time of new reservation
+        rs = stmp.executeQuery();
+
+        if (rs.next() && rs.getInt(1) > 0) {
+            System.out.println("You have already reserved a seat for another film at the same time.");
+            return false;
+        } 
+           }catch (SQLException ex) {
+               Logger.getLogger(reservation_placeCRUD.class.getName()).log(Level.SEVERE, null, ex);
+           }
+        return true;
+     } 
+     */
+     public void updateEntity(int id_res_place,String coordonnee,float prix,int id_reservation,Timestamp start_time,Timestamp end_time){
+        
+         try{
+        String requete = "UPDATE reservation_place set id_res_place=?,coordonnee=?,prix=?,id_reservation=?,start_time=?,end_time=?";
         PreparedStatement st=cineproConnexion.getInstance()
                 .getCnx().prepareStatement(requete);
             
@@ -116,11 +181,19 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
         st.setString(2, coordonnee);
         st.setFloat(3, prix);
         st.setInt(4, id_reservation);
-        
+        st.setTimestamp(4,start_time);
+        st.setTimestamp(5, end_time);
+                
         st.executeUpdate();
-        
         }catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
         }
+         
+     
+     
+     
+     
+     
+     
 }

@@ -11,6 +11,7 @@ import cinepro.services.reservationCRUD;
 import cinepro.services.reservation_placeCRUD;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -19,6 +20,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import java.time.LocalDateTime;
 
 /**
  * FXML Controller class
@@ -34,10 +36,15 @@ public class Reservation_placeController implements Initializable {
     @FXML
     private TextField idres;
     @FXML
+    private TextField starttime;
+    @FXML
+    private TextField endtime;
+    @FXML
     private Button btnres;
     @FXML
     private Button snackbtn;
-    
+    @FXML
+    private Button btnUpdate;
     
     /**
      * Initializes the controller class.
@@ -53,8 +60,28 @@ public class Reservation_placeController implements Initializable {
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
         int idRes = Integer.valueOf(idres.getText());
+        Timestamp start_time = Timestamp.valueOf(starttime.getText());
+        Timestamp end_time = Timestamp.valueOf(endtime.getText());
+
         
-        reservation_place res =new reservation_place(seatNum,Prix,idRes);
+        reservation_place res = new reservation_place(seatNum, Prix, idRes,start_time,end_time);
+        reservation_placeCRUD pcd = new reservation_placeCRUD();
+        pcd.addEntity(res); 
+    }
+    
+    /****************************************************************************************************/
+    /****************************************************************************************************/
+    
+    @FXML
+    private void saveReservationPlaceSnack (ActionEvent event) {
+        
+        String seatNum = coordonne.getText();
+        float Prix = Float.valueOf(prix_place.getText());
+        int idRes = Integer.valueOf(idres.getText());
+        Timestamp start_time = Timestamp.valueOf(starttime.getText());
+        Timestamp end_time = Timestamp.valueOf(endtime.getText());
+        
+        reservation_place res = new reservation_place(seatNum, Prix, idRes,start_time,end_time);
         reservation_placeCRUD pcd = new reservation_placeCRUD();
         pcd.addEntity(res);
         
@@ -69,4 +96,26 @@ public class Reservation_placeController implements Initializable {
         System.out.println(ex.getMessage());
     } 
     }
+
+    
+    @FXML
+    private void updateReservationPlace (ActionEvent event) {
+        
+        String seatNum = coordonne.getText();
+        float Prix = Float.valueOf(prix_place.getText());
+        int idRes = Integer.valueOf(idres.getText());
+        Timestamp start_time = Timestamp.valueOf(starttime.getText());
+        Timestamp end_time = Timestamp.valueOf(endtime.getText());
+
+        
+        reservation_place res = new reservation_place(seatNum, Prix, idRes,start_time,end_time);
+        reservation_placeCRUD pcd = new reservation_placeCRUD();
+        pcd.updateEntity(idRes, seatNum, Prix, idRes,start_time,end_time);
+    }
+    
+    
+    
 }
+
+
+  
