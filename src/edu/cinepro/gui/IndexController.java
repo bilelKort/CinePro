@@ -11,6 +11,7 @@ import edu.cinepro.services.CineproCRUD;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 
 /**
  * FXML Controller class
@@ -28,16 +29,17 @@ public class IndexController implements Initializable {
         CineproCRUD ccd = new CineproCRUD();
        /* Cinepro c = new Cinepro();
         c = ccd.getUserById(id); */
-        System.out.println("Bonjour "+UserSession.getInstace().getNom()+" !");
+       // System.out.println("Bonjour "+UserSession.getInstace().getNom()+" !");
         
-        UserSession.getInstace().cleanUserSession();
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setContentText("Bonjour "+UserSession.getInstace().getNom()+" !");
+        alert.show();
+        
+        UserSession.getInstace().cleanUserSession(); // Deconnecter
         System.out.println(UserSession.getInstace().getId());
 
         System.out.println("Bonjour "+UserSession.getInstace().getNom()+" !");
         
-        
-        //System.out.println(UserSession.getInstace().getId());
-        //System.out.println(UserSession.getInstace().getRole());
         
     }    
     
