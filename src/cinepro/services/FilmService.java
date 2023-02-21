@@ -14,7 +14,7 @@ import java.util.List;
 
 public class FilmService implements FilmCRUD<Film> {
     @Override
-    public void addFilm(Film film) {
+    public void addFilm(Film film) throws SQLException {
         try {
             String requete = "insert into film (nom, categorie, description, duree, poster, trailer, releaseDate, id_imdb) values (?, ?, ?, ?, ?, ?, str_to_date(?, '%Y-%m-%d'), ?)";
             PreparedStatement preparedStatement = MyConnection.getInstance().getConnection().prepareStatement(requete);
@@ -30,6 +30,7 @@ public class FilmService implements FilmCRUD<Film> {
             System.out.println("film ajouté");
         } catch (SQLException e) {
             System.out.println(e.getMessage());
+            throw new SQLException();
         }
     }
 
@@ -40,6 +41,33 @@ public class FilmService implements FilmCRUD<Film> {
             String requete = "select * from film";
             Statement statement = MyConnection.getInstance().getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(requete);
+            while (resultSet.next()) {
+                Film film = new Film();
+                film.setId_film(resultSet.getInt(1));
+                film.setNom(resultSet.getString(2));
+                film.setCategorie(resultSet.getString(3));
+                film.setDescription(resultSet.getString(4));
+                film.setDuree(resultSet.getInt(5));
+                film.setPoster(resultSet.getString(6));
+                film.setTrailer(resultSet.getString(7));
+                film.setReleaseDate(resultSet.getString(8));
+                film.setId_imdb(resultSet.getString(9));
+                list.add(film);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    @Override
+    public List filmList(String name) {
+        ArrayList<Film> list = new ArrayList<Film>();
+        try {
+            String requete = "select * from film where nom like ?";
+            PreparedStatement preparedStatement = MyConnection.getInstance().getConnection().prepareStatement(requete);
+            preparedStatement.setString(1, "%"+name+"%");
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Film film = new Film();
                 film.setId_film(resultSet.getInt(1));

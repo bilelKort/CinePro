@@ -4,9 +4,14 @@ import cinepro.entities.Crew;
 import cinepro.entities.Film;
 import cinepro.services.CrewService;
 import cinepro.services.FilmService;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
@@ -14,6 +19,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import jdk.nashorn.internal.runtime.ECMAException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -21,29 +27,33 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.ResourceBundle;
 
-public class AjoutMovieController extends Application {
+public class AjoutMovieController implements Initializable {
 
     @FXML
-    public TextField actors;
+    private Button listMovies;
     @FXML
-    public TextField directors;
+    private Label actors;
+    @FXML
+    private Label directors;
     @FXML
     private Label error;
     @FXML
     private TextField search;
     @FXML
-    private TextField name;
+    private Label name;
     @FXML
-    private TextField date;
+    private Label date;
     @FXML
-    private TextField runTime;
+    private Label runTime;
     @FXML
-    private TextField categories;
+    private Label categories;
     @FXML
-    private TextArea desc;
+    private Label desc;
     @FXML
     private ImageView poster;
     @FXML
@@ -51,13 +61,8 @@ public class AjoutMovieController extends Application {
     private static HttpURLConnection connection;
     private String id_imdb;
 
-    public static void main(String[] args) {
-        launch(args);
-    }
-
     @Override
-    public void start(Stage primaryStage) {
-
+    public void initialize(URL location, ResourceBundle resources) {
     }
 
     public void searchMovie(ActionEvent actionEvent) {
@@ -109,10 +114,18 @@ public class AjoutMovieController extends Application {
             /////////////////////////////////////////////////////////////////////////////crew
             JSONArray actorsArray = crew_response.getJSONArray("cast");
             String actor = "";
-            for (int i=0; i<10; i++){
-                String name = actorsArray.getJSONObject(i).getString("name");
-                String portrait = "https://image.tmdb.org/t/p/original" + actorsArray.getJSONObject(i).getString("profile_path");
-                actor = actor + name + ", ";
+            int count =0;
+            for (int i=0; i<actorsArray.length(); i++){
+                if (count >= 10) {
+                    break;
+                }
+                try {
+                    String name = actorsArray.getJSONObject(i).getString("name");
+                    String portrait = "https://image.tmdb.org/t/p/original" + actorsArray.getJSONObject(i).getString("profile_path");
+                    actor = actor + name + ", ";
+                    count ++;
+                } catch (Exception e) {
+                }
             }
             actors.setText(actor.substring(0, actor.length()-2));
 
@@ -159,7 +172,7 @@ public class AjoutMovieController extends Application {
             }
             response = new JSONObject(responseContent.toString());
         } catch (Exception e) {
-            System.out.println(e.getMessage());
+            System.out.println(e.getMessage() +"test");
         } finally {
             connection.disconnect();
             return response;
@@ -237,19 +250,35 @@ public class AjoutMovieController extends Application {
     }
 
     public void ajouterFilm(ActionEvent actionEvent) {
+        error.setText("");
         FilmService filmService = new FilmService();
         Film film = new Film(name.getText(), date.getText(), poster.getImage().impl_getUrl(), categories.getText(), desc.getText(), Integer.parseInt(runTime.getText()), trailer.getEngine().getLocation(), id_imdb);
-        filmService.addFilm(film);
 
+
+        try {
+            filmService.addFilm(film);
+        } catch (SQLException e) {
+            error.setText("FILM EXISTS");
+            return;
+        }
+        System.out.println("yala");
         CrewService crewService = new CrewService();
         JSONObject crew = get_crew(id_imdb);
         try {
             JSONArray actors = crew.getJSONArray("cast");
-            for (int i=0; i<10; i++){
-                String name = actors.getJSONObject(i).getString("name");
-                String portrait = "https://image.tmdb.org/t/p/original" + actors.getJSONObject(i).getString("profile_path");
-                Crew actor = new Crew(name, portrait, "Actor", filmService.getFilm(id_imdb).getId_film());
-                crewService.addCrew(actor);
+            int count =0;
+            for (int i=0; i<actors.length(); i++){
+                if (count >= 10) {
+                    break;
+                }
+                try {
+                    String name = actors.getJSONObject(i).getString("name");
+                    String portrait = "https://image.tmdb.org/t/p/original" + actors.getJSONObject(i).getString("profile_path");
+                    Crew actor = new Crew(name, portrait, "Actor", filmService.getFilm(id_imdb).getId_film());
+                    crewService.addCrew(actor);
+                    count ++;
+                } catch (Exception e) {
+                }
             }
             JSONArray directors = crew.getJSONArray("crew");
             for (int i=0; i<directors.length(); i++){
@@ -260,6 +289,17 @@ public class AjoutMovieController extends Application {
                     crewService.addCrew(director);
                 }
             }
+            listMovies(new ActionEvent());
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void listMovies(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("SearchMovies.fxml"));
+            Parent root =loader.load();
+            listMovies.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

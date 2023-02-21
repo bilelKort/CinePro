@@ -19,5 +19,6 @@
     </orderEntry>
     <orderEntry type="library" name="lib" level="project" />
     <orderEntry type="library" name="java-json" level="project" />
+    <orderEntry type="library" name="guava" level="project" />
   </component>
 </module>
