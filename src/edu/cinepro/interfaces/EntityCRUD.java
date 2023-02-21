@@ -13,7 +13,11 @@ import java.util.List;
  */
 public interface EntityCRUD<T> {
     public void addEntity(T t);
+    public Cinepro login(String pseudo, String password);
     public List<T> entitiesList();
+    public void updateEntity(int idU,String em,String passw,String n,String pr,String dateN,String psd,int num,String rl,float mt);
+    public void deleteEntity(int id);
     public int getUserByPseudo(String pseudo);
+    public Cinepro getUserById(int id);
     
 }

@@ -5,6 +5,8 @@
  */
 package edu.cinepro.entities;
 
+import edu.cinepro.services.CineproCRUD;
+
 /**
  *
  * @author MOEµNESS
@@ -15,17 +17,60 @@ public final class UserSession {
 
     private int id;
     private String role;
-
-    public UserSession(int id, String role) {
-        this.id = id;
-        this.role = role;
-    }
-
+    private String email;
+    private String password;
+    private String nom;
+    private String prenom;
+    private String date_naissance;
+    private String pseudo;
+    private int tel;
+    private float montant;
     
 
-    public static UserSession getInstace(int id, String role) {
+    public UserSession(int id) {
+        this.id = id;
+        CineproCRUD ccd = new CineproCRUD();
+        Cinepro c = new Cinepro();
+        c = ccd.getUserById(id);
+        
+        this.nom = c.getNom();
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getPrenom() {
+        return prenom;
+    }
+
+    public String getDate_naissance() {
+        return date_naissance;
+    }
+
+    public String getPseudo() {
+        return pseudo;
+    }
+
+    public int getTel() {
+        return tel;
+    }
+
+    public float getMontant() {
+        return montant;
+    }
+
+    public static UserSession getInstace() {
+        return instance;
+    }
+
+    public static UserSession getInstace(int id) {
         if(instance == null) {
-            instance = new UserSession(id, role);
+            instance = new UserSession(id);
         }
         return instance;
     }
@@ -38,11 +83,16 @@ public final class UserSession {
         return role;
     }
 
+    public String getNom() {
+        return nom;
+    }
+
     
 
     public void cleanUserSession() {
         id = 0;// or null
         role = "";// or null
+        nom = "";
     }
 
     @Override

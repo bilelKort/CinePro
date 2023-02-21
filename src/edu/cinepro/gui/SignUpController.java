@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.PasswordField;
@@ -71,11 +72,18 @@ public class SignUpController implements Initializable {
         
         
         ccd.addEntity(c);
-        System.out.println("Done!");
-       /* Cinepro user = cdd.login(resPseudo, resPassword);
-        UserSession.getInstace(user.getId_user(), user.getRole); */
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setContentText("User ajoutée");
+        alert.show();
+        // System.out.println("Done!");
         
-       
+      /*  Cinepro user = ccd.login(resPseudo, resPassword);
+        UserSession.getInstace(user.getId_user(), user.getRole()); */
+        
+       int id = ccd.getUserByPseudo(resPseudo);
+       // System.out.println(id);
+        
+        UserSession.getInstace(id);
         
         
         
@@ -87,7 +95,7 @@ public class SignUpController implements Initializable {
             
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
-        }
+        };
     }
 
     @FXML

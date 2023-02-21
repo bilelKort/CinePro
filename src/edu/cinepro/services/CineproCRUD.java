@@ -46,47 +46,45 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
             st.setString(9, c.getRole());
             st.setFloat(10,c.getMontant());
             st.executeUpdate();
-            System.out.println("User ajoutée!");
+          //  System.out.println("User ajoutée!");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
     }
     
+    @Override
     public Cinepro login(String pseudo, String password){
     
+        Cinepro c = new Cinepro();
         try {
-            String requete = "SELECT * FROM user where pseudo=? AND password=? ";
+            String requete = "SELECT * FROM user where (pseudo=? AND password=?) ";
             
-            Statement st =  MyConnection.getInstance().getCnx().createStatement();
+            PreparedStatement preparedStatement = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            preparedStatement.setString(1, pseudo);
+            preparedStatement.setString(2, password);
             
-            ResultSet rs = st.executeQuery(requete);
+            ResultSet rs = preparedStatement.executeQuery();
             while(rs.next()){
             
-                Cinepro c = new Cinepro();
-                c.setPseudo(rs.getString("pseudo"));
-                c.setPassword(rs.getString("password"));
+                c.setId_user(rs.getInt(1));
+                c.setEmail(rs.getString(2));
+                c.setPassword(rs.getString(3));
+                c.setNom(rs.getString(4));
+                c.setPrenom(rs.getString(5));
+                c.setDate_naissance(rs.getString(6));
+                c.setPseudo(rs.getString(7));
+                c.setTel(rs.getInt(8));
+                c.setRole(rs.getString(9));
+                c.setMontant(rs.getFloat(10));
             }
-          /*  ResultSet rs = st.executeQuery(requete);
-            while(rs.next()){
-            
-                Personne p =new Personne();
-                p.setId(rs.getInt(1));
-                p.setNom(rs.getString("nom"));
-                p.setPrenom(rs.getString("prenom"));
-                
-                myList.add(p);
-            } */
-            
-            
-            /*ResultSet rs = st.executeQuery()
-            st.setString(1, pseudo);
-            st.setString(2, password);*/
-            
-            
+            return c;
         } catch (SQLException ex) {
-            Logger.getLogger(CineproCRUD.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
+            return null;
         }
-    }
+       
+    }  
+    
 
     //Affichage
     @Override
@@ -121,7 +119,7 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
     }
     
     //Modification
-    
+    @Override
     public void updateEntity(int idU,String em,String passw,String n,String pr,String dateN,String psd,int num,String rl,float mt) {
        
         try {
@@ -147,6 +145,7 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
         }
     }
     
+    @Override
     public void deleteEntity(int id) {
         try {
             String requete="DELETE FROM user WHERE id_user=?";
@@ -163,21 +162,60 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
     @Override
     public int getUserByPseudo(String pseudo) {
     
+
+        int id=0;
         try {
-            String requete = "Select id_user from user where pseudo=?";
-            PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            String requete = "SELECT id_user FROM user WHERE pseudo=?";
+            PreparedStatement preparedStatement = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            preparedStatement.setString(1, pseudo);
             
-            st.setString(1, pseudo);
-            st.executeUpdate();
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+            
+               id = rs.getInt(1);
+            
+            }
             
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        return id;
         
-        
-        
-        
+    } 
+    
+    @Override
+    public Cinepro getUserById(int id){
+    
+        Cinepro c = new Cinepro();
+        try {
+            String requete = "SELECT * FROM user WHERE id_user=?";
+            PreparedStatement preparedStatement = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            preparedStatement.setInt(1, id);
+            
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+            
+               
+                c.setId_user(rs.getInt(1));
+                c.setEmail(rs.getString("email"));
+                c.setPassword(rs.getString("password"));
+                c.setNom(rs.getString("nom"));
+                c.setPrenom(rs.getString("prenom"));
+                c.setDate_naissance(rs.getString("date_naissance"));
+                c.setPseudo(rs.getString("pseudo"));
+                c.setTel(rs.getInt("tel"));
+                c.setRole(rs.getString("role"));
+                c.setMontant(rs.getFloat("montant"));
+                
+            }
+            return c;
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return null;   
     }
-        
     
 }
+
+

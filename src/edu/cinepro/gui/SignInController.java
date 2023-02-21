@@ -5,6 +5,9 @@
  */
 package edu.cinepro.gui;
 
+import edu.cinepro.entities.Cinepro;
+import edu.cinepro.entities.UserSession;
+import edu.cinepro.services.CineproCRUD;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -62,7 +65,28 @@ public class SignInController implements Initializable {
         String resPseudo = pseudo.getText();
         String resPassword = password.getText();
         
+        CineproCRUD ccd = new CineproCRUD();
         
+        Cinepro user = ccd.login(resPseudo, resPassword);
+        
+        int id = ccd.getUserByPseudo(resPseudo);
+       // System.out.println(id);
+        
+        UserSession.getInstace(id); 
+        
+        
+        // System.out.println(UserSession.getInstace(id, user.getRole()).toString()); // nbadel user.getRole() b variable role = ccd.getRole(pseudo)
+       
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Index.fxml"));
+        
+        try {
+            Parent root = loader.load();
+            pseudo.getScene().setRoot(root);
+            
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
     
