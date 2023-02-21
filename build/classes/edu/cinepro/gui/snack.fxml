@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.SnackController">
+   <children>
+      <Label layoutX="82.0" layoutY="57.0" text="nom" />
+      <Label layoutX="85.0" layoutY="124.0" text="prix" />
+      <Label layoutX="72.0" layoutY="200.0" text="quantité" />
+      <Label layoutX="77.0" layoutY="252.0" text="photo" />
+      <TextField fx:id="idnom" layoutX="151.0" layoutY="53.0" />
+      <TextField fx:id="idprix" layoutX="151.0" layoutY="112.0" />
+      <TextField fx:id="idquantite" layoutX="151.0" layoutY="196.0" />
+      <Button fx:id="ftimage" layoutX="160.0" layoutY="248.0" mnemonicParsing="false" onAction="#importimage" text="imprter une image " />
+      <Label fx:id="labelsinglefile" layoutX="81.0" layoutY="304.0" text="URL:" />
+      <Button fx:id="idbuttonsavesnack" layoutX="186.0" layoutY="300.0" mnemonicParsing="false" onAction="#savesnack" text="save" />
+   </children>
+</AnchorPane>
