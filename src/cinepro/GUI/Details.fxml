@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.GUI.DetailsController">
+   <children>
+      <Label layoutX="64.0" layoutY="119.0" text="Feedback" />
+      <TextField fx:id="feedback" editable="false" layoutX="144.0" layoutY="115.0" />
+      <Label layoutX="76.0" layoutY="162.0" text="date" />
+      <TextField fx:id="date" layoutX="144.0" layoutY="158.0" />
+   </children>
+</AnchorPane>
