@@ -74,7 +74,7 @@ return myList;
     
     
     
-    
+   /* 
     public List<cinema> entitiesListavecsalle() {
         ArrayList<cinema> myList= new ArrayList();
         
@@ -132,7 +132,7 @@ return myList;
 return myList ;
         }
     
-    
+   */ 
     public void updateEntity(int id, String nom,String localisation , String description,String photo) {
        
         try {

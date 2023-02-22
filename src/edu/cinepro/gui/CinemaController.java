@@ -42,8 +42,6 @@ public class CinemaController implements Initializable {
 
     private File f;
     @FXML
-    private TextField iduser;
-    @FXML
     private WebView map;
 
     /**

@@ -19,7 +19,7 @@ public class cinema {
     private String localisation;
     private String description;
     private String photo;
-    private ArrayList<salle> listsalle = new ArrayList<salle>();
+   /* private ArrayList<salle> listsalle = new ArrayList<salle>();
 
     public List getListsalle() {
         return listsalle;
@@ -30,7 +30,7 @@ public class cinema {
     }
 
    
-      
+      */
     
     
 
@@ -103,24 +103,15 @@ public class cinema {
         this.description = description;
         this.photo = photo;
     }
-     public cinema(String nom, String localisation, String description, String photo, ArrayList<salle> listsalle) {
-        this.nom = nom;
-        this.localisation = localisation;
-        this.description = description;
-        this.photo = photo;
-        this.listsalle = listsalle;
-    }
+   
     
     
     @Override
 
-    /*public String toString() {
-        return "cinema{" + "id_cinema=" + id_cinema + ", id_user=" + id_user + ", nom=" + nom + ", localisation=" + localisation + ", description=" + description + ", photo=" + photo + '}';
-    }*/
-
     public String toString() {
-        return "cinema{" + "id_cinema=" + id_cinema + ", id_user=" + id_user + ", nom=" + nom + ", localisation=" + localisation + ", description=" + description + ", photo=" + photo + ", listsalle=" + listsalle + '}';
+        return "cinema{" + "id_cinema=" + id_cinema + ", id_user=" + id_user + ", nom=" + nom + ", localisation=" + localisation + ", description=" + description + ", photo=" + photo + '}';
     }
+
     
     
     

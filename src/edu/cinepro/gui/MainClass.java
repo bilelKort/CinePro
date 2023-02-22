@@ -24,7 +24,7 @@ public class MainClass extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Image.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
 
             Scene scene = new Scene(root);
 

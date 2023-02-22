@@ -5,7 +5,10 @@
         <group>
             <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/CinemaController.java</file>
             <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/SnackController.java</file>
-            <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/tests/MainClass.java</file>
+            <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/ImageController.java</file>
+            <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/CinemaAfficheController.java</file>
+            <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/entities/cinema.java</file>
+            <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/connexion3A18/services/CinemaCRUD.java</file>
             <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/MainClass.java</file>
         </group>
     </open-files>

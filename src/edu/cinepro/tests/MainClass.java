@@ -46,7 +46,7 @@ public class MainClass {
         
        CinemaCRUD cd= new CinemaCRUD();
 
-      List<cinema>   k= cd.entitiesListavecsalle();
+      List<cinema>   k= cd.entitiesList();
         System.out.println(k);
          
       //          System.out.println(pcd.entitiesList());
