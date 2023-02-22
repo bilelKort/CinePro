@@ -48,6 +48,9 @@ public class MainClass {
 
       List<cinema>   k= cd.entitiesList();
         System.out.println(k);
+        
+                           cinema c=cd.cinemabyid(2);
+                            System.out.println(c);
          
       //          System.out.println(pcd.entitiesList());
 
