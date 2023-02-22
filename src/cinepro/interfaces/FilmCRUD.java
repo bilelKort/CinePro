@@ -10,7 +10,7 @@ public interface FilmCRUD<T> {
     public void addFilm(T t) throws SQLException;
     public List filmList();
     public List filmList(String name);
-    public Film getFilm(int id_film);
+    public Film getFilmById(int id_film);
     public Film getFilm(String id_imdb);
     public void updateFilm(T t);
     public void deleteFilm(T t);

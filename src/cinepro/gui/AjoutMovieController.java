@@ -35,6 +35,8 @@ import java.util.ResourceBundle;
 public class AjoutMovieController implements Initializable {
 
     @FXML
+    private Button ajoutprojection;
+    @FXML
     private Button listMovies;
     @FXML
     private Label actors;
@@ -300,6 +302,16 @@ public class AjoutMovieController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SearchMovies.fxml"));
             Parent root =loader.load();
             listMovies.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void ajoutProjection(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutProjection.fxml"));
+            Parent root =loader.load();
+            ajoutprojection.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

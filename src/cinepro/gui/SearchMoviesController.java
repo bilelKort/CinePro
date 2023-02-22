@@ -4,6 +4,7 @@ import cinepro.entities.Film;
 import cinepro.services.FilmService;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -17,6 +18,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -25,6 +27,7 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -32,13 +35,11 @@ import java.util.ResourceBundle;
 public class SearchMoviesController implements Initializable {
 
     @FXML
+    private Button ajoutprojection;
+    @FXML
     private Button ajoutMovies;
     @FXML
-    private BorderPane border;
-    @FXML
     private VBox vBox;
-    @FXML
-    private ScrollPane scrollPane;
     @FXML
     private TextField search;
 
@@ -48,19 +49,19 @@ public class SearchMoviesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         list = filmService.filmList();
-        diaplay(list);
+        display(list);
     }
 
-    public void test(KeyEvent keyEvent) {
+    public void search(KeyEvent keyEvent) {
         if (search.getText().equals("")) {
             list = filmService.filmList();
         } else {
             list = filmService.filmList(search.getText());
         }
-        diaplay(list);
+        display(list);
     }
 
-    public void diaplay (List<Film> list) {
+    public void display (List<Film> list) {
         vBox.getChildren().clear();
         int i=0;
         HBox hBox = new HBox();
@@ -72,7 +73,10 @@ public class SearchMoviesController implements Initializable {
                 hBox = new HBox();
             }
             ImageView imageView = new ImageView();
-            imageView.setImage(new Image(list.get(j).getPoster()));
+            Image image = new Image(list.get(j).getPoster());
+            String nom = list.get(j).getNom();
+
+            imageView.setImage(image);
             imageView.setFitWidth(200);
             imageView.setFitHeight(298);
 
@@ -80,7 +84,7 @@ public class SearchMoviesController implements Initializable {
             label.setPrefWidth(200);
             label.setAlignment(Pos.CENTER);
             label.setFont(Font.font(20));
-            label.setText(list.get(j).getNom());
+            label.setText(nom);
 
             VBox poster_name = new VBox();
             poster_name.setSpacing(10);
@@ -89,8 +93,28 @@ public class SearchMoviesController implements Initializable {
             hBox.setSpacing(20);
             hBox.getChildren().add(poster_name);
             i++;
+
+            int id = list.get(j).getId_film();
+            poster_name.setOnMouseClicked(new EventHandler<MouseEvent>() {
+                @Override
+                public void handle(MouseEvent event) {
+                    movieDetail(new ActionEvent(), id);
+                }
+            });
         }
         vBox.getChildren().add(hBox);
+    }
+
+    public void movieDetail(ActionEvent actionEvent, int id) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("MovieDetails.fxml"));
+            Parent root =loader.load();
+            MovieDetailsController movieDetailsController = loader.getController();
+            movieDetailsController.setId_film(id);
+            ajoutMovies.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     public void ajoutMovies(ActionEvent actionEvent) {
@@ -98,6 +122,16 @@ public class SearchMoviesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutMovie.fxml"));
             Parent root =loader.load();
             ajoutMovies.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void ajoutProjection(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutProjection.fxml"));
+            Parent root =loader.load();
+            ajoutprojection.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

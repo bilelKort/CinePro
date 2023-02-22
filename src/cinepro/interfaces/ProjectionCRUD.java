@@ -10,4 +10,6 @@ public interface ProjectionCRUD<T> {
     public Projection getProjection(int id_projection);
     public void updateProjection(T t);
     public void deleteProjection(T t);
+    public boolean checkDate(T t);
+    public List ProjectionListBySalle(int id_salle);
 }

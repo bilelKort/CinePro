@@ -88,12 +88,13 @@ public class FilmService implements FilmCRUD<Film> {
     }
 
     @Override
-    public Film getFilm(int id_film) {
+    public Film getFilmById(int id_film) {
         Film film = new Film();
         try {
-            String requete = "select * from film where id_film='" + id_film + "'";
-            Statement statement = MyConnection.getInstance().getConnection().createStatement();
-            ResultSet resultSet = statement.executeQuery(requete);
+            String requete = "select * from film where id_film=?";
+            PreparedStatement preparedStatement = MyConnection.getInstance().getConnection().prepareStatement(requete);
+            preparedStatement.setInt(1, id_film);
+            ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 film.setId_film(resultSet.getInt(1));
                 film.setNom(resultSet.getString(2));

@@ -5,31 +5,30 @@ public class Projection {
     private int id_projection;
     private int id_salle;
     private int id_film;
-    private String date;
+    private String date_debut;
+    private String date_fin;
     private int nbr_places;
     private boolean diffuse;
-    private String type;
-
     public Projection() {
     }
 
-    public Projection(int id_projection, int id_salle, int id_film, String date, int nbr_places, boolean diffuse, String type) {
+    public Projection(int id_projection, int id_salle, int id_film, String date_debut, String date_fin, int nbr_places, boolean diffuse) {
         this.id_projection = id_projection;
         this.id_salle = id_salle;
         this.id_film = id_film;
-        this.date = date;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
         this.nbr_places = nbr_places;
         this.diffuse = diffuse;
-        this.type = type;
     }
 
-    public Projection(int id_salle, int id_film, String date, int nbr_places, boolean diffuse, String type) {
+    public Projection(int id_salle, int id_film, String date_debut, String date_fin, int nbr_places, boolean diffuse) {
         this.id_salle = id_salle;
         this.id_film = id_film;
-        this.date = date;
+        this.date_debut = date_debut;
+        this.date_fin = date_fin;
         this.nbr_places = nbr_places;
         this.diffuse = diffuse;
-        this.type = type;
     }
 
     @Override
@@ -38,10 +37,10 @@ public class Projection {
                 "id_projection=" + id_projection +
                 ", id_salle=" + id_salle +
                 ", id_film=" + id_film +
-                ", date='" + date + '\'' +
+                ", date_debut='" + date_debut + '\'' +
+                ", date_fin='" + date_fin + '\'' +
                 ", nbr_places=" + nbr_places +
                 ", diffuse=" + diffuse +
-                ", type='" + type + '\'' +
                 '}';
     }
 
@@ -69,14 +68,6 @@ public class Projection {
         this.id_film = id_film;
     }
 
-    public String getDate() {
-        return date;
-    }
-
-    public void setDate(String date) {
-        this.date = date;
-    }
-
     public boolean isDiffuse() {
         return diffuse;
     }
@@ -85,19 +76,27 @@ public class Projection {
         this.diffuse = diffuse;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public int getNbr_places() {
         return nbr_places;
     }
 
     public void setNbr_places(int nbr_places) {
         this.nbr_places = nbr_places;
+    }
+
+    public String getDate_debut() {
+        return date_debut;
+    }
+
+    public void setDate_debut(String date_debut) {
+        this.date_debut = date_debut;
+    }
+
+    public String getDate_fin() {
+        return date_fin;
+    }
+
+    public void setDate_fin(String date_fin) {
+        this.date_fin = date_fin;
     }
 }

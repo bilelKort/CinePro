@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<?import javafx.scene.control.Button?>
 <AnchorPane prefHeight="739.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.SearchMoviesController">
    <children>
-      <TextField fx:id="search" alignment="CENTER" layoutX="113.0" layoutY="48.0" onKeyPressed="#test" prefHeight="51.0" prefWidth="1125.0" promptText="Search" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="112.0">
+      <TextField fx:id="search" alignment="CENTER" layoutX="113.0" layoutY="48.0" onKeyPressed="#search" prefHeight="51.0" prefWidth="1125.0" promptText="Search" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="112.0">
          <font>
             <Font size="24.0" />
          </font>
@@ -24,5 +24,8 @@
          </padding>
       </BorderPane>
       <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies" />
+      <Button fx:id="listMovies" layoutX="113.0" layoutY="14.0" mnemonicParsing="false" text="List Movies" />
+      <Button fx:id="ajoutprojection" layoutX="202.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection" />
+
    </children>
 </AnchorPane>
