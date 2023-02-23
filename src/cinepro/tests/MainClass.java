@@ -19,9 +19,8 @@ public class MainClass {
         //pcd.addCommentaire(f1);
        System.out.println(pcd.commentaireList());
        //pcd.deleteCommentaire(21);
-       pcd.updateCommentaire(22, "nour", 3, 2, "05/05/2022-15:00");
-        
-        
+       pcd.updateCommentaire(22, "ines", 3, 2, "05/05/2022-15:00");
+      pcd.deleteCommentaire(22);
     }
     
 }

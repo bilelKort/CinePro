@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.GUI.SupprimerController">
+   <children>
+      <Label fx:id="id_feedback" layoutX="79.0" layoutY="138.0" text="id_feedback" textFill="#e81414">
+         <font>
+            <Font name="System Bold Italic" size="27.0" />
+         </font></Label>
+      <TextField fx:id="id_f" layoutX="237.0" layoutY="142.0" prefHeight="31.0" prefWidth="149.0" />
+      <Button fx:id="supprimer" layoutX="293.0" layoutY="307.0" mnemonicParsing="false" onAction="#supprimer" text="supprimer" textFill="#e81e1e">
+         <font>
+            <Font size="25.0" />
+         </font></Button>
+   </children>
+</AnchorPane>

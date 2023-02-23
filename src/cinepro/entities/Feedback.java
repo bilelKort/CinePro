@@ -12,7 +12,7 @@ import java.util.Objects;
  */
 public class Feedback {
     private int id_feedback;
-    private String description;
+    private String feedback;
     private int id_user;
     private int id_film;
     private String date ;
@@ -21,26 +21,26 @@ public class Feedback {
     public Feedback() {
     }
 
-    public Feedback(String description, int id_user) {
-        this.description = description;
+    public Feedback(String feedback, int id_user) {
+        this.feedback = feedback;
         this.id_user = id_user;
     }
 
-    public Feedback(String description) {
-        this.description = description;
+    public Feedback(String feedback) {
+        this.feedback = feedback;
     }
 
-    public Feedback(String description, int id_user,int id_film, String date) {
-        this.description = description;
+    public Feedback(String feedback, int id_user,int id_film, String date) {
+        this.feedback = feedback;
         this.id_user = id_user;
         this.id_film = id_film;
         this.date = date;
     }
 
     
-    public Feedback(int id_feedback, String description, int id_user,int id_film, String date) {
+    public Feedback(int id_feedback, String feedback, int id_user,int id_film, String date) {
         this.id_feedback = id_feedback;
-        this.description = description;
+        this.feedback= feedback;
         this.id_user = id_user;
         this.id_film = id_film;
         this.date = date;
@@ -51,8 +51,8 @@ public class Feedback {
         return id_feedback;
     }
 
-    public String getDescription() {
-        return description;
+    public String getFeedback() {
+        return feedback;
     }
 
     public int getId_user() {
@@ -73,8 +73,8 @@ public class Feedback {
         this.id_feedback = id_feedback;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setFeedback(String feedback) {
+        this.feedback = feedback;
     }
 
     public void setId_user(int id_user) {
@@ -92,41 +92,10 @@ public class Feedback {
 
     @Override
     public String toString() {
-        return "Feedback{" + "id_feedback=" + id_feedback + ", description=" + description + ", id_user=" + id_user + ", id_film=" + id_film + ", date=" + date + '}';
+        return "Feedback{" + "id_feedback=" + id_feedback + ", feedback=" + feedback + ", id_user=" + id_user + ", id_film=" + id_film + ", date=" + date + '}';
     }
 
-    @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
-    }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-        if (obj == null) {
-            return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Feedback other = (Feedback) obj;
-        if (this.id_feedback != other.id_feedback) {
-            return false;
-        }
-        if (this.id_user != other.id_user) {
-            return false;
-        }
-        if (this.id_film != other.id_film) {
-            return false;
-        }
-        if (!Objects.equals(this.description, other.description)) {
-            return false;
-        }
-        return Objects.equals(this.date, other.date);
-    }
+  
 
    
 

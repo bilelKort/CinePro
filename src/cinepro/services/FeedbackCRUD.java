@@ -23,9 +23,9 @@ public class FeedbackCRUD implements CommentaireCRUD<Feedback> {
     @Override
     public void addCommentaire(Feedback t) {
         try {
-            String requete = "INSERT INTO feedback (description,id_user,id_film,date)" + "VALUES (?,?,?,str_to_date(?, '%d/%m/%Y-%H:%i'))";
+            String requete = "INSERT INTO feedback (feedback,id_user,id_film,date)" + "VALUES (?,?,?,str_to_date(?, '%d/%m/%Y-%H:%i'))";
             PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
-            st.setString(1, t.getDescription());
+            st.setString(1, t.getFeedback());
             st.setInt(2, t.getId_user());
             st.setInt(3, t.getId_film());
             st.setString(4, t.getDate());
@@ -50,8 +50,7 @@ public class FeedbackCRUD implements CommentaireCRUD<Feedback> {
             while (rs.next()) {
                 Feedback f = new Feedback();
                 f.setId_feedback(rs.getInt("id_feedback"));
-
-                f.setDescription(rs.getString("description"));
+                f.setFeedback(rs.getString("feedback"));
                 f.setId_user(rs.getInt("Id_user"));
                  f.setId_film(rs.getInt("Id_film"));
                 f.setDate(rs.getString("date"));
@@ -62,17 +61,18 @@ public class FeedbackCRUD implements CommentaireCRUD<Feedback> {
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+        System.out.println("test"+myList);
         return myList;
     }
 
     @Override
-    public void updateCommentaire(int id_feedback, String description, int id_user,int id_film, String date) {
+    public void updateCommentaire(int id_feedback, String feedback, int id_user,int id_film, String date) {
 
         try {
-            String requete = "UPDATE FEEDBACK SET description=?, id_user=?,id_film=?,date=str_to_date(?, '%d/%m/%Y-%H:%i') where id_feedback=?";
+            String requete = "UPDATE FEEDBACK SET feedback=?, id_user=?,id_film=?,date=str_to_date(?, '%d/%m/%Y-%H:%i') where id_feedback=?";
             PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
 
-            st.setString(1, description);
+            st.setString(1,feedback );
             st.setInt(2, id_user);
             st.setInt(3, id_film);
             st.setString(4, date);

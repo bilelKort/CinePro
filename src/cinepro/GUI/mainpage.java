@@ -27,11 +27,11 @@ public class mainpage extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root =FXMLLoader.load(getClass().getResource("Feedback.fxml"));
+            Parent root =FXMLLoader.load(getClass().getResource("Menu.fxml"));
             
             Scene scene = new Scene(root);
             
-            primaryStage.setTitle("Feedback!");
+            primaryStage.setTitle("Menu!");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {
@@ -44,6 +44,7 @@ public class mainpage extends Application {
      */
     public static void main(String[] args) {
         launch(args);
+        
     }
     
 }
