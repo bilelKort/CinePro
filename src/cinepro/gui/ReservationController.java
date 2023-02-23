@@ -27,8 +27,6 @@ import javafx.scene.control.TextField;
 public class ReservationController implements Initializable {
 
     @FXML
-    private TextField resprix;
-    @FXML
     private TextField residuser;
     @FXML
     private TextField residfilm;
@@ -40,6 +38,10 @@ public class ReservationController implements Initializable {
     private TextField endtime;
     @FXML
     private Button btn;
+    @FXML
+    private Button suppbtn;
+    @FXML
+    private TextField idreservation;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -47,7 +49,7 @@ public class ReservationController implements Initializable {
     }    
  
     @FXML
-    private void saveReservation(ActionEvent event) {
+    public void saveReservation(ActionEvent event) {
         //float prix = Float.valueOf(resprix.getText());
         int iduser = Integer.valueOf(residuser.getText());
         int idfilm = Integer.valueOf(residfilm.getText());
@@ -77,5 +79,14 @@ public class ReservationController implements Initializable {
        
     }
     
-      
+    public void supprimerReservation (ActionEvent event) {
+        
+       int idres = Integer.valueOf(idreservation.getText());
+
+        
+        reservationCRUD pcd = new reservationCRUD();
+        
+
+        pcd.deleteEntity(idres);
+    }  
 }

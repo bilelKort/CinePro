@@ -47,6 +47,8 @@ public class Reservation_placeController implements Initializable {
     private Button snackbtn;
     @FXML
     private Button btnUpdate;
+     @FXML
+    private Button btnsupp;
     
     /**
      * Initializes the controller class.
@@ -57,7 +59,7 @@ public class Reservation_placeController implements Initializable {
     }    
     
     @FXML
-    private void saveReservationPlace (ActionEvent event) {
+    public void saveReservationPlace (ActionEvent event) {
         
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
@@ -72,7 +74,7 @@ public class Reservation_placeController implements Initializable {
     /****************************************************************************************************/
     
     @FXML
-    private void saveReservationPlaceSnack (ActionEvent event) {
+    public void saveReservationPlaceSnack (ActionEvent event) {
         
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
@@ -97,7 +99,7 @@ public class Reservation_placeController implements Initializable {
 
     
     @FXML
-    private void updateReservationPlace (ActionEvent event) {
+    public void updateReservationPlace (ActionEvent event) {
         
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
@@ -111,6 +113,15 @@ public class Reservation_placeController implements Initializable {
         pcd.updateEntity(idpl,idRes, seatNum, Prix);
     }
     
+    @FXML
+    public void supprimerReservationPlace (ActionEvent event) {
+        
+        int idresplace = Integer.valueOf(id_place.getText());
+
+        
+        reservation_placeCRUD pcd = new reservation_placeCRUD();
+        pcd.deleteEntity(idresplace);
+    }
     
     
 }

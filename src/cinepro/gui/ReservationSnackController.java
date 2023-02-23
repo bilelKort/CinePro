@@ -47,7 +47,7 @@ public class ReservationSnackController implements Initializable {
     }    
     
     @FXML
-    private void saveReservationSnack (ActionEvent event) {        
+    public void saveReservationSnack (ActionEvent event) {        
        
         int qte = Integer.valueOf(quantite.getText());
         float Prix = Float.valueOf(prixsnack.getText());
@@ -67,14 +67,14 @@ public class ReservationSnackController implements Initializable {
     }
     
     @FXML
-    private void updateSnack(ActionEvent event){
+    public void updateSnack(ActionEvent event){
         
        int qte = Integer.valueOf(quantite.getText());
        float Prix = Float.valueOf(prixsnack.getText());
        int idRes = Integer.valueOf(idres.getText());
        int ids = Integer.valueOf(idsnack.getText());
        int idreservationsnack = Integer.valueOf(idressnack.getText());
-        System.out.println(qte + Prix + idRes + ids + idreservationsnack);
+       
         if(qte>0 && Prix>0){
         reservation_snack res =new reservation_snack(qte,Prix,idRes,ids);
         reservation_snackCRUD pcd = new reservation_snackCRUD();
@@ -83,7 +83,16 @@ public class ReservationSnackController implements Initializable {
         else{
             System.out.println("Invalid champ");
         }
+    }
     
+    @FXML
+    public void supprimerReservationSnack (ActionEvent event) {
+        
+       int idreservationsnack = Integer.valueOf(idressnack.getText());
+
+        
+        reservation_snackCRUD pcd = new reservation_snackCRUD();
+        pcd.deleteEntity(idreservationsnack);
     }
 }
 

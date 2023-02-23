@@ -18,6 +18,8 @@
       <TextField fx:id="endtime" layoutX="217.0" layoutY="303.0" prefHeight="25.0" prefWidth="221.0" />
       <Label layoutX="112.0" layoutY="256.0" text="start_time " />
       <Label layoutX="112.0" layoutY="307.0" text="end time" />
-      <Button fx:id="suppbtn" layoutX="321.0" layoutY="345.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Supprimer" />
+      <Button fx:id="suppbtn" layoutX="551.0" layoutY="120.0" mnemonicParsing="false" onAction="#supprimerReservation" prefHeight="25.0" prefWidth="124.0" text="Supprimer" />
+      <TextField fx:id="idreservation" layoutX="523.0" layoutY="76.0" prefHeight="25.0" prefWidth="187.0" />
+      <Label layoutX="523.0" layoutY="42.0" prefHeight="17.0" prefWidth="114.0" text="id reservation" />
    </children>
 </AnchorPane>

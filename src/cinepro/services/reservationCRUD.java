@@ -129,12 +129,12 @@ public int checkFilm(reservation r){
         return myList;
     }
     
-    public void deleteEntity(int id_reservation,int id_res_place,int id_res_snack) {
-        reservation_placeCRUD pcd = new reservation_placeCRUD();
+    public void deleteEntity(int id_reservation) {
+        /*reservation_placeCRUD pcd = new reservation_placeCRUD();
         reservation_snackCRUD pcs = new reservation_snackCRUD();
         pcd.deleteEntity(id_res_place);
         pcs.deleteEntity(id_res_snack);
-        
+        */
         try {
             String requete="DELETE FROM reservation WHERE id_reservation=?";
             PreparedStatement st=cineproConnexion.getInstance()

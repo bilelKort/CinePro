@@ -19,5 +19,6 @@
       <Button fx:id="btnup" layoutX="428.0" layoutY="108.0" mnemonicParsing="false" onAction="#updateSnack" prefHeight="25.0" prefWidth="101.0" text="update" />
       <TextField fx:id="idressnack" layoutX="404.0" layoutY="67.0" />
       <Label layoutX="404.0" layoutY="28.0" prefHeight="17.0" prefWidth="132.0" text="id reservation snack" />
+      <Button fx:id="btnsupp" layoutX="428.0" layoutY="152.0" mnemonicParsing="false" onAction="#supprimerReservationSnack" prefHeight="25.0" prefWidth="101.0" text="Supprimer" />
    </children>
 </AnchorPane>
