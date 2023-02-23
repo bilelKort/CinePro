@@ -5,10 +5,8 @@
         <group>
             <file>file:/C:/Users/MOEµNESS/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/SignInController.java</file>
             <file>file:/C:/Users/MOEµNESS/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/SignUpController.java</file>
-            <file>file:/C:/Users/MOEµNESS/Documents/NetBeansProjects/cinepro/src/edu/cinepro/interfaces/EntityCRUD.java</file>
             <file>file:/C:/Users/MOEµNESS/Documents/NetBeansProjects/cinepro/src/edu/cinepro/services/CineproCRUD.java</file>
-            <file>file:/C:/Users/MOEµNESS/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/HomePage.java</file>
-            <file>file:/C:/Users/MOEµNESS/Documents/NetBeansProjects/cinepro/src/edu/cinepro/entities/UserSession.java</file>
+            <file>file:/C:/Users/MOEµNESS/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/IndexController.java</file>
         </group>
     </open-files>
 </project-private>

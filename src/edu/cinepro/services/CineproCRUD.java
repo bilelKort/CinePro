@@ -16,6 +16,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import javafx.scene.control.Alert;
 
 
 /**
@@ -24,6 +27,27 @@ import java.util.logging.Logger;
  */
 
 public class CineproCRUD implements EntityCRUD<Cinepro> {
+    
+    // Verifier unicité du Pseudo
+   /* public boolean testPseudo(Cinepro c)
+            {
+            int a;
+            String requete = "select id from user WHERE email=?";
+            
+            
+            PreparedStatement preparedStatement = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            preparedStatement.setString(1, pseudo);
+            
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+             a = rs.getString("id");
+        return false;
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return true;
+            } */
+    
     
     // Insertion
     @Override
@@ -215,6 +239,8 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
         }
         return null;   
     }
+    
+    
     
 }
 

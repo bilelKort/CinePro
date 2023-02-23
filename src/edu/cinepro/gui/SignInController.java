@@ -74,9 +74,7 @@ public class SignInController implements Initializable {
         
         UserSession.getInstace(id); 
         
-        
-        // System.out.println(UserSession.getInstace(id, user.getRole()).toString()); // nbadel user.getRole() b variable role = ccd.getRole(pseudo)
-       
+               
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Index.fxml"));
         

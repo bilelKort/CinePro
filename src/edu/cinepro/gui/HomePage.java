@@ -31,7 +31,7 @@ public class HomePage extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
            // primaryStage .initStyle(StageStyle.UNDECORATED); ajouter 
-            Scene scene = new Scene(root);
+            Scene scene = new Scene(root,746,468);
             
             primaryStage.setTitle("Hello World!");
             primaryStage.setScene(scene);

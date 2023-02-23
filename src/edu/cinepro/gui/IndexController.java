@@ -35,11 +35,14 @@ public class IndexController implements Initializable {
         alert.setContentText("Bonjour "+UserSession.getInstace().getNom()+" !");
         alert.show();
         
+       
+        
         UserSession.getInstace().cleanUserSession(); // Deconnecter
         System.out.println(UserSession.getInstace().getId());
 
+        /*
         System.out.println("Bonjour "+UserSession.getInstace().getNom()+" !");
-        
+        */
         
     }    
     
