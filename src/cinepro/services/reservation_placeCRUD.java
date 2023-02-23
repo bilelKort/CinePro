@@ -29,13 +29,13 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
        ResultSet rs = null;
         try {
              String query = "SELECT COUNT(*) FROM reservation_place " +
-                       "WHERE coordonnee = ? AND id_reservation = ?";
+                       "WHERE id_reservation = (SELECT id_reservation FROM reservation WHERE id_film = ?) AND coordonnee= ?";
               PreparedStatement stmp;
                stmp = cineproConnexion.getInstance().getCnx()
                        .prepareStatement(query);
                
-               stmp.setString(1, r.getCoordonnee());
-               stmp.setInt(2, r.getId_reservation());
+               stmp.setString(2, r.getCoordonnee());
+               stmp.setInt(1, r.getId_res_place());
         //st.setTimestamp(4, Timestamp.valueOf(startTime.plusMinutes(120))); // End time of new reservation
         //st.setTimestamp(5, Timestamp.valueOf(startTime)); // Start time of new reservation
         rs = stmp.executeQuery();
@@ -53,7 +53,7 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
      public boolean check2(reservation_place r){
          ResultSet rs = null;
          try {
-             String requete = "SELECT id_reservation FROM reservation_place WHERE coordonnee = ? AND id_reservation <> ?";
+             String requete = "SELECT COUNT(*) FROM reservation_place WHERE start_time = ? AND end_time = ?";
              PreparedStatement stmp;
              
              stmp = cineproConnexion.getInstance().getCnx()
@@ -61,6 +61,8 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
              
              stmp.setString(1, r.getCoordonnee());
              stmp.setInt(2, r.getId_reservation());
+             
+             
              rs = stmp.executeQuery();
              
              if (rs.next()) {
@@ -76,7 +78,7 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
     public void addEntity(reservation_place r) { 
         if(check1(r) && check2(r)){
             try {
-                String requete = "INSERT INTO reservation_place (coordonnee,prix,id_reservation,start_time,end_time)" + "VALUES (?, ?, ?, ?, ?)";
+                String requete = "INSERT INTO reservation_place (coordonnee,prix,id_reservation)" + "VALUES (?, ?, ?)";
                 
                 PreparedStatement st = cineproConnexion.getInstance().getCnx()
                         .prepareStatement(requete);
@@ -84,8 +86,7 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
                 st.setString(1, r.getCoordonnee());
                 st.setFloat(2, r.getPrix());
                 st.setInt(3, r.getId_reservation());
-                st.setTimestamp(4,r.getStart_time());
-                st.setTimestamp(5, r.getEnd_time());
+               
                 
                 st.executeUpdate();
                 
@@ -118,6 +119,7 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
             while(rs.next()){
                 reservation_place p =new reservation_place();
 
+                p.setId_res_place(rs.getInt(1));
                 p.setCoordonnee(rs.getString(2));
                 p.setPrix(rs.getInt(3));
                 p.setId_reservation(rs.getInt(4));
@@ -170,20 +172,18 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
         return true;
      } 
      */
-     public void updateEntity(int id_res_place,String coordonnee,float prix,int id_reservation,Timestamp start_time,Timestamp end_time){
+     public void updateEntity(int id_res_place,int id_reservation,String coordonnee,float prix){
         
          try{
-        String requete = "UPDATE reservation_place set id_res_place=?,coordonnee=?,prix=?,id_reservation=?,start_time=?,end_time=?";
+        String requete = "UPDATE reservation_place set id_reservation=?,coordonnee=?,prix=? WHERE id_res_place = ?";
         PreparedStatement st=cineproConnexion.getInstance()
                 .getCnx().prepareStatement(requete);
             
-        st.setInt(1, id_res_place);
         st.setString(2, coordonnee);
         st.setFloat(3, prix);
-        st.setInt(4, id_reservation);
-        st.setTimestamp(4,start_time);
-        st.setTimestamp(5, end_time);
-                
+        st.setInt(1, id_reservation);
+        st.setInt(4, id_res_place);
+
         st.executeUpdate();
         }catch (SQLException ex) {
             System.out.println(ex.getMessage());

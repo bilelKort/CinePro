@@ -5,14 +5,19 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.ReservationController">
+<AnchorPane id="AnchorPane" prefHeight="463.0" prefWidth="743.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.ReservationController">
    <children>
       <Label layoutX="112.0" layoutY="80.0" prefHeight="17.0" prefWidth="67.0" text="id_user" />
-      <Label layoutX="112.0" layoutY="179.0" prefHeight="17.0" prefWidth="67.0" text="id_film" />
-      <Label layoutX="112.0" layoutY="277.0" prefHeight="17.0" prefWidth="67.0" text="state" />
+      <Label layoutX="112.0" layoutY="145.0" prefHeight="17.0" prefWidth="67.0" text="id_film" />
+      <Label layoutX="112.0" layoutY="200.0" prefHeight="17.0" prefWidth="67.0" text="state" />
       <TextField fx:id="residuser" layoutX="217.0" layoutY="76.0" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="residfilm" layoutX="217.0" layoutY="175.0" prefHeight="25.0" prefWidth="221.0" />
-      <TextField fx:id="resstate" layoutX="217.0" layoutY="273.0" prefHeight="25.0" prefWidth="221.0" />
-      <Button fx:id="btn" layoutX="257.0" layoutY="346.0" mnemonicParsing="false" onAction="#saveReservation" prefHeight="25.0" prefWidth="87.0" text="OK" />
+      <TextField fx:id="residfilm" layoutX="217.0" layoutY="141.0" prefHeight="25.0" prefWidth="221.0" />
+      <TextField fx:id="resstate" layoutX="217.0" layoutY="196.0" prefHeight="25.0" prefWidth="221.0" />
+      <Button fx:id="btn" layoutX="195.0" layoutY="345.0" mnemonicParsing="false" onAction="#saveReservation" prefHeight="25.0" prefWidth="87.0" text="Ajouter" />
+      <TextField fx:id="starttime" layoutX="217.0" layoutY="252.0" prefHeight="25.0" prefWidth="221.0" />
+      <TextField fx:id="endtime" layoutX="217.0" layoutY="303.0" prefHeight="25.0" prefWidth="221.0" />
+      <Label layoutX="112.0" layoutY="256.0" text="start_time " />
+      <Label layoutX="112.0" layoutY="307.0" text="end time" />
+      <Button fx:id="suppbtn" layoutX="321.0" layoutY="345.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="87.0" text="Supprimer" />
    </children>
 </AnchorPane>

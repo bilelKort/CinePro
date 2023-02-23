@@ -6,6 +6,7 @@
 package cinepro.gui;
 
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
@@ -15,6 +16,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
@@ -28,7 +30,7 @@ public class cineProMain extends Application {
     public void start(Stage primaryStage) {
        Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("reservation.fxml"));
+            root = FXMLLoader.load(getClass().getResource("ReservationSnack.fxml"));
             
             Scene scene = new Scene(root);
         
@@ -38,6 +40,7 @@ public class cineProMain extends Application {
         } catch (IOException ex) {
             Logger.getLogger(cineProMain.class.getName()).log(Level.SEVERE, null, ex);
     }
+     
     }
     /**
      * @param args the command line arguments

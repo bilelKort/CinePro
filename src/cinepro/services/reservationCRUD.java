@@ -67,7 +67,7 @@ public int checkFilm(reservation r){
     @Override
     public void addEntity(reservation r) {
         try {
-            String requete = "INSERT INTO reservation (Prix_final,id_user,id_film,state)" + "VALUES (? ,?, ?, ?)";
+            String requete = "INSERT INTO reservation (Prix_final,id_user,id_film,state,start_time,end_time)" + "VALUES (? ,?, ?, ?, ?, ?)";
             int count = checkUser(r);
             int count2=checkFilm(r);
             
@@ -87,6 +87,8 @@ public int checkFilm(reservation r){
             st.setInt(2, r.getId_user());
             st.setInt(3, r.getId_film());
             st.setBoolean(4, r.isState());
+            st.setTimestamp(5, r.getStart_time());
+            st.setTimestamp(6, r.getEnd_time());
 
             st.executeUpdate();
             
@@ -115,6 +117,9 @@ public int checkFilm(reservation r){
                 p.setId_user(rs.getInt(3));
                 p.setId_film(rs.getInt(4));
                 p.setState(rs.getBoolean(5));
+                p.setStart_time(rs.getTimestamp(6));
+                p.setEnd_time(rs.getTimestamp(7));
+                
                 
                 myList.add(p);
             }

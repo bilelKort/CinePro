@@ -10,15 +10,13 @@
       <Label layoutX="128.0" layoutY="88.0" prefHeight="17.0" prefWidth="89.0" text="seat number" />
       <Label layoutX="128.0" layoutY="144.0" prefHeight="17.0" prefWidth="56.0" text="price" />
       <Label layoutX="128.0" layoutY="196.0" prefHeight="17.0" prefWidth="89.0" text="id_reservation" />
-      <TextField fx:id="coordonne" layoutX="252.0" layoutY="84.0" prefHeight="25.0" prefWidth="250.0" />
-      <TextField fx:id="prix_place" layoutX="252.0" layoutY="140.0" prefHeight="25.0" prefWidth="250.0" />
-      <TextField fx:id="idres" layoutX="252.0" layoutY="192.0" prefHeight="25.0" prefWidth="250.0" />
-      <Button fx:id="btnres" layoutX="166.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveReservationPlace" prefHeight="25.0" prefWidth="124.0" text="Reserver place" />
-      <Button fx:id="snackbtn" layoutX="305.0" layoutY="344.0" mnemonicParsing="false" onAction="#saveReservationPlaceSnack" prefHeight="25.0" prefWidth="124.0" text="Acheter Snack" />
-      <Label layoutX="128.0" layoutY="252.0" prefHeight="17.0" prefWidth="76.0" text="start_time" />
-      <Label layoutX="128.0" layoutY="300.0" prefHeight="17.0" prefWidth="76.0" text="end_time" />
-      <TextField fx:id="starttime" layoutX="252.0" layoutY="248.0" prefHeight="25.0" prefWidth="250.0" />
-      <TextField fx:id="endtime" layoutX="252.0" layoutY="296.0" prefHeight="25.0" prefWidth="250.0" />
-      <Button fx:id="btnUpdate" layoutX="440.0" layoutY="344.0" mnemonicParsing="false" onAction="#updateReservationPlace" prefHeight="25.0" prefWidth="124.0" text="Update" />
+      <TextField fx:id="coordonne" layoutX="230.0" layoutY="84.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="prix_place" layoutX="230.0" layoutY="140.0" prefHeight="25.0" prefWidth="250.0" />
+      <TextField fx:id="idres" layoutX="230.0" layoutY="192.0" prefHeight="25.0" prefWidth="250.0" />
+      <Button fx:id="btnres" layoutX="217.0" layoutY="254.0" mnemonicParsing="false" onAction="#saveReservationPlace" prefHeight="25.0" prefWidth="124.0" text="Reserver place" />
+      <Button fx:id="snackbtn" layoutX="378.0" layoutY="254.0" mnemonicParsing="false" onAction="#saveReservationPlaceSnack" prefHeight="25.0" prefWidth="124.0" text="Acheter Snack" />
+      <Button fx:id="btnUpdate" layoutX="530.0" layoutY="119.0" mnemonicParsing="false" onAction="#updateReservationPlace" prefHeight="25.0" prefWidth="124.0" text="Update" />
+      <TextField fx:id="id_place" layoutX="517.0" layoutY="84.0" />
+      <Label layoutX="517.0" layoutY="58.0" prefHeight="17.0" prefWidth="89.0" text="id_place" />
    </children>
 </AnchorPane>

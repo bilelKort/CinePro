@@ -30,6 +30,8 @@ import java.time.LocalDateTime;
 public class Reservation_placeController implements Initializable {
 
     @FXML
+    private TextField id_place;
+    @FXML
     private TextField coordonne;
     @FXML
     private TextField prix_place;
@@ -60,11 +62,8 @@ public class Reservation_placeController implements Initializable {
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
         int idRes = Integer.valueOf(idres.getText());
-        Timestamp start_time = Timestamp.valueOf(starttime.getText());
-        Timestamp end_time = Timestamp.valueOf(endtime.getText());
-
-        
-        reservation_place res = new reservation_place(seatNum, Prix, idRes,start_time,end_time);
+       
+        reservation_place res = new reservation_place(seatNum, Prix, idRes);
         reservation_placeCRUD pcd = new reservation_placeCRUD();
         pcd.addEntity(res); 
     }
@@ -78,10 +77,9 @@ public class Reservation_placeController implements Initializable {
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
         int idRes = Integer.valueOf(idres.getText());
-        Timestamp start_time = Timestamp.valueOf(starttime.getText());
-        Timestamp end_time = Timestamp.valueOf(endtime.getText());
         
-        reservation_place res = new reservation_place(seatNum, Prix, idRes,start_time,end_time);
+        
+        reservation_place res = new reservation_place(seatNum, Prix, idRes);
         reservation_placeCRUD pcd = new reservation_placeCRUD();
         pcd.addEntity(res);
         
@@ -104,13 +102,13 @@ public class Reservation_placeController implements Initializable {
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
         int idRes = Integer.valueOf(idres.getText());
-        Timestamp start_time = Timestamp.valueOf(starttime.getText());
-        Timestamp end_time = Timestamp.valueOf(endtime.getText());
+       
+        int idpl = Integer.valueOf(id_place.getText());
 
         
-        reservation_place res = new reservation_place(seatNum, Prix, idRes,start_time,end_time);
+        reservation_place res = new reservation_place(idpl,seatNum, Prix, idRes);
         reservation_placeCRUD pcd = new reservation_placeCRUD();
-        pcd.updateEntity(idRes, seatNum, Prix, idRes,start_time,end_time);
+        pcd.updateEntity(idpl,idRes, seatNum, Prix);
     }
     
     

@@ -13,22 +13,24 @@ public class reservation_snack {
    private int quantite;
    private float prix;
    private int 	id_reservation;
-   
+   private int id_snack;
 
     public reservation_snack() {
     }
 
-    public reservation_snack(int quantite, float prix, int id_reservation) {
+    public reservation_snack(int quantite, float prix, int id_reservation, int id_snack) {
         this.quantite = quantite;
         this.prix = prix;
         this.id_reservation = id_reservation;
+        this.id_snack = id_snack;
     }
 
-    public reservation_snack(int id_res_snack, int quantite, float prix, int id_reservation) {
+    public reservation_snack(int id_res_snack, int quantite, float prix, int id_reservation,int id_snack) {
         this.id_res_snack = id_res_snack;
         this.quantite = quantite;
         this.prix = prix;
         this.id_reservation = id_reservation;
+        this.id_snack = id_snack;
     }
 
     
@@ -63,6 +65,14 @@ public class reservation_snack {
 
     public void setPrix(float prix) {
         this.prix = prix;
+    }
+
+    public int getId_snack() {
+        return id_snack;
+    }
+
+    public void setId_snack(int id_snack) {
+        this.id_snack = id_snack;
     }
 
     @Override

@@ -25,14 +25,19 @@ import javafx.scene.control.TextField;
 public class ReservationSnackController implements Initializable {
 
     @FXML
-    private TextField idsnack;
-    @FXML
     private TextField prixsnack;
     @FXML
     private TextField idres;
     @FXML
+    private TextField idsnack;
+    @FXML
     private Button btnsnack;
-    
+    @FXML
+    private TextField quantite;
+    @FXML
+    private Button btnup;
+    @FXML
+    private TextField idressnack;
     /**
      * Initializes the controller class.
      */
@@ -42,20 +47,43 @@ public class ReservationSnackController implements Initializable {
     }    
     
     @FXML
-    private void saveReservationSnack (ActionEvent event) {
-        
-        int idSnack = Integer.valueOf(idsnack.getText());
+    private void saveReservationSnack (ActionEvent event) {        
+       
+        int qte = Integer.valueOf(quantite.getText());
         float Prix = Float.valueOf(prixsnack.getText());
         int idRes = Integer.valueOf(idres.getText());
+        int ids = Integer.valueOf(idsnack.getText());
         
-        if(idSnack>0 && Prix>0){
-        reservation_snack res =new reservation_snack(idSnack,Prix,idRes);
+        if(qte>0 && Prix>0){
+        reservation_snack res =new reservation_snack(qte,Prix,idRes,ids);
+            System.out.println(res);
         reservation_snackCRUD pcd = new reservation_snackCRUD();
+        
         pcd.addEntity(res);
         }
         else{
             System.out.println("Invalid champ");
         }
+    }
+    
+    @FXML
+    private void updateSnack(ActionEvent event){
+        
+       int qte = Integer.valueOf(quantite.getText());
+       float Prix = Float.valueOf(prixsnack.getText());
+       int idRes = Integer.valueOf(idres.getText());
+       int ids = Integer.valueOf(idsnack.getText());
+       int idreservationsnack = Integer.valueOf(idressnack.getText());
+        System.out.println(qte + Prix + idRes + ids + idreservationsnack);
+        if(qte>0 && Prix>0){
+        reservation_snack res =new reservation_snack(qte,Prix,idRes,ids);
+        reservation_snackCRUD pcd = new reservation_snackCRUD();
+        pcd.updateEntity(qte, Prix, idRes,ids,idreservationsnack);
+        }
+        else{
+            System.out.println("Invalid champ");
+        }
+    
     }
 }
 

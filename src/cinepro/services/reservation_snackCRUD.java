@@ -23,14 +23,15 @@ public class reservation_snackCRUD implements entityCRUD<reservation_snack>{
      @Override
     public void addEntity(reservation_snack r) {
         try {
-            String requete = "INSERT INTO reservation_snack (quantite,prix,id_reservation)" + "VALUES (?, ?, ?)";
+            String requete = "INSERT INTO reservation_snack (quantite,prix,id_reservation,id_snack)" + "VALUES (?, ?, ?, ?)";
             PreparedStatement st = cineproConnexion.getInstance().getCnx()
                     .prepareStatement(requete);
             
             st.setInt(1, r.getQuantite());
             st.setFloat(2, r.getPrix());
             st.setInt(3, r.getId_reservation());
-
+            st.setInt(4, r.getId_snack());
+            
             st.executeUpdate();
             
              String requete2 = "UPDATE reservation SET prix_final = (prix_final + ?) WHERE (id_reservation=?)";
@@ -62,9 +63,11 @@ public class reservation_snackCRUD implements entityCRUD<reservation_snack>{
             while(rs.next()){
                 reservation_snack p =new reservation_snack();
 
+                p.setId_res_snack(rs.getInt(1));
                 p.setQuantite(rs.getInt(2));
                 p.setPrix(rs.getInt(3));
                 p.setId_reservation(rs.getInt(4));
+                p.setId_snack(rs.getInt(5));
                 
                 myList.add(p);
             }
@@ -88,15 +91,17 @@ public class reservation_snackCRUD implements entityCRUD<reservation_snack>{
         }
      }
 
-    public void updateEntity(int id_res_snack,int quantite,float prix,int id_reservation){
+    public void updateEntity(int quantite,float prix,int id_reservation,int id_snack,int id_res_snack){
         try{
-        String requete = "UPDATE reservation_snack set id_res_snack=?,quantite=?,prix=?,id_reservation=?";
+        String requete = "UPDATE reservation_snack set quantite=?,prix=?,id_reservation=?,id_snack=? WHERE id_res_snack=?";
         PreparedStatement st=cineproConnexion.getInstance()
                 .getCnx().prepareStatement(requete);
             
         st.setInt(1, quantite);
         st.setFloat(2, prix);
         st.setInt(3, id_reservation);
+        st.setInt(4, id_snack);
+        st.setInt(5, id_res_snack);
         
         st.executeUpdate();
         

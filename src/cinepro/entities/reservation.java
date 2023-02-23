@@ -4,6 +4,8 @@
  */
 package cinepro.entities;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author kortb
@@ -14,24 +16,28 @@ public class reservation {
    private int id_user;
    private int id_film;
    private boolean state;
-
+   private Timestamp start_time;
+   private Timestamp end_time;
   
     public reservation() {
     }
 
-    public reservation(int id_reservation, float prix_final, int id_user, int id_film,boolean state) {
+    public reservation(int id_reservation, float prix_final, int id_user, int id_film, boolean state, Timestamp start_time, Timestamp end_time) {
         this.id_reservation = id_reservation;
         this.prix_final = prix_final;
         this.id_user = id_user;
         this.id_film = id_film;
         this.state = state;
+        this.start_time = start_time;
+        this.end_time = end_time;
     }
 
-    public reservation(float prix_final, int id_user, int id_film,boolean state) {
-        this.prix_final = prix_final;
+    public reservation(int id_user, int id_film, boolean state, Timestamp start_time, Timestamp end_time) {
         this.id_user = id_user;
         this.id_film = id_film;
         this.state = state;
+        this.start_time = start_time;
+        this.end_time = end_time;
     }
 
     public reservation(int id_user, int id_film, boolean state) {
@@ -39,6 +45,16 @@ public class reservation {
         this.id_film = id_film;
         this.state = state;
     }
+
+    public reservation(float prix_final, int id_user, int id_film, boolean state, Timestamp start_time, Timestamp end_time) {
+        this.prix_final = prix_final;
+        this.id_user = id_user;
+        this.id_film = id_film;
+        this.state = state;
+        this.start_time = start_time;
+        this.end_time = end_time;
+    }
+    
 
     public boolean isState() {
         return state;
@@ -81,6 +97,24 @@ public class reservation {
         this.id_film = id_film;
     }
 
+    public Timestamp getStart_time() {
+        return start_time;
+    }
+
+    public void setStart_time(Timestamp start_time) {
+        this.start_time = start_time;
+    }
+
+    public Timestamp getEnd_time() {
+        return end_time;
+    }
+
+    public void setEnd_time(Timestamp end_time) {
+        this.end_time = end_time;
+    }
+
+    
+    
     @Override
     public String toString() {
         return "reservation{" + "id_reservation=" + id_reservation + ", prix_final=" + prix_final + ", id_user=" + id_user + ", id_film=" + id_film + ", state=" + state + '}';

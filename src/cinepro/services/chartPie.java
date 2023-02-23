@@ -34,7 +34,7 @@ public class chartPie extends Application{
     @Override
         public void start(Stage stage) throws Exception {
             
-         PieChart.Data slice1 = new PieChart.Data("Apples", 10);
+        PieChart.Data slice1 = new PieChart.Data("Apples", 10);
         PieChart.Data slice2 = new PieChart.Data("Bananas", 5);
         PieChart.Data slice3 = new PieChart.Data("Oranges", 15);
         PieChart.Data slice4 = new PieChart.Data("Pears", 8);

@@ -5,17 +5,16 @@
         <group>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/ReservationSnackController.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/entities/reservation.java</file>
-            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/utils/cineproConnexion.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/entities/reservation_place.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/cineProMain.java</file>
-            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/interfaces/entityCRUD.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/DisplayController.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/reservation_placeCRUD.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/reservationCRUD.java</file>
-            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/reservation_place.fxml</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/DetailSnackController.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/DetailPlaceController.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/ReservationSnack.fxml</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/chartPie.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/ReservationController.java</file>
-            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/reservation.fxml</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/Reservation_placeController.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/reservation_snackCRUD.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/tests/MainClass.java</file>

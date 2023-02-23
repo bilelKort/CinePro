@@ -9,6 +9,7 @@ import cinepro.entities.*;
 import cinepro.services.*;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.Timestamp;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -33,6 +34,10 @@ public class ReservationController implements Initializable {
     private TextField residfilm;
     @FXML
     private TextField resstate;
+     @FXML
+    private TextField starttime;
+    @FXML
+    private TextField endtime;
     @FXML
     private Button btn;
 
@@ -47,10 +52,12 @@ public class ReservationController implements Initializable {
         int iduser = Integer.valueOf(residuser.getText());
         int idfilm = Integer.valueOf(residfilm.getText());
         boolean state = Boolean.valueOf(resstate.getText());
+        Timestamp start_time = Timestamp.valueOf(starttime.getText());
+        Timestamp end_time = Timestamp.valueOf(endtime.getText());
         
         if(iduser>0 && idfilm>0){
         reservationCRUD pcd = new reservationCRUD();
-        reservation res = new reservation(0.0f,iduser,idfilm,state);
+        reservation res = new reservation(0.0f,iduser,idfilm,state,start_time,end_time);
         pcd.addEntity(res);
         
        FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation_place.fxml"));
@@ -69,4 +76,6 @@ public class ReservationController implements Initializable {
         }
        
     }
+    
+      
 }
