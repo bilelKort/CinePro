@@ -10,6 +10,7 @@ import cinepro.services.*;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -18,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
 /**
@@ -105,14 +107,21 @@ public class ReservationController implements Initializable {
        
     }
     
+    private boolean confirmDelete() {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirm Delete");
+    alert.setHeaderText(null);
+    alert.setContentText("Are you sure you want to delete this element?");
+
+    Optional<ButtonType> result = alert.showAndWait();
+    return result.isPresent() && result.get() == ButtonType.OK;
+    }
+    
     public void supprimerReservation (ActionEvent event) {
-        
-       int idres = Integer.valueOf(idreservation.getText());
-
-        
-        reservationCRUD pcd = new reservationCRUD();
-        
-
-        pcd.deleteEntity(idres);
+        if(confirmDelete()){
+          int idres = Integer.valueOf(idreservation.getText());
+          reservationCRUD pcd = new reservationCRUD();
+          pcd.deleteEntity(idres);  
+        }   
     }  
 }

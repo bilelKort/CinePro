@@ -9,10 +9,10 @@
    <children>
       <TableView fx:id="tableview" layoutY="71.0" prefHeight="329.0" prefWidth="601.0">
         <columns>
-          <TableColumn fx:id="col1" prefWidth="75.0" text="C1" />
-          <TableColumn fx:id="col2" prefWidth="75.0" text="C2" />
-            <TableColumn fx:id="col3" prefWidth="75.0" text="Column X" />
-            <TableColumn fx:id="col4" prefWidth="75.0" text="Column X" />
+          <TableColumn fx:id="col1" prefWidth="75.0" text="ID Place" />
+          <TableColumn fx:id="col2" prefWidth="147.0" text="coordonnées chaise" />
+            <TableColumn fx:id="col3" minWidth="3.0" prefWidth="78.0" text="Prix" />
+            <TableColumn fx:id="col4" minWidth="0.0" prefWidth="101.0" text="ID reservation" />
         </columns>
       </TableView>
       <Button fx:id="btnres" layoutX="34.0" layoutY="28.0" mnemonicParsing="false" onAction="#showresTable" text="Reservation" />

@@ -113,11 +113,17 @@ public class reservation {
         this.end_time = end_time;
     }
 
-    
-    
     @Override
     public String toString() {
-        return "reservation{" + "id_reservation=" + id_reservation + ", prix_final=" + prix_final + ", id_user=" + id_user + ", id_film=" + id_film + ", state=" + state + '}';
+        return "reservation{" + "id_reservation=" + id_reservation + ", prix_final=" + prix_final + ", id_user=" + id_user + ", id_film=" + id_film + ", state=" + state + ", start_time=" + start_time + ", end_time=" + end_time + '}';
     }
+
+    public int getId_reservation() {
+        return id_reservation;
+    }
+
+    
+    
+    
        
 }

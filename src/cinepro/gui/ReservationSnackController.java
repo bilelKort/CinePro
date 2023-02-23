@@ -10,12 +10,14 @@ import cinepro.entities.reservation_snack;
 import cinepro.services.reservation_placeCRUD;
 import cinepro.services.reservation_snackCRUD;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 
 /**
@@ -114,15 +116,26 @@ public class ReservationSnackController implements Initializable {
         }
     }
     
+    private boolean confirmDelete() {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirm Delete");
+    alert.setHeaderText(null);
+    alert.setContentText("Are you sure you want to delete this element?");
+
+    Optional<ButtonType> result = alert.showAndWait();
+    return result.isPresent() && result.get() == ButtonType.OK;
+    }
+    
     @FXML
     public void supprimerReservationSnack (ActionEvent event) {
         
-       int idreservationsnack = Integer.valueOf(idressnack.getText());
 
-        
+        if(confirmDelete()){
+        int idreservationsnack = Integer.valueOf(idressnack.getText());
         reservation_snackCRUD pcd = new reservation_snackCRUD();
         pcd.deleteEntity(idreservationsnack);
-    }
+        }
+        }
 }
 
 

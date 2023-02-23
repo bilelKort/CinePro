@@ -30,7 +30,7 @@ public class cineProMain extends Application {
     public void start(Stage primaryStage) {
        Parent root;
         try {
-            root = FXMLLoader.load(getClass().getResource("reservation.fxml"));
+            root = FXMLLoader.load(getClass().getResource("Menu.fxml"));
             
             Scene scene = new Scene(root);
         

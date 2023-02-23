@@ -41,13 +41,13 @@ calendar2.set(Calendar.MILLISECOND, 0); // set the millisecond to 0
 
 Timestamp timestamp2 = new Timestamp(calendar2.getTimeInMillis());
         
-        //reservationCRUD pcd = new reservationCRUD();
+        reservationCRUD pcd = new reservationCRUD();
         //reservation res = new reservation(1,1,true,timestamp,timestamp2);
        // System.out.println(pcd.checkUser(res));
         //System.out.println(pcd.checkFilm(res));
-        //pcd.addEntity(res);
+//pcd.addEntity(res);
         //pcd.deleteEntity(13,2,1);
-        //System.out.println(pcd.entitiesList()); 
+        System.out.println(pcd.entitiesList()); 
         
         //reservation_place r1=new reservation_place("(11,11)",40.5f,57);
       //reservation_placeCRUD pcd = new reservation_placeCRUD();
@@ -59,9 +59,9 @@ Timestamp timestamp2 = new Timestamp(calendar2.getTimeInMillis());
 
 //System.out.println(pcd.entitiesList()); 
         //pcd.updateEntity(5, "(10,10)", 60.9f, 7);
-      reservation_snack rr = new reservation_snack(30,50.9f,11,1);
-      reservation_snackCRUD pcs = new reservation_snackCRUD();
-      pcs.updateEntity(3, 20f, 58, 1, 15);
+      //reservation_snack rr = new reservation_snack(30,50.9f,11,1);
+      //reservation_snackCRUD pcs = new reservation_snackCRUD();
+      //pcs.updateEntity(3, 20f, 58, 1, 15);
       
       /*chartPie chartDemo = new chartPie();
         chartDemo.launch(args);

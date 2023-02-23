@@ -113,14 +113,13 @@ public int checkFilm(reservation r){
                 reservation p =new reservation();
                 
                 p.setId_reservation(rs.getInt(1));
-                p.setPrix_final(rs.getInt(2));
+                p.setPrix_final(rs.getFloat(2));
                 p.setId_user(rs.getInt(3));
                 p.setId_film(rs.getInt(4));
                 p.setState(rs.getBoolean(5));
                 p.setStart_time(rs.getTimestamp(6));
                 p.setEnd_time(rs.getTimestamp(7));
-                
-                
+                                
                 myList.add(p);
             }
         } catch (SQLException ex) {

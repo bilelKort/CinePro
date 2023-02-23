@@ -21,6 +21,9 @@ import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import java.time.LocalDateTime;
+import java.util.Optional;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 
 /**
  * FXML Controller class
@@ -113,14 +116,25 @@ public class Reservation_placeController implements Initializable {
         pcd.updateEntity(idpl,idRes, seatNum, Prix);
     }
     
+    
+    private boolean confirmDelete() {
+    Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    alert.setTitle("Confirm Delete");
+    alert.setHeaderText(null);
+    alert.setContentText("Are you sure you want to delete this element?");
+
+    Optional<ButtonType> result = alert.showAndWait();
+    return result.isPresent() && result.get() == ButtonType.OK;
+    }
+    
     @FXML
     public void supprimerReservationPlace (ActionEvent event) {
-        
-        int idresplace = Integer.valueOf(id_place.getText());
-
-        
-        reservation_placeCRUD pcd = new reservation_placeCRUD();
-        pcd.deleteEntity(idresplace);
+        if(confirmDelete()){
+            int idresplace = Integer.valueOf(id_place.getText());      
+            reservation_placeCRUD pcd = new reservation_placeCRUD();
+            pcd.deleteEntity(idresplace); 
+        }
+       
     }
     
     

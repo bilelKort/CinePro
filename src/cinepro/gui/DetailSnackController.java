@@ -39,6 +39,8 @@ public class DetailSnackController implements Initializable {
     @FXML
     private TableColumn<reservation_snack, Integer> col4;  
     @FXML
+    private TableColumn<reservation_snack, Integer> col5;  
+    @FXML
     private TableView<reservation_snack> tableview;
     public   ObservableList<reservation_snack> data = FXCollections.observableArrayList();
      @FXML
@@ -60,7 +62,8 @@ public class DetailSnackController implements Initializable {
       col2.setCellValueFactory(new PropertyValueFactory<reservation_snack, Integer>("quantite"));
       col3.setCellValueFactory(new PropertyValueFactory<reservation_snack, Float>("prix"));
       col4.setCellValueFactory(new PropertyValueFactory<reservation_snack, Integer>("id_reservation"));
-   
+      col5.setCellValueFactory(new PropertyValueFactory<reservation_snack, Integer>("id_snack"));
+
       tableview.setItems(data);
     }    
     

@@ -9,13 +9,13 @@
    <children>
       <TableView fx:id="tableview" layoutY="46.0" prefHeight="477.0" prefWidth="835.0">
         <columns>
-          <TableColumn fx:id="col1" prefWidth="91.0" text="C1" />
-          <TableColumn fx:id="col2" prefWidth="71.0" text="C2" />
-            <TableColumn fx:id="col3" prefWidth="98.0" text="Column X" />
-            <TableColumn fx:id="col4" prefWidth="143.0" text="Column X" />
-            <TableColumn fx:id="col5" prefWidth="91.0" text="Column X" />
-            <TableColumn fx:id="col6" prefWidth="100.0" text="Column X" />
-            <TableColumn fx:id="col7" prefWidth="116.0" text="Column X" />
+          <TableColumn fx:id="col1" prefWidth="91.0" text="ID" />
+          <TableColumn fx:id="col2" prefWidth="71.0" text="Prix Final" />
+            <TableColumn fx:id="col3" prefWidth="98.0" text="ID User" />
+            <TableColumn fx:id="col4" prefWidth="143.0" text="ID Film" />
+            <TableColumn fx:id="col5" prefWidth="91.0" text="State" />
+            <TableColumn fx:id="col6" prefWidth="181.0" text="Start time" />
+            <TableColumn fx:id="col7" prefWidth="159.0" text="End Time" />
         </columns>
       </TableView>
       <Button fx:id="btnresplace" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#showPlaceTable" prefHeight="25.0" prefWidth="112.0" text="Reservation Place" />
