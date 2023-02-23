@@ -21,5 +21,6 @@
       <Button fx:id="suppbtn" layoutX="565.0" layoutY="345.0" mnemonicParsing="false" onAction="#supprimerReservation" prefHeight="25.0" prefWidth="106.0" text="Supprimer" />
       <TextField id="bevel" fx:id="idreservation" layoutX="524.0" layoutY="303.0" prefHeight="25.0" prefWidth="187.0" />
       <Label layoutX="524.0" layoutY="277.0" prefHeight="17.0" prefWidth="114.0" text="id reservation" />
+      <Button fx:id="Menu" layoutX="27.0" layoutY="22.0" mnemonicParsing="false" onAction="#showMenu" text="Menu" />
    </children>
 </AnchorPane>

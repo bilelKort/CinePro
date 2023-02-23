@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -47,6 +48,10 @@ public class DetailPlaceController implements Initializable {
     private Button btnres;
     @FXML
     private Button btnressnack;
+    @FXML
+    private TableColumn<?, ?> delete;
+    @FXML
+    private Button Menu;
     /**
      * Initializes the controller class.
      */
@@ -67,6 +72,7 @@ public class DetailPlaceController implements Initializable {
     tableview.setItems(data);
     }    
     
+    @FXML
     public void showresTable(){
          FXMLLoader loader = new FXMLLoader(getClass().getResource("Display.fxml"));
        try{
@@ -79,12 +85,26 @@ public class DetailPlaceController implements Initializable {
         System.out.println(ex.getMessage());
     }
    }
+    @FXML
     public void showSnackTable(){
          FXMLLoader loader = new FXMLLoader(getClass().getResource("detailSnack.fxml"));
        try{
        Parent root = loader.load(); 
 
         btnressnack.getScene().setRoot(root);
+       
+       }catch(IOException ex){
+       
+        System.out.println(ex.getMessage());
+    }
+   }
+
+         public void showMenu(){
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+       try{
+       Parent root = loader.load(); 
+
+        Menu.getScene().setRoot(root);
        
        }catch(IOException ex){
        

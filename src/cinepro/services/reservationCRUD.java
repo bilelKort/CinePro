@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -26,9 +27,7 @@ public class reservationCRUD implements entityCRUD<reservation>{
         int count=0;
         try {
             String requete = "SELECT COUNT(*) FROM user u WHERE u.id_user = ? ";
-                                
-                               
-            
+                                        
             PreparedStatement stmp = cineproConnexion.getInstance().getCnx()
                     .prepareStatement(requete);
             
@@ -149,4 +148,24 @@ public int checkFilm(reservation r){
             System.out.println(ex.getMessage());
         }
      }
+    
+     public void updateEntity(int id_reservation,float prix_final,int id_user,int id_film,boolean state,Timestamp start_time,Timestamp end_time){
+        
+         try{
+        String requete = "UPDATE reservation set prix_final = ?,id_user = ?,id_film = ?,state  = ?,start_time = ?,end_time = ? WHERE id_reservation = ?";
+        PreparedStatement st=cineproConnexion.getInstance()
+                .getCnx().prepareStatement(requete);
+            
+              st.setFloat(1, prix_final);
+              st.setInt(2, id_user);
+              st.setInt(3, id_film);
+              st.setBoolean(4, state);
+              st.setTimestamp(5, start_time);
+              st.setTimestamp(6, end_time);
+
+        st.executeUpdate();
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        }
 }

@@ -41,10 +41,6 @@ public class Reservation_placeController implements Initializable {
     @FXML
     private TextField idres;
     @FXML
-    private TextField starttime;
-    @FXML
-    private TextField endtime;
-    @FXML
     private Button btnres;
     @FXML
     private Button snackbtn;
@@ -52,6 +48,8 @@ public class Reservation_placeController implements Initializable {
     private Button btnUpdate;
      @FXML
     private Button btnsupp;
+    @FXML
+    private Button Menu;
     
     /**
      * Initializes the controller class.
@@ -61,16 +59,58 @@ public class Reservation_placeController implements Initializable {
         // TODO
     }    
     
+    private boolean isFieldNotEmpty(String field) {
+    return field != null && !field.isEmpty();
+    }
+    
+    private boolean validateForm() {
+        String prixPlace = prix_place.getText();
+        String Coordonne= coordonne.getText();
+        String idRes = idres.getText();
+        
+        System.out.println(prixPlace+Coordonne+idRes);
+        if  (!isFieldNotEmpty(prixPlace) || !isFieldNotEmpty(Coordonne) || !isFieldNotEmpty(idRes)) {
+            
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validate Form");
+            alert.setHeaderText(null);
+            alert.setContentText("All fields must be filled!");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+    
+    
+    
     @FXML
     public void saveReservationPlace (ActionEvent event) {
         
+        if(validateForm()){
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
         int idRes = Integer.valueOf(idres.getText());
+        if(Prix<0){
+           Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validate Form");
+            alert.setHeaderText(null);
+            alert.setContentText("price invalid");
+            alert.showAndWait(); 
+        }
+        else{
+             reservation_place res = new reservation_place(seatNum, Prix, idRes);
+             reservation_placeCRUD pcd = new reservation_placeCRUD();
+             pcd.addEntity(res);
+        if(!pcd.check1(res)){
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validate Form");
+            alert.setHeaderText(null);
+            alert.setContentText("Seat reserved");
+            alert.showAndWait();
+        }
+        }
        
-        reservation_place res = new reservation_place(seatNum, Prix, idRes);
-        reservation_placeCRUD pcd = new reservation_placeCRUD();
-        pcd.addEntity(res); 
+        }
     }
     
     /****************************************************************************************************/
@@ -79,6 +119,7 @@ public class Reservation_placeController implements Initializable {
     @FXML
     public void saveReservationPlaceSnack (ActionEvent event) {
         
+        if(validateForm()){
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
         int idRes = Integer.valueOf(idres.getText());
@@ -99,10 +140,12 @@ public class Reservation_placeController implements Initializable {
         System.out.println(ex.getMessage());
     } 
     }
+    }
 
     
     @FXML
     public void updateReservationPlace (ActionEvent event) {
+        
         
         String seatNum = coordonne.getText();
         float Prix = Float.valueOf(prix_place.getText());
@@ -110,12 +153,11 @@ public class Reservation_placeController implements Initializable {
        
         int idpl = Integer.valueOf(id_place.getText());
 
-        
         reservation_place res = new reservation_place(idpl,seatNum, Prix, idRes);
         reservation_placeCRUD pcd = new reservation_placeCRUD();
         pcd.updateEntity(idpl,idRes, seatNum, Prix);
-    }
     
+    }
     
     private boolean confirmDelete() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -137,7 +179,19 @@ public class Reservation_placeController implements Initializable {
        
     }
     
-    
+    @FXML
+       public void showMenu(){
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+       try{
+       Parent root = loader.load(); 
+
+        Menu.getScene().setRoot(root);
+       
+       }catch(IOException ex){
+       
+        System.out.println(ex.getMessage());
+    }
+   }
 }
 
 

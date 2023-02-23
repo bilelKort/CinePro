@@ -9,12 +9,15 @@ import cinepro.entities.reservation_place;
 import cinepro.entities.reservation_snack;
 import cinepro.services.reservation_placeCRUD;
 import cinepro.services.reservation_snackCRUD;
+import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -41,6 +44,10 @@ public class ReservationSnackController implements Initializable {
     private Button btnup;
     @FXML
     private TextField idressnack;
+    @FXML
+    private Button btnsupp;
+    @FXML
+    private Button Menu;
     /**
      * Initializes the controller class.
      */
@@ -64,7 +71,7 @@ public class ReservationSnackController implements Initializable {
         
         
         if  (!isFieldNotEmpty(prixSnack) || !isFieldNotEmpty(idRes) || !isFieldNotEmpty(idSnack) || 
-                !isFieldNotEmpty(idResSnack) || !isFieldNotEmpty(Quantite)) {
+                !isFieldNotEmpty(Quantite)) {
             
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Validate Form");
@@ -84,7 +91,14 @@ public class ReservationSnackController implements Initializable {
         float Prix = Float.valueOf(prixsnack.getText());
         int idRes = Integer.valueOf(idres.getText());
         int ids = Integer.valueOf(idsnack.getText());
-        if(qte>0 && Prix>0){
+         if(Prix<0f || qte<0){
+           Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validate Form");
+            alert.setHeaderText(null);
+            alert.setContentText("price or quantity invalid");
+            alert.showAndWait(); 
+        }
+        else{
         reservation_snack res =new reservation_snack(qte,Prix,idRes,ids);
         System.out.println(res);
         reservation_snackCRUD pcd = new reservation_snackCRUD();
@@ -106,14 +120,19 @@ public class ReservationSnackController implements Initializable {
        int ids = Integer.valueOf(idsnack.getText());
        int idreservationsnack = Integer.valueOf(idressnack.getText());
        
-        if(qte>0 && Prix>0){
+        if(Prix<0f || qte<0){
+           Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validate Form");
+            alert.setHeaderText(null);
+            alert.setContentText("price or quantity invalid");
+            alert.showAndWait(); 
+        }
+        else{
         reservation_snack res =new reservation_snack(qte,Prix,idRes,ids);
         reservation_snackCRUD pcd = new reservation_snackCRUD();
         pcd.updateEntity(qte, Prix, idRes,ids,idreservationsnack);
         }
-        else{
-            System.out.println("Invalid champ");
-        }
+        
     }
     
     private boolean confirmDelete() {
@@ -136,6 +155,20 @@ public class ReservationSnackController implements Initializable {
         pcd.deleteEntity(idreservationsnack);
         }
         }
+    
+    @FXML
+       public void showMenu(){
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+       try{
+       Parent root = loader.load(); 
+
+        Menu.getScene().setRoot(root);
+       
+       }catch(IOException ex){
+       
+        System.out.println(ex.getMessage());
+    }
+   }
 }
 
 

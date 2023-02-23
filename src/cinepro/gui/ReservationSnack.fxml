@@ -20,5 +20,6 @@
       <TextField id="bevel" fx:id="idressnack" layoutX="386.0" layoutY="259.0" prefHeight="25.0" prefWidth="183.0" />
       <Label layoutX="386.0" layoutY="234.0" prefHeight="17.0" prefWidth="132.0" text="id reservation snack" />
       <Button fx:id="btnsupp" layoutX="386.0" layoutY="318.0" mnemonicParsing="false" onAction="#supprimerReservationSnack" prefHeight="25.0" prefWidth="83.0" text="Supprimer" />
+      <Button fx:id="Menu" layoutX="32.0" layoutY="22.0" mnemonicParsing="false" onAction="#showMenu" text="Menu" />
    </children>
 </AnchorPane>

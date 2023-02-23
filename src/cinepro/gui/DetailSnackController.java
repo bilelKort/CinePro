@@ -47,6 +47,8 @@ public class DetailSnackController implements Initializable {
     private Button btnres;
     @FXML
     private Button btnresplace;
+    @FXML
+    private Button Menu;
     /**
      * Initializes the controller class.
      */
@@ -68,6 +70,7 @@ public class DetailSnackController implements Initializable {
     }    
     
     
+ @FXML
        public void showPlaceTable(){
          FXMLLoader loader = new FXMLLoader(getClass().getResource("detailPlace.fxml"));
        try{
@@ -80,12 +83,27 @@ public class DetailSnackController implements Initializable {
         System.out.println(ex.getMessage());
     }
    }
+ @FXML
     public void showresTable(){
          FXMLLoader loader = new FXMLLoader(getClass().getResource("Display.fxml"));
        try{
        Parent root = loader.load(); 
 
         btnres.getScene().setRoot(root);
+       
+       }catch(IOException ex){
+       
+        System.out.println(ex.getMessage());
+    }
+   }
+    
+ @FXML
+       public void showMenu(){
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+       try{
+       Parent root = loader.load(); 
+
+        Menu.getScene().setRoot(root);
        
        }catch(IOException ex){
        

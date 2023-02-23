@@ -7,6 +7,7 @@ package cinepro.gui;
 
 import cinepro.entities.*;
 import cinepro.services.*;
+import com.mysql.cj.x.protobuf.MysqlxCrud.Projection;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Timestamp;
@@ -20,7 +21,10 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -45,10 +49,13 @@ public class ReservationController implements Initializable {
     private Button suppbtn;
     @FXML
     private TextField idreservation;
+    @FXML
+    private Button Menu;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+       
+        
     }
     
     private boolean isFieldNotEmpty(String field) {
@@ -56,13 +63,13 @@ public class ReservationController implements Initializable {
     }
     
     private boolean validateForm() {
-         String residUser = residuser.getText();
+        String residUser = residuser.getText();
         String residFilm = residfilm.getText();
         String idReservation = idreservation.getText();
         String resState = resstate.getText();
         String startTime = starttime.getText();
         String endTime = endtime.getText();
-        if  (!isFieldNotEmpty(residUser) || !isFieldNotEmpty(residFilm) || !isFieldNotEmpty(idReservation) || 
+        if  (!isFieldNotEmpty(residUser) || !isFieldNotEmpty(residFilm) || 
                 !isFieldNotEmpty(resState) || !isFieldNotEmpty(startTime) || !isFieldNotEmpty(endTime)) {
             
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -90,6 +97,10 @@ public class ReservationController implements Initializable {
         reservation res = new reservation(0.0f,iduser,idfilm,state,start_time,end_time);
         pcd.addEntity(res);
         
+        int c1 = pcd.checkUser(res);
+        int c2 = pcd.checkFilm(res);
+       
+        if(c1>0 && c2>0){
        FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation_place.fxml"));
        try{
        Parent root = loader.load(); 
@@ -101,11 +112,26 @@ public class ReservationController implements Initializable {
         System.out.println(ex.getMessage());
     } 
         }
+        }
         else{
            System.out.println("Invalid champ");
         }
        
     }
+    
+    public void updateReservation(ActionEvent event){
+        
+       int iduser = Integer.valueOf(residuser.getText());
+        int idfilm = Integer.valueOf(residfilm.getText());
+        boolean state = Boolean.valueOf(resstate.getText());
+        Timestamp start_time = Timestamp.valueOf(starttime.getText());
+        Timestamp end_time = Timestamp.valueOf(endtime.getText());
+        reservationCRUD pcd = new reservationCRUD();
+        reservation res = new reservation(0.0f,iduser,idfilm,state,start_time,end_time);
+       
+        
+    }
+    
     
     private boolean confirmDelete() {
     Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -117,11 +143,27 @@ public class ReservationController implements Initializable {
     return result.isPresent() && result.get() == ButtonType.OK;
     }
     
+    @FXML
     public void supprimerReservation (ActionEvent event) {
         if(confirmDelete()){
           int idres = Integer.valueOf(idreservation.getText());
           reservationCRUD pcd = new reservationCRUD();
           pcd.deleteEntity(idres);  
         }   
-    }  
+    } 
+    
+    
+    @FXML
+       public void showMenu(){
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Menu.fxml"));
+       try{
+       Parent root = loader.load(); 
+
+        Menu.getScene().setRoot(root);
+       
+       }catch(IOException ex){
+       
+        System.out.println(ex.getMessage());
+    }
+   }
 }

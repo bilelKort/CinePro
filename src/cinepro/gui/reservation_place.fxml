@@ -26,5 +26,6 @@
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="456.0" prefWidth="27.0" />
         </items>
       </SplitPane>
+      <Button fx:id="Menu" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#showMenu" text="Menu" />
    </children>
 </AnchorPane>
