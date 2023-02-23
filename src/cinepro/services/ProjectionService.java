@@ -35,7 +35,7 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
     }
 
     @Override
-    public List ProjectionList() {
+    public List projectionList() {
         ArrayList<Projection> list = new ArrayList<Projection>();
         try {
             String requete = "select * from projection";
@@ -114,7 +114,12 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
 
     @Override
     public boolean checkDate(Projection projection) {
-        List<Projection> list = ProjectionListBySalle(projection.getId_salle());
+        List<Projection> list = projectionListBySalle(projection.getId_salle());
+        for (int i=0; i<list.size(); i++) {
+            if (projection.getId_projection() == list.get(i).getId_projection()) {
+                list.remove(i);
+            }
+        }
         List<LocalDateTime> debut = new ArrayList<>();
         List<LocalDateTime> fin = new ArrayList<>();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
@@ -124,9 +129,7 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
             fin.add(LocalDateTime.parse(projection1.getDate_fin(), dateTimeFormatter));
         });
         LocalDateTime this_debut = LocalDateTime.parse(projection.getDate_debut(), dateTimeFormatter1);
-        System.out.println("debut: " + this_debut);
         LocalDateTime this_fin = LocalDateTime.parse(projection.getDate_fin(), dateTimeFormatter1);
-        System.out.println("fin: " + this_fin);
         for (int i=0; i<list.size(); i++) {
             if (!((debut.get(i).compareTo(this_debut) < 0) && (fin.get(i).compareTo(this_debut) < 0) ||
                             (debut.get(i).compareTo(this_fin) > 0) && (fin.get(i).compareTo(this_fin) > 0))) {
@@ -137,7 +140,7 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
     }
 
     @Override
-    public List ProjectionListBySalle(int id_salle) {
+    public List projectionListBySalle(int id_salle) {
         ArrayList<Projection> list = new ArrayList<Projection>();
         try {
             String requete = "select * from projection where id_salle = '" + id_salle + "'";

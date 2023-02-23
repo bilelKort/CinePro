@@ -71,7 +71,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="desc" layoutX="122.0" layoutY="423.0" prefHeight="212.0" prefWidth="261.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="967.0">
+      <Label fx:id="desc" alignment="TOP_LEFT" layoutX="122.0" layoutY="423.0" prefHeight="212.0" prefWidth="261.0" AnchorPane.leftAnchor="122.0" AnchorPane.rightAnchor="967.0">
          <font>
             <Font size="18.0" />
          </font></Label>
@@ -93,7 +93,7 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Label fx:id="actors" layoutX="484.0" layoutY="655.0" prefHeight="39.0" prefWidth="446.0" AnchorPane.rightAnchor="420.0">
+      <Label fx:id="actors" layoutX="484.0" layoutY="655.0" prefHeight="39.0" prefWidth="629.0" AnchorPane.rightAnchor="237.0">
          <font>
             <Font size="18.0" />
          </font>
@@ -111,5 +111,7 @@
       <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" text="Ajout Movies" />
       <Button fx:id="listMovies" layoutX="113.0" layoutY="14.0" mnemonicParsing="false" onAction="#listMovies" text="List Movies" />
       <Button fx:id="ajoutprojection" layoutX="202.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection" />
+      <Button fx:id="listProjections" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections" />
+
    </children>
 </AnchorPane>

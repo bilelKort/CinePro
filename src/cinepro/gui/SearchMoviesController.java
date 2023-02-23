@@ -19,6 +19,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -27,13 +28,19 @@ import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class SearchMoviesController implements Initializable {
 
+    @FXML
+    private AnchorPane anchor;
+    @FXML
+    private Button listProjections;
     @FXML
     private Button ajoutprojection;
     @FXML
@@ -71,9 +78,18 @@ public class SearchMoviesController implements Initializable {
                 vBox.setSpacing(20);
                 vBox.getChildren().add(hBox);
                 hBox = new HBox();
+                anchor.setPrefHeight(anchor.getPrefHeight()+200);
             }
             ImageView imageView = new ImageView();
-            Image image = new Image(list.get(j).getPoster());
+            File file = new File(list.get(j).getPoster());
+            String localURl = "";
+            try {
+                localURl = file.toURI().toURL().toString();
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+            Image image = new Image(localURl);
+
             String nom = list.get(j).getNom();
 
             imageView.setImage(image);
@@ -107,10 +123,9 @@ public class SearchMoviesController implements Initializable {
 
     public void movieDetail(ActionEvent actionEvent, int id) {
         try {
+            MovieDetailsController.getInstance().setId_film(id);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MovieDetails.fxml"));
             Parent root =loader.load();
-            MovieDetailsController movieDetailsController = loader.getController();
-            movieDetailsController.setId_film(id);
             ajoutMovies.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
@@ -132,6 +147,16 @@ public class SearchMoviesController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutProjection.fxml"));
             Parent root =loader.load();
             ajoutprojection.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void listProjections(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListProjections.fxml"));
+            Parent root =loader.load();
+            listProjections.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

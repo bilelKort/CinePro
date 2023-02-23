@@ -29,6 +29,8 @@ public class AjoutProjectionController implements Initializable {
     @FXML
     private Label error;
     @FXML
+    private Button listProjections;
+    @FXML
     private Button ajoutMovies;
     @FXML
     private Button listMovies;
@@ -59,7 +61,7 @@ public class AjoutProjectionController implements Initializable {
         dropFilm.setConverter(new StringConverter<Film>() {
             @Override
             public String toString(Film object) {
-                return object.getNom();
+                return object.getId_film() + " - " + object.getNom();
             }
 
             @Override
@@ -115,6 +117,7 @@ public class AjoutProjectionController implements Initializable {
                 Projection projection = new Projection(Integer.valueOf(salle_id.getText()), dropFilm.getValue().getId_film(), debut_date_time, dateTimeFormatter.format(fin_date_time), 0, false);
                 if (projectionService.checkDate(projection)) {
                     projectionService.addProjection(projection);
+                    listProjections(new ActionEvent());
                 }else {
                     error.setText("Already projection in salle");
                 }
@@ -143,4 +146,13 @@ public class AjoutProjectionController implements Initializable {
         }
     }
 
+    public void listProjections(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListProjections.fxml"));
+            Parent root =loader.load();
+            listProjections.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
 }

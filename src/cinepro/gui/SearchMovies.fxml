@@ -2,6 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
@@ -10,22 +11,31 @@
 
 <AnchorPane prefHeight="739.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.SearchMoviesController">
    <children>
-      <TextField fx:id="search" alignment="CENTER" layoutX="113.0" layoutY="48.0" onKeyPressed="#search" prefHeight="51.0" prefWidth="1125.0" promptText="Search" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="112.0">
-         <font>
-            <Font size="24.0" />
-         </font>
-      </TextField>
-      <BorderPane fx:id="border" layoutX="48.0" layoutY="157.0" prefHeight="582.0" prefWidth="1256.0">
-         <center>
-            <VBox fx:id="vBox" prefHeight="600.0" prefWidth="1350.0" BorderPane.alignment="CENTER" />
-         </center>
-         <padding>
-            <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-         </padding>
-      </BorderPane>
-      <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies" />
-      <Button fx:id="listMovies" layoutX="113.0" layoutY="14.0" mnemonicParsing="false" text="List Movies" />
-      <Button fx:id="ajoutprojection" layoutX="202.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection" />
+      <ScrollPane prefHeight="739.0" prefWidth="1350.0">
+        <content>
+          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="739.0" prefWidth="1350.0">
+               <children>
+                  <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies" />
+                  <Button fx:id="listMovies" layoutX="113.0" layoutY="14.0" mnemonicParsing="false" text="List Movies" />
+                  <BorderPane fx:id="border"  layoutX="48.0" layoutY="157.0" prefHeight="582.0" prefWidth="1256.0">
+                     <center>
+                        <VBox fx:id="vBox" prefHeight="600.0" prefWidth="1350.0" BorderPane.alignment="CENTER" />
+                     </center>
+                     <padding>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </padding>
+                  </BorderPane>
+                  <TextField fx:id="search" alignment="CENTER" layoutX="113.0" layoutY="48.0" onKeyPressed="#search" prefHeight="51.0" prefWidth="1125.0" promptText="Search" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="112.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </TextField>
+                  <Button fx:id="ajoutprojection" layoutX="202.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projections" />
+                   <Button fx:id="listProjections" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections" />
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
 
    </children>
 </AnchorPane>

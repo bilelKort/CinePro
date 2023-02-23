@@ -6,6 +6,7 @@ import cinepro.services.CrewService;
 import cinepro.services.FilmService;
 
 import javafx.application.Application;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -23,7 +24,9 @@ import jdk.nashorn.internal.runtime.ECMAException;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import javax.imageio.ImageIO;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -34,6 +37,8 @@ import java.util.ResourceBundle;
 
 public class AjoutMovieController implements Initializable {
 
+    @FXML
+    private Button listProjections;
     @FXML
     private Button ajoutprojection;
     @FXML
@@ -83,7 +88,7 @@ public class AjoutMovieController implements Initializable {
         try {
             //////////////////////////////////////////////////////////////////////////////////details
             name.setText(movie_response.getString("title"));
-            runTime.setText(movie_response.getInt("runtime")+"");
+            runTime.setText(movie_response.getInt("runtime")/60 + "h " + movie_response.getInt("runtime")%60 + "min");
             date.setText(movie_response.getString("release_date"));
             desc.setText(movie_response.getString("overview"));
             desc.setWrapText(true);
@@ -253,17 +258,24 @@ public class AjoutMovieController implements Initializable {
 
     public void ajouterFilm(ActionEvent actionEvent) {
         error.setText("");
-        FilmService filmService = new FilmService();
-        Film film = new Film(name.getText(), date.getText(), poster.getImage().impl_getUrl(), categories.getText(), desc.getText(), Integer.parseInt(runTime.getText()), trailer.getEngine().getLocation(), id_imdb);
 
+        String poster_id = poster.getImage().impl_getUrl().split("/")[6];
+        String localURL = "src/cinepro/images/poster/"+poster_id;
+        FilmService filmService = new FilmService();
+        Film film = new Film(name.getText(), date.getText(), localURL, categories.getText(), desc.getText(), Integer.parseInt(runTime.getText()), trailer.getEngine().getLocation(), id_imdb);
 
         try {
             filmService.addFilm(film);
         } catch (SQLException e) {
-            error.setText("FILM EXISTS");
+            error.setText("URL invalid");
             return;
         }
-        System.out.println("yala");
+        File file = new File(localURL);
+        try {
+            ImageIO.write(SwingFXUtils.fromFXImage(new Image("https://image.tmdb.org/t/p/original/"+poster_id),null), "jpg", file);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         CrewService crewService = new CrewService();
         JSONObject crew = get_crew(id_imdb);
         try {
@@ -275,9 +287,17 @@ public class AjoutMovieController implements Initializable {
                 }
                 try {
                     String name = actors.getJSONObject(i).getString("name");
-                    String portrait = "https://image.tmdb.org/t/p/original" + actors.getJSONObject(i).getString("profile_path");
+                    String portrait_id = actors.getJSONObject(i).getString("profile_path");
+                    String portrait = "src/cinepro/images/crewPhoto" + portrait_id;
                     Crew actor = new Crew(name, portrait, "Actor", filmService.getFilm(id_imdb).getId_film());
                     crewService.addCrew(actor);
+
+                    File filePortrait = new File(portrait);
+                    try {
+                        ImageIO.write(SwingFXUtils.fromFXImage(new Image("https://image.tmdb.org/t/p/original"+portrait_id),null), "jpg", filePortrait);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                     count ++;
                 } catch (Exception e) {
                 }
@@ -286,9 +306,17 @@ public class AjoutMovieController implements Initializable {
             for (int i=0; i<directors.length(); i++){
                 if ((directors.getJSONObject(i).getString("department").equals("Directing")) && (directors.getJSONObject(i).getString("job").equals("Director"))) {
                     String name = directors.getJSONObject(i).getString("name");
-                    String portrait = "https://image.tmdb.org/t/p/original" + directors.getJSONObject(i).getString("profile_path");
+                    String portrait_id = directors.getJSONObject(i).getString("profile_path");
+                    String portrait = "src/cinepro/images/crewPhoto" + portrait_id;
                     Crew director = new Crew(name, portrait, "Director", filmService.getFilm(id_imdb).getId_film());
                     crewService.addCrew(director);
+
+                    File filePortrait = new File(portrait);
+                    try {
+                        ImageIO.write(SwingFXUtils.fromFXImage(new Image("https://image.tmdb.org/t/p/original"+portrait_id),null), "jpg", filePortrait);
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
                 }
             }
             listMovies(new ActionEvent());
@@ -312,6 +340,16 @@ public class AjoutMovieController implements Initializable {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutProjection.fxml"));
             Parent root =loader.load();
             ajoutprojection.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void listProjections(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("ListProjections.fxml"));
+            Parent root =loader.load();
+            listProjections.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }

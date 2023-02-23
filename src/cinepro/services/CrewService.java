@@ -51,6 +51,28 @@ public class CrewService implements CrewCRUD<Crew> {
     }
 
     @Override
+    public List crewListByFilm(int id) {
+        ArrayList<Crew> list = new ArrayList<Crew>();
+        try {
+            String requete = "select * from crew where id_film='" + id + "'";
+            Statement statement = MyConnection.getInstance().getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(requete);
+            while (resultSet.next()) {
+                Crew crew = new Crew();
+                crew.setId_crew(resultSet.getInt(1));
+                crew.setNom(resultSet.getString(2));
+                crew.setPhoto(resultSet.getString(3));
+                crew.setJob(resultSet.getString(4));
+                crew.setId_film(resultSet.getInt(5));
+                list.add(crew);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    @Override
     public void updateCrew(Crew crew) {
         try {
             String requete = "update crew set nom=?, photo=?, job=?, id_film=? where id_crew=?";
