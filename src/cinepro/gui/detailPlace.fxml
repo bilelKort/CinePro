@@ -13,7 +13,7 @@
           <TableColumn fx:id="col2" prefWidth="147.0" text="coordonnées chaise" />
             <TableColumn fx:id="col3" minWidth="3.0" prefWidth="78.0" text="Prix" />
             <TableColumn fx:id="col4" minWidth="0.0" prefWidth="101.0" text="ID reservation" />
-            <TableColumn fx:id="delete" prefWidth="75.0" text="delete" />
+            <TableColumn fx:id="delete" prefWidth="132.0" text="delete" />
         </columns>
       </TableView>
       <Button fx:id="btnres" layoutX="34.0" layoutY="28.0" mnemonicParsing="false" onAction="#showresTable" text="Reservation" />

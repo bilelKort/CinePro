@@ -23,9 +23,11 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -49,7 +51,7 @@ public class DetailPlaceController implements Initializable {
     @FXML
     private Button btnressnack;
     @FXML
-    private TableColumn<?, ?> delete;
+    private TableColumn<reservation_place, Void> delete;
     @FXML
     private Button Menu;
     /**
@@ -70,6 +72,35 @@ public class DetailPlaceController implements Initializable {
     col4.setCellValueFactory(new PropertyValueFactory<reservation_place, Integer>("id_reservation"));
 
     tableview.setItems(data);
+    
+    
+    Callback<TableColumn<reservation_place, Void>, TableCell<reservation_place, Void>> cellFactory = new Callback<TableColumn<reservation_place, Void>, TableCell<reservation_place, Void>>() {
+            @Override
+            public TableCell<reservation_place, Void> call(final TableColumn<reservation_place, Void> param) {
+                final TableCell<reservation_place, Void> cell = new TableCell<reservation_place, Void>() {
+                    private final Button btn = new Button("Supprimer");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            int rowIndex = getTableRow().getIndex();
+                            reservation_placeCRUD pcd = new reservation_placeCRUD();
+                            pcd.deleteEntity(col1.getCellObservableValue(rowIndex).getValue());
+
+                        });
+                    }
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        delete.setCellFactory(cellFactory);
     }    
     
     @FXML

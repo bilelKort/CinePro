@@ -14,6 +14,7 @@
             <TableColumn fx:id="col3" minWidth="0.0" prefWidth="61.0" text="Prix" />
             <TableColumn fx:id="col4" prefWidth="97.0" text="ID reservation" />
             <TableColumn fx:id="col5" prefWidth="95.0" text="ID Snack" />
+            <TableColumn fx:id="delete" prefWidth="134.0" text="delete" />
         </columns>
       </TableView>
       <Button fx:id="btnres" layoutX="27.0" layoutY="14.0" mnemonicParsing="false" onAction="#showresTable" text="Reservation" />

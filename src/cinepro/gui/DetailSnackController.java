@@ -5,7 +5,9 @@
  */
 package cinepro.gui;
 
+import cinepro.entities.reservation_place;
 import cinepro.entities.reservation_snack;
+import cinepro.services.reservation_placeCRUD;
 import cinepro.services.reservation_snackCRUD;
 import java.io.IOException;
 import java.net.URL;
@@ -14,14 +16,17 @@ import java.util.List;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 
 /**
  * FXML Controller class
@@ -49,6 +54,8 @@ public class DetailSnackController implements Initializable {
     private Button btnresplace;
     @FXML
     private Button Menu;
+    @FXML
+    private TableColumn<reservation_snack, Void> delete;
     /**
      * Initializes the controller class.
      */
@@ -67,6 +74,35 @@ public class DetailSnackController implements Initializable {
       col5.setCellValueFactory(new PropertyValueFactory<reservation_snack, Integer>("id_snack"));
 
       tableview.setItems(data);
+      
+      Callback<TableColumn<reservation_snack, Void>, TableCell<reservation_snack, Void>> cellFactory = new Callback<TableColumn<reservation_snack, Void>, TableCell<reservation_snack, Void>>() {
+            @Override
+            public TableCell<reservation_snack, Void> call(final TableColumn<reservation_snack, Void> param) {
+                final TableCell<reservation_snack, Void> cell = new TableCell<reservation_snack, Void>() {
+                    private final Button btn = new Button("Supprimer");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            int rowIndex = getTableRow().getIndex();
+                            reservation_snackCRUD pcd = new reservation_snackCRUD();
+                            pcd.deleteEntity(col1.getCellObservableValue(rowIndex).getValue());
+
+                        });
+                    }
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        delete.setCellFactory(cellFactory);
+      
     }    
     
     
