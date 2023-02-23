@@ -16,6 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
@@ -46,18 +47,43 @@ public class ReservationController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
- 
+    }
+    
+    private boolean isFieldNotEmpty(String field) {
+    return field != null && !field.isEmpty();
+    }
+    
+    private boolean validateForm() {
+         String residUser = residuser.getText();
+        String residFilm = residfilm.getText();
+        String idReservation = idreservation.getText();
+        String resState = resstate.getText();
+        String startTime = starttime.getText();
+        String endTime = endtime.getText();
+        if  (!isFieldNotEmpty(residUser) || !isFieldNotEmpty(residFilm) || !isFieldNotEmpty(idReservation) || 
+                !isFieldNotEmpty(resState) || !isFieldNotEmpty(startTime) || !isFieldNotEmpty(endTime)) {
+            
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Validate Form");
+            alert.setHeaderText(null);
+            alert.setContentText("All fields must be filled!");
+            alert.showAndWait();
+            return false;
+        }
+        return true;
+    }
+    
     @FXML
     public void saveReservation(ActionEvent event) {
         //float prix = Float.valueOf(resprix.getText());
+        
+        
+        if(validateForm()){    
         int iduser = Integer.valueOf(residuser.getText());
         int idfilm = Integer.valueOf(residfilm.getText());
         boolean state = Boolean.valueOf(resstate.getText());
         Timestamp start_time = Timestamp.valueOf(starttime.getText());
         Timestamp end_time = Timestamp.valueOf(endtime.getText());
-        
-        if(iduser>0 && idfilm>0){
         reservationCRUD pcd = new reservationCRUD();
         reservation res = new reservation(0.0f,iduser,idfilm,state,start_time,end_time);
         pcd.addEntity(res);
