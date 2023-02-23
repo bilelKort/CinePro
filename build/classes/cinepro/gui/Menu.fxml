@@ -6,18 +6,18 @@
 <?import javafx.scene.text.Font?>
 
 
-<AnchorPane id="AnchorPane" prefHeight="545.0" prefWidth="751.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="cinepro.gui.MenuController">
+<AnchorPane id="red" prefHeight="545.0" prefWidth="751.0" stylesheets="@stylesheet.css" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="cinepro.gui.MenuController">
    <children>
       <Label contentDisplay="TOP" layoutX="218.0" layoutY="46.0" prefHeight="46.0" prefWidth="333.0" text="      Reservation">
          <font>
             <Font name="Arial Bold" size="34.0" />
          </font>
       </Label>
-      <Button fx:id="affres" layoutX="54.0" layoutY="140.0" mnemonicParsing="false" onAction="#showreservation" prefHeight="25.0" prefWidth="179.0" text="Afficher resevation" />
-      <Button fx:id="affresplace" layoutX="277.0" layoutY="140.0" mnemonicParsing="false" onAction="#showreservationPlace" text="Afficher reservation des places" />
-      <Button fx:id="affressnack" layoutX="500.0" layoutY="140.0" mnemonicParsing="false" onAction="#showreservationSnack" text="Afficher reservation des snacks" />
-      <Button fx:id="crudglobal" layoutX="54.0" layoutY="217.0" mnemonicParsing="false" onAction="#showreservationCRUD" prefHeight="25.0" prefWidth="294.0" text="(Ajouter,Modifier,Supprimer) Reservation Global" />
-      <Button fx:id="crudplace" layoutX="54.0" layoutY="273.0" mnemonicParsing="false" onAction="#showreservationPlaceCRUD" prefHeight="25.0" prefWidth="294.0" text="(Ajouter,Modifier,Supprimer) Reservation Place" />
-      <Button fx:id="crudsnack" layoutX="54.0" layoutY="320.0" mnemonicParsing="false" onAction="#showreservationSnackCRUD" prefHeight="25.0" prefWidth="294.0" text="(Ajouter,Modifier,Supprimer) Reservation Snack" />
+      <Button id="dark" fx:id="affres" layoutX="46.0" layoutY="140.0" mnemonicParsing="false" onAction="#showreservation" prefHeight="35.0" prefWidth="205.0" stylesheets="@../../../../../Downloads/stylesheet.css" text="Afficher resevation" />
+      <Button id="dark" fx:id="affresplace" layoutX="277.0" layoutY="140.0" mnemonicParsing="false" onAction="#showreservationPlace" text="Afficher reservation des places" />
+      <Button id="dark" fx:id="affressnack" layoutX="500.0" layoutY="140.0" mnemonicParsing="false" onAction="#showreservationSnack" text="Afficher reservation des snacks" />
+      <Button id="dark" fx:id="crudglobal" layoutX="229.0" layoutY="222.0" mnemonicParsing="false" onAction="#showreservationCRUD" prefHeight="25.0" prefWidth="294.0" text="(Ajouter,Modifier,Supprimer) Reservation Global" />
+      <Button id="dark" fx:id="crudplace" layoutX="229.0" layoutY="306.0" mnemonicParsing="false" onAction="#showreservationPlaceCRUD" prefHeight="25.0" prefWidth="294.0" text="(Ajouter,Modifier,Supprimer) Reservation Place" />
+      <Button id="dark" fx:id="crudsnack" layoutX="229.0" layoutY="380.0" mnemonicParsing="false" onAction="#showreservationSnackCRUD" prefHeight="25.0" prefWidth="294.0" text="(Ajouter,Modifier,Supprimer) Reservation Snack" />
    </children>
 </AnchorPane>
