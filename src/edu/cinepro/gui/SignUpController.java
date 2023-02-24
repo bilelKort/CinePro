@@ -26,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -61,6 +62,10 @@ public class SignUpController implements Initializable {
     private Label passwordStrength;
     @FXML
     private ImageView image2;
+    @FXML
+    private CheckBox afficherMdp;
+    @FXML
+    private TextField pass_text;
 
     /**
      * Initializes the controller class.
@@ -84,6 +89,24 @@ public class SignUpController implements Initializable {
         }
         image2.setImage(new Image(localURL));
         // TODO
+        
+        
+        pass_text.setVisible(false);
+        
+        afficherMdp.selectedProperty().addListener((ObservableValue<? extends Boolean> ov, Boolean old_psw,Boolean new_psw)->{
+    
+        if (afficherMdp.isSelected()) {
+        
+            pass_text.setText(ajouterPassword.getText());
+            pass_text.setVisible(true);
+            ajouterPassword.setVisible(false);
+            return;
+        }
+        ajouterPassword.setText(pass_text.getText());
+        ajouterPassword.setVisible(true);
+        pass_text.setVisible(false);
+    });
+        
     }
     
     //COntrole saisie
