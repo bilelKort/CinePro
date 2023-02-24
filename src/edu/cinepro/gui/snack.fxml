@@ -3,19 +3,38 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.SnackController">
+<AnchorPane id="AnchorPane" prefHeight="530.0" prefWidth="729.0" style="-fx-background-color: brown;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.SnackController">
    <children>
-      <Label layoutX="82.0" layoutY="57.0" text="nom" />
-      <Label layoutX="85.0" layoutY="124.0" text="prix" />
-      <Label layoutX="72.0" layoutY="200.0" text="quantité" />
-      <Label layoutX="77.0" layoutY="252.0" text="photo" />
-      <TextField fx:id="idnom" layoutX="151.0" layoutY="53.0" />
-      <TextField fx:id="idprix" layoutX="151.0" layoutY="112.0" />
-      <TextField fx:id="idquantite" layoutX="151.0" layoutY="196.0" />
-      <Button fx:id="ftimage" layoutX="160.0" layoutY="248.0" mnemonicParsing="false" onAction="#importimage" text="imprter une image " />
-      <Label fx:id="labelsinglefile" layoutX="81.0" layoutY="304.0" text="URL:" />
-      <Button fx:id="idbuttonsavesnack" layoutX="186.0" layoutY="300.0" mnemonicParsing="false" onAction="#savesnack" text="save" />
+      <Label layoutX="252.0" layoutY="79.0" text="nom" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="255.0" layoutY="146.0" text="prix" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="242.0" layoutY="222.0" text="quantité" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Label layoutX="247.0" layoutY="274.0" text="photo" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <TextField fx:id="idnom" layoutX="326.0" layoutY="81.0" />
+      <TextField fx:id="idprix" layoutX="326.0" layoutY="140.0" />
+      <TextField fx:id="idquantite" layoutX="326.0" layoutY="224.0" />
+      <Button fx:id="ftimage" layoutX="335.0" layoutY="276.0" mnemonicParsing="false" onAction="#importimage" style="-fx-background-color: purple;" text="imprter une image " textFill="WHITE" />
+      <Label fx:id="labelsinglefile" layoutX="14.0" layoutY="369.0" text="URL:" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font></Label>
+      <Button fx:id="idbuttonsavesnack" layoutX="563.0" layoutY="491.0" mnemonicParsing="false" onAction="#savesnack" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: green;" text="save" textFill="WHITE" />
+      <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="239.0" layoutX="294.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="382.0" layoutY="491.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="142.0" style="-fx-background-color: black;" text="back" textFill="#f8f8f8" />
    </children>
 </AnchorPane>

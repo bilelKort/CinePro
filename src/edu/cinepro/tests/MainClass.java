@@ -43,14 +43,9 @@ public class MainClass {
 //pcd.updateEntity(2, "jus", 3, 0, 0, 2);
    
    //salle salle= new salle(5, 3, 2,false);
-        
-       CinemaCRUD cd= new CinemaCRUD();
-
-      List<cinema>   k= cd.entitiesList();
-        System.out.println(k);
-        
-                           cinema c=cd.cinemabyid(2);
-                            System.out.println(c);
+        salle s=new salle("nom",1,2,2,true);
+       SalleCRUD cd= new SalleCRUD();
+cd.addEntity(s);
          
       //          System.out.println(pcd.entitiesList());
 

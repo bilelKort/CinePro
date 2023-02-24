@@ -2,13 +2,11 @@
 
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="461.0" prefWidth="698.0" style="-fx-background-color: brown;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.PlaceController">
+<AnchorPane id="AnchorPane" prefHeight="461.0" prefWidth="901.0" style="-fx-background-color: brown;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.PlaceController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#eb2e66" height="26.0" layoutX="441.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="#7899b9" height="26.0" layoutX="268.0" layoutY="60.0" stroke="BLACK" strokeType="INSIDE" width="28.0" />
@@ -24,5 +22,10 @@
       <GridPane fx:id="idmatrice" layoutX="220.0" layoutY="186.0">
         
       </GridPane>
+      <Label fx:id="msg" layoutX="648.0" layoutY="118.0" prefHeight="25.0" prefWidth="232.0" textFill="WHITE">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

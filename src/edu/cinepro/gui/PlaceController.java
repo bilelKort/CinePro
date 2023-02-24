@@ -11,6 +11,7 @@ import java.util.ResourceBundle;
 import java.util.Set;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
@@ -27,6 +28,8 @@ public class PlaceController implements Initializable {
     private GridPane idmatrice;
     private static final int ROWS = 10;
     private static final int COLS =10;
+    @FXML
+    private Label msg;
 
     /**
      * Initializes the controller class.
@@ -76,7 +79,7 @@ public class PlaceController implements Initializable {
                         rectangle.setStroke(Color.BLACK);
                         pane.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
 
-                            System.out.println("impossible cette place est déja reservé");
+                            msg.setText("impossible cette place est déja reservé");
                         });
                         break;
 
@@ -89,12 +92,12 @@ public class PlaceController implements Initializable {
                             rectangle.setFill(Color.web("#eb2e66"));
                             rectangle.setStroke(Color.BLACK);
 
-                            System.out.println("chaise cliquée : " + clickedRow + "," + clickedCol);
+                             msg.setText("chaise cliquée : " + clickedRow + "," + clickedCol);
 
                             String b = clickedRow + "," + clickedCol;
                             if (placereservees.contains(b)) {
                                 placereservees.remove(b);
-                                System.out.println("annulation");
+                                 msg.setText("annulation");
                                 rectangle.setFill(Color.WHITE);
                                 rectangle.setStroke(Color.BLACK);
 

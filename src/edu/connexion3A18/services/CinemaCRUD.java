@@ -176,15 +176,22 @@ return myList ;
         }
     }
 
-    public void deleteEntity(int id) {
+    public void deleteEntity(int id) throws SQLException {
+        
+        PreparedStatement st0 = MyConnection.getInstance().getCnx().prepareStatement("DELETE FROM salle WHERE id_cinema=?");
+            st0.setInt(1, id);
+            st0.executeUpdate(); 
+        
         try {
+            
+            
             String requete = "DELETE FROM cinema WHERE id_cinema=?";
             PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
             st.setInt(1, id);
             st.executeUpdate();
             System.out.println("cinema deleted!");
         } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
+ 
         }
     }
 }

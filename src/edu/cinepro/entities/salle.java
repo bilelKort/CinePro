@@ -11,6 +11,7 @@ package edu.cinepro.entities;
 public class salle {
 
     private int id_salle;
+    private String nom ;
     private int longueur;
     private int largeur;
     private int id_cinema;
@@ -22,6 +23,14 @@ public class salle {
 
     public void setAcces(boolean acces) {
         this.acces = acces;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
         
 
@@ -58,19 +67,31 @@ public class salle {
         this.id_cinema = id_cinema;
     }
 
-    public salle(int id_salle, int longueur, int largeur, int id_cinema, boolean acces) {
+    public salle(int id_salle, String nom,int longueur, int largeur, int id_cinema, boolean acces) {
         this.id_salle = id_salle;
         this.longueur = longueur;
         this.largeur = largeur;
         this.id_cinema = id_cinema;
         this.acces = acces;
+        this.nom=nom;
     }
 
-    public salle(int longueur, int largeur, int id_cinema, boolean acces) {
+    public salle(String nom,int longueur, int largeur, int id_cinema, boolean acces) {
         this.longueur = longueur;
         this.largeur = largeur;
         this.id_cinema = id_cinema;
         this.acces = acces;
+                this.nom=nom;
+
+    }
+    
+    
+      public salle(String nom,int longueur, int largeur, int id_cinema) {
+        this.longueur = longueur;
+        this.largeur = largeur;
+        this.id_cinema = id_cinema;
+                this.nom=nom;
+
     }
 
     public salle() {
@@ -78,8 +99,10 @@ public class salle {
 
     @Override
     public String toString() {
-        return "salle{" + "id_salle=" + id_salle + ", longueur=" + longueur + ", largeur=" + largeur + ", id_cinema=" + id_cinema + ", acces=" + acces + '}';
+        return   "nom=" + nom  ;
     }
+
+    
 
    
     

@@ -21,17 +21,18 @@ import java.util.List;
 public class SalleCRUD {
 
     public void addEntity(salle s) {
-        String requete = "INSERT INTO salle ( longueur,  largeur,  id_cinema ,acces)" + "VALUES(?,?,?,?)";
+        String requete = "INSERT INTO salle ( nom,longueur,  largeur,  id_cinema ,acces)" + "VALUES(?,?,?,?,?)";
 
         try {
             PreparedStatement st = MyConnection.getInstance().getCnx()
                     .prepareStatement(requete);
+            st.setString(1, s.getNom());
 
-            st.setInt(1, s.getLongueur());
-            st.setInt(2, s.getLargeur());
+            st.setInt(2, s.getLongueur());
+            st.setInt(3, s.getLargeur());
 
-            st.setInt(3, s.getId_cinema());
-            st.setBoolean(4, s.isAcces());
+            st.setInt(4, s.getId_cinema());
+            st.setBoolean(5, false);
 
             st.executeUpdate();
             System.out.println("Salle ajoutée");
@@ -56,6 +57,7 @@ public class SalleCRUD {
                 s.setId_salle(rs.getInt("id_salle"));
 
                 s.setId_cinema(rs.getInt("id_cinema"));
+                s.setNom(rs.getString("nom"));
                 s.setLongueur(rs.getInt("longueur"));
                 s.setLargeur(rs.getInt("Largeur"));
                 s.setAcces(rs.getBoolean("acces"));
@@ -69,10 +71,74 @@ public class SalleCRUD {
         return myList;
     }
 
+    
+    
+     public List<salle> entitiesList2(int id) {
+        ArrayList<salle> myList = new ArrayList();
+
+        try {
+            String requete = "SELECT * FROM salle where id_cinema=" +id;
+            Statement st = MyConnection.getInstance().getCnx()
+                    .createStatement();
+
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+                salle s = new salle();
+
+                s.setId_salle(rs.getInt("id_salle"));
+                s.setNom(rs.getString("nom"));
+
+                s.setId_cinema(rs.getInt("id_cinema"));
+                s.setLongueur(rs.getInt("longueur"));
+                s.setLargeur(rs.getInt("Largeur"));
+                s.setAcces(rs.getBoolean("acces"));
+
+                myList.add(s);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return myList;
+    }
+     
+     
+     
+     public List<salle> entitiesList3(int id) {
+        ArrayList<salle> myList = new ArrayList();
+
+        try {
+            String requete = "SELECT * FROM salle where id_salle=" +id;
+            Statement st = MyConnection.getInstance().getCnx()
+                    .createStatement();
+
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+                salle s = new salle();
+
+                s.setId_salle(rs.getInt("id_salle"));
+                s.setNom(rs.getString("nom"));
+
+                s.setId_cinema(rs.getInt("id_cinema"));
+                s.setLongueur(rs.getInt("longueur"));
+                s.setLargeur(rs.getInt("Largeur"));
+                s.setAcces(rs.getBoolean("acces"));
+
+                myList.add(s);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return myList;
+    }
+     
+
+
     public void updateEntity(int id, Boolean acces) {
 
         try {
-            String requete = "UPDATE salle SET acces=?  where id_cinema=?";
+            String requete = "UPDATE salle SET acces=?  where id_salle=?";
             PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
             st.setBoolean(1, acces);
 

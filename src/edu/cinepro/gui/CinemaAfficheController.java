@@ -9,6 +9,7 @@ import edu.cinepro.entities.salle;
 import edu.connexion3A18.services.CinemaCRUD;
 import java.io.IOException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -18,11 +19,14 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.SelectionModel;
+import javafx.scene.control.Tab;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -78,14 +82,21 @@ public class CinemaAfficheController implements Initializable {
         id_user.setCellValueFactory(new PropertyValueFactory<cinema, Integer>("id_user"));
 
         tableview.setItems(k);
+        tableview.getSelectionModel().select(2);
 
-        Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> cellFactory = new Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>>() {
+     
+
+        Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> cellFactory
+                = new Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>>() {
             @Override
             public TableCell<cinema, Void> call(final TableColumn<cinema, Void> param) {
                 final TableCell<cinema, Void> cell = new TableCell<cinema, Void>() {
-                    private final Button btn = new Button("Action");
+                    private final Button btn = new Button("see more ");
+                    
 
                     {
+                       btn .setStyle("-fx-color: white;");
+
                         btn.setOnAction((ActionEvent event) -> {
                             /* 
     TableCell<cinema, String> cell = (TableCell<cinema, String>) event.getTarget();
@@ -103,14 +114,14 @@ public class CinemaAfficheController implements Initializable {
                                 int rowIndex = getTableRow().getIndex();
                                 Integer idCinemaValue = id_cinema.getCellObservableValue(rowIndex).getValue();
                                 System.out.println("ID Cinéma : " + idCinemaValue);
-
+                  //  ViewmorecinemaController.getInstance().setId(Integer.toString(idCinemaValue));
                                 String id = Integer.toString(idCinemaValue);
-                                dc.setId(id);
-                                CinemaCRUD cd = new CinemaCRUD();
+                               dc.setId(id);
                                 cinema liste = cd.cinemabyid(idCinemaValue);
-                                
-                                dc.setNom1(liste.getNom());
-                                 dc.setImage(liste.getPhoto());
+                             dc.setMap(liste.getLocalisation());
+
+                                dc.setNom(liste.getNom());
+                                dc.setImage(liste.getPhoto());
                                 System.out.println(liste);
                                 btn.getScene().setRoot(root);
 
@@ -145,11 +156,13 @@ public class CinemaAfficheController implements Initializable {
     @FXML
 
     private void redirection(ActionEvent event) {
-        /* FXMLLoader loader = new FXMLLoader(getClass().getResource("Cinema.fxml"));
+         FXMLLoader loader = new FXMLLoader(getClass().getResource("Cinema.fxml"));
         try {
             Parent root = loader.load();
             CinemaController dc= loader.getController();
-                  idbtn      .getScene().setRoot(root);
+                  idbtn.getScene().setRoot(root);
+                  
+                  
 
         } catch (IOException ex) {
             System.err.println(ex.getMessage());        }
@@ -157,10 +170,85 @@ public class CinemaAfficheController implements Initializable {
                 
         
         
-    }*/
+    }
 
         //Alert a =new Alert(Alert.AlertType., "ddd", ButtonType.OK);
         //a.showAndWait();
+    
+
+    @FXML
+    private void delete(ActionEvent event) throws SQLException {
+           SelectionModel<cinema> selectionModel = tableview.getSelectionModel();
+int selectedIndex = tableview.getSelectionModel().getSelectedIndex();
+
+        System.out.println(selectedIndex);
+        Integer idCinemaValue = id_cinema.getCellObservableValue(selectedIndex).getValue();
+        
+        if(idCinemaValue>0){
+                CinemaCRUD cd = new CinemaCRUD();
+                            System.out.println(idCinemaValue); 
+                            
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("supprimer");
+        alert.setHeaderText(null);
+        alert.setContentText("voulez vous supprimer ?       |o_O|");
+
+        if (alert.showAndWait().get() == ButtonType.OK) {
+                            
+                            
+        cd.deleteEntity(idCinemaValue);
+        
+       
+        try {
+                    Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());                }
+        } 
+        else {
+        
+        
+         try {
+                    Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
+                    Scene scene = new Scene(root);
+                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                    stage.setScene(scene);
+                    stage.show();
+                } catch (IOException ex) {
+                    System.out.println(ex.getMessage());                }
+        
+        
+        }
+        
+        
+        }
+        
+        
+
+        
+        
     }
+
+    @FXML
+    private void metier(ActionEvent event) {
+        
+            try {
+
+                System.out.println("ok !");
+                Parent root = FXMLLoader.load(getClass().getResource("place.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+        
+        
+    
 
 }
