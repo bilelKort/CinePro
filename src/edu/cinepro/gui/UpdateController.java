@@ -11,10 +11,6 @@ import edu.cinepro.services.CineproCRUD;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -23,6 +19,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -34,48 +31,48 @@ import javafx.scene.paint.Color;
  *
  * @author MOEµNESS
  */
-public class SignUpController implements Initializable {
-
-    @FXML
-    private PasswordField ajouterPassword;
-    @FXML
-    private TextField ajouterNom;
-    @FXML
-    private Button signInBtn;
-    @FXML
-    private TextField ajouterPrenom;
-    @FXML
-    private TextField ajouterEmail;
-    @FXML
-    private DatePicker ajouterDateN;
-    @FXML
-    private TextField ajouterTel;
-    @FXML
-    private TextField ajouterPseudo;
+public class UpdateController implements Initializable {
     @FXML
     private Label passwordStrength;
+    @FXML
+    private TextField modifierNom;
+    @FXML
+    private TextField modifierPrenom;
+    @FXML
+    private TextField modifierEmail;
+    @FXML
+    private DatePicker modifierDateN;
+    @FXML
+    private TextField modifierTel;
+    @FXML
+    private TextField modifierPseudo;
+    @FXML
+    private PasswordField modifierPassword;
+    @FXML
+    private Button updateBtn;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ajouterPassword.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
+        modifierPassword.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!"".equals(newValue)) {
                 updatePasswordStrength(newValue);
             } else {
                 passwordStrength.setText("");
             }
         });
-        // TODO
-    }
-    
-    //COntrole saisie
-    private boolean validateForm() {
         
-        if (ajouterPassword.getText().equals("") || ajouterNom.getText().equals("") || ajouterPrenom.getText().equals("")
-                || ajouterEmail.getText().equals("") || ajouterDateN.getValue() == null || Integer.valueOf(ajouterTel.getText()) == null
-                || ajouterPseudo.getText().equals("") ) {
+        
+        // TODO
+    }    
+    
+     private boolean validateForm() {
+        
+        if (modifierPassword.getText().equals("") || modifierNom.getText().equals("") || modifierPrenom.getText().equals("")
+                || modifierEmail.getText().equals("") || modifierDateN.getValue() == null || Integer.valueOf(modifierTel.getText()) == null
+                || modifierPseudo.getText().equals("") ) {
             
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Validate Form");
@@ -86,9 +83,8 @@ public class SignUpController implements Initializable {
         }
         return true;
     }
-    
-    
-    public boolean validateNom(String nom) {
+     
+     public boolean validateNom(String nom) {
         String pattern = "^[A-Z][a-z]+(?: [A-Z][a-z]+)*$";
         return nom.matches(pattern);
     }
@@ -157,6 +153,7 @@ public class SignUpController implements Initializable {
         return iPasswordScore;
 
     }
+    
     private void updatePasswordStrength(String value) {
         if (calculatePasswordStrength(value) < 5) {
             passwordStrength.setText("( weak )");
@@ -170,9 +167,6 @@ public class SignUpController implements Initializable {
         }
     }
     
-    
-    
-    
     private boolean isFormValid() {
         
         Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -180,7 +174,7 @@ public class SignUpController implements Initializable {
         if (!validateForm()) {
             flag = false;
         } else {
-            if (!validateNom(ajouterNom.getText())) {
+            if (!validateNom(modifierNom.getText())) {
                 
                 alert.setTitle("Validate Nom");
                 alert.setHeaderText(null);
@@ -188,35 +182,35 @@ public class SignUpController implements Initializable {
                 alert.showAndWait();
                 flag = false;
             }
-            if (!validatePrenom(ajouterPrenom.getText())) {
+            if (!validatePrenom(modifierPrenom.getText())) {
                 alert.setTitle("Validate Prenom");
                 alert.setHeaderText(null);
                 alert.setContentText("Please check first name! (Must starts with UPPERCASE) ");
                 alert.showAndWait();
                 flag = false;
             }
-            if (!validateEmail(ajouterEmail.getText())) {
+            if (!validateEmail(modifierEmail.getText())) {
                 alert.setTitle("Validate EMail");
                 alert.setHeaderText(null);
                 alert.setContentText("Please check the mail! (Format: ***@***.**) ");
                 alert.showAndWait();
                 flag = false;
             }
-            if (!validateTel(ajouterTel.getText())) {
+            if (!validateTel(modifierTel.getText())) {
                 alert.setTitle("Validate Phone number");
                 alert.setHeaderText(null);
                 alert.setContentText("Please check the phone number! (Must be 8 digit number!) ");
                 alert.showAndWait();
                 flag = false;
             }
-            if (!validatePseudo(ajouterPseudo.getText())) {
+            if (!validatePseudo(modifierPseudo.getText())) {
                 alert.setTitle("Validate Pseudo");
                 alert.setHeaderText(null);
                 alert.setContentText("Please check the Pseudo! (Must be LOWERCASE with no spaces!) ");
                 alert.showAndWait();
                 flag = false;
             }
-            if (!validatePassword(ajouterPassword.getText())) {
+            if (!validatePassword(modifierPassword.getText())) {
                 alert.setTitle("Validate password");
                 alert.setHeaderText(null);
                 alert.setContentText("Please check the Password! Password must contain at least one(Digit, Lowercase, UpperCase and Special Character)");
@@ -228,42 +222,36 @@ public class SignUpController implements Initializable {
      
         return flag;
     }
-    
-    
-    
-    
-
 
     @FXML
-    private void addUser(ActionEvent event) {
-        //Nom
-        if (ajouterNom.getText().length()==0){
+    private void updateUser(ActionEvent event) {
+        if (modifierNom.getText().length()==0){
         
-            ajouterNom.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+            modifierNom.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
         }
         else{
         
-            ajouterNom.setStyle(null);
+            modifierNom.setStyle(null);
         }
         
         //Prenom
-        if (ajouterPrenom.getText().length()==0){
+        if (modifierPrenom.getText().length()==0){
         
-            ajouterPrenom.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+            modifierPrenom.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
         }
         else{
         
-            ajouterPrenom.setStyle(null);
+            modifierPrenom.setStyle(null);
         }
         
         //Email
-        if (ajouterEmail.getText().length()==0){
+        if (modifierEmail.getText().length()==0){
         
-            ajouterEmail.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+            modifierEmail.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
         }
         else{
         
-            ajouterEmail.setStyle(null);
+            modifierEmail.setStyle(null);
         }
         
         //DateN
@@ -277,61 +265,48 @@ public class SignUpController implements Initializable {
         } */
        
        //Pseudo
-       if (ajouterPseudo.getText().length()==0){
+       if (modifierPseudo.getText().length()==0){
         
-            ajouterPseudo.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+            modifierPseudo.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
         }
         else{
         
-            ajouterPseudo.setStyle(null);
+            modifierPseudo.setStyle(null);
         }
        
        //Password
-       if (ajouterPassword.getText().length()==0){
+       if (modifierPassword.getText().length()==0){
         
-            ajouterPassword.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+            modifierPassword.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
         }
         else{
         
-            ajouterPassword.setStyle(null);
+            modifierPassword.setStyle(null);
         }
-        /*
-       /if (ajouterTel.getText().length()==0){
+       
+       
+       if(isFormValid()) {
         
-            ajouterNom.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
-        }
-        else{
-        
-            ajouterNom.setStyle(null);
-        } */
-        
-      if(isFormValid()) {
-        
-        String resNom = ajouterNom.getText();
-        String resPrenom = ajouterPrenom.getText();
-        String resEmail = ajouterEmail.getText();
-        String resDateN = ajouterDateN.getValue().toString();
-        int resTel = Integer.valueOf(ajouterTel.getText());
-        String resPseudo = ajouterPseudo.getText();
-        String resPassword = ajouterPassword.getText();
+        String resNom = modifierNom.getText();
+        String resPrenom = modifierPrenom.getText();
+        String resEmail = modifierEmail.getText();
+        String resDateN = modifierDateN.getValue().toString();
+        int resTel = Integer.valueOf(modifierTel.getText());
+        String resPseudo = modifierPseudo.getText();
+        String resPassword = modifierPassword.getText();
 
-        
         //Ajout
         CineproCRUD ccd = new CineproCRUD();
-        Cinepro c = new Cinepro(resEmail,resPassword,resNom,resPrenom,resDateN,resPseudo,resTel,"Client",0);
+        int id =UserSession.getInstace().getId();
+        String role = UserSession.getInstace().getRole();
         
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION, "Modify " + id + " ?", ButtonType.YES, ButtonType.CANCEL);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.YES) {
         
-        ccd.addEntity(c);
-       /* Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setContentText("User ajoutée");
-        alert.show();
-         System.out.println("Done!"); */
-        
-      /*  Cinepro user = ccd.login(resPseudo, resPassword);
-        UserSession.getInstace(user.getId_user(), user.getRole()); */
-        
-       int id = ccd.getUserByPseudo(resPseudo);
-       // System.out.println(id);
+            ccd.updateEntity(id,resEmail,resPassword,resNom,resPrenom,resDateN,resPassword,resTel,role,0);
+        }
+      
         
         UserSession.getInstace(id);
         
@@ -340,20 +315,16 @@ public class SignUpController implements Initializable {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("Index.fxml"));
         
         try {
+            
             Parent root = loader.load();
-            ajouterNom.getScene().setRoot(root);
+            modifierNom.getScene().setRoot(root);
             
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         };
       }
-      
-      
-      
     }
-
-    @FXML
-    private void login(ActionEvent event) {
-    }
+    
+    
     
 }

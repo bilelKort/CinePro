@@ -1,11 +1,60 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="edu.cinepro.gui.IndexController">
+<AnchorPane id="AnchorPane" prefHeight="500.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.IndexController">
    <children>
-      <Button layoutX="152.0" layoutY="165.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="140.0" text="Button" />
+      <TabPane prefHeight="500.0" prefWidth="600.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Profile">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="600.0">
+                     <children>
+                        <Label layoutX="172.0" layoutY="40.0" text="Welcome " textAlignment="CENTER">
+                           <font>
+                              <Font name="System Bold" size="31.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="affichagePseudo" disable="true" editable="false" layoutX="317.0" layoutY="51.0" />
+                        <Label layoutX="26.0" layoutY="104.0" text="Your infos:">
+                           <font>
+                              <Font size="17.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="26.0" layoutY="149.0" text="First name: " />
+                        <Label layoutX="26.0" layoutY="179.0" text="Last name: " />
+                        <Label layoutX="26.0" layoutY="211.0" text="Email: " />
+                        <Label layoutX="26.0" layoutY="242.0" text="Age: " />
+                        <Label layoutX="23.0" layoutY="274.0" text="Number" />
+                        <TextField fx:id="affichagePrenom" disable="true" editable="false" layoutX="113.0" layoutY="145.0" />
+                        <TextField fx:id="affichageNom" disable="true" editable="false" layoutX="113.0" layoutY="175.0" />
+                        <TextField fx:id="affichageEmail" disable="true" editable="false" layoutX="113.0" layoutY="207.0" />
+                        <TextField fx:id="affichageAge" disable="true" editable="false" layoutX="113.0" layoutY="238.0" />
+                        <TextField fx:id="affichageTel" disable="true" editable="false" layoutX="113.0" layoutY="270.0" />
+                        <Button fx:id="Logout" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+                        <Button fx:id="modifier" layoutX="392.0" layoutY="175.0" mnemonicParsing="false" onAction="#modifier" text="Modifier" />
+                        <Button fx:id="modifierRole" layoutX="397.0" layoutY="411.0" mnemonicParsing="false" onAction="#modifierRole" opacity="0.0" text="Modifier Role" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Films">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+            <Tab text="Cinema">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+              </content>
+            </Tab>
+        </tabs>
+      </TabPane>
    </children>
 </AnchorPane>

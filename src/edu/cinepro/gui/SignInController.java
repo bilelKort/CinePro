@@ -18,11 +18,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 /**
  * FXML Controller class
  *
@@ -38,12 +41,17 @@ public class SignInController implements Initializable {
     private Button signInBtn;
     @FXML
     private Hyperlink suLink;
+    @FXML
+    private ImageView image1;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+      /*  Image image = new Image("..\\images\\image1.png");
+        image1.setImage(image); */
+        
         // TODO
     }    
 
@@ -74,17 +82,53 @@ public class SignInController implements Initializable {
         
         UserSession.getInstace(id); 
         
+        switch (UserSession.getInstace().getRole()) {
+        
+            case "Client": {
+            
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("Index.fxml"));
+                
+                try {
+                Parent root = loader.load();
+                Stage myWindow = (Stage) pseudo.getScene().getWindow();
+                Scene sc = new Scene(root);
+                myWindow.setScene(sc);
+                myWindow.setTitle("Espace Client");
+                myWindow.show();
+                
+            
+                } catch (IOException ex) {
+                 System.out.println(ex.getMessage());
+                 }
+                break;
+            }
+            case "Admin": {
+            
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminIndex.fxml"));
+                
+                try {
+                Parent root = loader.load();
+                Stage myWindow = (Stage) pseudo.getScene().getWindow();
+                Scene sc = new Scene(root);
+                myWindow.setScene(sc);
+                myWindow.setTitle("Espace Admin");
+                myWindow.show();
+                
+            
+                } catch (IOException ex) {
+                 System.out.println(ex.getMessage());
+                 }
+                break;
+            }
+            
+            
+        }
+        
                
         
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("Index.fxml"));
         
-        try {
-            Parent root = loader.load();
-            pseudo.getScene().setRoot(root);
-            
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
+        
+        
     }
     
     

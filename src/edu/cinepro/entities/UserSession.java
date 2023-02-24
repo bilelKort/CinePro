@@ -34,6 +34,14 @@ public final class UserSession {
         c = ccd.getUserById(id);
         
         this.nom = c.getNom();
+        this.prenom = c.getPrenom();
+        this.email = c.getEmail();
+        this.date_naissance = c.getDate_naissance();
+        this.pseudo = c.getPseudo();
+        this.tel = c.getTel();
+        this.role = c.getRole();
+        this.password = c.getPassword();
+        this.montant = c.getMontant();
     }
 
     public String getEmail() {

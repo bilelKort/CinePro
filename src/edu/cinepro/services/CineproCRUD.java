@@ -147,7 +147,7 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
     public void updateEntity(int idU,String em,String passw,String n,String pr,String dateN,String psd,int num,String rl,float mt) {
        
         try {
-            String requete="UPDATE user SET email=?, password=?, nom=?, prenom=?, date_naissance=STR_TO_DATE(?,'%m/%d/%Y'), pseudo=?, tel=?, role=?, montant=? where id_user=?";
+            String requete="UPDATE user SET email=?, password=?, nom=?, prenom=?, date_naissance=STR_TO_DATE(?,'%Y-%m-%d'), pseudo=?, tel=?, role=?, montant=? where id_user=?";
             PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
             
             
@@ -238,6 +238,22 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
             System.out.println(ex.getMessage());
         }
         return null;   
+    }
+    
+    public void changeRole(int idU, String rl){
+    
+        try {
+            String requete="UPDATE user SET role=? where id_user=?";
+            PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            
+            st.setString(1, rl);
+            st.setInt(2, idU);
+            
+            st.executeUpdate();
+            System.out.println("Role Updated!");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
     
     
