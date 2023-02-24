@@ -5,11 +5,14 @@
  */
 package edu.cinepro.gui;
 
+import com.google.common.hash.Hashing;
 import edu.cinepro.entities.Cinepro;
 import edu.cinepro.entities.UserSession;
 import edu.cinepro.services.CineproCRUD;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
@@ -24,6 +27,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 /**
@@ -50,6 +55,8 @@ public class UpdateController implements Initializable {
     private PasswordField modifierPassword;
     @FXML
     private Button updateBtn;
+    @FXML
+    private ImageView image4;
 
     /**
      * Initializes the controller class.
@@ -64,6 +71,14 @@ public class UpdateController implements Initializable {
             }
         });
         
+        File file = new File("src/edu/cinepro/gui/images/image2.jpg");
+        String localURL = "";
+        try {
+            localURL = file.toURI().toURL().toString();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        image4.setImage(new Image(localURL));
         
         // TODO
     }    
@@ -304,7 +319,8 @@ public class UpdateController implements Initializable {
         alert.showAndWait();
         if (alert.getResult() == ButtonType.YES) {
         
-            ccd.updateEntity(id,resEmail,resPassword,resNom,resPrenom,resDateN,resPassword,resTel,role,0);
+            String passwordCry = Hashing.sha256().hashString(resPassword, StandardCharsets.UTF_8).toString();
+            ccd.updateEntity(id,resEmail,passwordCry,resNom,resPrenom,resDateN,resPseudo,resTel,role,0);
         }
       
         

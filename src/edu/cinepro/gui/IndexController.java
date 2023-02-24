@@ -8,6 +8,7 @@ package edu.cinepro.gui;
 import edu.cinepro.entities.Cinepro;
 import edu.cinepro.entities.UserSession;
 import edu.cinepro.services.CineproCRUD;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -19,6 +20,8 @@ import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -44,7 +47,7 @@ public class IndexController implements Initializable {
     @FXML
     private Button modifier;
     @FXML
-    private Button modifierRole;
+    private ImageView image3;
 
     /**
      * Initializes the controller class.
@@ -77,6 +80,15 @@ public class IndexController implements Initializable {
         /*
         System.out.println("Bonjour "+UserSession.getInstace().getNom()+" !");
         */
+        
+        File file = new File("src/edu/cinepro/gui/images/image1.jpg");
+        String localURL = "";
+        try {
+            localURL = file.toURI().toURL().toString();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        image3.setImage(new Image(localURL));
         
     }    
     
@@ -118,28 +130,5 @@ public class IndexController implements Initializable {
         }
     }
 
-   /* @FXML
-    private void modifierRole(ActionEvent event) {
-        CineproCRUD ccd = new CineproCRUD();
-        int id = UserSession.getInstace().getId();
-        ccd.changeRole(id, "Admin");
-        
-        if (UserSession.getInstace().getRole().equals("Admin")){
-        
-            
-            
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("AdminIndex.fxml"));
-        
-        try {
-            Parent root = loader.load();
-            affichagePseudo.getScene().setRoot(root);
-            
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-        
-        }
-    }
-    */
     
 }

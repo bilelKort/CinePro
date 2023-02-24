@@ -5,11 +5,14 @@
  */
 package edu.cinepro.gui;
 
+import com.google.common.hash.Hashing;
 import edu.cinepro.entities.Cinepro;
 import edu.cinepro.entities.UserSession;
 import edu.cinepro.services.CineproCRUD;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -27,6 +30,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 
 /**
@@ -54,6 +59,8 @@ public class SignUpController implements Initializable {
     private TextField ajouterPseudo;
     @FXML
     private Label passwordStrength;
+    @FXML
+    private ImageView image2;
 
     /**
      * Initializes the controller class.
@@ -67,6 +74,15 @@ public class SignUpController implements Initializable {
                 passwordStrength.setText("");
             }
         });
+        
+        File file = new File("src/edu/cinepro/gui/images/image2.jpg");
+        String localURL = "";
+        try {
+            localURL = file.toURI().toURL().toString();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        image2.setImage(new Image(localURL));
         // TODO
     }
     
@@ -315,10 +331,10 @@ public class SignUpController implements Initializable {
         String resPseudo = ajouterPseudo.getText();
         String resPassword = ajouterPassword.getText();
 
-        
+        String passwordCry = Hashing.sha256().hashString(resPassword, StandardCharsets.UTF_8).toString();
         //Ajout
         CineproCRUD ccd = new CineproCRUD();
-        Cinepro c = new Cinepro(resEmail,resPassword,resNom,resPrenom,resDateN,resPseudo,resTel,"Client",0);
+        Cinepro c = new Cinepro(resEmail,passwordCry,resNom,resPrenom,resDateN,resPseudo,resTel,"Client",0);
         
         
         ccd.addEntity(c);

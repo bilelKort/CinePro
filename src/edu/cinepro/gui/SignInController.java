@@ -8,6 +8,7 @@ package edu.cinepro.gui;
 import edu.cinepro.entities.Cinepro;
 import edu.cinepro.entities.UserSession;
 import edu.cinepro.services.CineproCRUD;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -49,6 +50,15 @@ public class SignInController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        File file = new File("src/edu/cinepro/gui/images/image1.jpg");
+        String localURL = "";
+        try {
+            localURL = file.toURI().toURL().toString();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        image1.setImage(new Image(localURL));
+        
       /*  Image image = new Image("..\\images\\image1.png");
         image1.setImage(image); */
         

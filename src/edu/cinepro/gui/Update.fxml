@@ -5,11 +5,13 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.UpdateController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.UpdateController">
    <children>
+      <ImageView fx:id="image4" fitHeight="400.0" fitWidth="600.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="modifierNom" layoutX="158.0" layoutY="62.0" prefHeight="26.0" prefWidth="258.0" promptText="nom" />
       <TextField fx:id="modifierPrenom" layoutX="158.0" layoutY="104.0" prefHeight="26.0" prefWidth="258.0" promptText="prenom" />
       <TextField fx:id="modifierEmail" layoutX="158.0" layoutY="143.0" prefHeight="26.0" prefWidth="258.0" promptText="email" />

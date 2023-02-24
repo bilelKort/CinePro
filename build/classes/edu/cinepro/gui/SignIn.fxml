@@ -5,7 +5,6 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
@@ -13,13 +12,10 @@
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="433.0" prefWidth="724.0" style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.SignInController">
    <children>
       <ImageView fx:id="image1" fitHeight="490.0" fitWidth="981.0" opacity="0.3" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../images/image1.png" />
-         </image>
       </ImageView>
       <AnchorPane layoutX="377.0" layoutY="41.0" prefHeight="351.0" prefWidth="302.0" style="-fx-background-color: #9C2827;" AnchorPane.rightAnchor="44.60000000000002">
          <children>
-            <Label layoutX="83.0" layoutY="312.0" text="No account?" textFill="WHITE" />
+            <Label layoutX="83.0" layoutY="312.0" text="No account?" textFill="WHITE" AnchorPane.rightAnchor="152.2" />
             <PasswordField fx:id="password" layoutX="22.0" layoutY="181.0" prefHeight="26.0" prefWidth="258.0" promptText="password" />
             <TextField fx:id="pseudo" layoutX="22.0" layoutY="119.0" prefHeight="26.0" prefWidth="258.0" promptText="pseudo" />
             <Button fx:id="signInBtn" layoutX="22.0" layoutY="258.0" onAction="#login" prefHeight="26.0" prefWidth="258.0" style="-fx-background-color: #E45652;" text="Sign in" textFill="#dad6d6" />
