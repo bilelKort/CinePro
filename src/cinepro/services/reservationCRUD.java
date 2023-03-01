@@ -13,7 +13,9 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -168,4 +170,35 @@ public int checkFilm(reservation r){
             System.out.println(ex.getMessage());
         }
         }
+     
+
+    public static Map<String, Integer> countFilmReservations() {
+        try {
+            String requete = "SELECT f.nom, COUNT(*) AS reservations_count " +
+                    "FROM reservation r " +
+                    "INNER JOIN film f ON r.id_film = f.id_film " +
+                    "GROUP BY f.nom";
+            
+        PreparedStatement st=cineproConnexion.getInstance()
+                    .getCnx().prepareStatement(requete);
+            ResultSet rs = st.executeQuery(requete);
+            
+            Map<String, Integer> filmReservationCounts = new HashMap<>();
+
+            while (rs.next()) {
+                String filmName = rs.getString("nom");
+                int reservationsCount = rs.getInt("reservations_count");
+                filmReservationCounts.put(filmName, reservationsCount);
+            }
+
+            return filmReservationCounts;
+        }catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+            
+         return null;
+        } 
+    
+     
+     
 }

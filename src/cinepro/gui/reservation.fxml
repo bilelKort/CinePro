@@ -13,7 +13,7 @@
       <TextField id="bevel" fx:id="residuser" layoutX="217.0" layoutY="85.0" prefHeight="25.0" prefWidth="221.0" />
       <TextField id="bevel" fx:id="residfilm" layoutX="217.0" layoutY="141.0" prefHeight="25.0" prefWidth="221.0" />
       <TextField id="bevel" fx:id="resstate" layoutX="217.0" layoutY="196.0" prefHeight="25.0" prefWidth="221.0" />
-      <Button fx:id="btn" layoutX="275.0" layoutY="345.0" mnemonicParsing="false" onAction="#saveReservation" prefHeight="25.0" prefWidth="106.0" text="Ajouter" />
+      <Button fx:id="btn" layoutX="217.0" layoutY="359.0" mnemonicParsing="false" onAction="#saveReservation" prefHeight="25.0" prefWidth="106.0" text="Ajouter" />
       <TextField id="bevel" fx:id="starttime" layoutX="217.0" layoutY="252.0" prefHeight="25.0" prefWidth="221.0" />
       <TextField id="bevel" fx:id="endtime" layoutX="217.0" layoutY="303.0" prefHeight="25.0" prefWidth="221.0" />
       <Label layoutX="112.0" layoutY="256.0" text="start_time " />
@@ -22,5 +22,6 @@
       <TextField id="bevel" fx:id="idreservation" layoutX="524.0" layoutY="303.0" prefHeight="25.0" prefWidth="187.0" />
       <Label layoutX="524.0" layoutY="277.0" prefHeight="17.0" prefWidth="114.0" text="id reservation" />
       <Button fx:id="Menu" layoutX="27.0" layoutY="22.0" mnemonicParsing="false" onAction="#showMenu" text="Menu" />
+      <Button fx:id="update" layoutX="346.0" layoutY="360.0" mnemonicParsing="false" onAction="#updateReservation" prefHeight="27.0" prefWidth="106.0" text="Update" />
    </children>
 </AnchorPane>

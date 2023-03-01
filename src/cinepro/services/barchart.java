@@ -20,10 +20,8 @@ import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.application.Application;
-import static javafx.application.Application.launch;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.chart.BarChart;
 import javafx.scene.chart.CategoryAxis;
@@ -32,34 +30,42 @@ import javafx.scene.chart.PieChart;
 import javafx.scene.chart.XYChart;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.application.Application;
+import javafx.scene.Group;
+
 /**
  *
  * @author kortb
  */
-public class chartPie extends Application{
-  
-     @Override
+public class barchart extends Application{
+           
+    @Override
         public void start(Stage stage) throws Exception {
             
          Map<String, Integer> filmReservationCounts = countFilmReservations();
 
-         PieChart pieChart = new PieChart();
+        if (filmReservationCounts != null) {
+            final CategoryAxis xAxis = new CategoryAxis();
+            final NumberAxis yAxis = new NumberAxis();
+            final BarChart<String,Number> chart = new BarChart<>(xAxis,yAxis);
+            chart.setTitle("Film Reservations");
+            xAxis.setLabel("Film");
+            yAxis.setLabel("Reservations");
 
-         // Add the data to the PieChart
-    for (Map.Entry<String, Integer> entry : filmReservationCounts.entrySet()) {
-        String filmName = entry.getKey();
-        int reservationCount = entry.getValue();
-        pieChart.getData().add(new PieChart.Data(filmName, reservationCount));
-    }
+            XYChart.Series<String, Number> series = new XYChart.Series<>();
+            series.setName("Reservations");
 
-    // Create a Scene object and add the PieChart to it
-    Scene scene = new Scene(new Group(pieChart), 500, 400);
+            for (Map.Entry<String, Integer> entry : filmReservationCounts.entrySet()) {
+                series.getData().add(new XYChart.Data<>(entry.getKey(), entry.getValue()));
+                
+            }
 
-    // Display the Scene using a Stage object
-    
-    stage.setScene(scene);
-    stage.show();
-            
+            Scene scene  = new Scene(chart,800,600);
+            chart.getData().add(series);
+
+            stage.setScene(scene);
+            stage.show();
+        }
     
 }
      public static void main(String[] args) {

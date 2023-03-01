@@ -51,6 +51,8 @@ public class ReservationController implements Initializable {
     private TextField idreservation;
     @FXML
     private Button Menu;
+    @FXML
+    private Button update;
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -166,4 +168,8 @@ public class ReservationController implements Initializable {
         System.out.println(ex.getMessage());
     }
    }
+       
+       
+       
+       
 }

@@ -55,7 +55,6 @@ public class DisplayController implements Initializable {
     private TableColumn<reservation, Timestamp> col6;
     @FXML
     private TableColumn<reservation, Timestamp> col7;
-    
     @FXML
     private TableView<reservation> tableview;
     public   ObservableList<reservation> data = FXCollections.observableArrayList();

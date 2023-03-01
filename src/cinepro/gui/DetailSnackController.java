@@ -35,7 +35,7 @@ import javafx.util.Callback;
  */
 public class DetailSnackController implements Initializable {
 
- @FXML
+    @FXML
     private TableColumn<reservation_snack, Integer> col1;
     @FXML
     private TableColumn<reservation_snack, Integer> col2;
@@ -48,7 +48,7 @@ public class DetailSnackController implements Initializable {
     @FXML
     private TableView<reservation_snack> tableview;
     public   ObservableList<reservation_snack> data = FXCollections.observableArrayList();
-     @FXML
+    @FXML
     private Button btnres;
     @FXML
     private Button btnresplace;
@@ -103,8 +103,7 @@ public class DetailSnackController implements Initializable {
         };
         delete.setCellFactory(cellFactory);
       
-    }    
-    
+    }       
     
  @FXML
        public void showPlaceTable(){

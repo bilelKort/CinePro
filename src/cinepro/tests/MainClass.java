@@ -16,8 +16,8 @@ import javafx.stage.Stage;
  *
  * @author kortb
  */
-public class MainClass {
-    public static void main(String[] args) {
+public class MainClass extends Application{
+    /*public static void main(String[] args) {
         
         Calendar calendar = Calendar.getInstance();
 calendar.set(Calendar.YEAR, 2023); // set the year to 2023
@@ -68,8 +68,8 @@ Timestamp timestamp2 = new Timestamp(calendar2.getTimeInMillis());
       */
       
              
-    //}
-   /* public static void main(String[] args) {
+    //}*/
+    public static void main(String[] args) {
         cineproConnexion mc = new cineproConnexion();
         launch(args);
     }
@@ -78,6 +78,6 @@ Timestamp timestamp2 = new Timestamp(calendar2.getTimeInMillis());
     public void start(Stage stage) throws Exception {
       chartPie cp = new chartPie(); 
       cp.start(stage);
-    }*/  
+    }  
 }
-}
+

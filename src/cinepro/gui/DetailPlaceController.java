@@ -35,7 +35,7 @@ import javafx.util.Callback;
  * @author kortb
  */
 public class DetailPlaceController implements Initializable {
-  @FXML
+    @FXML
     private TableColumn<reservation_place, Integer> col1;
     @FXML
     private TableColumn<reservation_place, String> col2;
