@@ -10,6 +10,9 @@ import cinepro.utils.cineproConnexion;
 import java.sql.Timestamp;
 import java.util.Calendar;
 import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -76,8 +79,18 @@ Timestamp timestamp2 = new Timestamp(calendar2.getTimeInMillis());
 
     @Override
     public void start(Stage stage) throws Exception {
-      chartPie cp = new chartPie(); 
-      cp.start(stage);
+                String reservationInfo = "John Doe, 123 Main St, Anytown USA";
+
+       QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
+        ImageView imageView = qrCodeGenerator.generateQRCode(reservationInfo);
+
+        StackPane sp = new StackPane();
+        sp.getChildren().add(imageView);
+
+        Stage primaryStage = null;
+        Scene scene = new Scene(sp, 300, 300);
+        stage.setScene(scene);
+        stage.show();
     }  
 }
 

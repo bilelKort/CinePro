@@ -17,13 +17,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -101,16 +106,35 @@ public class ReservationController implements Initializable {
         
         int c1 = pcd.checkUser(res);
         int c2 = pcd.checkFilm(res);
-       
+       String reservationInfo = "id reservation: " + res.getId_reservation() + "\n id user: " + res.getId_user() + "\n id_film: " 
+                + res.getId_film() + "\n start time: " + res.getStart_time() + "\n end time: " + res.getEnd_time();
+               // String reservationInfo = "John Doe, 123 Main St, Anytown USA";
+
         if(c1>0 && c2>0){
        FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation_place.fxml"));
        try{
        Parent root = loader.load(); 
 
         btn.getScene().setRoot(root);
-       
+        ////////////////////////////////////////////////////////////////
+        QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
+        ImageView imageView = null;
+        ImageView qrCodeImageView = null;
+
+        qrCodeImageView = qrCodeGenerator.generateQRCode(reservationInfo);
+        Stage qrCodeStage = new Stage();
+        qrCodeStage.setTitle("Reservation QR Code");
+
+    // Check if qrCodeImageView is null
+    if (qrCodeImageView != null) {
+        // Add ImageView object to the scene
+        Scene scene = new Scene(new Group(qrCodeImageView));
+        qrCodeStage.setScene(scene);
+
+        // Show the new stage
+        qrCodeStage.show();
+    }
        }catch(IOException ex){
-       
         System.out.println(ex.getMessage());
     } 
         }
