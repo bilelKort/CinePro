@@ -5,6 +5,7 @@ import cinepro.entities.Film;
 import cinepro.entities.Projection;
 import cinepro.services.CrewService;
 import cinepro.services.FilmService;
+import cinepro.services.Mail;
 import cinepro.services.ProjectionService;
 import cinepro.utils.MyConnection;
 import javafx.fxml.FXMLLoader;
@@ -19,9 +20,6 @@ import java.util.List;
 public class MainClass {
 
     public static void main(String[] args) {
-
-        FilmService filmService = new FilmService();
-        System.out.println(filmService.filmList("a"));
 
     }
 }

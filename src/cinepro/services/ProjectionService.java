@@ -19,6 +19,13 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
     @Override
     public void addProjection(Projection projection) {
         try {
+            if (countFilms(projection.getId_film()) == 0) {
+                FilmService filmService = new FilmService();
+                Film film = filmService.getFilmById(projection.getId_film());
+                Mail mail = new Mail();
+                mail.envoyer(film.getNom(), film.getTrailer(), projection.getDate_debut());
+            }
+
             String requete = "insert into projection (id_salle, id_film, date_debut, date_fin, nbr_places, diffuse) values (?, ?, str_to_date(?, '%d/%m/%Y-%H:%i'), str_to_date(?, '%d/%m/%Y-%H:%i'), ?, ?)";
             PreparedStatement preparedStatement = MyConnection.getInstance().getConnection().prepareStatement(requete);
             preparedStatement.setInt(1, projection.getId_salle());
@@ -39,6 +46,30 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
         ArrayList<Projection> list = new ArrayList<Projection>();
         try {
             String requete = "select * from projection";
+            Statement statement = MyConnection.getInstance().getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(requete);
+            while (resultSet.next()) {
+                Projection projection = new Projection();
+                projection.setId_projection(resultSet.getInt(1));
+                projection.setId_salle(resultSet.getInt(2));
+                projection.setDate_debut(resultSet.getString(3));
+                projection.setId_film(resultSet.getInt(4));
+                projection.setNbr_places(resultSet.getInt(5));
+                projection.setDiffuse(resultSet.getBoolean(6));
+                projection.setDate_fin(resultSet.getString(7));
+                list.add(projection);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return list;
+    }
+
+    @Override
+    public List projectionListByFilm(int id_film) {
+        ArrayList<Projection> list = new ArrayList<Projection>();
+        try {
+            String requete = "select * from projection where id_film='" + id_film + "'";
             Statement statement = MyConnection.getInstance().getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(requete);
             while (resultSet.next()) {
@@ -161,5 +192,21 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
             System.out.println(e.getMessage());
         }
         return list;
+    }
+
+    @Override
+    public Integer countFilms(int id_film) {
+        Integer n = null;
+        try {
+            String requete = "select count(*) from projection where id_film = '" + id_film + "'";
+            Statement statement = MyConnection.getInstance().getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(requete);
+            while (resultSet.next()) {
+                n = resultSet.getInt(1);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return n;
     }
 }

@@ -88,7 +88,7 @@ public class AjoutMovieController implements Initializable {
         try {
             //////////////////////////////////////////////////////////////////////////////////details
             name.setText(movie_response.getString("title"));
-            runTime.setText(movie_response.getInt("runtime")/60 + "h " + movie_response.getInt("runtime")%60 + "min");
+            runTime.setText(Integer.toString(movie_response.getInt("runtime")));
             date.setText(movie_response.getString("release_date"));
             desc.setText(movie_response.getString("overview"));
             desc.setWrapText(true);
@@ -259,6 +259,11 @@ public class AjoutMovieController implements Initializable {
     public void ajouterFilm(ActionEvent actionEvent) {
         error.setText("");
 
+        if (name.getText().isEmpty()) {
+            error.setText("Film not detected");
+            return;
+        }
+
         String poster_id = poster.getImage().impl_getUrl().split("/")[6];
         String localURL = "src/cinepro/images/poster/"+poster_id;
         FilmService filmService = new FilmService();
@@ -287,17 +292,10 @@ public class AjoutMovieController implements Initializable {
                 }
                 try {
                     String name = actors.getJSONObject(i).getString("name");
-                    String portrait_id = actors.getJSONObject(i).getString("profile_path");
-                    String portrait = "src/cinepro/images/crewPhoto" + portrait_id;
+                    String portrait = "https://image.tmdb.org/t/p/original" + actors.getJSONObject(i).getString("profile_path");
                     Crew actor = new Crew(name, portrait, "Actor", filmService.getFilm(id_imdb).getId_film());
                     crewService.addCrew(actor);
 
-                    File filePortrait = new File(portrait);
-                    try {
-                        ImageIO.write(SwingFXUtils.fromFXImage(new Image("https://image.tmdb.org/t/p/original"+portrait_id),null), "jpg", filePortrait);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
                     count ++;
                 } catch (Exception e) {
                 }
@@ -306,17 +304,9 @@ public class AjoutMovieController implements Initializable {
             for (int i=0; i<directors.length(); i++){
                 if ((directors.getJSONObject(i).getString("department").equals("Directing")) && (directors.getJSONObject(i).getString("job").equals("Director"))) {
                     String name = directors.getJSONObject(i).getString("name");
-                    String portrait_id = directors.getJSONObject(i).getString("profile_path");
-                    String portrait = "src/cinepro/images/crewPhoto" + portrait_id;
+                    String portrait = "https://image.tmdb.org/t/p/original" + directors.getJSONObject(i).getString("profile_path");
                     Crew director = new Crew(name, portrait, "Director", filmService.getFilm(id_imdb).getId_film());
                     crewService.addCrew(director);
-
-                    File filePortrait = new File(portrait);
-                    try {
-                        ImageIO.write(SwingFXUtils.fromFXImage(new Image("https://image.tmdb.org/t/p/original"+portrait_id),null), "jpg", filePortrait);
-                    } catch (Exception e) {
-                        System.out.println(e.getMessage());
-                    }
                 }
             }
             listMovies(new ActionEvent());

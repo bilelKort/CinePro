@@ -4,6 +4,7 @@ import cinepro.entities.Crew;
 import cinepro.entities.Film;
 import cinepro.services.CrewService;
 import cinepro.services.FilmService;
+import cinepro.services.ProjectionService;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -69,7 +70,6 @@ public class MovieDetailsController implements Initializable {
     private Button listMovies;
     private static final MovieDetailsController instance = new MovieDetailsController();
     private Film film;
-
     public static MovieDetailsController getInstance() {
         return instance;
     }
@@ -97,8 +97,12 @@ public class MovieDetailsController implements Initializable {
         trailer.getEngine().load(film.getTrailer());
 
 
-        displayCrew(vBocActors, "Actor");
+
         displayCrew(vBoxDirector, "Director");
+        displayCrew(vBocActors, "Actor");
+
+        ProjectionService projectionService = new ProjectionService();
+        System.out.println(projectionService.projectionListByFilm(instance.id_film));
     }
 
     public void displayCrew(VBox vBox, String job) {
@@ -115,14 +119,7 @@ public class MovieDetailsController implements Initializable {
                     hBoxCrew = new HBox();
                 }
                 ImageView imageView = new ImageView();
-                File photo = new File(list.get(i).getPhoto());
-                String localURl_photo = "";
-                try {
-                    localURl_photo = photo.toURI().toURL().toString();
-                } catch (MalformedURLException e) {
-                    throw new RuntimeException(e);
-                }
-                Image photo_crew = new Image(localURl_photo);
+                Image photo_crew = new Image(list.get(i).getPhoto());
                 imageView.setImage(photo_crew);
                 imageView.setFitWidth(150);
                 imageView.setFitHeight(225);

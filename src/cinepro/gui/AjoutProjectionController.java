@@ -121,7 +121,6 @@ public class AjoutProjectionController implements Initializable {
                 }else {
                     error.setText("Already projection in salle");
                 }
-
             }
         }
     }
