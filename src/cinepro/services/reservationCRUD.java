@@ -68,38 +68,62 @@ public int checkFilm(reservation r){
     @Override
     public void addEntity(reservation r) {
         try {
-            String requete = "INSERT INTO reservation (Prix_final,id_user,id_film,state,start_time,end_time)" + "VALUES (? ,?, ?, ?, ?, ?)";
-            int count = checkUser(r);
-            int count2=checkFilm(r);
-            
-            if (count == 0) {
-                System.out.println("user doesn't exists");
-            }
-            
-            if(count2==0){
-                System.out.println("film doesn't exists"); 
-            }
-            
-            else if(count>0 && count2>0){
-               PreparedStatement st = cineproConnexion.getInstance().getCnx()
-                    .prepareStatement(requete);
-            
-            st.setFloat(1, 0f);
-            st.setInt(2, r.getId_user());
-            st.setInt(3, r.getId_film());
-            st.setBoolean(4, r.isState());
-            st.setTimestamp(5, r.getStart_time());
-            st.setTimestamp(6, r.getEnd_time());
+    int userId = r.getId_user();
+    int filmId = r.getId_film();
+    boolean state = r.isState();
+    float prixFinal = 0f;
 
-            st.executeUpdate();
-            
-            System.out.println("reservation ajoute"); 
-            }        
-        } catch (SQLException ex) {
-            System.out.println(ex.getMessage());
-        }
+    // Check if the user exists
+    if (checkUser(r) == 0) {
+          System.out.println("user doesn't exists");
+    System.out.println("r.getId_user() = " + r.getId_user());
+    System.out.println("count = " + checkUser(r));
     }
 
+    // Check if the film exists
+    if (checkFilm(r) == 0) {
+        System.out.println("Film does not exist");
+        return;
+    }
+
+    // Retrieve the start and end times from the projection table
+    String selectProjectionQuery = "SELECT date_debut, date_fin FROM projection WHERE id_film = ?";
+    PreparedStatement selectProjectionStmt = cineproConnexion.getInstance().getCnx().prepareStatement(selectProjectionQuery);
+    selectProjectionStmt.setInt(1, filmId);
+    ResultSet projectionResult = selectProjectionStmt.executeQuery();
+
+    // Insert the reservation into the database
+    String insertReservationQuery = "INSERT INTO reservation (Prix_final, id_user, id_film, state, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?)";
+    PreparedStatement insertReservationStmt = cineproConnexion.getInstance().getCnx().prepareStatement(insertReservationQuery);
+    insertReservationStmt.setFloat(1, prixFinal);
+    insertReservationStmt.setInt(2, userId);
+    insertReservationStmt.setInt(3, filmId);
+    insertReservationStmt.setBoolean(4, state);
+
+    if (projectionResult.next()) {
+        Timestamp startTime = projectionResult.getTimestamp("date_debut");
+        Timestamp endTime = projectionResult.getTimestamp("date_fin");
+
+        insertReservationStmt.setTimestamp(5, startTime);
+        insertReservationStmt.setTimestamp(6, endTime);
+    } else {
+        // No projection found for the given film ID
+        System.out.println("No projection found for the given film ID");
+        return;
+    }
+
+    int rowsAffected = insertReservationStmt.executeUpdate();
+
+    if (rowsAffected > 0) {
+        System.out.println("Reservation added successfully");
+    } else {
+        System.out.println("Failed to add reservation");
+    }
+} catch (SQLException ex) {
+    System.out.println(ex.getMessage());
+}
+    }
+    
     @Override
     public List<reservation> entitiesList() {
          ArrayList<reservation> myList = new ArrayList();

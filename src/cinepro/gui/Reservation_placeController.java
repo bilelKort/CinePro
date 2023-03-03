@@ -101,6 +101,7 @@ public class Reservation_placeController implements Initializable {
              reservation_place res = new reservation_place(seatNum, Prix, idRes);
              reservation_placeCRUD pcd = new reservation_placeCRUD();
              pcd.addEntity(res);
+             
         if(!pcd.check1(res)){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Validate Form");

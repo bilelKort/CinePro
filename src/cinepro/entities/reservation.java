@@ -41,6 +41,7 @@ public class reservation {
     }
 
     public reservation(int id_user, int id_film, boolean state) {
+        this.prix_final = 0f;
         this.id_user = id_user;
         this.id_film = id_film;
         this.state = state;
@@ -53,6 +54,14 @@ public class reservation {
         this.state = state;
         this.start_time = start_time;
         this.end_time = end_time;
+    }
+
+    public reservation(float prix_final, int iduser, int idfilm, boolean state) {
+         this.prix_final = prix_final;
+        this.id_user = id_user;
+        this.id_film = id_film;
+        this.state = state;
+       
     }
     
 

@@ -7,19 +7,25 @@
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/entities/reservation.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/utils/cineproConnexion.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/entities/reservation_place.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/id_snack.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/cineProMain.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/DisplayController.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/reservation_placeCRUD.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/reservationCRUD.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/Display.fxml</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/QRCodeGenerator.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/DetailSnackController.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/WeatherAPI.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/MenuController.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/DetailPlaceController.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/ReservationSnack.fxml</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/chartPie.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/ReservationController.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/entities/reservation_snack.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/Reservation_placeController.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/reservation_snackCRUD.java</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/tests/MainClass.java</file>
+            <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/barchart.java</file>
         </group>
     </open-files>
 </project-private>

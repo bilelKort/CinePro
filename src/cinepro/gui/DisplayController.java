@@ -6,8 +6,10 @@
 package cinepro.gui;
 
 import cinepro.entities.reservation;
+import cinepro.services.QRCodeGenerator;
 import cinepro.services.reservationCRUD;
 import cinepro.utils.cineproConnexion;
+import com.google.zxing.WriterException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -26,12 +28,16 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Group;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 import javafx.util.Callback;
 
 /**
@@ -88,6 +94,64 @@ public class DisplayController implements Initializable {
         
     tableview.setItems(data);
 
+    // Create new TableColumn for QR code
+TableColumn<reservation, Void> qrCodeCol = new TableColumn<>("QR Code");
+qrCodeCol.setPrefWidth(100);
+qrCodeCol.setSortable(false);
+
+// Set cellFactory for QR code column to display QR code for each reservation
+qrCodeCol.setCellFactory(new Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>>() {
+    @Override
+    public TableCell<reservation, Void> call(TableColumn<reservation, Void> param) {
+        final TableCell<reservation, Void> cell = new TableCell<reservation, Void>() {
+              private final Button btnqr = new Button("QR Code");
+            {
+                btnqr.setOnAction((ActionEvent event) -> {
+                    // Retrieve reservation information from the database
+                    reservation res = getTableView().getItems().get(getIndex());
+
+                    String reservationInfo = " id reservation: " + res.getId_reservation() + "\n id user: " + res.getId_user() + "\n id_film: " 
+                + res.getId_film() + "\n start time: " + res.getStart_time() + "\n end time: " + res.getEnd_time() + "\n price: " + res.getPrix_final();
+
+                    // Generate QR code
+                    QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
+                    ImageView qrCodeImageView = null;
+                    qrCodeImageView = qrCodeGenerator.generateQRCode(reservationInfo);
+
+                    // Create new stage
+                    Stage qrCodeStage = new Stage();
+                    qrCodeStage.setTitle("Reservation QR Code");
+
+                    // Check if qrCodeImageView is null
+                    if (qrCodeImageView != null) {
+                        // Add ImageView object to the scene
+                        Scene scene = new Scene(new Group(qrCodeImageView));
+                        qrCodeStage.setScene(scene);
+
+                        // Show the new stage
+                        qrCodeStage.show();
+                    }
+                });
+            }
+
+            @Override
+            public void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btnqr);
+                }
+            }
+        };
+        return cell;
+    }
+});
+
+// Add QR code column to the table
+tableview.getColumns().add(qrCodeCol);
+
+
      Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>> cellFactory = new Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>>() {
             @Override
             public TableCell<reservation, Void> call(final TableColumn<reservation, Void> param) {
@@ -100,7 +164,7 @@ public class DisplayController implements Initializable {
                             pcd.deleteEntity(col1.getCellObservableValue(rowIndex).getValue());
 
                         });
-                    }
+                    }                    
                     @Override
                     public void updateItem(Void item, boolean empty) {
                         super.updateItem(item, empty);

@@ -74,10 +74,10 @@ public class ReservationController implements Initializable {
         String residFilm = residfilm.getText();
         String idReservation = idreservation.getText();
         String resState = resstate.getText();
-        String startTime = starttime.getText();
-        String endTime = endtime.getText();
+       /* String startTime = starttime.getText();
+        String endTime = endtime.getText();*/
         if  (!isFieldNotEmpty(residUser) || !isFieldNotEmpty(residFilm) || 
-                !isFieldNotEmpty(resState) || !isFieldNotEmpty(startTime) || !isFieldNotEmpty(endTime)) {
+                !isFieldNotEmpty(resState)) {
             
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Validate Form");
@@ -98,17 +98,16 @@ public class ReservationController implements Initializable {
         int iduser = Integer.valueOf(residuser.getText());
         int idfilm = Integer.valueOf(residfilm.getText());
         boolean state = Boolean.valueOf(resstate.getText());
-        Timestamp start_time = Timestamp.valueOf(starttime.getText());
-        Timestamp end_time = Timestamp.valueOf(endtime.getText());
+        /*Timestamp start_time = Timestamp.valueOf(starttime.getText());
+        Timestamp end_time = Timestamp.valueOf(endtime.getText());*/
         reservationCRUD pcd = new reservationCRUD();
-        reservation res = new reservation(0.0f,iduser,idfilm,state,start_time,end_time);
+        reservation res = new reservation(iduser,idfilm,state);
         pcd.addEntity(res);
         
         int c1 = pcd.checkUser(res);
         int c2 = pcd.checkFilm(res);
-       String reservationInfo = "id reservation: " + res.getId_reservation() + "\n id user: " + res.getId_user() + "\n id_film: " 
+        String reservationInfo = "id reservation: " + res.getId_reservation() + "\n id user: " + res.getId_user() + "\n id_film: " 
                 + res.getId_film() + "\n start time: " + res.getStart_time() + "\n end time: " + res.getEnd_time();
-               // String reservationInfo = "John Doe, 123 Main St, Anytown USA";
 
         if(c1>0 && c2>0){
        FXMLLoader loader = new FXMLLoader(getClass().getResource("reservation_place.fxml"));
@@ -117,7 +116,7 @@ public class ReservationController implements Initializable {
 
         btn.getScene().setRoot(root);
         ////////////////////////////////////////////////////////////////
-        QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
+        /*QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
         ImageView imageView = null;
         ImageView qrCodeImageView = null;
 
@@ -133,7 +132,10 @@ public class ReservationController implements Initializable {
 
         // Show the new stage
         qrCodeStage.show();
-    }
+    ///////////////////////////////////////////////////////////
+    
+    
+    }*/
        }catch(IOException ex){
         System.out.println(ex.getMessage());
     } 

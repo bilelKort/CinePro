@@ -29,13 +29,14 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
        ResultSet rs = null;
         try {
  String query = "SELECT COUNT(*) FROM reservation_place " +
-                       "WHERE coordonnee = ? AND id_reservation = ?";
+                       "WHERE coordonnee = ? ";
+              //AND id_reservation = ?
                 PreparedStatement stmp;
                stmp = cineproConnexion.getInstance().getCnx()
                        .prepareStatement(query);
                
                stmp.setString(1, r.getCoordonnee());
-               stmp.setInt(2, r.getId_reservation());
+               //stmp.setInt(2, r.getId_reservation());
         
         rs = stmp.executeQuery();
 
