@@ -11,6 +11,8 @@ import edu.cinepro.services.CineproCRUD;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -60,7 +62,20 @@ public class IndexController implements Initializable {
         affichageNom.setText(UserSession.getInstace().getNom());
         affichagePrenom.setText(UserSession.getInstace().getPrenom());
         affichageEmail.setText(UserSession.getInstace().getEmail());
-        affichageAge.setText(UserSession.getInstace().getDate_naissance());
+        
+        // Calcul d'age
+        LocalDate today = LocalDate.now();
+        
+        String date = UserSession.getInstace().getDate_naissance();
+        String[] x= date.split("-");
+        int y = Integer.valueOf(x[0]);
+        int m = Integer.valueOf(x[1]);
+        int d = Integer.valueOf(x[2]);
+        
+        LocalDate birthday = LocalDate.of(y, m, d);
+        int years = Period.between(birthday, today).getYears();
+        
+        affichageAge.setText(String.valueOf(years));
         affichageTel.setText(String.valueOf(UserSession.getInstace().getTel()));
       /*  int id = UserSession.getInstace().getId();
         CineproCRUD ccd = new CineproCRUD(); */
