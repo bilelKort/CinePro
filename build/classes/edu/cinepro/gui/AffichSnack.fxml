@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.AffichSnackController">
+   <children>
+      <TableView fx:id="snack" layoutX="129.0" layoutY="91.0" prefHeight="190.0" prefWidth="438.0">
+        <columns>
+          <TableColumn fx:id="id_snack" prefWidth="75.0" text="id snack" />
+          <TableColumn fx:id="nom" prefWidth="75.0" text="nom" />
+            <TableColumn fx:id="prix" prefWidth="75.0" text="prix" />
+            <TableColumn fx:id="quantite" prefWidth="75.0" text="quantite" />
+            <TableColumn fx:id="photo" prefWidth="75.0" text="photo" />
+            <TableColumn fx:id="btn" prefWidth="75.0" text="btn" />
+        </columns>
+      </TableView>
+      <Button layoutX="24.0" layoutY="353.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="79.0" text="back" />
+   </children>
+</AnchorPane>

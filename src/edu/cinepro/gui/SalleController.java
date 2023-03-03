@@ -68,16 +68,19 @@ public class SalleController implements Initializable {
         SalleCRUD s = new SalleCRUD();
         salle actuel = s.entitiesList3(instance.id).get(0);
         nom.setText(actuel.getNom());
-        longeurid.setText(Integer.toString(actuel.getLongueur()));
+        largeurid.setText(Integer.toString(actuel.getLongueur()));
 
+        placeid.setHgap(10);
+        placeid.setVgap(10);
+        
         if (actuel.isAcces() == false) {
             etatid.setText("la salle n'est pas disponible");
             for (int row = 0; row < actuel.getLongueur(); row++) {
                 for (int col = 0; col < actuel.getLargeur(); col++) {
 
                     Pane pane = new Pane();
-                    Rectangle rectangle = new Rectangle(30, 30);
-                    rectangle.setFill(Color.WHITE);
+                    Rectangle rectangle = new Rectangle(20, 20);
+                    rectangle.setFill(Color.RED);
                     rectangle.setStroke(Color.BLACK);
 
                     pane.getChildren().add(rectangle);
@@ -106,7 +109,7 @@ public class SalleController implements Initializable {
 
         }
 
-        largeurid.setText(Integer.toString(actuel.getLargeur()));
+        longeurid.setText(Integer.toString(actuel.getLargeur()));
 
     }
 

@@ -10,7 +10,7 @@
 
 <AnchorPane id="AnchorPane" prefHeight="648.0" prefWidth="1040.0" style="-fx-background-color: brown;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.CinemaAfficheController">
    <children>
-      <TableView fx:id="tableview" layoutX="133.0" layoutY="88.0" prefHeight="403.0" prefWidth="552.0">
+      <TableView fx:id="tableview" layoutX="133.0" layoutY="88.0" prefHeight="403.0" prefWidth="653.0">
         <columns>
           <TableColumn fx:id="id_cinema" prefWidth="83.0" text="id_cinema" />
           <TableColumn fx:id="nom" prefWidth="95.0" text="           nom" />
@@ -19,6 +19,7 @@
             <TableColumn fx:id="photo" prefWidth="49.0" text="photo" />
             <TableColumn fx:id="id_user" prefWidth="51.0" text="id_user" />
             <TableColumn fx:id="edit" prefWidth="94.0" text="          edit" />
+            <TableColumn fx:id="supprimer" prefWidth="75.0" text="supprimer" />
         </columns>
       </TableView>
       <VBox layoutY="64.0" prefHeight="12.0" prefWidth="1006.0" style="-fx-background-color: white;" />

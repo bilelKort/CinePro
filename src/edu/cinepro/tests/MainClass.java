@@ -30,7 +30,8 @@ public class MainClass {
        pcd.updateEntity(2, "bolbol","rasjbal" , "khayba","photo");*/
 
    
-   
+  // SnackCRUD pcd= new SnackCRUD();
+    // pcd.deleteEntity(7); 
    
    /*
      // snack s = new snack( "9tania", 2 ,  15 , "test", 15, 2);

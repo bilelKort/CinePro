@@ -13,6 +13,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -61,6 +63,10 @@ public class CinemaAfficheController implements Initializable {
     private Button idbtn;
     @FXML
     private TableColumn edit;
+    @FXML
+    private TableColumn supprimer;
+    
+    
 
     /**
      * Initializes the controller class.
@@ -84,18 +90,15 @@ public class CinemaAfficheController implements Initializable {
         tableview.setItems(k);
         tableview.getSelectionModel().select(2);
 
-     
-
         Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> cellFactory
                 = new Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>>() {
             @Override
             public TableCell<cinema, Void> call(final TableColumn<cinema, Void> param) {
                 final TableCell<cinema, Void> cell = new TableCell<cinema, Void>() {
                     private final Button btn = new Button("see more ");
-                    
 
                     {
-                       btn .setStyle("-fx-color: white;");
+                        btn.setStyle("-fx-color: white;");
 
                         btn.setOnAction((ActionEvent event) -> {
                             /* 
@@ -103,22 +106,22 @@ public class CinemaAfficheController implements Initializable {
     int rowIndex = cell.getIndex();
     System.out.println("Ligne cliquée : " + rowIndex);
                              */
+                                int rowIndex = getTableRow().getIndex();
+                                Integer idCinemaValue = id_cinema.getCellObservableValue(rowIndex).getValue();
+                                System.out.println("ID Cinéma : " + idCinemaValue);
+                                ViewmorecinemaController.getInstance().setId1(idCinemaValue);
 
                             FXMLLoader loader = new FXMLLoader(getClass().getResource("viewmorecinema.fxml"));
 
                             try {
                                 Parent root = loader.load();
 
-                                ViewmorecinemaController dc = loader.getController();
+           ViewmorecinemaController dc = loader.getController();
 
-                                int rowIndex = getTableRow().getIndex();
-                                Integer idCinemaValue = id_cinema.getCellObservableValue(rowIndex).getValue();
-                                System.out.println("ID Cinéma : " + idCinemaValue);
-                  //  ViewmorecinemaController.getInstance().setId(Integer.toString(idCinemaValue));
                                 String id = Integer.toString(idCinemaValue);
-                               dc.setId(id);
+                                dc.setId(id);
                                 cinema liste = cd.cinemabyid(idCinemaValue);
-                             dc.setMap(liste.getLocalisation());
+                                dc.setMap(liste.getLocalisation());
 
                                 dc.setNom(liste.getNom());
                                 dc.setImage(liste.getPhoto());
@@ -150,105 +153,164 @@ public class CinemaAfficheController implements Initializable {
 
         edit.setCellFactory(cellFactory);
 
+        Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> cellFactory2
+                = new Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>>() {
+            @Override
+            public TableCell<cinema, Void> call(final TableColumn<cinema, Void> param) {
+                final TableCell<cinema, Void> cell = new TableCell<cinema, Void>() {
+                    private final Button btn = new Button("supprimer ");
+
+                    {
+                        btn.setStyle("-fx-color: white;");
+
+                        btn.setOnAction((ActionEvent event) -> {
+                            /* 
+    TableCell<cinema, String> cell = (TableCell<cinema, String>) event.getTarget();
+    int rowIndex = cell.getIndex();
+    System.out.println("Ligne cliquée : " + rowIndex);
+                             */
+
+
+                            int rowIndex = getTableRow().getIndex();// Code pour gérer l'action du bouton
+                            //redirection
+                            Integer idCinemaValue = id_cinema.getCellObservableValue(rowIndex).getValue();
+                            CinemaCRUD cd = new CinemaCRUD();
+                            System.out.println(idCinemaValue);
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("supprimer");
+                            alert.setHeaderText(null);
+                            alert.setContentText("voulez vous supprimer ?       |o_O|");
+                            if (alert.showAndWait().get() == ButtonType.OK) {
+                                
+                                try {
+                                    cd.deleteEntity(idCinemaValue);
+                                } catch (SQLException ex) {
+                                    Logger.getLogger(CinemaAfficheController.class.getName()).log(Level.SEVERE, null, ex);
+                                }
+                                
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
+                                    Scene scene = new Scene(root);
+                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                    stage.setScene(scene);
+                                    stage.show();
+                                } catch (IOException ex) {
+                                    System.out.println(ex.getMessage());
+                                }
+                            } else {
+                                
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
+                                    Scene scene = new Scene(root);
+                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                    stage.setScene(scene);
+                                    stage.show();
+                                } catch (IOException ex) {
+                                    System.out.println(ex.getMessage());
+                                }
+                                
+                            }
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        supprimer.setCellFactory(cellFactory2);
+
 // Ajoute la colonne à la fin du TableView
     }
 
     @FXML
 
     private void redirection(ActionEvent event) {
-         FXMLLoader loader = new FXMLLoader(getClass().getResource("Cinema.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("Cinema.fxml"));
         try {
             Parent root = loader.load();
-            CinemaController dc= loader.getController();
-                  idbtn.getScene().setRoot(root);
-                  
-                  
+            CinemaController dc = loader.getController();
+            idbtn.getScene().setRoot(root);
 
         } catch (IOException ex) {
-            System.err.println(ex.getMessage());        }
-        
-                
-        
-        
+            System.err.println(ex.getMessage());
+        }
+
     }
 
-        //Alert a =new Alert(Alert.AlertType., "ddd", ButtonType.OK);
-        //a.showAndWait();
-    
-
+    //Alert a =new Alert(Alert.AlertType., "ddd", ButtonType.OK);
+    //a.showAndWait();
     @FXML
     private void delete(ActionEvent event) throws SQLException {
-           SelectionModel<cinema> selectionModel = tableview.getSelectionModel();
-int selectedIndex = tableview.getSelectionModel().getSelectedIndex();
+        SelectionModel<cinema> selectionModel = tableview.getSelectionModel();
+        int selectedIndex = tableview.getSelectionModel().getSelectedIndex();
 
         System.out.println(selectedIndex);
         Integer idCinemaValue = id_cinema.getCellObservableValue(selectedIndex).getValue();
-        
-        if(idCinemaValue>0){
-                CinemaCRUD cd = new CinemaCRUD();
-                            System.out.println(idCinemaValue); 
-                            
-                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("supprimer");
-        alert.setHeaderText(null);
-        alert.setContentText("voulez vous supprimer ?       |o_O|");
 
-        if (alert.showAndWait().get() == ButtonType.OK) {
-                            
-                            
-        cd.deleteEntity(idCinemaValue);
-        
-       
-        try {
+        if (idCinemaValue > 0) {
+            CinemaCRUD cd = new CinemaCRUD();
+            System.out.println(idCinemaValue);
+
+            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+            alert.setTitle("supprimer");
+            alert.setHeaderText(null);
+            alert.setContentText("voulez vous supprimer ?       |o_O|");
+
+            if (alert.showAndWait().get() == ButtonType.OK) {
+
+                cd.deleteEntity(idCinemaValue);
+
+                try {
                     Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException ex) {
-                    System.out.println(ex.getMessage());                }
-        } 
-        else {
-        
-        
-         try {
+                    System.out.println(ex.getMessage());
+                }
+            } else {
+
+                try {
                     Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
                     Scene scene = new Scene(root);
                     Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                     stage.setScene(scene);
                     stage.show();
                 } catch (IOException ex) {
-                    System.out.println(ex.getMessage());                }
-        
-        
-        }
-        
-        
-        }
-        
-        
+                    System.out.println(ex.getMessage());
+                }
 
-        
-        
+            }
+
+        }
+
     }
 
     @FXML
     private void metier(ActionEvent event) {
-        
-            try {
 
-                System.out.println("ok !");
-                Parent root = FXMLLoader.load(getClass().getResource("place.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
+        try {
+
+            System.out.println("ok !");
+            Parent root = FXMLLoader.load(getClass().getResource("place.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
-        
-        
-    
+    }
 
 }

@@ -15,19 +15,17 @@ public class snack {
     private float prix;
     private int quantite;
     private String photo;
-    private int stock;
     private int id_cinema;
 
     
     public snack() {
     }
 
-    public snack(String nom, float prix, int quantite, String photo, int stock, int id_cinema) {
+    public snack(String nom, float prix, int quantite, String photo, int id_cinema) {
         this.nom = nom;
         this.prix = prix;
         this.quantite = quantite;
         this.photo = photo;
-        this.stock = stock;
         this.id_cinema = id_cinema;
     }
 
@@ -71,13 +69,7 @@ public class snack {
         this.photo = photo;
     }
 
-    public int getStock() {
-        return stock;
-    }
 
-    public void setStock(int stock) {
-        this.stock = stock;
-    }
 
     public int getId_cinema() {
         return id_cinema;
@@ -87,19 +79,18 @@ public class snack {
         this.id_cinema = id_cinema;
     }
 
-    public snack(int id_snack, String nom, float prix, int quantite, String photo, int stock, int id_cinema) {
+    public snack(int id_snack, String nom, float prix, int quantite, String photo, int id_cinema) {
         this.id_snack = id_snack;
         this.nom = nom;
         this.prix = prix;
         this.quantite = quantite;
         this.photo = photo;
-        this.stock = stock;
         this.id_cinema = id_cinema;
     }
 
     @Override
     public String toString() {
-        return "snack{" + "id_snack=" + id_snack + ", nom=" + nom + ", prix=" + prix + ", quantite=" + quantite + ", photo=" + photo + ", stock=" + stock + ", id_cinema=" + id_cinema + '}';
+        return "snack{" + "id_snack=" + id_snack + ", nom=" + nom + ", prix=" + prix + ", quantite=" + quantite + ", photo=" + photo  + ", id_cinema=" + id_cinema + '}';
     }
     
     

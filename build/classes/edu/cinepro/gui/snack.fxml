@@ -36,5 +36,6 @@
       <Button fx:id="idbuttonsavesnack" layoutX="563.0" layoutY="491.0" mnemonicParsing="false" onAction="#savesnack" prefHeight="25.0" prefWidth="134.0" style="-fx-background-color: green;" text="save" textFill="WHITE" />
       <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="239.0" layoutX="294.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="382.0" layoutY="491.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="142.0" style="-fx-background-color: black;" text="back" textFill="#f8f8f8" />
+      <Button layoutX="14.0" layoutY="421.0" mnemonicParsing="false" onAction="#csv" prefHeight="25.0" prefWidth="118.0" text="ajouter CSV" />
    </children>
 </AnchorPane>

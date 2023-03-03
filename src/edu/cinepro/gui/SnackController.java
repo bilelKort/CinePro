@@ -4,6 +4,10 @@
  */
 package edu.cinepro.gui;
 
+import edu.cinepro.entities.salle;
+import edu.cinepro.entities.snack;
+import edu.connexion3A18.services.SalleCRUD;
+import edu.connexion3A18.services.SnackCRUD;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -48,14 +52,28 @@ public class SnackController implements Initializable {
     private Button idbuttonsavesnack;
     @FXML
     private ImageView imageview;
+    
+     private static final SnackController instance = new SnackController();
+    private int id;
+public int getId() {
+        return id;
+    }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public static SnackController getInstance() {
+        return instance;
+    }
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+                System.out.println(instance.id);
+}
 
     @FXML
     private void importimage(ActionEvent event) {
@@ -91,6 +109,8 @@ public class SnackController implements Initializable {
         String resNom = idnom.getText();
         String resPrix = idprix.getText();
         String resQuantite = idquantite.getText();
+                float restPrixF = Integer.valueOf(resPrix);
+                 int restquantiteF = Integer.valueOf(resQuantite);
 
         if (resNom.equals("")) {
             System.out.println("il faut entrer un nom");
@@ -104,9 +124,11 @@ public class SnackController implements Initializable {
 
         } else {
             try {
-                float restPrixF = Integer.valueOf(resPrix);
                 System.out.println(restPrixF);
+                
+                if (restPrixF>0){
                 conditionprix = true;
+                }
             } catch (NumberFormatException ex) {
                 System.out.println("il faut entrer un nombre valide ");
             }
@@ -117,8 +139,9 @@ public class SnackController implements Initializable {
 
         } else {
             try {
-                int restquantiteF = Integer.valueOf(resQuantite);
+                 if (restquantiteF>0){
                 conditionQuantite = true;
+                }
                 System.out.println(restquantiteF);
             } catch (NumberFormatException ex) {
                 System.out.println("il faut entrer un nombre valide ");
@@ -134,6 +157,11 @@ public class SnackController implements Initializable {
 
         if ((conditionQuantite) && (conditionnom) && (conditionprix) && (conditionurl)) {
             System.out.println("ok");
+            snack cc = new snack(resNom, restPrixF, restquantiteF,labelsinglefile.getText() , instance.id);
+           
+            System.out.println(instance.id);
+            SnackCRUD pc = new SnackCRUD();
+            pc.addEntity(cc);
         } else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error ");
@@ -165,6 +193,23 @@ public class SnackController implements Initializable {
                 System.out.println(ex.getMessage());
             }
         }
+    }
+
+    @FXML
+    private void csv(ActionEvent event) {
+        
+        try {
+        AjoutsnackcsvController.getInstance().setId1(instance.id);
+
+                Parent root = FXMLLoader.load(getClass().getResource("Ajoutsnackcsv.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        
     }
 
 }

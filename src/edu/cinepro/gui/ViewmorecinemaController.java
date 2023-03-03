@@ -49,7 +49,8 @@ import javafx.util.Callback;
  * @author rayen
  */
 public class ViewmorecinemaController implements Initializable {
-
+ private static final ViewmorecinemaController instance = new ViewmorecinemaController();
+    private int id1;
     @FXML
     private Label id;
     @FXML
@@ -65,13 +66,14 @@ public class ViewmorecinemaController implements Initializable {
     private Label longeur;
     @FXML
     private Label largeur;
-
-    /*public static ViewmorecinemaController getInstance() {
-        return instance;
-    }*/
+    
+    
+     
     public ImageView getImage() {
         return image;
     }
+
+
 
     public void setImage(String path) {
         try {
@@ -123,15 +125,37 @@ public class ViewmorecinemaController implements Initializable {
     public void setId(String i) {
         this.id.setText(i);
     }
+    
+    
+    
+    
+    public int getId1() {
+        return id1;
+    }
+
+    public void setId1(int id1) {
+        this.id1 = id1;
+    }
+    
+      public static ViewmorecinemaController getInstance() {
+        return instance;
+    }
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("nnnn"+instance.id1);
+        
+       // CinemaCRUD c =new CinemaCRUD();
+       //cinema a= c.cinemabyid(instance.idinstance);
+      //this.setMap(a.getLocalisation());
 
-       
+        //                   this.setNom(a.getNom());
+          //                this.setImage(a.getPhoto());
     }
 
     @FXML
     private void affichesalle(ActionEvent event) {
+        System.out.println("nnnn"+instance.id1);
 
         SalleCRUD cd = new SalleCRUD();
         int id2 = Integer.valueOf(id.getText());
@@ -264,7 +288,29 @@ public class ViewmorecinemaController implements Initializable {
     @FXML
     private void ajoutersnack(ActionEvent event) {
          try{
+             
+                     int id2 = Integer.valueOf(id.getText());
+   SnackController.getInstance().setId(id2);
+
                       Parent root = FXMLLoader.load(getClass().getResource("snack.fxml"));
+                      Scene scene = new Scene(root);
+                      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                      stage.setScene(scene);
+                      stage.show();
+                  } catch (IOException ex) {
+                      Logger.getLogger(ViewmorecinemaController.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+        
+    }
+
+    @FXML
+    private void affichsnacks(ActionEvent event) {
+     try{
+             
+                     int id2 = Integer.valueOf(id.getText());
+   AffichSnackController.getInstance().setId(id2);
+
+                      Parent root = FXMLLoader.load(getClass().getResource("AffichSnack.fxml"));
                       Scene scene = new Scene(root);
                       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
                       stage.setScene(scene);

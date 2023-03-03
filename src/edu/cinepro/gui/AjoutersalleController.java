@@ -54,7 +54,10 @@ public class AjoutersalleController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println(instance.id);
+        System.out.println("test"+instance.id);
+        nomid.clear();
+        longeurid.clear();
+        largeurid.clear();
     }
 
     @FXML
@@ -87,7 +90,9 @@ public class AjoutersalleController implements Initializable {
             try {
                 int longeurint = Integer.valueOf(longeurid.getText());
                 System.out.println(longeurint);
+                if(longeurint>0){
                 longeurtest = true;
+                }
             } catch (NumberFormatException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error ");
@@ -109,7 +114,9 @@ public class AjoutersalleController implements Initializable {
 
             try {
                 int largeur = Integer.valueOf(largeurid.getText());
+                if(largeur>0){
 largeurtest=true;
+                }
             } catch (NumberFormatException ex) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error ");
@@ -143,15 +150,8 @@ largeurtest=true;
 
                     pc.addEntity(cc);
                     System.out.println("ok !");
-                     try {
-                    Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
-                    Scene scene = new Scene(root);
-                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                    stage.setScene(scene);
-                    stage.show();
-                } catch (IOException ex) {
-                    System.out.println(ex.getMessage());                }
-            
+                            initialize(new FXMLLoader().getLocation(), new FXMLLoader().getResources());
+
         }
         
         else {

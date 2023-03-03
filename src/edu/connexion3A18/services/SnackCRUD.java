@@ -21,7 +21,7 @@ import java.util.List;
 public class SnackCRUD {
 
     public void addEntity(snack s) {
-        String requete = "INSERT INTO snack ( nom,  prix,  quantite,  photo,  stock,  id_cinema )" + "VALUES(?,?,?,?,?,?)";
+        String requete = "INSERT INTO snack ( nom,  prix,  quantite,  photo,  id_cinema )" + "VALUES(?,?,?,?,?)";
 
         try {
             PreparedStatement st = MyConnection.getInstance().getCnx()
@@ -31,8 +31,7 @@ public class SnackCRUD {
             st.setFloat(2, s.getPrix());
             st.setInt(3, s.getQuantite());
             st.setString(4, s.getPhoto());
-            st.setInt(5, s.getStock());
-            st.setInt(6, s.getId_cinema());
+            st.setInt(5, s.getId_cinema());
 
             st.executeUpdate();
             System.out.println("snack ajoutée");
@@ -59,7 +58,36 @@ public class SnackCRUD {
 
                 s.setQuantite(rs.getInt("quantite"));
                 s.setPhoto(rs.getString("photo"));
-                s.setStock(rs.getInt("stock"));
+                s.setId_cinema(rs.getInt("id_cinema"));
+
+                myList.add(s);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return myList;
+    }
+    
+    
+    
+     public List<snack> entitiesList2(int id) {
+        ArrayList<snack> myList = new ArrayList();
+
+        try {
+            String requete = "SELECT * FROM snack where id_cinema="+id;
+            Statement st = MyConnection.getInstance().getCnx()
+                    .createStatement();
+
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+                snack s = new snack();
+                s.setId_snack(rs.getInt(1));
+                s.setNom(rs.getString("nom"));
+                s.setPrix(rs.getFloat("prix"));
+
+                s.setQuantite(rs.getInt("quantite"));
+                s.setPhoto(rs.getString("photo"));
                 s.setId_cinema(rs.getInt("id_cinema"));
 
                 myList.add(s);
@@ -94,7 +122,7 @@ public class SnackCRUD {
 
     public void deleteEntity(int id) {
         try {
-            String requete="DELETE FROM snack WHERE id_cinema=?";
+            String requete="DELETE FROM snack WHERE id_snack=?";
             PreparedStatement st=MyConnection.getInstance().getCnx().prepareStatement(requete);
             st.setInt(1,id);
             st.executeUpdate();

@@ -24,11 +24,11 @@ public class MainClass extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
+                Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
 
             Scene scene = new Scene(root);
 
-            primaryStage.setTitle("ajouter cinema");
+            primaryStage.setTitle(" cinema");
             primaryStage.setScene(scene);
             primaryStage.show();
         } catch (IOException ex) {

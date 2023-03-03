@@ -8,16 +8,16 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane id="AnchorPane" prefHeight="745.0" prefWidth="791.0" style="-fx-background-color: brown;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.ViewmorecinemaController">
+<AnchorPane id="AnchorPane" prefHeight="745.0" prefWidth="1342.0" style="-fx-background-color: brown;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.ViewmorecinemaController">
    <children>
       <Label layoutX="14.0" layoutY="279.0" prefHeight="27.0" prefWidth="57.0" text="Nom:" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font></Label>
-      <WebView fx:id="map" layoutX="279.0" prefHeight="365.0" prefWidth="512.0" />
+      <WebView fx:id="map" layoutX="344.0" layoutY="12.0" prefHeight="745.0" prefWidth="987.0" />
       <ImageView fx:id="image" fitHeight="257.0" fitWidth="264.0" layoutY="10.0" pickOnBounds="true" preserveRatio="true" />
       <Button layoutX="132.0" layoutY="410.0" mnemonicParsing="false" onAction="#affichesalle" style="-fx-background-color: green;" text="afficher les salles " textFill="WHITE" />
-      <ListView fx:id="idsalle" layoutX="11.0" layoutY="451.0" prefHeight="85.0" prefWidth="388.0" />
+      <ListView fx:id="idsalle" layoutX="11.0" layoutY="451.0" prefHeight="85.0" prefWidth="314.0" />
       <Label fx:id="nom" layoutX="77.0" layoutY="279.0" prefHeight="39.0" prefWidth="144.0" textFill="WHITE">
          <font>
             <Font name="System Bold" size="27.0" />
@@ -35,8 +35,9 @@
          <font>
             <Font size="19.0" />
          </font></Label>
-      <Button layoutX="308.0" layoutY="668.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="183.0" style="-fx-background-color: black;" text="back" textFill="WHITE" />
+      <Button layoutX="58.0" layoutY="618.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="183.0" style="-fx-background-color: black;" text="back" textFill="WHITE" />
       <Button layoutX="25.0" layoutY="542.0" mnemonicParsing="false" onAction="#ajouterunesalle" style="-fx-background-color: purple;" text="ajouter une salle" textFill="WHITE" />
       <Button layoutX="25.0" layoutY="581.0" mnemonicParsing="false" onAction="#ajoutersnack" prefHeight="25.0" prefWidth="104.0" style="-fx-background-color: red;" text="ajouter snack" textFill="WHITE" />
+      <Button layoutX="11.0" layoutY="410.0" mnemonicParsing="false" onAction="#affichsnacks" prefHeight="25.0" prefWidth="108.0" style="-fx-background-color: pink;" text="afficher snacks" textFill="WHITE" />
    </children>
 </AnchorPane>
