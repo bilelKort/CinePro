@@ -26,7 +26,7 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
                 mail.envoyer(film.getNom(), film.getTrailer(), projection.getDate_debut());
             }
 
-            String requete = "insert into projection (id_salle, id_film, date_debut, date_fin, nbr_places, diffuse) values (?, ?, str_to_date(?, '%d/%m/%Y-%H:%i'), str_to_date(?, '%d/%m/%Y-%H:%i'), ?, ?)";
+            String requete = "insert into projection (id_salle, id_film, date_debut, date_fin, nbr_places, diffuse) values (?, ?, str_to_date(?, '%Y-%m-%d %H:%i'), str_to_date(?, '%Y-%m-%d %H:%i'), ?, ?)";
             PreparedStatement preparedStatement = MyConnection.getInstance().getConnection().prepareStatement(requete);
             preparedStatement.setInt(1, projection.getId_salle());
             preparedStatement.setInt(2, projection.getId_film());
@@ -114,7 +114,7 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
     @Override
     public void updateProjection(Projection projection) {
         try {
-            String requete = "update projection set id_salle=?, date_debut=str_to_date(?, '%d/%m/%Y-%H:%i'), date_fin=str_to_date(?, '%d/%m/%Y-%H:%i'), id_film=?, nbr_places=?, diffuse=? where id_projection=?";
+            String requete = "update projection set id_salle=?, date_debut=str_to_date(?, '%Y-%m-%d %H:%i'), date_fin=str_to_date(?, '%Y-%m-%d %H:%i'), id_film=?, nbr_places=?, diffuse=? where id_projection=?";
             PreparedStatement preparedStatement = MyConnection.getInstance().getConnection().prepareStatement(requete);
             preparedStatement.setInt(1, projection.getId_salle());
             preparedStatement.setString(2, projection.getDate_debut());
@@ -154,7 +154,7 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
         List<LocalDateTime> debut = new ArrayList<>();
         List<LocalDateTime> fin = new ArrayList<>();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-        DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
+        DateTimeFormatter dateTimeFormatter1 = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         list.stream().forEach(projection1 -> {
             debut.add(LocalDateTime.parse(projection1.getDate_debut(), dateTimeFormatter));
             fin.add(LocalDateTime.parse(projection1.getDate_fin(), dateTimeFormatter));

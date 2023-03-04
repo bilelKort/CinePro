@@ -4,6 +4,8 @@ import cinepro.entities.Film;
 import cinepro.entities.Projection;
 import cinepro.services.FilmService;
 import cinepro.services.ProjectionService;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXTimePicker;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -22,10 +24,15 @@ import java.time.format.DateTimeFormatterBuilder;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AjoutProjectionController implements Initializable {
 
+    @FXML
+    private JFXDatePicker date;
+    @FXML
+    private JFXTimePicker time;
     @FXML
     private Label error;
     @FXML
@@ -42,22 +49,12 @@ public class AjoutProjectionController implements Initializable {
     private TextField salle_id;
 
     @FXML
-    private DatePicker date;
-
-    @FXML
-    private TextField hour;
-
-    @FXML
     private ComboBox<Film> dropFilm;
 
-    @FXML
-    private TextField min;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         checkint(salle_id);
-        checkint(hour);
-        checkint(min);
         dropFilm.setConverter(new StringConverter<Film>() {
             @Override
             public String toString(Film object) {
@@ -85,42 +82,29 @@ public class AjoutProjectionController implements Initializable {
         }));
     }
 
-    public boolean checkTime(TextField hour, TextField min) {
-        int h = Integer.valueOf(hour.getText());
-        int m = Integer.valueOf(min.getText());
-        if (h < 0 || h > 23 || m < 0 || m > 59) {
-            return false;
-        } else {
-            return true;
-        }
-    }
-
     public void ajoutProjection(ActionEvent actionEvent) {
         error.setText("");
-        if (salle_id.getText().isEmpty() || date.getEditor().getText().isEmpty() || hour.getText().isEmpty() || min.getText().isEmpty() || dropFilm.getValue()==null) {
+        if (salle_id.getText().isEmpty() || date.getValue() == null || time.getValue() == null || dropFilm.getValue()==null) {
             error.setText("Empty field !");
         }else {
-            if (!checkTime(hour, min)) {
-                error.setText("Wrong Time !");
-            } else {
-                if (hour.getText().length()==1)
-                    hour.setText("0"+hour.getText());
-                if (min.getText().length()==1)
-                    min.setText("0"+min.getText());
-                String debut_date_time = date.getEditor().getText() + "-" + hour.getText() + ":" + min.getText();
-                DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
-                LocalDateTime fin_date_time = LocalDateTime.parse(debut_date_time, dateTimeFormatter);
-                fin_date_time = fin_date_time.plus(Integer.valueOf(dropFilm.getValue().getDuree() / 60), ChronoUnit.HOURS);
-                fin_date_time = fin_date_time.plus(Integer.valueOf(dropFilm.getValue().getDuree()) % 60, ChronoUnit.MINUTES);
+            String debut_date_time = date.getValue() + " " + time.getValue();
+            DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime fin_date_time = LocalDateTime.parse(debut_date_time, dateTimeFormatter);
+            fin_date_time = fin_date_time.plus(Integer.valueOf(dropFilm.getValue().getDuree() / 60), ChronoUnit.HOURS);
+            fin_date_time = fin_date_time.plus(Integer.valueOf(dropFilm.getValue().getDuree()) % 60, ChronoUnit.MINUTES);
 
-                ProjectionService projectionService = new ProjectionService();
-                Projection projection = new Projection(Integer.valueOf(salle_id.getText()), dropFilm.getValue().getId_film(), debut_date_time, dateTimeFormatter.format(fin_date_time), 0, false);
-                if (projectionService.checkDate(projection)) {
-                    projectionService.addProjection(projection);
-                    listProjections(new ActionEvent());
-                }else {
-                    error.setText("Already projection in salle");
-                }
+            ProjectionService projectionService = new ProjectionService();
+            Projection projection = new Projection(Integer.valueOf(salle_id.getText()), dropFilm.getValue().getId_film(), debut_date_time, dateTimeFormatter.format(fin_date_time), 0, false);
+            if (projectionService.checkDate(projection)) {
+                projectionService.addProjection(projection);
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Ajout Projection");
+                alert.setHeaderText(null);
+                alert.setContentText("Projection ajoutée !");
+                Optional<ButtonType> option = alert.showAndWait();
+                listProjections(new ActionEvent());
+            }else {
+                error.setText("Already projection in salle");
             }
         }
     }

@@ -11,8 +11,8 @@ import javax.mail.internet.MimeMessage;
 
 public class Mail {
 
-    private String username = "selim.boulaaba@esprit.tn";
-    private String password = "fiiidryfibybvprp";
+    private String username = "Cinepro2023@gmail.com";
+    private String password = "utkwolmihagifeow";
 
     public void envoyer(String name, String trailer, String date) {
         Properties props = new Properties();

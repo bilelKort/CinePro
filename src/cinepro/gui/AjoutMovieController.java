@@ -12,10 +12,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.web.WebView;
@@ -33,6 +30,7 @@ import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class AjoutMovieController implements Initializable {
@@ -309,6 +307,11 @@ public class AjoutMovieController implements Initializable {
                     crewService.addCrew(director);
                 }
             }
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Ajout Film");
+            alert.setHeaderText(null);
+            alert.setContentText("Film ajoutée !");
+            Optional<ButtonType> option = alert.showAndWait();
             listMovies(new ActionEvent());
         } catch (Exception e) {
             System.out.println(e.getMessage());
