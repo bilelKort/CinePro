@@ -5,6 +5,8 @@
  */
 package cinepro.gui;
 
+import cinepro.services.barchart;
+import cinepro.services.chartPie;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -12,7 +14,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -33,7 +37,14 @@ public class MenuController implements Initializable {
     private Button crudsnack;
     @FXML
     private Button crudglobal;
+    @FXML
+    private Button btnpie;
+    @FXML
+    private Button btnbar;
+    @FXML
+    private PieChart pieChart;
 
+    
     /**
      * Initializes the controller class.
      */
@@ -124,4 +135,17 @@ public class MenuController implements Initializable {
         System.out.println(ex.getMessage());
     }
    }    
+    @FXML
+    public void DisplayChartPie() throws Exception{
+        chartPie chartpie = new chartPie();
+        Stage stage = new Stage();
+        chartpie.start(stage);
+        
+    }
+    @FXML
+    public void DisplayBarChart() throws Exception{
+        barchart barchart = new barchart();
+        Stage stage = new Stage();
+        barchart.start(stage);
+    }
 }

@@ -7,6 +7,7 @@ package cinepro.gui;
 
 import cinepro.entities.reservation;
 import cinepro.services.QRCodeGenerator;
+import cinepro.services.WeatherAPI;
 import cinepro.services.reservationCRUD;
 import cinepro.utils.cineproConnexion;
 import com.google.zxing.WriterException;
@@ -19,9 +20,14 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.Timestamp;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,9 +42,12 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * FXML Controller class
@@ -151,6 +160,66 @@ qrCodeCol.setCellFactory(new Callback<TableColumn<reservation, Void>, TableCell<
 // Add QR code column to the table
 tableview.getColumns().add(qrCodeCol);
 
+////////////////////////////////////////////////////////////////////////////////////**
+TableColumn<reservation, String> weatherIconCol = new TableColumn<>("Weather Icon");
+weatherIconCol.setCellValueFactory(cellData -> {
+    reservation reservation = cellData.getValue();
+    try {
+        LocalDate date = reservation.getStart_time().toLocalDateTime().toLocalDate();
+        String weatherData = WeatherAPI.getWeatherData("Tunisia", date);
+        JSONObject obj = new JSONObject(weatherData);
+        JSONArray weatherArray = obj.getJSONArray("weather");
+        JSONObject weather = weatherArray.getJSONObject(0);
+        String iconCode = weather.getString("icon");
+        URL iconUrl = new URL("https://openweathermap.org/img/w/" + iconCode + ".png");
+        return new SimpleStringProperty(iconUrl.toString());
+    } catch (Exception e) {
+        e.printStackTrace();
+        return new SimpleStringProperty("Error retrieving weather information");
+    }
+});
+
+weatherIconCol.setCellFactory(column -> new TableCell<reservation, String>() {
+    private final ImageView imageView = new ImageView();
+
+    @Override
+    protected void updateItem(String item, boolean empty) {
+        super.updateItem(item, empty);
+        if (empty || item == null) {
+            setGraphic(null);
+        } else {
+            Image icon = new Image(item);
+            imageView.setImage(icon);
+            setGraphic(imageView);
+        }
+    }
+});
+
+
+tableview.getColumns().add(weatherIconCol);
+
+///////////////////////////////////////////////////////
+
+TableColumn<reservation, String> weatherCol = new TableColumn<>("Weather");
+
+weatherCol.setCellValueFactory(cellData -> {
+    reservation reservation = cellData.getValue();
+    try {
+        Timestamp timestamp = reservation.getStart_time();
+        LocalDate date = reservation.getStart_time().toLocalDateTime().toLocalDate();
+        String weatherInfo = WeatherAPI.displayWeather(date, "Tunisia");
+        return new SimpleStringProperty(weatherInfo);
+    } catch (Exception e) {
+        e.printStackTrace();
+        return new SimpleStringProperty("Error retrieving weather information");
+    }
+});
+
+
+// Add weather column to the table
+tableview.getColumns().add(weatherCol);
+
+//////////////////////////////////////////////////////////////////////////////////////**
 
      Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>> cellFactory = new Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>>() {
             @Override

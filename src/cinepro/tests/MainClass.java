@@ -10,6 +10,7 @@ import cinepro.utils.cineproConnexion;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
 import java.net.URI;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
 import javafx.application.Application;
@@ -25,16 +26,13 @@ import javafx.stage.Stage;
  */
 public class MainClass {
     public static void main(String[] args) throws Exception {
-       /* String timeString = "2023-01-03 16:12:12";
-        Timestamp timestamp= Timestamp.valueOf(timeString);  
-
-        LocalDateTime dateTime = timestamp.toLocalDateTime();
-
-        String weatherData = WeatherAPI.getWeatherData("Tunisia", timestamp);
-        System.out.println(WeatherAPI.displayWeather(timestamp, "Tunisia"));*/
-       reservation r = new reservation(2,66,true);
+        String dateString = "2023-03-08";
+LocalDate date = LocalDate.parse(dateString);
+String weatherData = WeatherAPI.getWeatherData("Tunisia", date);
+System.out.println(WeatherAPI.displayWeather(date, "Tunisia"));
+       /*reservation r = new reservation(2,66,true);
        reservationCRUD res = new reservationCRUD();
-       res.addEntity(r);
+       res.addEntity(r);*/
        
     }
     /*public static void main(String[] args) {

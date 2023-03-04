@@ -18,5 +18,7 @@
       <Button id="dark" fx:id="crudglobal" layoutX="218.0" layoutY="220.0" mnemonicParsing="false" onAction="#showreservationCRUD" prefHeight="35.0" prefWidth="322.0" text="(Ajouter,Modifier,Supprimer) Reservation Global" />
       <Button id="dark" fx:id="crudplace" layoutX="218.0" layoutY="294.0" mnemonicParsing="false" onAction="#showreservationPlaceCRUD" prefHeight="35.0" prefWidth="322.0" text="(Ajouter,Modifier,Supprimer) Reservation Place" />
       <Button id="dark" fx:id="crudsnack" layoutX="218.0" layoutY="369.0" mnemonicParsing="false" onAction="#showreservationSnackCRUD" prefHeight="35.0" prefWidth="322.0" text="(Ajouter,Modifier,Supprimer) Reservation Snack" />
+      <Button fx:id="btnpie" layoutX="97.0" layoutY="446.0" mnemonicParsing="false" onAction="#DisplayChartPie" prefHeight="25.0" prefWidth="179.0" text="pieChart" />
+      <Button fx:id="btnbar" layoutX="385.0" layoutY="446.0" mnemonicParsing="false" onAction="#DisplayBarChart" prefHeight="25.0" prefWidth="186.0" text="BarChart" />
    </children>
 </AnchorPane>
