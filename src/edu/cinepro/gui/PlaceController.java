@@ -30,6 +30,8 @@ public class PlaceController implements Initializable {
     private static final int COLS =10;
     @FXML
     private Label msg;
+    @FXML
+    private Label lista;
 
     /**
      * Initializes the controller class.
@@ -78,8 +80,9 @@ public class PlaceController implements Initializable {
                         rectangle.setFill(Color.web("#7899b9"));
                         rectangle.setStroke(Color.BLACK);
                         pane.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-
                             msg.setText("impossible cette place est déja reservé");
+                            lista.setText(placereservees.toString()  );
+
                         });
                         break;
 
@@ -93,17 +96,24 @@ public class PlaceController implements Initializable {
                             rectangle.setStroke(Color.BLACK);
 
                              msg.setText("chaise cliquée : " + clickedRow + "," + clickedCol);
+lista.setText(placereservees.toString()  );
 
                             String b = clickedRow + "," + clickedCol;
                             if (placereservees.contains(b)) {
                                 placereservees.remove(b);
                                  msg.setText("annulation");
+                            System.out.println("annulation"+placereservees);
+                                Set<String> k =placereservees;
+
+lista.setText(placereservees.toString()  );
+
                                 rectangle.setFill(Color.WHITE);
                                 rectangle.setStroke(Color.BLACK);
 
                             } else {
                                 placereservees.add(b);
-                                System.out.println(placereservees);
+                                System.out.println("ajouut"+placereservees);
+                                lista.setText(placereservees.toString()  );
                             }
 
                         });

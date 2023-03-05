@@ -27,6 +27,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -43,122 +44,142 @@ public class AjoutsnackcsvController implements Initializable {
     @FXML
     private Button idbtn;
 
-      @FXML
+    @FXML
     private TableColumn<snack, String> nom;
     @FXML
     private TableColumn<snack, Float> prix;
     @FXML
     private TableColumn<snack, Integer> quantite;
-   @FXML
+    @FXML
     private TableColumn<snack, String> photo;
     @FXML
     private TableView<snack> snack;
     public ObservableList<snack> k = FXCollections.observableArrayList();
-     private List<snack> data1 = new ArrayList<>();
-     
-     private static final AjoutsnackcsvController instance = new AjoutsnackcsvController();
+    private List<snack> data1 = new ArrayList<>();
+    private String ereur = "";
+    @FXML
+    private Label veriff;
+    private static final AjoutsnackcsvController instance = new AjoutsnackcsvController();
     private int id1;
-  public int getId1() {
+boolean err=false;
+    public int getId1() {
         return id1;
     }
 
     public void setId1(int id1) {
         this.id1 = id1;
     }
-    
-      public static AjoutsnackcsvController getInstance() {
+
+    public static AjoutsnackcsvController getInstance() {
         return instance;
     }
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }    
+    }
 
     @FXML
     private void load(ActionEvent event) {
-         FileChooser fileChooser = new FileChooser();
+        FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Select CSV file");
-      
-            // Show FileChooser dialog
-    File selectedFile = fileChooser.showOpenDialog(idbtn.getScene().getWindow());
-           
-            if (selectedFile != null) {
-                // Load CSV data
-                List<String[]> data = loadDataFromCsv(selectedFile);
 
-                // Flatten data into a single list
-                List<String> flatData = new ArrayList<>();
-                for (String[] row : data) {
-                    
-                    
-                    flatData.addAll(Arrays.asList(row));
-                }
-                List<String[]> separatedTable = new ArrayList<>();
-        for (String row : flatData) {
-            String[] rowValues = row.split(";");
-            
-            separatedTable.add(rowValues);
-        }
-boolean firstLine = true;
+        // Show FileChooser dialog
+        File selectedFile = fileChooser.showOpenDialog(idbtn.getScene().getWindow());
 
-        // Affichage des éléments de la liste de tableaux
-        for (String[] row : separatedTable) {
-            
-            if (firstLine) {
-        firstLine = false;
-        continue; // skip first line
-    }
-            System.out.println("affich"+Arrays.toString(row));
-            String nom = row[0];
-    float prix = Float.parseFloat(row[1]);
-    int quantite = Integer.parseInt(row[2]);
-                String photo = row[3];
+        if (selectedFile != null) {
+            // Load CSV data
+            List<String[]> data = loadDataFromCsv(selectedFile);
 
-snack sc = new snack(nom, prix, quantite,photo,instance.id1)  ;
-        data1.add(sc);
-        
-        }
-                        
+            // Flatten data into a single list
+            List<String> flatData = new ArrayList<>();
+            for (String[] row : data) {
 
- for (snack i : data1) {
-            k.add(i);
-        }
-
-        this.affiche();        // Set ListView data
-              /*  ObservableList<String> observableData = FXCollections.observableArrayList(flatData);
-                listView.setItems(observableData);*/
+                flatData.addAll(Arrays.asList(row));
             }
-       
+            List<String[]> separatedTable = new ArrayList<>();
+            for (String row : flatData) {
+                String[] rowValues = row.split(";");
+
+                separatedTable.add(rowValues);
+            }
+            boolean firstLine = true;
+
+            // Affichage des éléments de la liste de tableaux
+            try {
+                for (String[] row : separatedTable) {
+
+                    if (firstLine) {
+                        firstLine = false;
+                        continue; // skip first line
+                    }
+                    System.out.println("affich" + Arrays.toString(row));
+                    if ((row[0].equals(""))|| (row[1].equals("")) || (row[2].equals("")) || (row[3].equals(""))
+                            
+                            ) {
+                        System.out.println("dddd");
+data1.clear();
+err=true;
+                        break;
+                    } else {
+                        String nom = row[0];
+                        float prix = Float.parseFloat(row[1]);
+                        int quantite = Integer.parseInt(row[2]);
+                        String photo = row[3];
+                        snack sc = new snack(nom, prix, quantite, photo, instance.id1);
+                        data1.add(sc);
+                        err=false;
+                    }
+                }
+
+            } catch (Exception e) {
+                data1.clear();
+err=true;
+            }
+            for (snack i : data1) {
+                k.add(i);
+            }
+            System.out.println(data1);
+            this.affiche();        // Set ListView data
+            /*  ObservableList<String> observableData = FXCollections.observableArrayList(flatData);
+                listView.setItems(observableData);*/
+        }
+
     }
-    
-    private void affiche (){
-    photo.setCellValueFactory(new PropertyValueFactory<snack, String>("photo"));
+
+    private void affiche() {
+        photo.setCellValueFactory(new PropertyValueFactory<snack, String>("photo"));
 
         nom.setCellValueFactory(new PropertyValueFactory<snack, String>("nom"));
         prix.setCellValueFactory(new PropertyValueFactory<snack, Float>("prix"));
         quantite.setCellValueFactory(new PropertyValueFactory<snack, Integer>("quantite"));
 
         snack.setItems(k);
+if(err){
+                            veriff.setText("verifier les champs du snack");
+
     
     
+}
+else {veriff.setText("");}
     }
-     private List<String[]> loadDataFromCsv(File file) {
+
+    private List<String[]> loadDataFromCsv(File file) {
         List<String[]> data = new ArrayList<>();
 
-        
-        try (CSVReader reader = new CSVReader(new FileReader(file))) {
+        try ( CSVReader reader = new CSVReader(new FileReader(file))) {
             String[] line;
             while ((line = reader.readNext()) != null) {
-                
+
                 data.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        
+
         return data;
     }
 
@@ -166,16 +187,16 @@ snack sc = new snack(nom, prix, quantite,photo,instance.id1)  ;
     private void save(ActionEvent event) {
         System.out.println(data1);
         SnackCRUD pc = new SnackCRUD();
-            
-        for(snack i :data1){
+
+        for (snack i : data1) {
             System.out.println(i);
-        pc.addEntity(i);
+            pc.addEntity(i);
         }
         affiche();
     }
 
     @FXML
-     private void back(ActionEvent event) {
+    private void back(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("annuler ?");
         alert.setHeaderText(null);
@@ -191,10 +212,9 @@ snack sc = new snack(nom, prix, quantite,photo,instance.id1)  ;
                 stage.setScene(scene);
                 stage.show();
             } catch (IOException ex) {
-                System.out.println(ex.getMessage());            }
+                System.out.println(ex.getMessage());
+            }
         }
     }
 
-
-    
 }

@@ -90,7 +90,7 @@ public class snack {
 
     @Override
     public String toString() {
-        return "snack{" + "id_snack=" + id_snack + ", nom=" + nom + ", prix=" + prix + ", quantite=" + quantite + ", photo=" + photo  + ", id_cinema=" + id_cinema + '}';
+        return  " nom=" + nom + ", prix=" + prix  ;
     }
     
     
