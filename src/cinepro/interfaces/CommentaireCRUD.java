@@ -15,5 +15,6 @@ public interface CommentaireCRUD<T>{
     public List<T> commentaireList();
     public void updateCommentaire(int id_feedback, String feedback,int id_user,int id_film,String date);
     public void deleteCommentaire(int id_feedback);
+     public int FeedbackCounter();
     
 }

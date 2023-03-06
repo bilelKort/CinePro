@@ -4,16 +4,37 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.GUI.FeedbackController">
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.GUI.FeedbackController">
    <children>
-      <Label layoutX="55.0" layoutY="225.0" text="Feedback" />
-      <TextField fx:id="feedback" layoutX="135.0" layoutY="211.0" prefHeight="46.0" prefWidth="149.0" />
-      <Button fx:id="btnajouter" layoutX="273.0" layoutY="346.0" mnemonicParsing="false" onAction="#ajouterfeedback" text="Ajouter" />
-      <Label layoutX="61.0" layoutY="79.0" text="id_user" />
-      <Label layoutX="55.0" layoutY="133.0" text="id_film" />
-      <TextField fx:id="id_user" layoutX="117.0" layoutY="75.0" />
-      <TextField fx:id="id_film" layoutX="106.0" layoutY="129.0" />
-      <Label fx:id="erreur" layoutX="482.0" layoutY="183.0" />
+      <Label layoutX="154.0" layoutY="294.0" text="Feedback" textFill="#e80a0a">
+         <font>
+            <Font name="System Bold Italic" size="26.0" />
+         </font></Label>
+      <TextField fx:id="feedback" layoutX="289.0" layoutY="272.0" prefHeight="82.0" prefWidth="169.0" />
+      <Button fx:id="btnajouter" layoutX="455.0" layoutY="402.0" mnemonicParsing="false" onAction="#ajouterfeedback" text="Ajouter" textFill="#a81010">
+         <font>
+            <Font name="Tahoma" size="22.0" />
+         </font></Button>
+      <Label layoutX="154.0" layoutY="124.0" text="id_user" textFill="#e40a0a">
+         <font>
+            <Font name="System Bold Italic" size="26.0" />
+         </font></Label>
+      <Label layoutX="155.0" layoutY="194.0" text="id_film" textFill="#e41010">
+         <font>
+            <Font name="System Bold Italic" size="26.0" />
+         </font></Label>
+      <TextField fx:id="id_user" layoutX="289.0" layoutY="130.0" />
+      <TextField fx:id="id_film" layoutX="289.0" layoutY="200.0" />
+      <Label fx:id="erreur" layoutX="482.0" layoutY="183.0" textFill="#1a2edb">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <Label layoutX="26.0" layoutY="14.0" text="Feedback!" textFill="#bf6565">
+         <font>
+            <Font name="System Italic" size="58.0" />
+         </font>
+      </Label>
    </children>
 </AnchorPane>

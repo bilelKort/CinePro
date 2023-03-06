@@ -7,12 +7,16 @@ package cinepro.services;
 import cinepro.entities.Feedback;
 import cinepro.interfaces.CommentaireCRUD;
 import cinepro.utils.MyConnection;
+import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -30,6 +34,8 @@ public class FeedbackCRUD implements CommentaireCRUD<Feedback> {
             st.setInt(3, t.getId_film());
             st.setString(4, t.getDate());
             
+          
+    
 
             st.executeUpdate();
             System.out.println("Feedback ajouté");
@@ -97,5 +103,48 @@ public class FeedbackCRUD implements CommentaireCRUD<Feedback> {
             System.out.println(ex.getMessage());
         }
     }
+    @Override
+   public int FeedbackCounter(){
+     
+   
+    // Liste des mots interdits
+   String[] badWords = {"racisme", "projection", "descrimination"};
+
     
+        // Compteur de feedbacks contenant un mot interdit
+        int badCount =0;
+
+        try {
+            // Récupération des feedbacks
+            Statement stmt = MyConnection.getInstance().getCnx().createStatement();
+            ResultSet rs = stmt.executeQuery("SELECT id_user, feedback FROM feedback");
+
+            // Parcours des feedbacks
+            while (rs.next()) {
+                String feedback = rs.getString("feedback");
+                // Vérification si le feedback contient un mot interdit
+                for (String badWord : badWords) {
+                    if (feedback.toLowerCase().contains(badWord)) {
+                        badCount++;
+                        break;
+                    }
+                }
+                // Vérification si le nombre de feedbacks contenant un mot interdit a atteint 3
+                if (badCount >= 2) {
+                    System.out.println("Vous avez atteint le nombre maximum de feedbacks contenant des mots interdits.");
+                    
+                    
+                }
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+            
+        }
+        return badCount;
+        
+    }
+
 }
+    
+    
+

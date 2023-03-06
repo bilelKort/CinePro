@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="cinepro.GUI.MenuReclamationController">
+   <children>
+      <Button fx:id="btnajouter" layoutX="70.0" layoutY="131.0" mnemonicParsing="false" onAction="#AjouterReclamation" text="Ajouter" />
+      <Button fx:id="btnsupprimer" layoutX="327.0" layoutY="131.0" mnemonicParsing="false" onAction="#supprimerReclamation" text="Supprimer" />
+      <Button fx:id="btnafficher" layoutX="463.0" layoutY="131.0" mnemonicParsing="false" onAction="#afficher" text="Afficher" />
+      <Button fx:id="btnModifier" layoutX="183.0" layoutY="131.0" mnemonicParsing="false" onAction="#ModifierReclamation" text="Modifier" />
+   </children>
+</AnchorPane>

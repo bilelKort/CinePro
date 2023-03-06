@@ -4,9 +4,8 @@
  */
 package cinepro.GUI;
 
-import cinepro.entities.Feedback;
-import cinepro.services.FeedbackCRUD;
-import cinepro.services.Mail;
+import cinepro.entities.Reclamation;
+import cinepro.services.ReclamationCRUD;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -18,6 +17,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -26,30 +26,31 @@ import javafx.scene.control.TextField;
  *
  * @author acer
  */
-public class ModifierController implements Initializable {
+public class UpdateReclamationController implements Initializable {
 
+    @FXML
+    private TextField id_reclamation;
     @FXML
     private TextField id_user;
     @FXML
-    private TextField feedback;
+    private TextField id_film;
+   
     @FXML
-    private Button btnmodifier;
+    private TextField description;
     @FXML
-    private Label user;
-
-    @FXML
-    private Label Feedback;
-    private Label Date;
-    @FXML
-    private Label id_feedback;
-    @FXML
-    private TextField id_f;
-    @FXML
-    private TextField idf;
-    @FXML
-    private TextField id_date;
+    private Button btnModifier;
     @FXML
     private Label erreur;
+    @FXML
+    private Label id_r;
+    @FXML
+    private Label desc;
+    @FXML
+    private Label user;
+    @FXML
+    private Label film;
+    @FXML
+    private CheckBox etat;
 
     /**
      * Initializes the controller class.
@@ -57,38 +58,22 @@ public class ModifierController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
-    }
+    }    
 
     @FXML
-    private void modifier(ActionEvent event) {
-        
-   FeedbackCRUD c =new FeedbackCRUD();
-
+    private void ModifierReclamation(ActionEvent event) {
         erreur.setText("");
-        if (feedback.getText().isEmpty()) {
-            erreur.setText("Entrez feedback!");
+        if (description.getText().isEmpty()) {
+            erreur.setText("Entrez description!");
         } else if (id_user.getText().isEmpty()) {
             erreur.setText("Entrez id_user!");
-        } else if (idf.getText().isEmpty()) {
+        } else if (id_film.getText().isEmpty()) {
             erreur.setText("Entrez id_film!");
-        } else if (id_f.getText().isEmpty()) {
-            erreur.setText("Entrez id_feedback!");
+        } else if (id_reclamation.getText().isEmpty()) {
+            erreur.setText("Entrez id_reclamation!");
         
 
-        } 
-         else if(c.FeedbackCounter()>=3){
-               
-           
-              System.out.println("Vous n'avez pas respecté les reglements");
-        
-            Mail nvmail=new Mail();
-            nvmail.envoyer();
-            
-           
-            }
-            else 
-            {
-            
+        } else {
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation de modification");
@@ -99,20 +84,29 @@ public class ModifierController implements Initializable {
             Optional<ButtonType> result = alert.showAndWait();
             // Si l'utilisateur a cliqué sur "Oui", effectuez l'opération de modification
             if (result.get() == ButtonType.YES) {
-                String Feedback = feedback.getText();
-                String id_feedback = id_f.getText();
+                String desc= description.getText();
+                String id_r = id_reclamation.getText();
                 String user
                         = id_user.getText();
-                String id_film
-                        = idf.getText();
-                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
+                String film
+                        = id_film.getText();
+               DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
                 LocalDateTime now = LocalDateTime.now();
-                String date = dtf.format(now);
-                Feedback f = new Feedback(Integer.parseInt(id_feedback), Feedback, Integer.parseInt(user), Integer.parseInt(id_film), date);
-                FeedbackCRUD pcd = new FeedbackCRUD();
-                pcd.updateCommentaire(Integer.parseInt(id_feedback), feedback.getText(), Integer.parseInt(user), Integer.parseInt(id_film), date);
+                String daate = dtf.format(now);
+                       
+              boolean etaat
+                        = etat.isSelected();
+                
+                Reclamation f = new Reclamation(Integer.parseInt(id_r), desc, Integer.parseInt(user), Integer.parseInt(film), daate,etaat);
+                System.out.println(f);
+                ReclamationCRUD rcd = new ReclamationCRUD();
+               
+                rcd.updateEntity(Integer.parseInt(id_r), desc, Integer.parseInt(user), Integer.parseInt(film), daate,etaat);
                 System.out.println(f);
             }
-        }
+        
+    
+    }
+    
     }
 }
