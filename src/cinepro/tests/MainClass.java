@@ -21,6 +21,9 @@ import javafx.stage.Stage;
 import com.stripe.Stripe; 
 import com.stripe.exception.StripeException; 
 import com.stripe.model.*; 
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 /**
  *
@@ -28,9 +31,16 @@ import com.stripe.model.*;
  */
 public class MainClass {
     public static void main(String[] args) throws Exception {
-         String text = "Hello,thank you for using cinepro application,."; // Text to be converted to speech
+          /*try {
+            Customer customer = StripeAPI.createCustomer("john.doe@example.com", "John Doe");
+        } catch (StripeException e) {
+            e.printStackTrace();
+        }*/
+          
+}
+        /* String text = "hello"; // Text to be converted to speech
 
-    TextToSpeech.speak(text);
+    TextToSpeech.speak(text);*/
       /*  String dateString = "2023-03-08";
 LocalDate date = LocalDate.parse(dateString);
 String weatherData = WeatherAPI.getWeatherData("Tunisia", date);

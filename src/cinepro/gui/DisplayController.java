@@ -7,10 +7,13 @@ package cinepro.gui;
 
 import cinepro.entities.reservation;
 import cinepro.services.QRCodeGenerator;
+import cinepro.services.ReservationDAO;
+import cinepro.services.StripeAPI;
 import cinepro.services.WeatherAPI;
 import cinepro.services.reservationCRUD;
 import cinepro.utils.cineproConnexion;
 import com.google.zxing.WriterException;
+import com.stripe.exception.StripeException;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -26,6 +29,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
@@ -102,6 +107,8 @@ public class DisplayController implements Initializable {
     col7.setCellValueFactory(new PropertyValueFactory<reservation, Timestamp>("end_time"));
         
     tableview.setItems(data);
+    
+    
 
     // Create new TableColumn for QR code
 TableColumn<reservation, Void> qrCodeCol = new TableColumn<>("QR Code");
@@ -159,7 +166,6 @@ qrCodeCol.setCellFactory(new Callback<TableColumn<reservation, Void>, TableCell<
 
 // Add QR code column to the table
 tableview.getColumns().add(qrCodeCol);
-
 ////////////////////////////////////////////////////////////////////////////////////**
 TableColumn<reservation, String> weatherIconCol = new TableColumn<>("Weather Icon");
 weatherIconCol.setCellValueFactory(cellData -> {
@@ -248,6 +254,70 @@ tableview.getColumns().add(weatherCol);
             }
         };
         delete.setCellFactory(cellFactory);
+        
+        
+        ////////////////////////////////////STRIPE///////////////////////////////////////////////////
+TableColumn<reservation, Void> paymentCol = new TableColumn<>("payment");
+
+Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>> payment = new Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>>() {
+    @Override
+    public TableCell<reservation, Void> call(TableColumn<reservation, Void> param) {
+        final TableCell<reservation, Void> cell = new TableCell<reservation, Void>() {
+            // Define the button that generates the QR code
+            private final Button btnstripe = new Button("Payer");
+            {
+                // Set action for the button
+                btnstripe.setOnAction((ActionEvent event) -> {
+                    // Retrieve reservation information from the table view
+                    reservation res = getTableView().getItems().get(getIndex());
+                    
+                    try {
+                      ReservationDAO reservationDAO = new ReservationDAO();
+                      ResultSet user = reservationDAO.getUser(res.getId_reservation());
+                      if (user.next()) {
+                      int userId = user.getInt("id_user");
+                      String name = user.getString("nom");
+                      String email = user.getString("email");
+                       // retrieve other user properties here
+                       System.out.println("User ID: " + userId);
+                       System.out.println("Name: " + name);
+                       System.out.println("Email: " + email);
+                       
+                          try {
+                              StripeAPI.createCustomerWithCard(email, name, "707070");
+                              StripeAPI.createCharge("tok_visa", (int)res.getPrix_final(), "usd", email);
+                          } catch (StripeException ex) {
+                              Logger.getLogger(DisplayController.class.getName()).log(Level.SEVERE, null, ex);
+                          }
+        // print other user properties here
+    } else {
+        System.out.println("No user found for reservation ID " + res.getId_reservation());
+    }
+} catch (SQLException e) {
+    e.printStackTrace();
+}   
+                });
+            }
+
+            @Override
+            public void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btnstripe);
+                }
+            }
+        };
+        return cell;
+    }
+};
+
+paymentCol.setCellFactory(payment);
+tableview.getColumns().add(paymentCol);
+
+        
+     ///////end init //////   
     }    
       // Define the TableView and TableColumn objects from the FXML file
     @FXML
@@ -295,5 +365,7 @@ tableview.getColumns().add(weatherCol);
         System.out.println(ex.getMessage());
     }
    }
+       
+       
 }
 

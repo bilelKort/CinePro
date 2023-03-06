@@ -5,9 +5,9 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane id="AnchorPane" prefHeight="669.0" prefWidth="1460.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.DisplayController">
+<AnchorPane id="AnchorPane" prefHeight="669.0" prefWidth="1659.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.DisplayController">
    <children>
-      <TableView fx:id="tableview" layoutX="-2.0" layoutY="46.0" prefHeight="619.0" prefWidth="1451.0">
+      <TableView fx:id="tableview" layoutX="-2.0" layoutY="46.0" prefHeight="619.0" prefWidth="1659.0">
         <columns>
           <TableColumn fx:id="col1" prefWidth="91.0" text="ID" />
           <TableColumn fx:id="col2" prefWidth="71.0" text="Prix Final" />

@@ -7,6 +7,7 @@ package cinepro.gui;
 
 import cinepro.entities.reservation;
 import cinepro.entities.reservation_place;
+import cinepro.services.TextToSpeech;
 import cinepro.services.reservationCRUD;
 import cinepro.services.reservation_placeCRUD;
 import java.io.IOException;
@@ -101,8 +102,10 @@ public class Reservation_placeController implements Initializable {
              reservation_place res = new reservation_place(seatNum, Prix, idRes);
              reservation_placeCRUD pcd = new reservation_placeCRUD();
              pcd.addEntity(res);
-             
-        if(!pcd.check1(res)){
+             String text = "your seat number is " + res.getCoordonnee() + "the price u need to pay is " + res.getPrix() + "this information related to the reservation number" + res.getId_res_place();
+             TextToSpeech.speak(text);
+
+             if(!pcd.check1(res)){
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Validate Form");
             alert.setHeaderText(null);
