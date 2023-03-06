@@ -36,39 +36,36 @@ public class StripeAPI {
         Stripe.apiKey = SECRET_KEY;
     }
     
- public static Customer createCustomerWithCard(String email, String name, String cardNumber, int expMonth, int expYear, String cvc) throws StripeException {
+public static String createCustomerWithCard(String email, String name, String cardNumber, int expMonth, int expYear, String cvc) throws StripeException {
     // Create card object
     Map<String, Object> cardParams = new HashMap<>();
     cardParams.put("number", cardNumber);
     cardParams.put("exp_month", expMonth);
     cardParams.put("exp_year", expYear);
     cardParams.put("cvc", cvc);
-    Card card = Card.create(cardParams);
 
-    // Create token object using the card
     Map<String, Object> tokenParams = new HashMap<>();
-    tokenParams.put("card", card.getId());
+    tokenParams.put("card", cardParams);
+
     Token token = Token.create(tokenParams);
 
-    // Create customer object using the token
     Map<String, Object> customerParams = new HashMap<>();
     customerParams.put("email", email);
     customerParams.put("name", name);
     customerParams.put("source", token.getId());
-    return Customer.create(customerParams);
+
+    Customer customer = Customer.create(customerParams);
+    return customer.getId();
 }
  
  
-       public static Charge createCharge(String token, int amount, String currency, String customerEmail) throws StripeException {
-        Customer customer = Customer.list(new HashMap<String, Object>() {{
-            put("email", customerEmail);
-        }}).getData().get(0);
+     public static void createCharge(String customerId, int amount, String currency, String email) throws StripeException {
+    Map<String, Object> chargeParams = new HashMap<>();
+    chargeParams.put("amount", amount);
+    chargeParams.put("currency", currency);
+    chargeParams.put("customer", customerId);
+    chargeParams.put("receipt_email", email);
 
-        Map<String, Object> chargeParams = new HashMap<>();
-        chargeParams.put("amount", amount);
-        chargeParams.put("currency", currency);
-        chargeParams.put("source", token);
-        chargeParams.put("customer", customer.getId());
-        return Charge.create(chargeParams);
-    }
+    Charge.create(chargeParams);
+}
 }

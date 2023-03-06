@@ -14,6 +14,7 @@ import cinepro.services.reservationCRUD;
 import cinepro.utils.cineproConnexion;
 import com.google.zxing.WriterException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Card;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
@@ -267,36 +268,39 @@ Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>> payment =
             private final Button btnstripe = new Button("Payer");
             {
                 // Set action for the button
-                btnstripe.setOnAction((ActionEvent event) -> {
-                    // Retrieve reservation information from the table view
-                    reservation res = getTableView().getItems().get(getIndex());
-                    
-                    try {
-                      ReservationDAO reservationDAO = new ReservationDAO();
-                      ResultSet user = reservationDAO.getUser(res.getId_reservation());
-                      if (user.next()) {
-                      int userId = user.getInt("id_user");
-                      String name = user.getString("nom");
-                      String email = user.getString("email");
-                       // retrieve other user properties here
-                       System.out.println("User ID: " + userId);
-                       System.out.println("Name: " + name);
-                       System.out.println("Email: " + email);
-                       
-                          try {
-                              StripeAPI.createCustomerWithCard(email, name, "707070");
-                              StripeAPI.createCharge("tok_visa", (int)res.getPrix_final(), "usd", email);
-                          } catch (StripeException ex) {
-                              Logger.getLogger(DisplayController.class.getName()).log(Level.SEVERE, null, ex);
-                          }
-        // print other user properties here
-    } else {
-        System.out.println("No user found for reservation ID " + res.getId_reservation());
-    }
-} catch (SQLException e) {
-    e.printStackTrace();
-}   
-                });
+            btnstripe.setOnAction((ActionEvent event) -> {
+    // Retrieve reservation information from the table view
+    reservation res = getTableView().getItems().get(getIndex());
+    
+    try {
+        ReservationDAO reservationDAO = new ReservationDAO();
+        ResultSet user = reservationDAO.getUser(res.getId_reservation());
+        if (user.next()) {
+            int userId = user.getInt("id_user");
+            String name = user.getString("nom");
+            String email = user.getString("email");
+            // retrieve other user properties here
+            System.out.println("User ID: " + userId);
+            System.out.println("Name: " + name);
+            System.out.println("Email: " + email);
+            
+            // Create a new card and associate it with the customer
+            String customerId = StripeAPI.createCustomerWithCard(email, name, "4242424242424242", 12, 2023, "123");
+            
+            // Charge the card
+            StripeAPI.createCharge(customerId, (int)res.getPrix_final(), "usd", email);
+            reservationCRUD rescrud = new reservationCRUD();
+            rescrud.updateEntityPrix(res.getId_reservation(), 0, userId);
+            // print other user properties here
+        } else {
+            System.out.println("No user found for reservation ID " + res.getId_reservation());
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }           catch (StripeException ex) {
+                    Logger.getLogger(DisplayController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+});
             }
 
             @Override
