@@ -9,56 +9,56 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="558.0" prefWidth="714.0" style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.IndexController">
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.IndexController">
    <children>
-      <ImageView fx:id="image3" fitHeight="558.0" fitWidth="714.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" />
-      <TabPane prefHeight="558.0" prefWidth="714.0" tabClosingPolicy="UNAVAILABLE">
+      <ImageView fx:id="image3" fitHeight="750.0" fitWidth="1400.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" />
+      <TabPane prefHeight="750.0" prefWidth="1400.0" tabClosingPolicy="UNAVAILABLE">
         <tabs>
           <Tab text="Profile">
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="475.0" prefWidth="600.0">
                      <children>
-                        <Label layoutX="172.0" layoutY="40.0" text="Welcome " textAlignment="CENTER" textFill="#d0cccc">
+                        <Label layoutX="555.0" layoutY="39.0" text="Welcome " textAlignment="CENTER" textFill="#d0cccc">
                            <font>
                               <Font name="System Bold" size="31.0" />
                            </font>
                         </Label>
-                        <TextField fx:id="affichagePseudo" disable="true" editable="false" layoutX="317.0" layoutY="51.0" style="-fx-background-color: #FFFFFF;">
+                        <TextField fx:id="affichagePseudo" disable="true" editable="false" layoutX="731.0" layoutY="47.0" style="-fx-background-color: #FFFFFF;">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></TextField>
-                        <Label layoutX="26.0" layoutY="104.0" text="Your infos:" textFill="#d0cccc">
+                        <Label layoutX="16.0" layoutY="209.0" text="Your infos:" textFill="#d0cccc">
                            <font>
                               <Font size="17.0" />
                            </font>
                         </Label>
-                        <Label layoutX="26.0" layoutY="149.0" text="First name: " textFill="#d0cccc" />
-                        <Label layoutX="26.0" layoutY="179.0" text="Last name: " textFill="#d0cccc" />
-                        <Label layoutX="26.0" layoutY="211.0" text="Email: " textFill="#d0cccc" />
-                        <Label layoutX="26.0" layoutY="242.0" text="Age: " textFill="#d0cccc" />
-                        <Label layoutX="23.0" layoutY="274.0" text="Number" textFill="#d0cccc" />
-                        <TextField fx:id="affichagePrenom" disable="true" editable="false" layoutX="113.0" layoutY="145.0">
+                        <Label layoutX="21.0" layoutY="268.0" text="First name: " textFill="#d0cccc" />
+                        <Label layoutX="24.0" layoutY="323.0" text="Last name:" textFill="#d0cccc" />
+                        <Label layoutX="25.0" layoutY="377.0" text="Email: " textFill="#d0cccc" />
+                        <Label layoutX="29.0" layoutY="424.0" text="Age: " textFill="#d0cccc" />
+                        <Label layoutX="21.0" layoutY="473.0" text="Number" textFill="#d0cccc" />
+                        <TextField fx:id="affichagePrenom" disable="true" editable="false" layoutX="113.0" layoutY="261.0">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></TextField>
-                        <TextField fx:id="affichageNom" disable="true" editable="false" layoutX="113.0" layoutY="175.0">
+                        <TextField fx:id="affichageNom" disable="true" editable="false" layoutX="113.0" layoutY="316.0">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></TextField>
-                        <TextField fx:id="affichageEmail" disable="true" editable="false" layoutX="113.0" layoutY="207.0">
+                        <TextField fx:id="affichageEmail" disable="true" editable="false" layoutX="113.0" layoutY="370.0">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></TextField>
-                        <TextField fx:id="affichageAge" disable="true" editable="false" layoutX="113.0" layoutY="238.0">
+                        <TextField fx:id="affichageAge" disable="true" editable="false" layoutX="113.0" layoutY="417.0">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></TextField>
-                        <TextField fx:id="affichageTel" disable="true" editable="false" layoutX="113.0" layoutY="270.0">
+                        <TextField fx:id="affichageTel" disable="true" editable="false" layoutX="113.0" layoutY="466.0">
                            <font>
                               <Font name="System Bold" size="15.0" />
                            </font></TextField>
-                        <Button fx:id="Logout" layoutX="534.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #E45652;" text="Logout" />
-                        <Button fx:id="modifier" layoutX="392.0" layoutY="175.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #E45652;" text="Modifier">
+                        <Button fx:id="Logout" layoutX="1312.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #E45652;" text="Logout" AnchorPane.rightAnchor="33.6" />
+                        <Button fx:id="modifier" layoutX="425.0" layoutY="367.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: #E45652;" text="Modifier">
                            <font>
                               <Font size="17.0" />
                            </font></Button>

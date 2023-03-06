@@ -19,11 +19,13 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -96,7 +98,7 @@ public class IndexController implements Initializable {
         System.out.println("Bonjour "+UserSession.getInstace().getNom()+" !");
         */
         
-        File file = new File("src/edu/cinepro/gui/images/image1.jpg");
+        File file = new File("src/edu/cinepro/gui/images/image5.jpg");
         String localURL = "";
         try {
             localURL = file.toURI().toURL().toString();
@@ -124,7 +126,11 @@ public class IndexController implements Initializable {
         
         try {
             Parent root = loader.load();
-            affichagePseudo.getScene().setRoot(root);
+            Stage myWindow = (Stage) affichagePseudo.getScene().getWindow();
+            Scene sc = new Scene(root);
+            myWindow.setScene(sc);
+            myWindow.setTitle("Sign In");
+            myWindow.show();
             
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

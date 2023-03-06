@@ -31,11 +31,12 @@ public class HomePage extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("SignIn.fxml"));
            // primaryStage .initStyle(StageStyle.UNDECORATED); ajouter 
-            Scene scene = new Scene(root,746,468);
+            Scene scene = new Scene(root);
             
-            primaryStage.setTitle("Hello World!");
+            primaryStage.setTitle("CINEPRO");
             primaryStage.setScene(scene);
             primaryStage.show();
+          
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }

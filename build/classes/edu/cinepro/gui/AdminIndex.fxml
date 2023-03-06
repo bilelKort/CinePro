@@ -5,21 +5,24 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.AdminIndexController">
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.AdminIndexController">
    <children>
-      <Label layoutX="150.0" layoutY="9.0" text="Welcome Admin Moeness" textFill="#d0cccc">
+      <ImageView fx:id="image5" fitHeight="752.0" fitWidth="1409.0" layoutX="7.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" AnchorPane.rightAnchor="0.599999999999909" />
+      <Label layoutX="547.0" layoutY="9.0" text="Welcome Admin Moeness" textFill="#d0cccc" AnchorPane.rightAnchor="557.5999999999998">
          <font>
             <Font name="System Bold" size="25.0" />
          </font>
       </Label>
-      <Button layoutX="589.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #E45652;" text="Logout" />
-      <TextField fx:id="affichageNom" layoutX="14.0" layoutY="58.0" prefHeight="26.0" prefWidth="74.0" promptText="Nom" />
-      <TableView fx:id="table_user" layoutX="37.0" layoutY="95.0" prefHeight="442.0" prefWidth="591.0" style="-fx-background-color: #9C2827;">
+      <Button layoutX="1317.0" layoutY="14.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: #E45652;" text="Logout" AnchorPane.rightAnchor="45.19999999999991" />
+      <TextField fx:id="searchNom" layoutX="860.0" layoutY="304.0" prefHeight="26.0" prefWidth="223.0" promptText="rechercher par nom" AnchorPane.rightAnchor="326.99999999999983" />
+      <TableView fx:id="table_user" layoutX="54.0" layoutY="161.0" prefHeight="442.0" prefWidth="673.0" style="-fx-background-color: #9C2827;" AnchorPane.rightAnchor="682.5999999999998">
          <columns>
             <TableColumn fx:id="id" prefWidth="36.999969482421875" text="id" />
+            <TableColumn fx:id="nom" prefWidth="75.0" text="Nom" />
             <TableColumn fx:id="pseudo" prefWidth="91.0" text="Pseudo" />
             <TableColumn fx:id="email" minWidth="0.0" prefWidth="127.0" text="email" />
             <TableColumn fx:id="role" prefWidth="82.0" text="role" />
@@ -27,6 +30,7 @@
             <TableColumn fx:id="tel" maxWidth="580.0" prefWidth="125.0" text="tel" />
          </columns>
       </TableView>
-      <Button fx:id="delete" layoutX="249.0" layoutY="59.0" mnemonicParsing="false" onAction="#deleteUser" style="-fx-background-color: #E45652;" text="Delete user" />
+      <Button fx:id="delete" layoutX="1007.0" layoutY="363.0" mnemonicParsing="false" onAction="#deleteUser" style="-fx-background-color: #E45652;" text="Delete user" />
+      <Button fx:id="search" layoutX="860.0" layoutY="363.0" mnemonicParsing="false" onAction="#searchUser" prefHeight="26.0" prefWidth="76.0" style="-fx-background-color: #E45652;" text="Search" AnchorPane.rightAnchor="474.1999999999998" />
    </children>
 </AnchorPane>

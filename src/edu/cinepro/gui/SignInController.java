@@ -7,10 +7,13 @@ package edu.cinepro.gui;
 
 import edu.cinepro.entities.Cinepro;
 import edu.cinepro.entities.UserSession;
+import edu.cinepro.entities.code;
 import edu.cinepro.services.CineproCRUD;
+import edu.cinepro.services.Mail;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -44,6 +47,8 @@ public class SignInController implements Initializable {
     private Hyperlink suLink;
     @FXML
     private ImageView image1;
+    @FXML
+    private Hyperlink mdpoublie;
 
     /**
      * Initializes the controller class.
@@ -138,6 +143,45 @@ public class SignInController implements Initializable {
         
         
         
+        
+    }
+
+    @FXML
+    private void mdpOublie(ActionEvent event) {
+        String resPseudo = pseudo.getText();
+        
+        CineproCRUD ccd = new CineproCRUD();
+        int id = ccd.getUserByPseudo(resPseudo);
+        UserSession.getInstace(id); 
+        
+        
+        String email = ccd.getEmailByPseudo(resPseudo);
+        
+        Mail mail = new Mail();
+        
+        Random random = new Random();
+        int num = random.nextInt(100000);
+        String formatted = String.format("%05d", num);
+        System.out.println(formatted);
+        
+        mail.envoyer(formatted,email);
+        
+        code.getInstace(formatted);
+        //code.getInstace().setCodeConfirmation(formatted);
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("MdpOublie.fxml"));
+                
+        try {
+            Parent root = loader.load();
+            Stage myWindow = (Stage) password.getScene().getWindow();
+            Scene sc = new Scene(root);
+            myWindow.setScene(sc);
+            myWindow.setTitle("Modifier mdp");
+            myWindow.show();
+                
+            } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+            }
         
     }
     

@@ -9,6 +9,7 @@ import edu.cinepro.entities.Cinepro;
 import edu.cinepro.entities.UserSession;
 import edu.cinepro.services.CineproCRUD;
 import edu.cinepro.utils.MyConnection;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.sql.PreparedStatement;
@@ -35,6 +36,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 
 /**
  * FXML Controller class
@@ -43,7 +46,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
  */
 public class AdminIndexController implements Initializable {
 
-    @FXML
     private TextField affichageNom;
     @FXML
     private TableView<Cinepro> table_user;
@@ -59,16 +61,37 @@ public class AdminIndexController implements Initializable {
     private TableColumn<Cinepro, String> dateN;
     @FXML
     private TableColumn<Cinepro, Integer> tel;
+    @FXML
+    private TableColumn<Cinepro, String> nom;
     
     private ObservableList<Cinepro> data;
     @FXML
     private Button delete;
+    @FXML
+    private TextField searchNom;
+    @FXML
+    private Button search;
+    @FXML
+    private ImageView image5;
+    
 
+    CineproCRUD ccd = new CineproCRUD();
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        File file = new File("src/edu/cinepro/gui/images/image5.jpg");
+        String localURL = "";
+        try {
+            localURL = file.toURI().toURL().toString();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+        image5.setImage(new Image(localURL));
+        
+        
         InitUser();
         show();
         
@@ -90,7 +113,7 @@ public class AdminIndexController implements Initializable {
         
         try {
             Parent root = loader.load();
-            affichageNom.getScene().setRoot(root);
+            delete.getScene().setRoot(root);
             
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -128,11 +151,44 @@ public class AdminIndexController implements Initializable {
         }
         
     }
+    
+    public void Search(String name) {
+        
+        data = FXCollections.observableArrayList();
+        
+        try {
+            String requete = "SELECT * FROM user WHERE nom like ?";
+            PreparedStatement preparedStatement = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            preparedStatement.setString(1, "%"+name+"%");
+            
+            ResultSet rs = preparedStatement.executeQuery();
+            while(rs.next()){
+            
+                Cinepro c =new Cinepro();
+                c.setId_user(rs.getInt(1));
+                c.setEmail(rs.getString("email"));
+                c.setPassword(rs.getString("password"));
+                c.setNom(rs.getString("nom"));
+                c.setPrenom(rs.getString("prenom"));
+                c.setDate_naissance(rs.getString("date_naissance"));
+                c.setPseudo(rs.getString("pseudo"));
+                c.setTel(rs.getInt("tel"));
+                c.setRole(rs.getString("role"));
+                c.setMontant(rs.getFloat("montant"));
+                
+                data.add(c);
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+    }
      
     public void show(){
     
      
-        
+        nom.setCellValueFactory(new PropertyValueFactory<Cinepro,String>("nom"));
         id.setCellValueFactory(new PropertyValueFactory<Cinepro,Integer>("id_user"));
         pseudo.setCellValueFactory(new PropertyValueFactory<Cinepro,String>("pseudo"));
         email.setCellValueFactory(new PropertyValueFactory<Cinepro,String>("email"));
@@ -169,6 +225,30 @@ public class AdminIndexController implements Initializable {
                     }
             }
         }
+    }
+
+    @FXML
+    private void searchUser(ActionEvent event) {
+        String nomRecherche = searchNom.getText();
+        
+        if (nomRecherche.equals("")) {
+        
+            
+            Alert alert = new Alert(Alert.AlertType.WARNING);
+            alert.setTitle("Warning");
+            alert.setHeaderText(null);
+            alert.setContentText("You have to enter a name!");
+            alert.showAndWait();
+            
+            InitUser();
+            show();
+            
+        } else {
+            Search(nomRecherche);
+            show();
+            
+        }
+        
     }
     
 }

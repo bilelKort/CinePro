@@ -142,6 +142,8 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
         return myList;
     }
     
+    
+    
     //Modification
     @Override
     public void updateEntity(int idU,String em,String passw,String n,String pr,String dateN,String psd,int num,String rl,float mt) {
@@ -208,6 +210,30 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
     } 
     
     @Override
+    public String getEmailByPseudo(String pseudo){
+    
+        String email = "";
+        try {
+            String requete = "SELECT email FROM user WHERE pseudo=?";
+            PreparedStatement preparedStatement = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            preparedStatement.setString(1, pseudo);
+            
+            ResultSet rs = preparedStatement.executeQuery();
+            while (rs.next()){
+            
+               email = rs.getString(1);
+            
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return email;
+        
+        
+    }
+    
+    @Override
     public Cinepro getUserById(int id){
     
         Cinepro c = new Cinepro();
@@ -240,6 +266,7 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
         return null;   
     }
     
+    @Override
     public void changeRole(int idU, String rl){
     
         try {
@@ -251,6 +278,24 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
             
             st.executeUpdate();
             System.out.println("Role Updated!");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+    
+    
+    @Override
+    public void changePass(String pseudo, String pass){
+    
+        try {
+            String requete="UPDATE user SET password=? where pseudo=?";
+            PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            
+            st.setString(1, pass);
+            st.setString(2, pseudo);
+            
+            st.executeUpdate();
+            System.out.println("Password Changed!");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
