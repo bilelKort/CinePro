@@ -3,6 +3,7 @@ package cinepro.gui;
 import cinepro.entities.Crew;
 import cinepro.entities.Film;
 import cinepro.entities.Projection;
+import cinepro.entities.TableProjection;
 import cinepro.services.CrewService;
 import cinepro.services.FilmService;
 import cinepro.services.ProjectionService;
@@ -67,19 +68,19 @@ public class MovieDetailsController implements Initializable {
     @FXML
     private Button deleteBtn;
     @FXML
-    private TableColumn<Projection, Integer> tableProjection;
+    private TableColumn<TableProjection, Integer> tableProjection;
 
     @FXML
-    private TableColumn<Projection, Integer> tableSalle;
+    private TableColumn<TableProjection, Integer> tableSalle;
 
     @FXML
-    private TableColumn<Projection, Integer> tableFilm;
+    private TableColumn<TableProjection, String> tableFilm;
 
     @FXML
-    private TableColumn<Projection, String> tableDebut;
+    private TableColumn<TableProjection, String> tableDebut;
 
     @FXML
-    private TableColumn<Projection, String> tableFin;
+    private TableColumn<TableProjection, String> tableFin;
     @FXML
     private Button listProjections;
     @FXML
@@ -95,7 +96,7 @@ public class MovieDetailsController implements Initializable {
     }
     private int id_film;
     private List<Projection> list;
-    public ObservableList<Projection> observableList = FXCollections.observableArrayList();
+    public ObservableList<TableProjection> observableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -124,13 +125,13 @@ public class MovieDetailsController implements Initializable {
         ProjectionService projectionService = new ProjectionService();
         list = projectionService.projectionListByFilm(instance.id_film);
         for (Projection projection : list) {
-            observableList.add(projection);
+            observableList.add(new TableProjection(projection));
         }
-        tableProjection.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("id_projection"));
-        tableSalle.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("id_salle"));
-        tableFilm.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("id_film"));
-        tableDebut.setCellValueFactory(new PropertyValueFactory<Projection, String>("date_debut"));
-        tableFin.setCellValueFactory(new PropertyValueFactory<Projection, String>("date_fin"));
+        tableProjection.setCellValueFactory(new PropertyValueFactory<TableProjection, Integer>("id_projection"));
+        tableSalle.setCellValueFactory(new PropertyValueFactory<TableProjection, Integer>("id_salle"));
+        tableFilm.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("film"));
+        tableDebut.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("date_debut"));
+        tableFin.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("date_fin"));
 
         table.setItems(observableList);
     }

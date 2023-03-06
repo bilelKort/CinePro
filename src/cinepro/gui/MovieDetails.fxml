@@ -89,15 +89,15 @@
                   </Label>
                   <Label fx:id="description" alignment="TOP_LEFT" layoutX="279.0" layoutY="353.0" prefHeight="227.0" prefWidth="500.0" />
                   <ImageView fx:id="poster" fitHeight="450.0" fitWidth="303.0" layoutX="923.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true" />
-                  <ScrollPane layoutX="242.0" layoutY="656.0" prefHeight="300.0" prefWidth="898.0">
+                  <ScrollPane layoutX="261.0" layoutY="658.0" prefHeight="300.0" prefWidth="859.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="879.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="840.0">
                            <children>
-                              <TableView fx:id="table" prefHeight="300.0" prefWidth="879.0">
+                              <TableView fx:id="table" prefHeight="300.0" prefWidth="840.0">
                                 <columns>
-                                  <TableColumn fx:id="tableProjection" prefWidth="153.0" style="-fx-alignment: center;" text="id_projection" />
-                                    <TableColumn fx:id="tableSalle" prefWidth="153.0" style="-fx-alignment: center;" text="id_salle" />
-                                    <TableColumn fx:id="tableFilm" prefWidth="153.0" style="-fx-alignment: center;" text="id_film" />
+                                  <TableColumn fx:id="tableProjection" prefWidth="120.0" style="-fx-alignment: center;" text="id_projection" />
+                                    <TableColumn fx:id="tableSalle" prefWidth="120.0" style="-fx-alignment: center;" text="id_salle" />
+                                    <TableColumn fx:id="tableFilm" prefWidth="180.0" style="-fx-alignment: center;" text="film" />
                                     <TableColumn fx:id="tableDebut" prefWidth="210.0" style="-fx-alignment: center;" text="date_debut" />
                                     <TableColumn fx:id="tableFin" prefWidth="210.0" style="-fx-alignment: center;" text="date_fin" />
                                 </columns>
@@ -106,7 +106,7 @@
                         </AnchorPane>
                     </content>
                   </ScrollPane>
-                  <WebView fx:id="trailer" layoutX="244.0" layoutY="1055.0" prefHeight="475.0" prefWidth="885.0" />
+                  <WebView fx:id="trailer" layoutX="248.0" layoutY="1055.0" prefHeight="475.0" prefWidth="885.0" />
                   <VBox fx:id="vBocActors" alignment="CENTER" layoutX="187.0" layoutY="1672.0" prefHeight="255.0" prefWidth="1000.0" />
                   <Label layoutX="121.0" layoutY="1607.0" text="Actors:">
                      <font>

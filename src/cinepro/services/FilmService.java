@@ -10,6 +10,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
 import java.util.List;
 
 public class FilmService implements FilmCRUD<Film> {
@@ -38,7 +40,7 @@ public class FilmService implements FilmCRUD<Film> {
     public List filmList() {
         ArrayList<Film> list = new ArrayList<Film>();
         try {
-            String requete = "select * from film";
+            String requete = "select * from film order by id_film desc";
             Statement statement = MyConnection.getInstance().getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(requete);
             while (resultSet.next()) {
@@ -61,17 +63,19 @@ public class FilmService implements FilmCRUD<Film> {
     }
 
     @Override
-    public List filmList(String name, String date) {
+    public List filmList(String name, String date, String genre) {
         ArrayList<Film> list = new ArrayList<Film>();
         try {
-            String requete = "select distinct(f.id_film), f.nom, f.poster from film f left join projection p on f.id_film = p.id_film where f.nom like ?";
+            String requete = "select distinct(f.id_film), f.nom, f.poster from film f left join projection p on f.id_film = p.id_film where f.nom like ? and categorie like ?";
             if (!date.isEmpty()) {
                 requete = requete + " and date(p.date_debut) = str_to_date(?, '%d/%m/%Y')";
             }
+            requete = requete + " order by id_film desc";
             PreparedStatement preparedStatement = MyConnection.getInstance().getConnection().prepareStatement(requete);
             preparedStatement.setString(1, "%"+name+"%");
+            preparedStatement.setString(2, "%"+genre+"%");
             if (!date.isEmpty()) {
-                preparedStatement.setString(2, date);
+                preparedStatement.setString(3, date);
             }
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
@@ -169,5 +173,25 @@ public class FilmService implements FilmCRUD<Film> {
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    @Override
+    public HashSet<String> genresList() {
+        HashSet<String> set = new HashSet<String>();
+        try {
+            String requete = "select categorie from film";
+            Statement statement = MyConnection.getInstance().getConnection().createStatement();
+            ResultSet resultSet = statement.executeQuery(requete);
+            while (resultSet.next()) {
+                String categorie = resultSet.getString(1);
+                List<String> list = Arrays.asList(categorie.split(","));
+                for(String l: list) {
+                    set.add(l.trim());
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return set;
     }
 }

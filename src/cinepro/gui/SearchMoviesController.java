@@ -24,11 +24,13 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
+import javafx.util.StringConverter;
 
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.HashSet;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -48,6 +50,8 @@ public class SearchMoviesController implements Initializable {
     private DatePicker date;
     @FXML
     private TextField search;
+    @FXML
+    private ComboBox<String> genre;
 
     private FilmService filmService = new FilmService();
     private List<Film> list;
@@ -55,6 +59,22 @@ public class SearchMoviesController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         list = filmService.filmList();
+        genre.setConverter(new StringConverter<String>() {
+            @Override
+            public String toString(String genres) {
+                return genres;
+            }
+
+            @Override
+            public String fromString(String string) {
+                return null;
+            }
+        });
+        FilmService filmService = new FilmService();
+        HashSet<String> categories = filmService.genresList();
+        for (String categorie: categories) {
+            genre.getItems().add(categorie);
+        }
         display(list);
         search.textProperty().addListener((observable, oldValue, newValue) -> {
             search(new ActionEvent());
@@ -62,10 +82,13 @@ public class SearchMoviesController implements Initializable {
         date.valueProperty().addListener((observable, oldValue, newValue) -> {
             search(new ActionEvent());
         });
+        genre.valueProperty().addListener((observable, oldValue, newValue) -> {
+            search(new ActionEvent());
+        });
     }
 
     public void search(ActionEvent actionEvent) {
-        list = filmService.filmList(search.getText(), date.getEditor().getText());
+        list = filmService.filmList(search.getText(), date.getEditor().getText(), genre.getValue());
         display(list);
     }
 
@@ -73,6 +96,7 @@ public class SearchMoviesController implements Initializable {
     public void searchDelete(ActionEvent actionEvent) {
         search.setText("");
         date.getEditor().setText("");
+        genre.setValue("Choose Genre");
         list = filmService.filmList();
         display(list);
     }

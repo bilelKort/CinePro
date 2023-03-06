@@ -1,6 +1,7 @@
 package cinepro.gui;
 
 import cinepro.entities.Projection;
+import cinepro.entities.TableProjection;
 import cinepro.services.FilmService;
 import cinepro.services.ProjectionService;
 import javafx.collections.FXCollections;
@@ -12,6 +13,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.AnchorPane;
 import javafx.util.Callback;
 
 import java.io.File;
@@ -23,7 +25,9 @@ import java.util.ResourceBundle;
 public class ListProjectionsController implements Initializable {
 
     @FXML
-    private TableView<Projection> tableProjection;
+    private AnchorPane anchor;
+    @FXML
+    private TableView<TableProjection> tableProjection;
     @FXML
     private Button ajoutprojection;
     @FXML
@@ -31,34 +35,34 @@ public class ListProjectionsController implements Initializable {
     @FXML
     private Button listMovies;
     @FXML
-    private TableColumn<Projection, Integer> id_projection;
+    private TableColumn<TableProjection, Integer> id_projection;
 
     @FXML
-    private TableColumn<Projection, Integer> id_salle;
+    private TableColumn<TableProjection, Integer> id_salle;
 
     @FXML
-    private TableColumn<Projection, Integer> id_film;
+    private TableColumn<TableProjection, String> id_film;
 
     @FXML
-    private TableColumn<Projection, Integer> nbr_places;
+    private TableColumn<TableProjection, Integer> nbr_places;
 
     @FXML
-    private TableColumn<Projection, String> debut;
+    private TableColumn<TableProjection, String> debut;
 
     @FXML
-    private TableColumn<Projection, String> fin;
+    private TableColumn<TableProjection, String> fin;
 
     @FXML
-    private TableColumn<Projection, String> diffuse;
+    private TableColumn<TableProjection, String> diffuse;
 
     @FXML
-    private TableColumn<Projection, Void> update;
+    private TableColumn<TableProjection, Void> update;
 
     @FXML
-    private TableColumn<Projection, Void> delete;
+    private TableColumn<TableProjection, Void> delete;
     private ProjectionService projectionService = new ProjectionService();
     private List<Projection> list;
-    public ObservableList<Projection> observableList = FXCollections.observableArrayList();
+    public ObservableList<TableProjection> observableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -66,22 +70,22 @@ public class ListProjectionsController implements Initializable {
         projectionService.updateDiffuse();
         list = projectionService.projectionList();
         for (Projection projection : list) {
-            observableList.add(projection);
+            observableList.add(new TableProjection(projection));
         }
-        id_projection.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("id_projection"));
-        id_salle.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("id_salle"));
-        id_film.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("id_film"));
-        nbr_places.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("nbr_places"));
-        debut.setCellValueFactory(new PropertyValueFactory<Projection, String>("date_debut"));
-        fin.setCellValueFactory(new PropertyValueFactory<Projection, String>("date_fin"));
-        diffuse.setCellValueFactory(new PropertyValueFactory<Projection, String>("diffuse"));
+        id_projection.setCellValueFactory(new PropertyValueFactory<TableProjection, Integer>("id_projection"));
+        id_salle.setCellValueFactory(new PropertyValueFactory<TableProjection, Integer>("id_salle"));
+        id_film.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("film"));
+        nbr_places.setCellValueFactory(new PropertyValueFactory<TableProjection, Integer>("nbr_places"));
+        debut.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("date_debut"));
+        fin.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("date_fin"));
+        diffuse.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("diffuse"));
 
         tableProjection.setItems(observableList);
 
-        Callback<TableColumn<Projection, Void>, TableCell<Projection, Void>> delete_btn = new Callback<TableColumn<Projection, Void>, TableCell<Projection, Void>>() {
+        Callback<TableColumn<TableProjection, Void>, TableCell<TableProjection, Void>> delete_btn = new Callback<TableColumn<TableProjection, Void>, TableCell<TableProjection, Void>>() {
             @Override
-            public TableCell<Projection, Void> call(final TableColumn<Projection, Void> param) {
-                final TableCell<Projection, Void> cell = new TableCell<Projection, Void>() {
+            public TableCell<TableProjection, Void> call(final TableColumn<TableProjection, Void> param) {
+                final TableCell<TableProjection, Void> cell = new TableCell<TableProjection, Void>() {
                     private final Button btn = new Button("Supprimer");
                     {
                         btn.setOnAction((ActionEvent event) -> {
@@ -104,10 +108,10 @@ public class ListProjectionsController implements Initializable {
         };
         delete.setCellFactory(delete_btn);
 
-        Callback<TableColumn<Projection, Void>, TableCell<Projection, Void>> update_btn = new Callback<TableColumn<Projection, Void>, TableCell<Projection, Void>>() {
+        Callback<TableColumn<TableProjection, Void>, TableCell<TableProjection, Void>> update_btn = new Callback<TableColumn<TableProjection, Void>, TableCell<TableProjection, Void>>() {
             @Override
-            public TableCell<Projection, Void> call(final TableColumn<Projection, Void> param) {
-                final TableCell<Projection, Void> cell = new TableCell<Projection, Void>() {
+            public TableCell<TableProjection, Void> call(final TableColumn<TableProjection, Void> param) {
+                final TableCell<TableProjection, Void> cell = new TableCell<TableProjection, Void>() {
                     private final Button btn = new Button("Update");
                     {
                         btn.setOnAction((ActionEvent event) -> {
