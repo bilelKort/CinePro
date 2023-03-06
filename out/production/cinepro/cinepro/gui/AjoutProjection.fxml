@@ -11,10 +11,22 @@
 
 <AnchorPane prefHeight="739.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.AjoutProjectionController">
     <children>
-        <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies" />
-        <Button fx:id="listMovies" layoutX="113.0" layoutY="14.0" mnemonicParsing="false" onAction="#listMovies" text="List Movies" />
-        <Button fx:id="ajoutprojection" layoutX="202.0" layoutY="14.0" mnemonicParsing="false" text="Ajout Projection" />
-        <Button fx:id="listProjections" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections" />
+        <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies">
+            <font>
+                <Font size="14.0" />
+            </font></Button>
+        <Button fx:id="listMovies" layoutX="121.0" layoutY="14.0" mnemonicParsing="false" onAction="#listMovies" text="List Movies">
+            <font>
+                <Font size="14.0" />
+            </font></Button>
+        <Button fx:id="ajoutprojection" layoutX="214.0" layoutY="14.0" mnemonicParsing="false" text="Ajout Projection">
+            <font>
+                <Font size="14.0" />
+            </font></Button>
+        <Button fx:id="listProjections" layoutX="338.0" layoutY="14.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections">
+            <font>
+                <Font size="14.0" />
+            </font></Button>
         <Label alignment="CENTER" layoutX="151.0" layoutY="169.0" prefHeight="27.0" prefWidth="86.0" text="Salle">
          <font>
             <Font size="18.0" />
@@ -41,11 +53,6 @@
          <font>
             <Font size="18.0" />
          </font></Button>
-      <Label fx:id="error" alignment="CENTER_RIGHT" layoutX="301.0" layoutY="525.0" prefHeight="27.0" prefWidth="427.0" textFill="RED">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <ComboBox fx:id="dropFilm" layoutX="253.0" layoutY="344.0" prefHeight="39.0" prefWidth="427.0" promptText="Choose Film" />
     </children>
 </AnchorPane>

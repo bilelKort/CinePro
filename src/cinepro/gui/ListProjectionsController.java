@@ -63,6 +63,7 @@ public class ListProjectionsController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         tableProjection.getItems().clear();
+        projectionService.updateDiffuse();
         list = projectionService.projectionList();
         for (Projection projection : list) {
             observableList.add(projection);
@@ -86,8 +87,6 @@ public class ListProjectionsController implements Initializable {
                         btn.setOnAction((ActionEvent event) -> {
                             int rowIndex = getTableRow().getIndex();
                             deleteProjection(id_projection.getCellObservableValue(rowIndex).getValue());
-
-
                         });
                     }
                     @Override

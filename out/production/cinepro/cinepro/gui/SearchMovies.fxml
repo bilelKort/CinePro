@@ -1,37 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="739.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.SearchMoviesController">
+<AnchorPane prefHeight="750.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.SearchMoviesController">
    <children>
-      <ScrollPane prefHeight="739.0" prefWidth="1350.0">
+      <ScrollPane prefHeight="750.0" prefWidth="1400.0">
         <content>
-          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="739.0" prefWidth="1350.0">
+          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1381.0">
                <children>
-                  <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies" />
-                  <Button fx:id="listMovies" layoutX="113.0" layoutY="14.0" mnemonicParsing="false" text="List Movies" />
-                  <BorderPane fx:id="border"  layoutX="48.0" layoutY="157.0" prefHeight="582.0" prefWidth="1256.0">
-                     <center>
-                        <VBox fx:id="vBox" prefHeight="600.0" prefWidth="1350.0" BorderPane.alignment="CENTER" />
-                     </center>
-                     <padding>
-                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
-                     </padding>
-                  </BorderPane>
-                  <TextField fx:id="search" alignment="CENTER" layoutX="113.0" layoutY="48.0" onKeyPressed="#search" prefHeight="51.0" prefWidth="1125.0" promptText="Search" AnchorPane.leftAnchor="113.0" AnchorPane.rightAnchor="112.0">
+                   <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies">
+                       <font>
+                           <Font size="14.0" />
+                       </font></Button>
+                   <Button fx:id="listMovies" layoutX="121.0" layoutY="14.0" mnemonicParsing="false" text="List Movies">
+                       <font>
+                           <Font size="14.0" />
+                       </font></Button>
+                   <Button fx:id="ajoutprojection" layoutX="214.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection">
+                       <font>
+                           <Font size="14.0" />
+                       </font></Button>
+                   <Button fx:id="listProjections" layoutX="338.0" layoutY="14.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections">
+                       <font>
+                           <Font size="14.0" />
+                       </font></Button>
+                  <TextField fx:id="search" alignment="CENTER" layoutX="84.0" layoutY="71.0" prefHeight="51.0" prefWidth="751.0" promptText="Search" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="546.0">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
-                  <Button fx:id="ajoutprojection" layoutX="202.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projections" />
-                   <Button fx:id="listProjections" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections" />
+                  <VBox fx:id="vBox" layoutX="100.0" layoutY="166.0" prefHeight="0" prefWidth="1350.0" />
+                  <DatePicker fx:id="date" layoutX="861.0" layoutY="71.0" onAction="#search" prefHeight="51.0" prefWidth="230.0" />
+                  <Button layoutX="1120.0" layoutY="71.0" mnemonicParsing="false" onAction="#searchDelete" prefHeight="51.0" text="Delete Search">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
         </content>

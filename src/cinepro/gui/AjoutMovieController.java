@@ -46,8 +46,6 @@ public class AjoutMovieController implements Initializable {
     @FXML
     private Label directors;
     @FXML
-    private Label error;
-    @FXML
     private TextField search;
     @FXML
     private Label name;
@@ -71,11 +69,10 @@ public class AjoutMovieController implements Initializable {
     }
 
     public void searchMovie(ActionEvent actionEvent) {
-        error.setText("");
         try {
             id_imdb = search.getText().split("/")[4];
         } catch (Exception e) {
-            error.setText("URL invalid");
+            alerting("Invalid", "URL invalid !");
             return;
         }
 
@@ -114,7 +111,6 @@ public class AjoutMovieController implements Initializable {
             }
             String youtubeTrailer = "https://www.youtube.com/embed/" + key_trailer;
             trailer.getEngine().load(youtubeTrailer);
-
 
             /////////////////////////////////////////////////////////////////////////////crew
             JSONArray actorsArray = crew_response.getJSONArray("cast");
@@ -167,7 +163,7 @@ public class AjoutMovieController implements Initializable {
                     responseContent.append(line);
                 }
                 reader.close();
-                error.setText("URL invalid");
+                alerting("Invalid", "URL invalid !");
             } else {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 while ((line = reader.readLine()) != null) {
@@ -202,7 +198,7 @@ public class AjoutMovieController implements Initializable {
                     responseContent.append(line);
                 }
                 reader.close();
-                error.setText("URL invalid");
+                alerting("Invalid", "URL invalid !");
             } else {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 while ((line = reader.readLine()) != null) {
@@ -237,7 +233,7 @@ public class AjoutMovieController implements Initializable {
                     responseContent.append(line);
                 }
                 reader.close();
-                error.setText("URL invalid");
+                alerting("Invalid", "URL invalid !");
             } else {
                 reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
                 while ((line = reader.readLine()) != null) {
@@ -255,10 +251,8 @@ public class AjoutMovieController implements Initializable {
     }
 
     public void ajouterFilm(ActionEvent actionEvent) {
-        error.setText("");
-
         if (name.getText().isEmpty()) {
-            error.setText("Film not detected");
+            alerting("Invalid", "Vous devez rechercher un film !");
             return;
         }
 
@@ -270,7 +264,7 @@ public class AjoutMovieController implements Initializable {
         try {
             filmService.addFilm(film);
         } catch (SQLException e) {
-            error.setText("URL invalid");
+            alerting("Invalid", "Film existe déjà !");
             return;
         }
         File file = new File(localURL);
@@ -307,15 +301,19 @@ public class AjoutMovieController implements Initializable {
                     crewService.addCrew(director);
                 }
             }
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
-            alert.setTitle("Ajout Film");
-            alert.setHeaderText(null);
-            alert.setContentText("Film ajoutée !");
-            Optional<ButtonType> option = alert.showAndWait();
+            alerting("Ajout Film", "Film ajoutée !");
             listMovies(new ActionEvent());
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void alerting(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        Optional<ButtonType> option = alert.showAndWait();
     }
 
     public void listMovies(ActionEvent actionEvent) {

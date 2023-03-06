@@ -14,4 +14,5 @@ public interface ProjectionCRUD<T> {
     public boolean checkDate(T t);
     public List projectionListBySalle(int id_salle);
     public Integer countFilms(int id_film);
+    public void updateDiffuse();
 }

@@ -10,6 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Date;
@@ -45,7 +46,7 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
     public List projectionList() {
         ArrayList<Projection> list = new ArrayList<Projection>();
         try {
-            String requete = "select * from projection";
+            String requete = "select * from projection order by diffuse, date_debut";
             Statement statement = MyConnection.getInstance().getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(requete);
             while (resultSet.next()) {
@@ -69,7 +70,7 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
     public List projectionListByFilm(int id_film) {
         ArrayList<Projection> list = new ArrayList<Projection>();
         try {
-            String requete = "select * from projection where id_film='" + id_film + "'";
+            String requete = "select * from projection where id_film='" + id_film + "' and date_debut > sysdate()";
             Statement statement = MyConnection.getInstance().getConnection().createStatement();
             ResultSet resultSet = statement.executeQuery(requete);
             while (resultSet.next()) {
@@ -209,4 +210,26 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
         }
         return n;
     }
+
+    @Override
+    public void updateDiffuse() {
+        List<Projection> list = projectionList();
+        for (Projection projection1 : list) {
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-d HH:mm:ss");
+            LocalDateTime diffuse = LocalDateTime.parse(projection1.getDate_debut(), formatter);
+            LocalDateTime now = LocalDateTime.now();
+            if ((diffuse.compareTo(now) < 0) && (!projection1.isDiffuse())) {
+                try {
+                    String requete = "update projection set diffuse=true where id_projection=?";
+                    PreparedStatement preparedStatement = MyConnection.getInstance().getConnection().prepareStatement(requete);
+                    preparedStatement.setInt(1, projection1.getId_projection());
+                    preparedStatement.executeUpdate();
+                    System.out.println("projection modifié");
+                } catch (SQLException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
+        }
+    }
+
 }

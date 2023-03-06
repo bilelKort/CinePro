@@ -2,9 +2,12 @@ package cinepro.gui;
 
 import cinepro.entities.Crew;
 import cinepro.entities.Film;
+import cinepro.entities.Projection;
 import cinepro.services.CrewService;
 import cinepro.services.FilmService;
 import cinepro.services.ProjectionService;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
@@ -31,6 +35,8 @@ import java.util.ResourceBundle;
 public class MovieDetailsController implements Initializable {
 
 
+    @FXML
+    private TableView table;
     @FXML
     private Label nom;
 
@@ -61,6 +67,20 @@ public class MovieDetailsController implements Initializable {
     @FXML
     private Button deleteBtn;
     @FXML
+    private TableColumn<Projection, Integer> tableProjection;
+
+    @FXML
+    private TableColumn<Projection, Integer> tableSalle;
+
+    @FXML
+    private TableColumn<Projection, Integer> tableFilm;
+
+    @FXML
+    private TableColumn<Projection, String> tableDebut;
+
+    @FXML
+    private TableColumn<Projection, String> tableFin;
+    @FXML
     private Button listProjections;
     @FXML
     private Button ajoutprojection;
@@ -74,6 +94,8 @@ public class MovieDetailsController implements Initializable {
         return instance;
     }
     private int id_film;
+    private List<Projection> list;
+    public ObservableList<Projection> observableList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -96,13 +118,21 @@ public class MovieDetailsController implements Initializable {
         poster.setImage(image);
         trailer.getEngine().load(film.getTrailer());
 
-
-
         displayCrew(vBoxDirector, "Director");
         displayCrew(vBocActors, "Actor");
 
         ProjectionService projectionService = new ProjectionService();
-        System.out.println(projectionService.projectionListByFilm(instance.id_film));
+        list = projectionService.projectionListByFilm(instance.id_film);
+        for (Projection projection : list) {
+            observableList.add(projection);
+        }
+        tableProjection.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("id_projection"));
+        tableSalle.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("id_salle"));
+        tableFilm.setCellValueFactory(new PropertyValueFactory<Projection, Integer>("id_film"));
+        tableDebut.setCellValueFactory(new PropertyValueFactory<Projection, String>("date_debut"));
+        tableFin.setCellValueFactory(new PropertyValueFactory<Projection, String>("date_fin"));
+
+        table.setItems(observableList);
     }
 
     public void displayCrew(VBox vBox, String job) {

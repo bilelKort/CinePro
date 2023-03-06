@@ -42,9 +42,6 @@ public class UpdateProjectionController implements Initializable {
     private Button updateBtn;
 
     @FXML
-    private Label error;
-
-    @FXML
     private ComboBox<Film> dropFilm;
     @FXML
     private TextField places;
@@ -110,7 +107,6 @@ public class UpdateProjectionController implements Initializable {
 
 
     public void updateProjection(ActionEvent actionEvent) {
-        error.setText("");
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Update Projection");
         alert.setHeaderText(null);
@@ -118,7 +114,7 @@ public class UpdateProjectionController implements Initializable {
         Optional<ButtonType> option = alert.showAndWait();
         if (option.isPresent() && option.get() == ButtonType.OK) {
             if (salle_id.getText().isEmpty() || date.getValue() == null || time.getValue() == null || dropFilm.getValue()==null || places.getText().isEmpty()) {
-                error.setText("Empty field !");
+                alerting("Invalid", "Champ vide !");
             }else {
                 String debut_date_time = date.getValue() + " " + time.getValue();
                 DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -132,10 +128,18 @@ public class UpdateProjectionController implements Initializable {
                     projectionService.updateProjection(p);
                     listProjections(new ActionEvent());
                 }else {
-                    error.setText("Already projection in salle");
+                    alerting("Invalid", "Projection est en cours pour cette salle !");
                 }
             }
         }
+    }
+
+    public void alerting(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        Optional<ButtonType> option = alert.showAndWait();
     }
 
     public void ajoutMovies(ActionEvent actionEvent) {

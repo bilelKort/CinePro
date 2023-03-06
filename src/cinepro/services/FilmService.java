@@ -61,24 +61,24 @@ public class FilmService implements FilmCRUD<Film> {
     }
 
     @Override
-    public List filmList(String name) {
+    public List filmList(String name, String date) {
         ArrayList<Film> list = new ArrayList<Film>();
         try {
-            String requete = "select * from film where nom like ?";
+            String requete = "select distinct(f.id_film), f.nom, f.poster from film f left join projection p on f.id_film = p.id_film where f.nom like ?";
+            if (!date.isEmpty()) {
+                requete = requete + " and date(p.date_debut) = str_to_date(?, '%d/%m/%Y')";
+            }
             PreparedStatement preparedStatement = MyConnection.getInstance().getConnection().prepareStatement(requete);
             preparedStatement.setString(1, "%"+name+"%");
+            if (!date.isEmpty()) {
+                preparedStatement.setString(2, date);
+            }
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()) {
                 Film film = new Film();
                 film.setId_film(resultSet.getInt(1));
                 film.setNom(resultSet.getString(2));
-                film.setCategorie(resultSet.getString(3));
-                film.setDescription(resultSet.getString(4));
-                film.setDuree(resultSet.getInt(5));
-                film.setPoster(resultSet.getString(6));
-                film.setTrailer(resultSet.getString(7));
-                film.setReleaseDate(resultSet.getString(8));
-                film.setId_imdb(resultSet.getString(9));
+                film.setPoster(resultSet.getString(3));
                 list.add(film);
             }
         } catch (SQLException e) {

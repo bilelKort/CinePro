@@ -34,8 +34,6 @@ public class AjoutProjectionController implements Initializable {
     @FXML
     private JFXTimePicker time;
     @FXML
-    private Label error;
-    @FXML
     private Button listProjections;
     @FXML
     private Button ajoutMovies;
@@ -55,6 +53,14 @@ public class AjoutProjectionController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         checkint(salle_id);
+        date.setDayCellFactory(picker -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate date, boolean empty) {
+                super.updateItem(date, empty);
+                setDisable(date.isBefore(LocalDate.now()));
+            }
+        });
+
         dropFilm.setConverter(new StringConverter<Film>() {
             @Override
             public String toString(Film object) {
@@ -83,9 +89,8 @@ public class AjoutProjectionController implements Initializable {
     }
 
     public void ajoutProjection(ActionEvent actionEvent) {
-        error.setText("");
         if (salle_id.getText().isEmpty() || date.getValue() == null || time.getValue() == null || dropFilm.getValue()==null) {
-            error.setText("Empty field !");
+            alerting("Invalid", "Champ vide !");
         }else {
             String debut_date_time = date.getValue() + " " + time.getValue();
             DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
@@ -104,9 +109,17 @@ public class AjoutProjectionController implements Initializable {
                 Optional<ButtonType> option = alert.showAndWait();
                 listProjections(new ActionEvent());
             }else {
-                error.setText("Already projection in salle");
+                alerting("Invalid", "Projection est en cours pour cette salle !");
             }
         }
+    }
+
+    public void alerting(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(content);
+        Optional<ButtonType> option = alert.showAndWait();
     }
 
     public void ajoutMovies(ActionEvent actionEvent) {

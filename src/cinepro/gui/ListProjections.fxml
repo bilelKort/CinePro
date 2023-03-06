@@ -5,31 +5,50 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="739.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.ListProjectionsController">
+<AnchorPane prefHeight="750.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.ListProjectionsController">
    <children>
-      <ScrollPane prefHeight="739.0" prefWidth="1350.0">
-      <content>
-          <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="739.0" prefWidth="1350.0">
-            <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies" />
-            <Button fx:id="listMovies" layoutX="113.0" layoutY="14.0" mnemonicParsing="false" onAction="#listMovies" text="List Movies" />
-            <Button fx:id="ajoutprojection" layoutX="202.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection" />
-            <Button fx:id="listProjections" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" text="List Projections" />
-               <TableView fx:id="tableProjection" layoutX="101.0" layoutY="88.0" prefHeight="600.0" prefWidth="1122.0">
-                 <columns>
-                   <TableColumn fx:id="id_projection" minWidth="20.0" prefWidth="100.0" style="-fx-alignment: center;" text="id_projection" />
-                   <TableColumn fx:id="id_salle" prefWidth="100.0" style="-fx-alignment: center;" text="id_salle" />
-                     <TableColumn fx:id="id_film" prefWidth="100.0" style="-fx-alignment: center;" text="id_film" />
-                     <TableColumn fx:id="nbr_places" prefWidth="100.0" style="-fx-alignment: center;" text="nbr_places" />
-                     <TableColumn fx:id="debut" prefWidth="160.0" style="-fx-alignment: center;" text="date_debut" />
-                     <TableColumn fx:id="fin" prefWidth="160.0" style="-fx-alignment: center;" text="date_fin" />
-                     <TableColumn fx:id="diffuse" prefWidth="160.0" style="-fx-alignment: center;" text="diffuse" />
-                     <TableColumn fx:id="update" prefWidth="120.0" style="-fx-alignment: center;" text="Modifier" />
-                     <TableColumn fx:id="delete" prefWidth="120.0" style="-fx-alignment: center;" text="Supprimer" />
-                 </columns>
-               </TableView>
-        </AnchorPane>
-        </content>
+      <Button fx:id="ajoutMovies" layoutX="25.0" layoutY="24.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="listMovies" layoutX="131.0" layoutY="24.0" mnemonicParsing="false" onAction="#listMovies" text="List Movies">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="ajoutprojection" layoutX="224.0" layoutY="24.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <Button fx:id="listProjections" layoutX="348.0" layoutY="24.0" mnemonicParsing="false" text="List Projections">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Button>
+      <ScrollPane layoutX="139.0" layoutY="97.0" prefHeight="600.0" prefWidth="1137.0">
+         <content>
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1118.0">
+               <children>
+                  <TableView fx:id="tableProjection" prefHeight="600.0" prefWidth="1118.0">
+                     <columns>
+                        <TableColumn fx:id="id_projection" minWidth="20.0" prefWidth="110.0" style="-fx-alignment: center;" text="id_projection" />
+                        <TableColumn fx:id="id_salle" prefWidth="100.0" style="-fx-alignment: center;" text="id_salle" />
+                        <TableColumn fx:id="id_film" prefWidth="100.0" style="-fx-alignment: center;" text="id_film" />
+                        <TableColumn fx:id="nbr_places" prefWidth="112.0" style="-fx-alignment: center;" text="nbr_places" />
+                        <TableColumn fx:id="debut" prefWidth="180.0" style="-fx-alignment: center;" text="date_debut" />
+                        <TableColumn fx:id="fin" prefWidth="180.0" style="-fx-alignment: center;" text="date_fin" />
+                        <TableColumn fx:id="diffuse" prefWidth="92.0" style="-fx-alignment: center;" text="diffuse" />
+                        <TableColumn fx:id="update" prefWidth="120.0" style="-fx-alignment: center;" text="Modifier" />
+                        <TableColumn fx:id="delete" prefWidth="120.0" style="-fx-alignment: center;" text="Supprimer" />
+                     </columns>
+                  </TableView>
+               </children>
+            </AnchorPane>
+         </content>
       </ScrollPane>
    </children>
 </AnchorPane>

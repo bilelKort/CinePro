@@ -76,11 +76,6 @@
             <Font size="18.0" />
          </font></Label>
       <HBox layoutX="401.0" layoutY="192.0" />
-      <Label fx:id="error" alignment="CENTER_RIGHT" layoutX="1166.0" layoutY="118.0" prefHeight="27.0" prefWidth="159.0" textFill="RED" AnchorPane.rightAnchor="34.0">
-         <font>
-            <Font size="18.0" />
-         </font>
-      </Label>
       <ImageView fx:id="poster" fitHeight="450.0" fitWidth="303.0" layoutX="393.0" layoutY="193.0" pickOnBounds="true" preserveRatio="true" />
       <WebView fx:id="trailer" layoutX="706.0" layoutY="248.0" prefHeight="341.0" prefWidth="623.0" AnchorPane.rightAnchor="21.0" />
       <Button fx:id="ajoutBtn" layoutX="1170.0" layoutY="653.0" mnemonicParsing="false" onAction="#ajouterFilm" text="Ajouter Film" AnchorPane.rightAnchor="44.0">
@@ -108,10 +103,22 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" text="Ajout Movies" />
-      <Button fx:id="listMovies" layoutX="113.0" layoutY="14.0" mnemonicParsing="false" onAction="#listMovies" text="List Movies" />
-      <Button fx:id="ajoutprojection" layoutX="202.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection" />
-      <Button fx:id="listProjections" layoutX="320.0" layoutY="14.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections" />
+      <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" text="Ajout Movies">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="listMovies" layoutX="121.0" layoutY="14.0" mnemonicParsing="false" onAction="#listMovies" text="List Movies">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="ajoutprojection" layoutX="214.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
+      <Button fx:id="listProjections" layoutX="338.0" layoutY="14.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections">
+         <font>
+            <Font size="14.0" />
+         </font></Button>
 
    </children>
 </AnchorPane>

@@ -10,10 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.InputMethodEvent;
@@ -48,6 +45,8 @@ public class SearchMoviesController implements Initializable {
     @FXML
     private VBox vBox;
     @FXML
+    private DatePicker date;
+    @FXML
     private TextField search;
 
     private FilmService filmService = new FilmService();
@@ -57,28 +56,39 @@ public class SearchMoviesController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         list = filmService.filmList();
         display(list);
+        search.textProperty().addListener((observable, oldValue, newValue) -> {
+            search(new ActionEvent());
+        });
+        date.valueProperty().addListener((observable, oldValue, newValue) -> {
+            search(new ActionEvent());
+        });
     }
 
-    public void search(KeyEvent keyEvent) {
-        if (search.getText().equals("")) {
-            list = filmService.filmList();
-        } else {
-            list = filmService.filmList(search.getText());
-        }
+    public void search(ActionEvent actionEvent) {
+        list = filmService.filmList(search.getText(), date.getEditor().getText());
+        display(list);
+    }
+
+
+    public void searchDelete(ActionEvent actionEvent) {
+        search.setText("");
+        date.getEditor().setText("");
+        list = filmService.filmList();
         display(list);
     }
 
     public void display (List<Film> list) {
         vBox.getChildren().clear();
+        vBox.setSpacing(20);
+        anchor.setPrefHeight(310);
         int i=0;
         HBox hBox = new HBox();
         for (int j=0; j<list.size(); j++) {
-            if (i==5) {
+            if ((i % 5 == 0) && (i != 0)) {
                 i=0;
-                vBox.setSpacing(20);
                 vBox.getChildren().add(hBox);
                 hBox = new HBox();
-                anchor.setPrefHeight(anchor.getPrefHeight()+200);
+                anchor.setPrefHeight(anchor.getPrefHeight()+310);
             }
             ImageView imageView = new ImageView();
             File file = new File(list.get(j).getPoster());
@@ -106,7 +116,7 @@ public class SearchMoviesController implements Initializable {
             poster_name.setSpacing(10);
             poster_name.getChildren().addAll(imageView, label);
 
-            hBox.setSpacing(20);
+            hBox.setSpacing(40);
             hBox.getChildren().add(poster_name);
             i++;
 
@@ -119,6 +129,7 @@ public class SearchMoviesController implements Initializable {
             });
         }
         vBox.getChildren().add(hBox);
+        anchor.setPrefHeight(anchor.getPrefHeight()+310);
     }
 
     public void movieDetail(ActionEvent actionEvent, int id) {
