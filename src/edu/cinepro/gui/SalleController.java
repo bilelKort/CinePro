@@ -64,53 +64,7 @@ public class SalleController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("test" + instance.id);
-        SalleCRUD s = new SalleCRUD();
-        salle actuel = s.entitiesList3(instance.id).get(0);
-        nom.setText(actuel.getNom());
-        largeurid.setText(Integer.toString(actuel.getLongueur()));
-
-        placeid.setHgap(10);
-        placeid.setVgap(10);
-        
-        if (actuel.isAcces() == false) {
-            etatid.setText("la salle n'est pas disponible");
-            for (int row = 0; row < actuel.getLongueur(); row++) {
-                for (int col = 0; col < actuel.getLargeur(); col++) {
-
-                    Pane pane = new Pane();
-                    Rectangle rectangle = new Rectangle(20, 20);
-                    rectangle.setFill(Color.RED);
-                    rectangle.setStroke(Color.BLACK);
-
-                    pane.getChildren().add(rectangle);
-
-                    placeid.add(pane, col, row);
-                }
-
-            }
-
-        } else {
-            etatid.setText("la salle est disponible");
-            for (int row = 0; row < actuel.getLongueur(); row++) {
-                for (int col = 0; col < actuel.getLargeur(); col++) {
-
-                    Pane pane = new Pane();
-                    Rectangle rectangle = new Rectangle(30, 30);
-                    rectangle.setFill(Color.WHEAT);
-                    rectangle.setStroke(Color.BLACK);
-
-                    pane.getChildren().add(rectangle);
-
-                    placeid.add(pane, col, row);
-                }
-
-            }
-
-        }
-
-        longeurid.setText(Integer.toString(actuel.getLargeur()));
-
+Affiche();
     }
 
     @FXML
@@ -153,21 +107,9 @@ public class SalleController implements Initializable {
             alert.setContentText("updated");
             alert.showAndWait();
 
-            try {
+            
 
-                System.out.println("ok !");
-                Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-
-        } 
-        
-        else {
+        } else {
             s.updateEntity(instance.id, Boolean.TRUE);
 
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -176,19 +118,59 @@ public class SalleController implements Initializable {
             alert.setContentText("updated ");
             alert.showAndWait();
 
-            try {
-
-                System.out.println("ok !");
-                Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
+           
         }
+           initialize(new FXMLLoader().getLocation(), new FXMLLoader().getResources());
 
     }
 
+    public void Affiche() {
+        System.out.println("test" + instance.id);
+        SalleCRUD s = new SalleCRUD();
+        salle actuel = s.entitiesList3(instance.id).get(0);
+        nom.setText(actuel.getNom());
+        largeurid.setText(Integer.toString(actuel.getLongueur()));
+
+        placeid.setHgap(10);
+        placeid.setVgap(10);
+
+        if (actuel.isAcces() == false) {
+            etatid.setText("la salle n'est pas disponible");
+            for (int row = 0; row < actuel.getLongueur(); row++) {
+                for (int col = 0; col < actuel.getLargeur(); col++) {
+
+                    Pane pane = new Pane();
+                    Rectangle rectangle = new Rectangle(30, 30);
+                    rectangle.setFill(Color.RED);
+                    rectangle.setStroke(Color.BLACK);
+
+                    pane.getChildren().add(rectangle);
+
+                    placeid.add(pane, col, row);
+                }
+
+            }
+
+        } else {
+            etatid.setText("la salle est disponible");
+            for (int row = 0; row < actuel.getLongueur(); row++) {
+                for (int col = 0; col < actuel.getLargeur(); col++) {
+
+                    Pane pane = new Pane();
+                    Rectangle rectangle = new Rectangle(30, 30);
+                    rectangle.setFill(Color.WHEAT);
+                    rectangle.setStroke(Color.BLACK);
+
+                    pane.getChildren().add(rectangle);
+
+                    placeid.add(pane, col, row);
+                }
+
+            }
+
+        }
+
+        longeurid.setText(Integer.toString(actuel.getLargeur()));
+
+    }
 }

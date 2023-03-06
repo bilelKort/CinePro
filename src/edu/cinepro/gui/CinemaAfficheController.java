@@ -65,6 +65,8 @@ public class CinemaAfficheController implements Initializable {
     private TableColumn edit;
     @FXML
     private TableColumn supprimer;
+    @FXML
+    private TableColumn update;
     
     
 
@@ -90,7 +92,7 @@ public class CinemaAfficheController implements Initializable {
         tableview.setItems(k);
         tableview.getSelectionModel().select(2);
 
-        Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> cellFactory
+        Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> seemore
                 = new Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>>() {
             @Override
             public TableCell<cinema, Void> call(final TableColumn<cinema, Void> param) {
@@ -116,15 +118,15 @@ public class CinemaAfficheController implements Initializable {
                             try {
                                 Parent root = loader.load();
 
-           ViewmorecinemaController dc = loader.getController();
+         //  ViewmorecinemaController dc = loader.getController();
 
                                 String id = Integer.toString(idCinemaValue);
-                                dc.setId(id);
+                       //         dc.setId(id);
                                 cinema liste = cd.cinemabyid(idCinemaValue);
-                                dc.setMap(liste.getLocalisation());
+                       //         dc.setMap(liste.getLocalisation());
 
-                                dc.setNom(liste.getNom());
-                                dc.setImage(liste.getPhoto());
+                          //      dc.setNom(liste.getNom());
+                         //       dc.setImage(liste.getPhoto());
                                 System.out.println(liste);
                                 btn.getScene().setRoot(root);
 
@@ -151,9 +153,9 @@ public class CinemaAfficheController implements Initializable {
             }
         };
 
-        edit.setCellFactory(cellFactory);
+        edit.setCellFactory(seemore);
 
-        Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> cellFactory2
+        Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> delete
                 = new Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>>() {
             @Override
             public TableCell<cinema, Void> call(final TableColumn<cinema, Void> param) {
@@ -227,7 +229,64 @@ public class CinemaAfficheController implements Initializable {
             }
         };
 
-        supprimer.setCellFactory(cellFactory2);
+        supprimer.setCellFactory(delete);
+
+        
+        Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> update
+                = new Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>>() {
+            @Override
+            public TableCell<cinema, Void> call(final TableColumn<cinema, Void> param) {
+                final TableCell<cinema, Void> cell = new TableCell<cinema, Void>() {
+                    private final Button btn = new Button("update ");
+
+                    {
+                        btn.setStyle("-fx-color: white;");
+
+                        btn.setOnAction((ActionEvent event) -> {
+                            /* 
+    TableCell<cinema, String> cell = (TableCell<cinema, String>) event.getTarget();
+    int rowIndex = cell.getIndex();
+    System.out.println("Ligne cliquée : " + rowIndex);
+                             */
+
+
+                            int rowIndex = getTableRow().getIndex();// Code pour gérer l'action du bouton
+                            //redirection
+                            Integer idCinemaValue = id_cinema.getCellObservableValue(rowIndex).getValue();
+                            CinemaCRUD cd = new CinemaCRUD();
+                            System.out.println(idCinemaValue);
+                                                                      CinemaupdateController.getInstance().setId(idCinemaValue);
+                      
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("Cinemaupdate.fxml"));
+                                    Scene scene = new Scene(root);
+                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                    stage.setScene(scene);
+                                    stage.show();
+                                } catch (IOException ex) {
+                                    System.out.println(ex.getMessage());
+                                }
+                            
+                                
+                            
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        this.update.setCellFactory(update);
 
 // Ajoute la colonne à la fin du TableView
     }
@@ -249,7 +308,7 @@ public class CinemaAfficheController implements Initializable {
 
     //Alert a =new Alert(Alert.AlertType., "ddd", ButtonType.OK);
     //a.showAndWait();
-    @FXML
+ /*   @FXML
     private void delete(ActionEvent event) throws SQLException {
         SelectionModel<cinema> selectionModel = tableview.getSelectionModel();
         int selectedIndex = tableview.getSelectionModel().getSelectedIndex();
@@ -296,7 +355,7 @@ public class CinemaAfficheController implements Initializable {
         }
 
     }
-
+*/
     @FXML
     private void metier(ActionEvent event) {
 

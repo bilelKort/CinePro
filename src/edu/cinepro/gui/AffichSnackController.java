@@ -117,7 +117,7 @@ public class AffichSnackController implements Initializable {
                                 int rowIndex = getTableRow().getIndex();
                                 Integer idsnackValue = id_snack.getCellObservableValue(rowIndex).getValue();
 
-                                deleteProjection(idsnackValue);
+                                deletesnack(idsnackValue);
 
                                 System.out.println("ID snack : " + idsnackValue);
 
@@ -151,7 +151,7 @@ public class AffichSnackController implements Initializable {
 
     }
 
-    public void deleteProjection(int id) {
+    public void deletesnack(int id) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("Delete Snack");
         alert.setHeaderText(null);

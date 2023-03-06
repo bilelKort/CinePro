@@ -157,16 +157,18 @@ return myList ;
         }
     
      */
-    public void updateEntity(int id, String nom, String localisation, String description, String photo) {
+    
+    
+    public void updateEntity(int id,cinema c) {
 
         try {
             String requete = "UPDATE cinema SET nom=?, localisation=?,description=? ,photo=?  where id_cinema=?";
             PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
 
-            st.setString(1, nom);
-            st.setString(2, localisation);
-            st.setString(3, description);
-            st.setString(4, photo);
+            st.setString(1, c.getNom());
+            st.setString(2, c.getLocalisation());
+            st.setString(3, c.getDescription());
+            st.setString(4, c.getPhoto());
             st.setInt(5, id);
 
             st.executeUpdate();

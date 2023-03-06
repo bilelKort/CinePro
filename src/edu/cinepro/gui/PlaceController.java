@@ -4,18 +4,27 @@
  */
 package edu.cinepro.gui;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
+import javafx.stage.Stage;
 
 /**
  * FXML Controller class
@@ -26,8 +35,8 @@ public class PlaceController implements Initializable {
 
     @FXML
     private GridPane idmatrice;
-    private static final int ROWS = 10;
-    private static final int COLS =10;
+    private static final int ROWS = 9;
+    private static final int COLS =9;
     @FXML
     private Label msg;
     @FXML
@@ -46,7 +55,7 @@ public class PlaceController implements Initializable {
         coordMap.add("5,7");
         coordMap.add("5,9");
         coordMap.add("5,8");
-        coordMap.add("4,9");
+        coordMap.add("4,8");
         coordMap.add("3,5");
         System.out.println(coordMap);
 
@@ -90,8 +99,8 @@ public class PlaceController implements Initializable {
 
 // action onClick pour reserver une place
                         pane.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-                            int clickedRow = GridPane.getRowIndex(pane);
-                            int clickedCol = GridPane.getColumnIndex(pane);
+                            int clickedRow = GridPane.getRowIndex(pane)+1;
+                            int clickedCol = GridPane.getColumnIndex(pane)+1;
                             rectangle.setFill(Color.web("#eb2e66"));
                             rectangle.setStroke(Color.BLACK);
 
@@ -125,5 +134,26 @@ lista.setText(placereservees.toString()  );
 
        // idmatrice.getChildren().add(matrice);
     }
+  @FXML
+    
+    private void back(ActionEvent event) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("annuler ?");
+        alert.setHeaderText(null);
+        alert.setContentText("voulez vous annuler ?       |o_O|");
 
+        if (alert.showAndWait().get() == ButtonType.OK) {
+            try {
+
+                System.out.println("ok !");
+                Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
+                Scene scene = new Scene(root);
+                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException ex) {
+                System.out.println(ex.getMessage());
+            }
+        }
+    }
 }

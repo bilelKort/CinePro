@@ -6,17 +6,22 @@ package edu.cinepro.gui;
 
 import edu.cinepro.entities.cinema;
 import edu.cinepro.entities.salle;
+import edu.cinepro.entities.snack;
 import edu.connexion3A18.services.CinemaCRUD;
 import edu.connexion3A18.services.SalleCRUD;
+import edu.connexion3A18.services.SnackCRUD;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -32,7 +37,11 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.SelectionModel;
+import javafx.scene.control.TableCell;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.GridPane;
@@ -66,7 +75,18 @@ public class ViewmorecinemaController implements Initializable {
     private Label longeur;
     @FXML
     private Label largeur;
-    
+    @FXML
+    private TableColumn<salle, Boolean> acces;
+    @FXML
+    private TableColumn delete;
+    @FXML
+    private TableColumn<salle, String> name;
+    @FXML
+    private TableColumn<salle, Integer> idsal;
+    @FXML
+    private TableView<salle> tableview;
+        public ObservableList<salle> k = FXCollections.observableArrayList();
+
     
      
     public ImageView getImage() {
@@ -144,111 +164,104 @@ public class ViewmorecinemaController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         System.out.println("nnnn"+instance.id1);
-        
-       // CinemaCRUD c =new CinemaCRUD();
-       //cinema a= c.cinemabyid(instance.idinstance);
-      //this.setMap(a.getLocalisation());
+        affichesalle();
+        CinemaCRUD c =new CinemaCRUD();
+       cinema a= c.cinemabyid(instance.id1);
+      this.setMap(a.getLocalisation());
 
-        //                   this.setNom(a.getNom());
-          //                this.setImage(a.getPhoto());
+                          this.setNom(a.getNom());
+                        this.setImage(a.getPhoto());
     }
 
     @FXML
-    private void affichesalle(ActionEvent event) {
-        System.out.println("nnnn"+instance.id1);
-
+    private void affichesalle() {
+        
+         tableview .getItems().clear();
         SalleCRUD cd = new SalleCRUD();
-        int id2 = Integer.valueOf(id.getText());
-        List<salle> b = cd.entitiesList2(id2);
-        System.out.println(b.size());  
-              
-        if (b.size()==0) {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("empty");
-            alert.setHeaderText(null);
-            alert.setContentText(" vide      >.< ");
-            alert.showAndWait();
-        } else {
-
-              for (salle i : b) {
-            idsalle.getItems().add(i);
-            
-
+        List<salle> liste = new ArrayList<salle>();
+        liste = cd.entitiesList2(instance.id1);
+        for (salle i : liste) {
+            k.add(i);
         }
-              
+                idsal.setCellValueFactory(new PropertyValueFactory<salle, Integer>("id_salle"));
 
-            idsalle.setOnMouseClicked(event2 -> {
-                  try {
-                      /*
-                      int  index = idsalle.getSelectionModel().getSelectedIndex();
-                      
-                      if (index > -1) {
-                      
-                      Integer getLargeur = idsalle.getItems().get(index).getLargeur();
-                      Integer getLongueur = idsalle.getItems().get(index).getLongueur();
-                      idplace.getChildren().clear();
-                      idplace.setHgap(10);
-                      idplace.setVgap(10);
-                      longeur.setText(Integer.toString(getLongueur));
-                      largeur.setText(Integer.toString(getLargeur));
-                      
-                      if (idsalle.getItems().get(index).isAcces()) {
-                      for (int row = 0; row < getLargeur; row++) {
-                      for (int col = 0; col < getLongueur; col++) {
-                      
-                      Pane pane = new Pane();
-                      Rectangle rectangle = new Rectangle(30, 30);
-                      rectangle.setFill(Color.WHITE);
-                      rectangle.setStroke(Color.BLACK);
-                      
-                      pane.getChildren().add(rectangle);
-                      
-                      idplace.add(pane, col, row);
-                      }
-                      }
-                      } else {
-                      for (int row = 0; row < getLargeur; row++) {
-                      for (int col = 0; col < getLongueur; col++) {
-                      
-                      Pane pane = new Pane();
-                      Rectangle rectangle = new Rectangle(30, 30);
-                      rectangle.setFill(Color.DARKRED);
-                      rectangle.setStroke(Color.BLACK);
-                      
-                      pane.getChildren().add(rectangle);
-                      
-                      idplace.add(pane, col, row);
-                      }
-                      }
-                      }
-                      
-                      }
-                      */
-                      
-                      int  index = idsalle.getSelectionModel().getSelectedIndex();
-                      Integer idsalleValue = idsalle.getItems().get(index).getId_salle();
-                    SalleController.getInstance().setId(idsalleValue);
-                      Parent root = FXMLLoader.load(getClass().getResource("salle.fxml"));
-                      Scene scene = new Scene(root);
-                      Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                      stage.setScene(scene);
-                      stage.show();
-                  } catch (IOException ex) {
-                      Logger.getLogger(ViewmorecinemaController.class.getName()).log(Level.SEVERE, null, ex);
-                  }
+        name.setCellValueFactory(new PropertyValueFactory<salle, String>("nom"));
+        acces.setCellValueFactory(new PropertyValueFactory<salle,Boolean>("acces"));
+        
+          tableview.setItems(k);
+        tableview.getSelectionModel().select(2);
+Callback<TableColumn<snack, Void>, TableCell<snack, Void>> cellFactory
+                = new Callback<TableColumn<snack, Void>, TableCell<snack, Void>>() {
+            @Override
+            public TableCell<snack, Void> call(final TableColumn<snack, Void> param) {
+                final TableCell<snack, Void> cell = new TableCell<snack, Void>() {
+                    private final Button btn = new Button("supprimer ");
 
-            });
+                    {
+                        btn.setStyle("-fx-color: white;");
 
-        }
+                        btn.setOnAction((ActionEvent event) -> {
+                            /* 
+    TableCell<cinema, String> cell = (TableCell<cinema, String>) event.getTarget();
+    int rowIndex = cell.getIndex();
+    System.out.println("Ligne cliquée : " + rowIndex);
+                             */
+
+
+                            
+
+                                int rowIndex = getTableRow().getIndex();
+                                Integer idsalleValue = idsal.getCellObservableValue(rowIndex).getValue();
+deletesalle(idsalleValue);
+
+                                System.out.println("ID salle : " + idsalleValue);
+
+                            
+
+// Code pour gérer l'action du bouton
+                            //redirection
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        delete.setCellFactory(cellFactory);
+
+
                 
     }
+public void deletesalle(int id) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Delete salle");
+        alert.setHeaderText(null);
+        alert.setContentText("Are you sure you want to delete this salle ?");
+        Optional<ButtonType> option = alert.showAndWait();
+        if (option.isPresent() && option.get() == ButtonType.OK) {
 
+            SalleCRUD cd = new SalleCRUD();
+            System.out.println(id);
+            cd.deleteEntity2(id);
+        }
+        initialize(new FXMLLoader().getLocation(), new FXMLLoader().getResources());
+    }
     @FXML
     private void back(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle("annuler ?");
         alert.setHeaderText(null);
-        alert.setContentText("voulez vous annuler ?       |o_O|");
+        alert.setContentText("voulez vous annuler ?  |o_O|");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             try {

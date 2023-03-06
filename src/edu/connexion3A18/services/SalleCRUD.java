@@ -163,4 +163,16 @@ public class SalleCRUD {
             System.out.println(ex.getMessage());
         }
     }
+    
+    public void deleteEntity2(int id) {
+        try {
+            String requete="DELETE FROM salle WHERE id_salle=?";
+            PreparedStatement st=MyConnection.getInstance().getCnx().prepareStatement(requete);
+            st.setInt(1,id);
+            st.executeUpdate();
+            System.out.println("salle deleted!");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
