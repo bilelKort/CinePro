@@ -178,9 +178,20 @@ public class CinemaupdateController implements Initializable {
             erreurphoto = "";
 
         }
-        if (((map.getEngine().getLocation().equals("https://www.google.com/maps/@36.798464,10.1679104,14z")))
-                || (map.getEngine().getLocation().equals("https://www.google.com/maps"))) {
+        System.out.println(((map.getEngine().getLocation().equals("https://www.google.com/maps/@36.798464,10.1679104,17z")))
+                || (map.getEngine().getLocation().equals("https://www.google.com/maps")));
+        
+                System.out.println((map.getEngine().getLocation()));
+
+        System.out.println((map.getEngine().getLocation().equals("https://www.google.com/maps")));
+            System.out.println(((map.getEngine().getLocation().equals("https://www.google.com/maps/@36.798464,10.1679104,17z")))
+               );
+        
+        if (((map.getEngine().getLocation().equals("https://www.google.com/maps/@36.7260284,10.2558798,17z")))
+                || (map.getEngine().getLocation().equals("https://www.google.com/maps"))|| (map.getEngine().getLocation().equals(""))) {
             erreurmap = "il faut entrer une localisation !!!";
+                        mapb = false;
+
 
         } else {
             mapb = true;

@@ -71,7 +71,7 @@ public class AjoutersalleController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error ");
             alert.setHeaderText(null);
-            alert.setContentText("Verifier    |o_O|");
+            alert.setContentText("il faut remplir le nom   |o_O|");
 
             alert.showAndWait();
         } else {
@@ -82,7 +82,7 @@ public class AjoutersalleController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error ");
             alert.setHeaderText(null);
-            alert.setContentText("Verifier    |o_O|");
+            alert.setContentText("il faut verifier  longeur  |o_O|");
 
             alert.showAndWait();
         } else {
@@ -97,7 +97,7 @@ public class AjoutersalleController implements Initializable {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error ");
                 alert.setHeaderText(null);
-                alert.setContentText("Verifier    |o_O|");
+                alert.setContentText("il faut verifier longeur   |o_O|");
 
                 alert.showAndWait();
 
@@ -107,7 +107,7 @@ public class AjoutersalleController implements Initializable {
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("Error ");
             alert.setHeaderText(null);
-            alert.setContentText("Verifier largeur   |o_O|");
+            alert.setContentText("il faut verifier largeur   |o_O|");
 
             alert.showAndWait();
         } else {
@@ -121,7 +121,7 @@ largeurtest=true;
                 Alert alert = new Alert(Alert.AlertType.ERROR);
                 alert.setTitle("Error ");
                 alert.setHeaderText(null);
-                alert.setContentText("Verifier  largeur  |o_O|");
+                alert.setContentText("il faut verifier largeur  |o_O|");
 
                 alert.showAndWait();
 

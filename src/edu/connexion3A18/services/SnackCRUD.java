@@ -71,6 +71,36 @@ public class SnackCRUD {
     
     
     
+    public snack snackbyid(int id) {
+                snack s = new snack();
+
+        try {
+            String requete = "SELECT * FROM snack where id_snack=" +id;
+            Statement st = MyConnection.getInstance().getCnx()
+                    .createStatement();
+
+            ResultSet rs = st.executeQuery(requete);
+                s.setId_snack(rs.getInt("id_snack"));
+                s.setNom(rs.getString("nom"));
+                s.setPrix(rs.getFloat("prix"));
+
+                s.setQuantite(rs.getInt("quantite"));
+                s.setPhoto(rs.getString("photo"));
+
+
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return s;
+    }
+    
+    
+    
+    
+    
+    
+    
      public List<snack> entitiesList2(int id) {
         ArrayList<snack> myList = new ArrayList();
 
@@ -98,20 +128,52 @@ public class SnackCRUD {
         }
         return myList;
     }
- public void updateEntity(int id_snack, String nom,float prix , int quantite,int stock, int id_cinema ) {
+     
+     
+     
+     
+     public snack entitiesList3(int id) {
+        ArrayList<snack> myList = new ArrayList();
+
+        try {
+            String requete = "SELECT * FROM snack where id_snack="+id;
+            Statement st = MyConnection.getInstance().getCnx()
+                    .createStatement();
+
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+                snack s = new snack();
+                s.setId_snack(rs.getInt(1));
+                s.setNom(rs.getString("nom"));
+                s.setPrix(rs.getFloat("prix"));
+
+                s.setQuantite(rs.getInt("quantite"));
+                s.setPhoto(rs.getString("photo"));
+                s.setId_cinema(rs.getInt("id_cinema"));
+
+                myList.add(s);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return myList.get(0);
+    }
+     
+     
+ public void updateEntity(int id_snack, snack c ) {
 
 
 
 
         try {
-            String requete="UPDATE snack SET nom=?, quantite=?,stock=? ,prix=?  where id_snack=?";
+            String requete="UPDATE snack SET nom=?, quantite=? ,prix=?  where id_snack=?";
             PreparedStatement st=MyConnection.getInstance().getCnx().prepareStatement(requete);
             
-            st.setString(1,nom);
-            st.setInt(2,quantite);
-            st.setInt(3,stock);
-            st.setFloat(4,prix);
-            st.setInt(5,id_snack);
+            st.setString(1,c.getNom());
+            st.setInt(2,c.getQuantite());
+            st.setFloat(3,c.getPrix());
+            st.setInt(4,id_snack);
             
             st.executeUpdate();
             System.out.println("snack Updated!");

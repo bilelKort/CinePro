@@ -57,6 +57,8 @@ public class AffichSnackController implements Initializable {
     private int id;
     @FXML
     private TableColumn<snack, String> photo;
+    @FXML
+    private TableColumn updatebtn;
 
     public int getId() {
         return id;
@@ -93,7 +95,7 @@ public class AffichSnackController implements Initializable {
         snack.setItems(k);
         snack.getSelectionModel().select(2);
 
-        Callback<TableColumn<snack, Void>, TableCell<snack, Void>> cellFactory
+        Callback<TableColumn<snack, Void>, TableCell<snack, Void>> delete
                 = new Callback<TableColumn<snack, Void>, TableCell<snack, Void>>() {
             @Override
             public TableCell<snack, Void> call(final TableColumn<snack, Void> param) {
@@ -104,11 +106,7 @@ public class AffichSnackController implements Initializable {
                         btn.setStyle("-fx-color: white;");
 
                         btn.setOnAction((ActionEvent event) -> {
-                            /* 
-    TableCell<cinema, String> cell = (TableCell<cinema, String>) event.getTarget();
-    int rowIndex = cell.getIndex();
-    System.out.println("Ligne cliquée : " + rowIndex);
-                             */
+                           
 
 
                             
@@ -144,8 +142,69 @@ public class AffichSnackController implements Initializable {
             }
         };
 
-        btn.setCellFactory(cellFactory);
+        btn.setCellFactory(delete);
+        
+        
+        
+        
+        
+          Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> update
+                = new Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>>() {
+            @Override
+            public TableCell<cinema, Void> call(final TableColumn<cinema, Void> param) {
+                final TableCell<cinema, Void> cell = new TableCell<cinema, Void>() {
+                    private final Button btn = new Button("update ");
+
+                    {
+                        btn.setStyle("-fx-color: white;");
+
+                        btn.setOnAction((ActionEvent event) -> {
+                            /* 
+    TableCell<cinema, String> cell = (TableCell<cinema, String>) event.getTarget();
+    int rowIndex = cell.getIndex();
+    System.out.println("Ligne cliquée : " + rowIndex);
+                             */
+
+
+                            int rowIndex = getTableRow().getIndex();// Code pour gérer l'action du bouton
+                            //redirection
+                            Integer idsnackValue = id_snack.getCellObservableValue(rowIndex).getValue();
+                            CinemaCRUD cd = new CinemaCRUD();
+                                                                      SnackupdateController.getInstance().setIdinstance(idsnackValue);
+                      
+                                try {
+                                    Parent root = FXMLLoader.load(getClass().getResource("Snackupdate.fxml"));
+                                    Scene scene = new Scene(root);
+                                    Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+                                    stage.setScene(scene);
+                                    stage.show();
+                                } catch (IOException ex) {
+                                    System.out.println(ex.getMessage());
+                                }
+                            
+                                
+                            
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        this.updatebtn.setCellFactory(update);
     }
+    
+    
 
     public void Affiche() {
 
@@ -169,9 +228,9 @@ public class AffichSnackController implements Initializable {
     @FXML
     private void back(ActionEvent event) {
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("annuler ?");
+        alert.setTitle("Home Page");
         alert.setHeaderText(null);
-        alert.setContentText("voulez vous annuler ?       |o_O|");
+        alert.setContentText("voulez vous revenir à la page d'accueil ?       |o_O|");
 
         if (alert.showAndWait().get() == ButtonType.OK) {
             try {

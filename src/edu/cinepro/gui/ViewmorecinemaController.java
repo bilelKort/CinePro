@@ -68,8 +68,8 @@ public class ViewmorecinemaController implements Initializable {
     private WebView map;
     @FXML
     private ImageView image;
-    @FXML
-    private ListView<salle> idsalle;
+  /*  @FXML
+    private ListView<salle> idsalle;*/
     private GridPane idplace;
     @FXML
     private Label longeur;
@@ -86,6 +86,8 @@ public class ViewmorecinemaController implements Initializable {
     @FXML
     private TableView<salle> tableview;
         public ObservableList<salle> k = FXCollections.observableArrayList();
+    @FXML
+    private TableColumn edit;
 
     
      
@@ -190,6 +192,8 @@ public class ViewmorecinemaController implements Initializable {
         
           tableview.setItems(k);
         tableview.getSelectionModel().select(2);
+        
+        
 Callback<TableColumn<snack, Void>, TableCell<snack, Void>> cellFactory
                 = new Callback<TableColumn<snack, Void>, TableCell<snack, Void>>() {
             @Override
@@ -238,6 +242,61 @@ deletesalle(idsalleValue);
         };
 
         delete.setCellFactory(cellFactory);
+        
+        
+           Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>> seesalle
+                = new Callback<TableColumn<cinema, Void>, TableCell<cinema, Void>>() {
+            @Override
+            public TableCell<cinema, Void> call(final TableColumn<cinema, Void> param) {
+                final TableCell<cinema, Void> cell = new TableCell<cinema, Void>() {
+                    private final Button btn = new Button("see more ");
+
+                    {
+                        btn.setStyle("-fx-color: white;");
+
+                        btn.setOnAction((ActionEvent event) -> {
+                            /* 
+    TableCell<cinema, String> cell = (TableCell<cinema, String>) event.getTarget();
+    int rowIndex = cell.getIndex();
+    System.out.println("Ligne cliquée : " + rowIndex);
+                             */
+                                int rowIndex = getTableRow().getIndex();
+                                Integer idsalleValue = idsal.getCellObservableValue(rowIndex).getValue();
+                                SalleController.getInstance().setId(idsalleValue);
+
+                            FXMLLoader loader = new FXMLLoader(getClass().getResource("salle.fxml"));
+
+                            try {
+                                Parent root = loader.load();
+
+
+                                
+                                btn.getScene().setRoot(root);
+
+                            } catch (IOException ex) {
+                                System.err.println(ex.getMessage());
+                            }
+
+// Code pour gérer l'action du bouton
+                            //redirection
+                        });
+                    }
+
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+
+        edit.setCellFactory(seesalle);
 
 
                 
@@ -281,10 +340,9 @@ public void deletesalle(int id) {
 
     @FXML
     private void ajouterunesalle(ActionEvent event) {
-        int id2 = Integer.valueOf(id.getText());
-        System.out.println("aaaaaaaaa"+id2);
+        System.out.println("aaaaaaaaa"+instance.id1);
   try{
-   AjoutersalleController.getInstance().setId(id2);
+   AjoutersalleController.getInstance().setId(instance.id1);
                       Parent root = FXMLLoader.load(getClass().getResource("ajoutersalle.fxml"));
                       Scene scene = new Scene(root);
                       Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
@@ -302,8 +360,7 @@ public void deletesalle(int id) {
     private void ajoutersnack(ActionEvent event) {
          try{
              
-                     int id2 = Integer.valueOf(id.getText());
-   SnackController.getInstance().setId(id2);
+   SnackController.getInstance().setId(instance.id1);
 
                       Parent root = FXMLLoader.load(getClass().getResource("snack.fxml"));
                       Scene scene = new Scene(root);
@@ -320,8 +377,7 @@ public void deletesalle(int id) {
     private void affichsnacks(ActionEvent event) {
      try{
              
-                     int id2 = Integer.valueOf(id.getText());
-   AffichSnackController.getInstance().setId(id2);
+   AffichSnackController.getInstance().setId(instance.id1);
 
                       Parent root = FXMLLoader.load(getClass().getResource("AffichSnack.fxml"));
                       Scene scene = new Scene(root);

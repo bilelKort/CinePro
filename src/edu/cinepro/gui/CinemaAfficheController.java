@@ -33,6 +33,7 @@ import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 
@@ -97,10 +98,12 @@ public class CinemaAfficheController implements Initializable {
             @Override
             public TableCell<cinema, Void> call(final TableColumn<cinema, Void> param) {
                 final TableCell<cinema, Void> cell = new TableCell<cinema, Void>() {
-                    private final Button btn = new Button("see more ");
-
+Button btn = new Button("see more");
                     {
-                        btn.setStyle("-fx-color: white;");
+                       btn.setStyle("-fx-background-color: #800000; -fx-text-fill: white; -fx-font-weight: bold;");
+BorderPane pane = new BorderPane();
+pane.setCenter(btn);
+pane.setStyle("-fx-background-color: #f4a460;");
 
                         btn.setOnAction((ActionEvent event) -> {
                             /* 
@@ -163,7 +166,7 @@ public class CinemaAfficheController implements Initializable {
                     private final Button btn = new Button("supprimer ");
 
                     {
-                        btn.setStyle("-fx-color: white;");
+btn.setStyle("-fx-background-color: #3CB371; -fx-text-fill: white; -fx-font-size: 13px;");
 
                         btn.setOnAction((ActionEvent event) -> {
                             /* 
@@ -240,7 +243,7 @@ public class CinemaAfficheController implements Initializable {
                     private final Button btn = new Button("update ");
 
                     {
-                        btn.setStyle("-fx-color: white;");
+btn.setStyle("-fx-background-color: #000000; -fx-text-fill: white; -fx-font-size: 13px;");
 
                         btn.setOnAction((ActionEvent event) -> {
                             /* 
@@ -370,6 +373,24 @@ public class CinemaAfficheController implements Initializable {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    @FXML
+    private void reserversnack(ActionEvent event) {
+        
+         try {
+
+            System.out.println("ok !");
+            Parent root = FXMLLoader.load(getClass().getResource("PanierSnack.fxml"));
+            Scene scene = new Scene(root);
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+        
     }
 
 }

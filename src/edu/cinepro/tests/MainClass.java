@@ -28,14 +28,16 @@ public class MainClass {
       */
              /* CinemaCRUD pcd= new CinemaCRUD();
        pcd.updateEntity(2, "bolbol","rasjbal" , "khayba","photo");*/
-
    
   // SnackCRUD pcd= new SnackCRUD();
     // pcd.deleteEntity(7); 
-   
+
+           CinemaCRUD pcd= new CinemaCRUD();
+       
+pcd.cinemabyname("fff");
    /*
      // snack s = new snack( "9tania", 2 ,  15 , "test", 15, 2);
-      SnackCRUD pcd= new SnackCRUD();
+      
      // pcd.addEntity(s); 
       
       //System.out.println(pcd.entitiesList());
@@ -44,9 +46,9 @@ public class MainClass {
 //pcd.updateEntity(2, "jus", 3, 0, 0, 2);
    
    //salle salle= new salle(5, 3, 2,false);
-        salle s=new salle("nom",1,2,2,true);
-       SalleCRUD cd= new SalleCRUD();
-cd.addEntity(s);
+      //  salle s=new salle("nom",1,2,2,true);
+      // SalleCRUD cd= new SalleCRUD();
+//cd.addEntity(s);
          
       //          System.out.println(pcd.entitiesList());
 

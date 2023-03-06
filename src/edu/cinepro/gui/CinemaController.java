@@ -127,12 +127,14 @@ public class CinemaController implements Initializable {
             iderrorimage.setText("");
 
         }
-        if (((map.getEngine().getLocation().equals("https://www.google.com/maps/@36.798464,10.1679104,14z")))
+        if (((map.getEngine().getLocation().equals("https://www.google.com/maps/@36.7260284,10.2558798,17z")))
                 || (map.getEngine().getLocation().equals("https://www.google.com/maps"))) {
             iderrorlocation.setText("il faut entrer une localisation !!!");
-
+mapb = false;
         } else {
             mapb = true;
+                        iderrorlocation.setText("");
+
 
         }
  if ((mapb == false)
@@ -152,6 +154,7 @@ public class CinemaController implements Initializable {
             System.out.println(c);
 
             CinemaCRUD PCD = new CinemaCRUD();
+                    cinema k =PCD.cinemabyid(c.getId_cinema());
 
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("  >.<  VERIF");
@@ -160,7 +163,9 @@ public class CinemaController implements Initializable {
 
             if (alert.showAndWait().get() == ButtonType.OK) {
                 try {
+                    
                     PCD.addEntity(c);
+                    
                     System.out.println("done !");
                     Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
                     Scene scene = new Scene(root);

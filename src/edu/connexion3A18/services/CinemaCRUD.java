@@ -71,6 +71,39 @@ public class CinemaCRUD implements EntityCRUD<cinema> {
         }
         return myList;
     }
+    
+    
+    
+    public boolean cinemabyname(String nom) {
+        cinema c =new cinema();
+        cinema b =new cinema();
+
+        try {
+            String requete = "SELECT * FROM cinema where nom=" + nom;
+            Statement st = MyConnection.getInstance().getCnx()
+                    .createStatement();
+
+            ResultSet rs = st.executeQuery(requete);
+            if (rs.next()) {
+                
+            
+            c.setId_cinema(rs.getInt(1));
+            c.setId_user(rs.getInt("id_cinema"));
+            c.setNom(rs.getString("nom"));
+
+            c.setLocalisation(rs.getString("localisation"));
+            c.setDescription(rs.getString("description"));
+            c.setPhoto(rs.getString("photo"));
+}
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        
+        
+        return c.equals(b);
+    }
+    
+    
 
     public cinema cinemabyid(int id) {
         cinema c =new cinema();

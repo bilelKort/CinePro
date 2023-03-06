@@ -28,6 +28,13 @@ public class snack {
         this.photo = photo;
         this.id_cinema = id_cinema;
     }
+    
+      public snack(String nom, float prix, int quantite, String photo) {
+        this.nom = nom;
+        this.prix = prix;
+        this.quantite = quantite;
+        this.photo = photo;
+    }
 
     public int getId_snack() {
         return id_snack;

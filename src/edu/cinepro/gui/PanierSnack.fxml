@@ -5,11 +5,12 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="707.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.PanierSnackController">
+<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="707.0" style="-fx-background-color: #7B002C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.PanierSnackController">
    <children>
-      <VBox fx:id="vboxpanier" layoutX="448.0" layoutY="41.0" prefHeight="200.0" prefWidth="238.0" />
-      <Label fx:id="totalPriceLabel" layoutX="567.0" layoutY="295.0" prefHeight="17.0" prefWidth="86.0" text="total" />
-      <VBox fx:id="productList" layoutX="29.0" layoutY="41.0" prefHeight="282.0" prefWidth="100.0" />
-      <Button fx:id="removeButton" layoutX="385.0" layoutY="63.0" mnemonicParsing="false" text="delete" />
+      <VBox fx:id="vboxpanier" layoutX="441.0" layoutY="41.0" prefHeight="200.0" prefWidth="245.0" style="-fx-background-color: #EFEFEF;" />
+      <Label fx:id="totalPriceLabel" layoutX="567.0" layoutY="295.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #FFFFFF;" text="total" />
+      <VBox fx:id="productList" layoutX="29.0" layoutY="41.0" prefHeight="282.0" prefWidth="289.0" style="-fx-background-color: #EFEFEF;" />
+      <Button fx:id="removeButton" layoutX="385.0" layoutY="63.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-text-fill: #7B002C;" text="delete" />
+      <Label fx:id="prixgold" layoutX="531.0" layoutY="323.0" prefHeight="17.0" prefWidth="158.0" style="-fx-text-fill: #FFFFFF;" />
    </children>
 </AnchorPane>

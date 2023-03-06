@@ -4,68 +4,50 @@
  */
 package edu.cinepro.gui;
 
-import edu.cinepro.entities.salle;
 import edu.cinepro.entities.snack;
-import edu.connexion3A18.services.SalleCRUD;
 import edu.connexion3A18.services.SnackCRUD;
 import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
  * @author rayen
  */
-public class SnackController implements Initializable {
-
-    private File f;
-    @FXML
-    private Button ftimage;
-    @FXML
-    private Label labelsinglefile;
-    @FXML
-    private TextField idnom;
-    @FXML
-    private TextField idprix;
+public class SnackupdateController implements Initializable {
+ private static final SnackupdateController instance = new SnackupdateController();
+    private int idinstance;
     @FXML
     private TextField idquantite;
     @FXML
-    private Button idbuttonsavesnack;
+    private TextField idprix;
+    @FXML
+    private TextField idnom;
+    @FXML
+    private Label labelsinglefile;
+  private File f;
     @FXML
     private ImageView imageview;
-    
-    
-    
-     private static final SnackController instance = new SnackController();
-    private int id;
-public int getId() {
-        return id;
+
+    public int getIdinstance() {
+        return idinstance;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setIdinstance(int idinstance) {
+        this.idinstance = idinstance;
     }
-
-    public static SnackController getInstance() {
+     public static SnackupdateController getInstance() {
         return instance;
     }
     /**
@@ -73,37 +55,26 @@ public int getId() {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-                System.out.println(instance.id);
-}
-
-    @FXML
-    private void importimage(ActionEvent event) {
-        FileChooser fc = new FileChooser();
-        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers image", "*.png", "*.jpg", "*.gif", "*.bmp"));
-        f = fc.showOpenDialog(null);
-        if (f != null) {
-            labelsinglefile.setText("Select file" + f.getAbsolutePath());
-
-            try {
-                File file = new File(f.getAbsolutePath());
-
-// --> file:/C:/MyImages/myphoto.jpg
-                String localUrl = file.toURI().toURL().toString();
-//imageid.setImage(new Image("C:\Users\rayen\Pictures\cinema.jpg"));
-                imageview.setImage(new Image(localUrl));
-            } catch (MalformedURLException ex) {
-                System.out.println(ex.getMessage());
-            };
-
-            System.out.println(f.getAbsolutePath());
-        }
-
+        System.out.println(instance.idinstance);
+        affiche();
+    }    
+    
+    
+    
+    public void affiche(){
+            SnackCRUD cd = new SnackCRUD();
+snack b =cd.entitiesList3(instance.idinstance);
+        System.out.println(b);
+        idquantite.setText(Integer.toString(b.getQuantite()));
+    idnom.setText(b.getNom());
+            idprix.setText(Float.toString(b.getPrix()));
+            
+labelsinglefile.setText(b.getPhoto());
     }
 
     @FXML
-    private void savesnack(ActionEvent event) {
-        boolean conditionnom = false;
+    private void updatesnack(ActionEvent event) {
+             boolean conditionnom = false;
         boolean conditionprix = false;
         boolean conditionQuantite = false;
         boolean conditionurl = false;
@@ -124,7 +95,7 @@ public int getId() {
             
                  String resPrix = idprix.getText();
                  try {
-                 float restPrixF = Integer.valueOf(resPrix);
+                 float restPrixF = Float.valueOf(resPrix);
                         System.out.println(restPrixF);
 
                 if (restPrixF>0){
@@ -177,11 +148,11 @@ public int getId() {
         int restquantiteF = Integer.valueOf(resQuantite);
         if ((conditionQuantite) && (conditionnom) && (conditionprix) && (conditionurl)) {
             System.out.println("ok");
-            snack cc = new snack(resNom, restPrixF, restquantiteF,labelsinglefile.getText() , instance.id);
+            snack cc = new snack(resNom, restPrixF, restquantiteF,labelsinglefile.getText() );
            
-            System.out.println(instance.id);
+            System.out.println(instance.idinstance);
             SnackCRUD pc = new SnackCRUD();
-            pc.addEntity(cc);
+            pc.updateEntity(instance.idinstance,cc);
         } 
         else {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -201,47 +172,31 @@ public int getId() {
             alert.showAndWait();
         }
         
-
+        
+        
     }
 
     @FXML
-    
-    private void back(ActionEvent event) {
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
-        alert.setTitle("annuler ?");
-        alert.setHeaderText(null);
-        alert.setContentText("voulez vous annuler ?       |o_O|");
+    private void ftimage(ActionEvent event) {
+        FileChooser fc = new FileChooser();
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("Fichiers image", "*.png", "*.jpg", "*.gif", "*.bmp"));
+        f = fc.showOpenDialog(null);
+        if (f != null) {
+            labelsinglefile.setText("Select file" + f.getAbsolutePath());
 
-        if (alert.showAndWait().get() == ButtonType.OK) {
             try {
+                File file = new File(f.getAbsolutePath());
 
-                System.out.println("ok !");
-                Parent root = FXMLLoader.load(getClass().getResource("CinemaAffiche.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
+// --> file:/C:/MyImages/myphoto.jpg
+                String localUrl = file.toURI().toURL().toString();
+//imageid.setImage(new Image("C:\Users\rayen\Pictures\cinema.jpg"));
+                imageview.setImage(new Image(localUrl));
+            } catch (MalformedURLException ex) {
                 System.out.println(ex.getMessage());
-            }
+            };
+labelsinglefile.setText(f.getAbsolutePath());
+
         }
     }
-
-    @FXML
-    private void csv(ActionEvent event) {
-        
-        try {
-        AjoutsnackcsvController.getInstance().setId1(instance.id);
-
-                Parent root = FXMLLoader.load(getClass().getResource("Ajoutsnackcsv.fxml"));
-                Scene scene = new Scene(root);
-                Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-                stage.setScene(scene);
-                stage.show();
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
-            }
-        
-    }
-
+    
 }

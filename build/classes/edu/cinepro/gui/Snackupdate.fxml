@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="590.0" prefWidth="1155.0" style="-fx-background-color: #7B002C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.SnackupdateController">
+   <children>
+      <Label layoutX="76.0" layoutY="104.0" prefHeight="17.0" prefWidth="113.0" style="-fx-text-fill: white;" text="nom" />
+      <Label layoutX="68.0" layoutY="172.0" prefHeight="17.0" prefWidth="68.0" style="-fx-text-fill: white;" text="prix" />
+      <Label layoutX="62.0" layoutY="237.0" prefHeight="17.0" prefWidth="95.0" style="-fx-text-fill: white;" text="quantité" />
+      <Label layoutX="68.0" layoutY="295.0" prefHeight="17.0" prefWidth="45.0" style="-fx-text-fill: white;" text="URL" />
+      <ImageView fx:id="imageview" fitHeight="150.0" fitWidth="200.0" layoutX="108.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true" />
+      <Button layoutX="552.0" layoutY="532.0" mnemonicParsing="false" onAction="#updatesnack" style="-fx-background-color: #DAA520; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="update" />
+      <Button layoutX="163.0" layoutY="291.0" mnemonicParsing="false" onAction="#ftimage" style="-fx-background-color: #DAA520; -fx-text-fill: white; -fx-font-size: 16px; -fx-font-weight: bold;" text="upload image" />
+      <TextField fx:id="idquantite" layoutX="136.0" layoutY="233.0" />
+      <TextField fx:id="idprix" layoutX="136.0" layoutY="168.0" />
+      <TextField fx:id="idnom" layoutX="136.0" layoutY="100.0" />
+      <Label fx:id="labelsinglefile" layoutX="108.0" layoutY="488.0" prefHeight="37.0" prefWidth="200.0" />
+   </children>
+</AnchorPane>

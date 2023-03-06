@@ -19,14 +19,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.shape.Circle;
 
 /**
  * FXML Controller class
@@ -44,6 +47,8 @@ public class PanierSnackController implements Initializable {
     private VBox productList;
     @FXML
     private Button removeButton;
+    @FXML
+    private Label prixgold;
 
     /**
      * Initializes the controller class.
@@ -51,6 +56,10 @@ public class PanierSnackController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         Affiche();
+        
+    
+    // Ajout du ScrollPane à la scène
+   
     }
     ObservableList<snack> selection = FXCollections.observableArrayList();
 
@@ -59,7 +68,9 @@ public class PanierSnackController implements Initializable {
         for (snack product : selection) {
             totalPrice += product.getPrix();
         }
+        
         totalPriceLabel.setText("Prix total : " + totalPrice);
+         prixgold.setText("prix du badge spéciale"+(totalPrice*0.7));
     }
 
     private void vide(Label totalPriceLabel) {
@@ -77,7 +88,8 @@ public class PanierSnackController implements Initializable {
                 Label nameLabel = new Label(product.getNom());
                 //    Label descriptionLabel = new Label(product.);
                 Label priceLabel = new Label(Double.toString(product.getPrix()));
-                Button addButton = new Button("Ajouter au panier");
+Button addButton = new Button("Ajouter au panier");
+addButton.setStyle("-fx-background-color: #3CB371; -fx-text-fill: white; -fx-font-size: 13px;");
 
                 Label espas = new Label();
 
@@ -88,11 +100,13 @@ public class PanierSnackController implements Initializable {
                 ImageView imageView = new ImageView();
 //imageid.setImage(new Image("C:\Users\rayen\Pictures\cinema.jpg"));
                 imageView.setImage(new Image(localUrl));
-                imageView.setFitWidth(100);
-                imageView.setFitHeight(98);
+                imageView.setFitWidth(280);
+                imageView.setFitHeight(198);
 
                 VBox productBox = new VBox(imageView, nameLabel, priceLabel, addButton, espas);
-                productBox.setSpacing(5.0);
+                productBox.setSpacing(10.0);
+                
+
                 addButton.setStyle("-fx-background-color: blue; -fx-text-fill: white;");
 
                 addButton.setOnAction(event -> {
@@ -109,7 +123,7 @@ public class PanierSnackController implements Initializable {
             }
 
         }
-        removeButton.setStyle("-fx-background-color: green; -fx-text-fill: white;");
+removeButton.setStyle("-fx-background-color: #228B22; -fx-text-fill: white; -fx-font-size: 14px; -fx-padding: 10px 20px;");
 
         removeButton.setOnAction(event -> {
             // Suppression du produit sélectionné de la liste des produits sélectionnés
