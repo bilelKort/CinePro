@@ -18,11 +18,12 @@ public class reservation {
    private boolean state;
    private Timestamp start_time;
    private Timestamp end_time;
+   private int id_projection;
   
     public reservation() {
     }
 
-    public reservation(int id_reservation, float prix_final, int id_user, int id_film, boolean state, Timestamp start_time, Timestamp end_time) {
+    public reservation(int id_reservation, float prix_final, int id_user, int id_film, boolean state, Timestamp start_time, Timestamp end_time, int id_projection) {
         this.id_reservation = id_reservation;
         this.prix_final = prix_final;
         this.id_user = id_user;
@@ -30,38 +31,42 @@ public class reservation {
         this.state = state;
         this.start_time = start_time;
         this.end_time = end_time;
+        this.id_projection = id_projection;
     }
 
-    public reservation(int id_user, int id_film, boolean state, Timestamp start_time, Timestamp end_time) {
+    public reservation(int id_user, int id_film, boolean state, Timestamp start_time, Timestamp end_time, int id_projection) {
         this.id_user = id_user;
         this.id_film = id_film;
         this.state = state;
         this.start_time = start_time;
         this.end_time = end_time;
+        this.id_projection = id_projection;
     }
 
-    public reservation(int id_user, int id_film, boolean state) {
+    public reservation(int id_user, int id_film, boolean state, int id_projection) {
         this.prix_final = 0f;
         this.id_user = id_user;
         this.id_film = id_film;
         this.state = state;
+        this.id_projection = id_projection;
     }
 
-    public reservation(float prix_final, int id_user, int id_film, boolean state, Timestamp start_time, Timestamp end_time) {
+    public reservation(float prix_final, int id_user, int id_film, boolean state, Timestamp start_time, Timestamp end_time, int id_projection) {
         this.prix_final = prix_final;
         this.id_user = id_user;
         this.id_film = id_film;
         this.state = state;
         this.start_time = start_time;
         this.end_time = end_time;
+        this.id_projection = id_projection;
     }
 
-    public reservation(float prix_final, int iduser, int idfilm, boolean state) {
+    public reservation(float prix_final, int iduser, int idfilm, boolean state, int id_projection) {
          this.prix_final = prix_final;
         this.id_user = id_user;
         this.id_film = id_film;
         this.state = state;
-       
+       this.id_projection = id_projection;
     }
     
 
@@ -130,6 +135,16 @@ public class reservation {
     public int getId_reservation() {
         return id_reservation;
     }
+
+    public int getId_projection() {
+        return id_projection;
+    }
+
+    public void setId_projection(int id_projection) {
+        this.id_projection = id_projection;
+    }
+    
+    
 
     
     

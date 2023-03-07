@@ -40,16 +40,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.scene.Group;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.Dialog;
+import javafx.scene.control.Label;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import org.json.JSONArray;
@@ -76,6 +83,8 @@ public class DisplayController implements Initializable {
     private TableColumn<reservation, Timestamp> col6;
     @FXML
     private TableColumn<reservation, Timestamp> col7;
+    @FXML
+    private TableColumn<reservation, Integer> col8;
     @FXML
     private TableView<reservation> tableview;
     public   ObservableList<reservation> data = FXCollections.observableArrayList();
@@ -106,6 +115,7 @@ public class DisplayController implements Initializable {
     col5.setCellValueFactory(new PropertyValueFactory<reservation, Boolean>("state"));
     col6.setCellValueFactory(new PropertyValueFactory<reservation, Timestamp>("start_time"));
     col7.setCellValueFactory(new PropertyValueFactory<reservation, Timestamp>("end_time"));
+    col8.setCellValueFactory(new PropertyValueFactory<reservation, Integer>("id_projection"));
         
     tableview.setItems(data);
     
@@ -127,8 +137,8 @@ qrCodeCol.setCellFactory(new Callback<TableColumn<reservation, Void>, TableCell<
                     // Retrieve reservation information from the database
                     reservation res = getTableView().getItems().get(getIndex());
 
-                    String reservationInfo = " id reservation: " + res.getId_reservation() + "\n id user: " + res.getId_user() + "\n id_film: " 
-                + res.getId_film() + "\n start time: " + res.getStart_time() + "\n end time: " + res.getEnd_time() + "\n price: " + res.getPrix_final();
+                    String reservationInfo = " id reservation: " + res.getId_reservation() + "\n id user: " + res.getId_user() + "\n id_film: " + 
+                + res.getId_film() + "\n id projection: " + res.getId_projection() + "\n start time: " + res.getStart_time() + "\n end time: " + res.getEnd_time() + "\n price: " + res.getPrix_final();
 
                     // Generate QR code
                     QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
@@ -268,39 +278,76 @@ Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>> payment =
             private final Button btnstripe = new Button("Payer");
             {
                 // Set action for the button
-            btnstripe.setOnAction((ActionEvent event) -> {
+       btnstripe.setOnAction((ActionEvent event) -> {
     // Retrieve reservation information from the table view
     reservation res = getTableView().getItems().get(getIndex());
-    
-    try {
-        ReservationDAO reservationDAO = new ReservationDAO();
-        ResultSet user = reservationDAO.getUser(res.getId_reservation());
-        if (user.next()) {
-            int userId = user.getInt("id_user");
-            String name = user.getString("nom");
-            String email = user.getString("email");
-            // retrieve other user properties here
-            System.out.println("User ID: " + userId);
-            System.out.println("Name: " + name);
-            System.out.println("Email: " + email);
-            
-            // Create a new card and associate it with the customer
-            String customerId = StripeAPI.createCustomerWithCard(email, name, "4242424242424242", 12, 2023, "123");
-            
-            // Charge the card
-            StripeAPI.createCharge(customerId, (int)res.getPrix_final(), "usd", email);
-            reservationCRUD rescrud = new reservationCRUD();
-            rescrud.updateEntityPrix(res.getId_reservation(), 0, userId);
-            // print other user properties here
-        } else {
-            System.out.println("No user found for reservation ID " + res.getId_reservation());
+
+    // Create a new dialog box
+    Dialog<ButtonType> dialog = new Dialog<>();
+    dialog.setTitle("Create Customer with Card");
+
+    // Set the button types
+    ButtonType createButtonType = new ButtonType("Create", ButtonData.OK_DONE);
+    dialog.getDialogPane().getButtonTypes().addAll(createButtonType, ButtonType.CANCEL);
+
+    // Create the form
+    GridPane grid = new GridPane();
+    grid.setHgap(10);
+    grid.setVgap(10);
+    grid.setPadding(new Insets(20, 150, 10, 10));
+
+    TextField nameField = new TextField();
+    nameField.setPromptText("Name");
+    TextField emailField = new TextField();
+    emailField.setPromptText("Email");
+    TextField cardNumberField = new TextField();
+    cardNumberField.setPromptText("Card Number");
+    TextField expMonthField = new TextField();
+    expMonthField.setPromptText("Expiration Month");
+    TextField expYearField = new TextField();
+    expYearField.setPromptText("Expiration Year");
+    TextField cvcField = new TextField();
+    cvcField.setPromptText("CVC");
+
+    grid.add(new Label("Name:"), 0, 0);
+    grid.add(nameField, 1, 0);
+    grid.add(new Label("Email:"), 0, 1);
+    grid.add(emailField, 1, 1);
+    grid.add(new Label("Card Number:"), 0, 2);
+    grid.add(cardNumberField, 1, 2);
+    grid.add(new Label("Expiration Month:"), 0, 3);
+    grid.add(expMonthField, 1, 3);
+    grid.add(new Label("Expiration Year:"), 0, 4);
+    grid.add(expYearField, 1, 4);
+    grid.add(new Label("CVC:"), 0, 5);
+    grid.add(cvcField, 1, 5);
+
+    dialog.getDialogPane().setContent(grid);
+
+    // Convert the result to a Customer object when the button is clicked
+    dialog.setResultConverter(dialogButton -> {
+        if (dialogButton == createButtonType) {
+            String name = nameField.getText();
+            String email = emailField.getText();
+            String cardNumber = cardNumberField.getText();
+            int expMonth = Integer.parseInt(expMonthField.getText());
+            int expYear = Integer.parseInt(expYearField.getText());
+            String cvc = cvcField.getText();
+            try {
+                String customerId = StripeAPI.createCustomerWithCard(email, name, cardNumber, expMonth, expYear, cvc);
+                StripeAPI.createCharge(customerId, (int) res.getPrix_final(), "usd", email);
+                reservationCRUD rescrud = new reservationCRUD();
+                rescrud.updateEntityPrix(res.getId_reservation(), 0, res.getId_user());
+            } catch (StripeException ex) {
+                Logger.getLogger(DisplayController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
-    } catch (SQLException e) {
-        e.printStackTrace();
-    }           catch (StripeException ex) {
-                    Logger.getLogger(DisplayController.class.getName()).log(Level.SEVERE, null, ex);
-                }
+        return null;
+    });
+
+    dialog.showAndWait();
 });
+
             }
 
             @Override

@@ -43,6 +43,8 @@ public class ReservationController implements Initializable {
     @FXML
     private TextField residfilm;
     @FXML
+    private TextField id_projection;
+    @FXML
     private TextField resstate;
      @FXML
     private TextField starttime;
@@ -74,6 +76,7 @@ public class ReservationController implements Initializable {
         String residFilm = residfilm.getText();
         String idReservation = idreservation.getText();
         String resState = resstate.getText();
+        String residProjection = id_projection.getText();
        /* String startTime = starttime.getText();
         String endTime = endtime.getText();*/
         if  (!isFieldNotEmpty(residUser) || !isFieldNotEmpty(residFilm) || 
@@ -98,10 +101,11 @@ public class ReservationController implements Initializable {
         int iduser = Integer.valueOf(residuser.getText());
         int idfilm = Integer.valueOf(residfilm.getText());
         boolean state = Boolean.valueOf(resstate.getText());
+        int residProjection = Integer.valueOf(id_projection.getText());
         /*Timestamp start_time = Timestamp.valueOf(starttime.getText());
         Timestamp end_time = Timestamp.valueOf(endtime.getText());*/
         reservationCRUD pcd = new reservationCRUD();
-        reservation res = new reservation(iduser,idfilm,state);
+        reservation res = new reservation(iduser,idfilm,true,residProjection);
         pcd.addEntity(res);
         
         int c1 = pcd.checkUser(res);
@@ -152,10 +156,11 @@ public class ReservationController implements Initializable {
        int iduser = Integer.valueOf(residuser.getText());
         int idfilm = Integer.valueOf(residfilm.getText());
         boolean state = Boolean.valueOf(resstate.getText());
+                int residProjection = Integer.valueOf(id_projection.getText());
         Timestamp start_time = Timestamp.valueOf(starttime.getText());
         Timestamp end_time = Timestamp.valueOf(endtime.getText());
         reservationCRUD pcd = new reservationCRUD();
-        reservation res = new reservation(0.0f,iduser,idfilm,state,start_time,end_time);
+        reservation res = new reservation(0.0f,iduser,idfilm,state,start_time,end_time,residProjection);
        
         
     }

@@ -87,30 +87,24 @@ public int checkFilm(reservation r){
     }
 
     // Retrieve the start and end times from the projection table
-    String selectProjectionQuery = "SELECT date_debut, date_fin FROM projection WHERE id_film = ?";
+    String selectProjectionQuery = "SELECT date_debut, date_fin FROM projection WHERE id_projection = ?";
     PreparedStatement selectProjectionStmt = cineproConnexion.getInstance().getCnx().prepareStatement(selectProjectionQuery);
-    selectProjectionStmt.setInt(1, filmId);
+    selectProjectionStmt.setInt(1, r.getId_projection());
     ResultSet projectionResult = selectProjectionStmt.executeQuery();
 
     // Insert the reservation into the database
-    String insertReservationQuery = "INSERT INTO reservation (Prix_final, id_user, id_film, state, start_time, end_time) VALUES (?, ?, ?, ?, ?, ?)";
+    String insertReservationQuery = "INSERT INTO reservation (Prix_final, id_user, id_film, state, start_time, end_time, id_projection) VALUES (?, ?, ?, ?, ?, ?, ?)";
     PreparedStatement insertReservationStmt = cineproConnexion.getInstance().getCnx().prepareStatement(insertReservationQuery);
     insertReservationStmt.setFloat(1, prixFinal);
     insertReservationStmt.setInt(2, userId);
     insertReservationStmt.setInt(3, filmId);
     insertReservationStmt.setBoolean(4, state);
+    insertReservationStmt.setInt(7, r.getId_projection());
+    Timestamp startTime = projectionResult.getTimestamp("date_debut");
+    Timestamp endTime = projectionResult.getTimestamp("date_fin");
 
-    if (projectionResult.next()) {
-        Timestamp startTime = projectionResult.getTimestamp("date_debut");
-        Timestamp endTime = projectionResult.getTimestamp("date_fin");
-
-        insertReservationStmt.setTimestamp(5, startTime);
-        insertReservationStmt.setTimestamp(6, endTime);
-    } else {
-        // No projection found for the given film ID
-        System.out.println("No projection found for the given film ID");
-        return;
-    }
+    insertReservationStmt.setTimestamp(5, startTime);
+    insertReservationStmt.setTimestamp(6, endTime);
 
     int rowsAffected = insertReservationStmt.executeUpdate();
 
@@ -144,6 +138,7 @@ public int checkFilm(reservation r){
                 p.setState(rs.getBoolean(5));
                 p.setStart_time(rs.getTimestamp(6));
                 p.setEnd_time(rs.getTimestamp(7));
+                p.setId_projection(rs.getInt(8));
                                 
                 myList.add(p);
             }
@@ -175,17 +170,18 @@ public int checkFilm(reservation r){
         }
      }
     
-     public void updateEntity(int id_reservation,float prix_final,int id_user,int id_film,boolean state){
+     public void updateEntity(int id_reservation,float prix_final,int id_user,int id_film,boolean state, int id_projection){
         
          try{
-        String requete = "UPDATE reservation set prix_final = ?,id_user = ?,id_film = ?,state  = ? WHERE id_reservation = ?";
+        String requete = "UPDATE reservation set prix_final = ?,id_user = ?,id_film = ?,state  = ?,id_projection=? WHERE id_reservation = ?";
         PreparedStatement st=cineproConnexion.getInstance()
                 .getCnx().prepareStatement(requete);
             
               st.setFloat(1, prix_final);
               st.setInt(2, id_user);
               st.setInt(3, id_film);
-              st.setBoolean(4, state);
+              st.setInt(7, id_projection);
+              st.setBoolean(5, state);
               
         st.executeUpdate();
         }catch (SQLException ex) {
