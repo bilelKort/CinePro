@@ -40,6 +40,67 @@ public class SnackCRUD {
         }
 
     }
+    
+    
+      public void addEntitycsv(snack s) {
+          int count=0;
+            try {
+           String requete1 = "SELECT count(*) FROM snack where nom='"+s.getNom()+"'";
+            Statement st1 = MyConnection.getInstance().getCnx()
+                    .createStatement();
+
+            ResultSet rs = st1.executeQuery(requete1);
+            while (rs.next()) {
+                count = count + rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+
+          
+          
+          if(count==0){
+              String requete = "INSERT INTO snack ( nom,  prix,  quantite,  photo,  id_cinema )" + "VALUES(?,?,?,?,?)";
+
+        try {
+            PreparedStatement st = MyConnection.getInstance().getCnx()
+                    .prepareStatement(requete);
+            
+
+            st.setString(1, s.getNom());
+            st.setFloat(2, s.getPrix());
+            st.setInt(3, s.getQuantite());
+            st.setString(4, s.getPhoto());
+            st.setInt(5, s.getId_cinema());
+
+            st.executeUpdate();
+            System.out.println("snack ajoutée");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+          }
+          else  {
+          try {
+              
+              System.out.println(s.getQuantite());
+            String requete="UPDATE snack SET  quantite=quantite+?   where nom=?";
+            PreparedStatement st=MyConnection.getInstance().getCnx().prepareStatement(requete);
+                        st.setInt(1,s.getQuantite());
+
+            st.setString(2,s.getNom());
+            
+            st.executeUpdate();
+            System.out.println("snack Updated!");
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+          
+          
+          
+          }
+        
+
+    }
 
     public List<snack> entitiesList() {
         ArrayList<snack> myList = new ArrayList();

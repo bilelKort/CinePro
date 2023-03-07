@@ -26,6 +26,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -49,6 +50,8 @@ public class PanierSnackController implements Initializable {
     private Button removeButton;
     @FXML
     private Label prixgold;
+    @FXML
+    private AnchorPane anchor;
 
     /**
      * Initializes the controller class.
@@ -85,11 +88,11 @@ public class PanierSnackController implements Initializable {
         List<snack> products = cr.entitiesList2(9);
         for (snack product : products) {
             try {
-                Label nameLabel = new Label(product.getNom());
+                Label nameLabel = new Label("        "+product.getNom());
                 //    Label descriptionLabel = new Label(product.);
-                Label priceLabel = new Label(Double.toString(product.getPrix()));
+                Label priceLabel = new Label("        "+Double.toString(product.getPrix()));
 Button addButton = new Button("Ajouter au panier");
-addButton.setStyle("-fx-background-color: #3CB371; -fx-text-fill: white; -fx-font-size: 13px;");
+addButton.setStyle("-fx-background-color: #f9a460; -fx-text-fill: white; -fx-font-size: 13px;");
 
                 Label espas = new Label();
 
@@ -100,24 +103,26 @@ addButton.setStyle("-fx-background-color: #3CB371; -fx-text-fill: white; -fx-fon
                 ImageView imageView = new ImageView();
 //imageid.setImage(new Image("C:\Users\rayen\Pictures\cinema.jpg"));
                 imageView.setImage(new Image(localUrl));
-                imageView.setFitWidth(280);
-                imageView.setFitHeight(198);
+                imageView.setFitWidth(300);
+                imageView.setFitHeight(228);
 
                 VBox productBox = new VBox(imageView, nameLabel, priceLabel, addButton, espas);
                 productBox.setSpacing(10.0);
                 
 
-                addButton.setStyle("-fx-background-color: blue; -fx-text-fill: white;");
 
                 addButton.setOnAction(event -> {
+                                    addButton.setStyle("-fx-background-color: brown; -fx-text-fill: white;");
+
                     // Ajout du produit sélectionné à la liste des produits sélectionnés
                     if (product.getNom() != null) {
                         selection.add(product);
                         updateTotalPrice(totalPriceLabel, selection);
-
                     }
                 });
                 productList.getChildren().add(productBox);
+                anchor.setPrefHeight(3000);
+                
             } catch (MalformedURLException ex) {
                 Logger.getLogger(PanierSnackController.class.getName()).log(Level.SEVERE, null, ex);
             }

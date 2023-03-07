@@ -2,15 +2,35 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="707.0" style="-fx-background-color: #7B002C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.PanierSnackController">
+<AnchorPane id="AnchorPane" prefHeight="715.0" prefWidth="1323.0" style="-fx-background-color: #7B002C;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.PanierSnackController">
    <children>
-      <VBox fx:id="vboxpanier" layoutX="441.0" layoutY="41.0" prefHeight="200.0" prefWidth="245.0" style="-fx-background-color: #EFEFEF;" />
-      <Label fx:id="totalPriceLabel" layoutX="567.0" layoutY="295.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #FFFFFF;" text="total" />
-      <VBox fx:id="productList" layoutX="29.0" layoutY="41.0" prefHeight="282.0" prefWidth="289.0" style="-fx-background-color: #EFEFEF;" />
-      <Button fx:id="removeButton" layoutX="385.0" layoutY="63.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-text-fill: #7B002C;" text="delete" />
-      <Label fx:id="prixgold" layoutX="531.0" layoutY="323.0" prefHeight="17.0" prefWidth="158.0" style="-fx-text-fill: #FFFFFF;" />
+      <ScrollPane prefHeight="779.0" prefWidth="1363.0">
+        <content>
+          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="762.0" prefWidth="1388.0" style="-fx-background-color: #6b0f1a;">
+               <children>
+                  <VBox fx:id="vboxpanier" layoutX="1065.0" layoutY="320.0" prefHeight="294.0" prefWidth="245.0" style="-fx-background-color: #EFEFEF;" />
+                  <Label fx:id="totalPriceLabel" layoutX="1068.0" layoutY="642.0" prefHeight="17.0" prefWidth="86.0" style="-fx-text-fill: #FFFFFF;" text="total" />
+                  <VBox fx:id="productList" layoutX="31.0" layoutY="186.0" prefHeight="561.0" prefWidth="296.0" style="-fx-background-color: #EFEFEF;" />
+                  <Button fx:id="removeButton" layoutX="987.0" layoutY="369.0" mnemonicParsing="false" style="-fx-background-color: #FFFFFF; -fx-text-fill: #7B002C;" text="delete" />
+                  <Label fx:id="prixgold" layoutX="1091.0" layoutY="686.0" prefHeight="17.0" prefWidth="158.0" style="-fx-text-fill: #FFFFFF;" />
+                  <Label layoutX="1036.0" layoutY="269.0" prefHeight="32.0" prefWidth="151.0" text="votre panier :" textFill="WHITE">
+                     <font>
+                        <Font name="System Bold" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="547.0" layoutY="51.0" prefHeight="69.0" prefWidth="294.0" style="-fx-background-color: #E6B8B7; -fx-text-fill: #6B001F; -fx-alignment: center;" text="RESERVER VOS SNACKS">
+                     <font>
+                        <Font name="System Bold" size="15.0" />
+                     </font>
+                  </Label>
+               </children>
+            </AnchorPane>
+        </content>
+      </ScrollPane>
    </children>
 </AnchorPane>

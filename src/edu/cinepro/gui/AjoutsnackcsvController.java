@@ -190,7 +190,7 @@ else {veriff.setText("");}
 
         for (snack i : data1) {
             System.out.println(i);
-            pc.addEntity(i);
+            pc.addEntitycsv(i);
         }
         affiche();
     }
