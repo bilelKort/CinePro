@@ -64,6 +64,9 @@ public class FilmService implements FilmCRUD<Film> {
 
     @Override
     public List filmList(String name, String date, String genre) {
+        if (genre == null || genre.equals("Choose Genre")) {
+            genre = "";
+        }
         ArrayList<Film> list = new ArrayList<Film>();
         try {
             String requete = "select distinct(f.id_film), f.nom, f.poster from film f left join projection p on f.id_film = p.id_film where f.nom like ? and categorie like ?";
