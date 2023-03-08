@@ -91,8 +91,7 @@ public int checkFilm(reservation r){
     PreparedStatement selectProjectionStmt = cineproConnexion.getInstance().getCnx().prepareStatement(selectProjectionQuery);
     selectProjectionStmt.setInt(1, r.getId_projection());
     ResultSet projectionResult = selectProjectionStmt.executeQuery();
-
-    // Insert the reservation into the database
+    projectionResult.next();    // Insert the reservation into the database
     String insertReservationQuery = "INSERT INTO reservation (Prix_final, id_user, id_film, state, start_time, end_time, id_projection) VALUES (?, ?, ?, ?, ?, ?, ?)";
     PreparedStatement insertReservationStmt = cineproConnexion.getInstance().getCnx().prepareStatement(insertReservationQuery);
     insertReservationStmt.setFloat(1, prixFinal);

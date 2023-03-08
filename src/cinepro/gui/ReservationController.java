@@ -80,7 +80,7 @@ public class ReservationController implements Initializable {
        /* String startTime = starttime.getText();
         String endTime = endtime.getText();*/
         if  (!isFieldNotEmpty(residUser) || !isFieldNotEmpty(residFilm) || 
-                !isFieldNotEmpty(resState)) {
+                !isFieldNotEmpty(residProjection)) {
             
             Alert alert = new Alert(Alert.AlertType.WARNING);
             alert.setTitle("Validate Form");
@@ -102,13 +102,16 @@ public class ReservationController implements Initializable {
         int idfilm = Integer.valueOf(residfilm.getText());
         boolean state = Boolean.valueOf(resstate.getText());
         int residProjection = Integer.valueOf(id_projection.getText());
+            System.out.println(residProjection);
         /*Timestamp start_time = Timestamp.valueOf(starttime.getText());
         Timestamp end_time = Timestamp.valueOf(endtime.getText());*/
         reservationCRUD pcd = new reservationCRUD();
         reservation res = new reservation(iduser,idfilm,true,residProjection);
         pcd.addEntity(res);
         
-        int c1 = pcd.checkUser(res);
+            System.out.println(res);
+            System.out.println(pcd);
+            int c1 = pcd.checkUser(res);
         int c2 = pcd.checkFilm(res);
         String reservationInfo = "id reservation: " + res.getId_reservation() + "\n id user: " + res.getId_user() + "\n id_film: " 
                 + res.getId_film() + "\n start time: " + res.getStart_time() + "\n end time: " + res.getEnd_time();
@@ -119,27 +122,7 @@ public class ReservationController implements Initializable {
        Parent root = loader.load(); 
 
         btn.getScene().setRoot(root);
-        ////////////////////////////////////////////////////////////////
-        /*QRCodeGenerator qrCodeGenerator = new QRCodeGenerator();
-        ImageView imageView = null;
-        ImageView qrCodeImageView = null;
-
-        qrCodeImageView = qrCodeGenerator.generateQRCode(reservationInfo);
-        Stage qrCodeStage = new Stage();
-        qrCodeStage.setTitle("Reservation QR Code");
-
-    // Check if qrCodeImageView is null
-    if (qrCodeImageView != null) {
-        // Add ImageView object to the scene
-        Scene scene = new Scene(new Group(qrCodeImageView));
-        qrCodeStage.setScene(scene);
-
-        // Show the new stage
-        qrCodeStage.show();
-    ///////////////////////////////////////////////////////////
-    
-    
-    }*/
+      
        }catch(IOException ex){
         System.out.println(ex.getMessage());
     } 
