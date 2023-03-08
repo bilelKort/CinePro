@@ -10,32 +10,28 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Cinepro.gui.AbonnementController">
    <children>
-      <Label layoutX="86.0" layoutY="55.0" text="Nom">
+      <Label layoutX="123.0" layoutY="88.0" text="Nom">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="86.0" layoutY="102.0" text="Prénom">
+      <Label layoutX="115.0" layoutY="143.0" text="Prénom">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="86.0" layoutY="150.0" text="Durée de l'abonnement">
+      <Label layoutX="75.0" layoutY="200.0" text="Durée de l'abonnement">
          <font>
             <Font size="14.0" />
          </font>
       </Label>
-      <Label layoutX="86.0" layoutY="254.0" text="Adresse Mail">
-         <font>
-            <Font size="14.0" />
-         </font>
-      </Label>
-      <TextField fx:id="idNom" editable="false" layoutX="301.0" layoutY="51.0" />
-      <TextField fx:id="idPrenom" editable="false" layoutX="301.0" layoutY="98.0" />
-      <TextField fx:id="mail" editable="false" layoutX="301.0" layoutY="251.0" />
-      <Button fx:id="valider" layoutX="336.0" layoutY="320.0" mnemonicParsing="false" onAction="#saveAbonnement" prefHeight="26.0" prefWidth="79.0" text="Valider" />
-      <VBox fx:id="vBox" layoutX="300.0" layoutY="143.0" prefHeight="97.0" prefWidth="150.0" />
-      <ChoiceBox fx:id="choiceBox" layoutY="1.0" prefWidth="150.0" />
-      <Button fx:id="cancel" layoutX="124.0" layoutY="321.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Quitter" />
+      <TextField fx:id="idNom" editable="false" layoutX="301.0" layoutY="85.0" />
+      <TextField fx:id="idPrenom" editable="false" layoutX="300.0" layoutY="140.0" />
+      <VBox fx:id="vBox" layoutX="299.0" layoutY="182.0" prefHeight="97.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="choiceBox" prefWidth="150.0" />
+      <Button fx:id="cancel" layoutX="139.0" layoutY="330.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Annuler" />
+      <Button fx:id="valider" layoutX="335.0" layoutY="330.0" mnemonicParsing="false" onAction="#saveAbonnement" prefHeight="26.0" prefWidth="79.0" text="Valider" />
+      <Label layoutX="78.0" layoutY="280.0" text="Numéro carte bancaire" />
+      <TextField fx:id="ncb" layoutX="302.0" layoutY="276.0" />
    </children>
 </AnchorPane>

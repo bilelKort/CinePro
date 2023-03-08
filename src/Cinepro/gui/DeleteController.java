@@ -31,6 +31,8 @@ public class DeleteController implements Initializable {
     private TextField idClient;
     @FXML
     private Label erreur;
+    @FXML
+    private Label er;
 
     /**
      * Initializes the controller class.
@@ -39,13 +41,29 @@ public class DeleteController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
+    public boolean isValidId(String id) {
+    for (int i = 0; i < id.length(); i++) {
+    if (!Character.isDigit(id.charAt(i))) {
+        return false;
+    }else{
+        return true;
+    }
+    }
+    return true;
+    }
 
     @FXML
     private void Delete(ActionEvent event) {
         erreur.setText("");
         if (idClient.getText().isEmpty()) {
             erreur.setText("Entrez le client ID!");
-        } else {
+            
+        }String id = idClient.getText(); 
+            Boolean valid=isValidId(id);
+                if(!valid){
+                    er.setText("Entrez un entier!");
+                }
+                else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation de suppession");
             alert.setHeaderText("Êtes-vous sûr de vouloir supprimer cet élément ?");
@@ -56,7 +74,7 @@ public class DeleteController implements Initializable {
             // Si l'utilisateur a cliqué sur "Oui", effectuez l'opération de modification
             if (result.get() == ButtonType.YES) {
 
-                String id = idClient.getText();
+                
                 AbonnementCRUD acd = new AbonnementCRUD();
                 acd.deleteEntity(Integer.parseInt(id));
                 System.out.println("DELETE DONE!");

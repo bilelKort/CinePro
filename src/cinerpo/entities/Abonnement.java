@@ -95,6 +95,22 @@ public class Abonnement {
     public Timestamp getDateExpiration() {
         return dateExpiration;
     }
+     public String trans (){
+            switch (this.getType().getNb_mois()) {
+                case 1:
+                    return "1 mois";
+                case 3:
+                    return "3 mois";
+                case 6:
+                    return "6 mois";
+                case 12:
+                    return "1 an";
+                default:
+                    break;
+            }
+        
+        return "";
+    }
 
     
 

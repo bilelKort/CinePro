@@ -76,15 +76,14 @@ public class ADDBadgeController implements Initializable {
         switch(type){
                 case Gold :
                     b.setType(Type_Badge.gold);
-                    b.setNbr_reservation(100);
-                    break;
+                   
                 case Silver:
                     b.setType(Type_Badge.silver);
-                    b.setNbr_reservation(50);
+                    
                     break;
                 case Bronze:
                     b.setType(Type_Badge.bronze);
-                    b.setNbr_reservation(10);
+                   
                     break;
                 
         }

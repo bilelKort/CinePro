@@ -31,6 +31,8 @@ public class DeleteBadgeController implements Initializable {
     private TextField idb;
     @FXML
     private Label erreur;
+    @FXML
+    private Label er;
 
     /**
      * Initializes the controller class.
@@ -39,13 +41,27 @@ public class DeleteBadgeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
     }
-
+    public boolean isValidId(String id) {
+    for (int i = 0; i < id.length(); i++) {
+    if (!Character.isDigit(id.charAt(i))) {
+        return false;
+    }else{
+        return true;
+    }
+    }
+    return true;
+    }
     @FXML
     private void deleteBadge(ActionEvent event) {
         erreur.setText("");
         if (idb.getText().isEmpty()) {
             erreur.setText("Entrez le Badgz ID!");
-        } else {
+        }String id = idb.getText(); 
+            Boolean valid=isValidId(id);
+                if(!valid){
+                    er.setText("Entrez un entier!");
+                }
+                 else {
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation de suppression");
             alert.setHeaderText("Êtes-vous sûr de vouloir supprimer cet élément ?");
@@ -56,7 +72,7 @@ public class DeleteBadgeController implements Initializable {
             // Si l'utilisateur a cliqué sur "Oui", effectuez l'opération de modification
             if (result.get() == ButtonType.YES) {
 
-                String id = idb.getText();
+                
                 BadgeCRUD bcd = new BadgeCRUD();
                 bcd.deleteEntity(Integer.parseInt(id));
                 System.out.println("DELETE DONE!");

@@ -21,14 +21,7 @@ public class CineproConnection {
     private Connection cnx;
     private static CineproConnection instance;
     
-     public static CineproConnection getInstance(){
-        if(instance == null){
-            instance = new CineproConnection();
-        }
-        return instance;
-    }
-    
-    public CineproConnection(){
+    private CineproConnection(){
         try{
             cnx= DriverManager.getConnection(url,login,pwd);
             System.out.println("connexion etablie");
@@ -36,6 +29,15 @@ public class CineproConnection {
             System.out.println(ex.getMessage());
         }
     }
+    
+    
+     public static CineproConnection getInstance(){
+        if(instance == null){
+            instance = new CineproConnection();
+        }
+        return instance;
+    }
+    
     
     public Connection getCnx(){
         return cnx;

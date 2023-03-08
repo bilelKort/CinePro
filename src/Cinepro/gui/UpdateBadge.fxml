@@ -16,5 +16,6 @@
       <ChoiceBox fx:id="cbox" prefWidth="150.0" />
       <Button fx:id="update" layoutX="281.0" layoutY="361.0" mnemonicParsing="false" onAction="#updateBadge" text="Valider" />
       <Label fx:id="erreur" layoutX="361.0" layoutY="192.0" />
+      <Label fx:id="er" layoutX="286.0" layoutY="330.0" />
    </children>
 </AnchorPane>

@@ -35,6 +35,10 @@ public class Badge {
         this.type = type;
         this.nbr_reservation = nbr_reservation;
     }
+
+    public Badge(int i) {
+        this.id_badge=i;
+    }
     
     
 
@@ -74,6 +78,21 @@ public class Badge {
 
     public void setId_user(int id_user) {
         this.id_user = id_user;
+    }
+     public String trans (){
+            switch (this.getType()) {
+                case gold:
+                    return "gold";
+                case silver:
+                    return "silver";
+                case bronze:
+                    return "bronze";
+                
+                default:
+                    break;
+            }
+        
+        return "";
     }
     
 

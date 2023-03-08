@@ -25,5 +25,6 @@
       <VBox fx:id="vbox" layoutX="292.0" layoutY="155.0" prefHeight="144.0" prefWidth="100.0" />
       <ChoiceBox fx:id="cbox" prefHeight="26.0" prefWidth="118.0" />
       <Label fx:id="erreur" layoutX="328.0" layoutY="131.0" />
+      <Label layoutX="278.0" layoutY="353.0" />
    </children>
 </AnchorPane>

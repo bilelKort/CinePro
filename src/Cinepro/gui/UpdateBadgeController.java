@@ -39,6 +39,8 @@ public class UpdateBadgeController implements Initializable {
     private Button update;
     @FXML
     private Label erreur;
+    @FXML
+    private Label er;
 
     /**
      * Initializes the controller class.
@@ -56,6 +58,16 @@ public class UpdateBadgeController implements Initializable {
         // TODO
         // TODO
     }
+    public boolean isValidId(String id) {
+    for (int i = 0; i < id.length(); i++) {
+     if(!Character.isDigit(id.charAt(i))) {
+        return false;
+    }else{
+        return true;
+    }
+    }
+    return true;
+    }
 
     @FXML
     private void updateBadge(ActionEvent event) {
@@ -63,6 +75,12 @@ public class UpdateBadgeController implements Initializable {
         if (idUser.getText().isEmpty()) {
             erreur.setText("Entrez le User ID!");
         } else {
+            String id = idUser.getText();
+            Boolean valid=isValidId(id);
+                if(!valid){
+                    er.setText("Entrez un entier!");
+                }
+                else{
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation de modification");
             alert.setHeaderText("Êtes-vous sûr de vouloir modifier cet élément ?");
@@ -73,8 +91,8 @@ public class UpdateBadgeController implements Initializable {
             // Si l'utilisateur a cliqué sur "Oui", effectuez l'opération de modification
             if (result.get() == ButtonType.YES) {
 
-                String id = idUser.getText();
-
+                
+                
                 Type1 type = cbox.getValue();
                 Badge b = new Badge();
                 switch (type) {
@@ -91,6 +109,7 @@ public class UpdateBadgeController implements Initializable {
 
                 BadgeCRUD bcd = new BadgeCRUD();
                 bcd.updateEntity(b, Integer.parseInt(id));
+                }
 
             }
 

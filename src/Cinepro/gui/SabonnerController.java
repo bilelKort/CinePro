@@ -46,7 +46,7 @@ public class SabonnerController implements Initializable {
             AbonnementController ac = loader.getController();
             ac.setIdNom(p.getNom());
             ac.setIdPrenom(p.getPrenom());
-            ac.setMail(p.getMail());
+           
             ab.getScene().setRoot(root);
 
         } catch (IOException ex) {

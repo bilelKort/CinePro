@@ -44,6 +44,8 @@ public class UpdateController implements Initializable {
     private ChoiceBox<Type> cbox;
     @FXML
     private Label erreur;
+    @FXML
+    private Label er;
 
     /**
      * Initializes the controller class.
@@ -60,6 +62,16 @@ public class UpdateController implements Initializable {
         vbox.getChildren().addAll(cbox);
         // TODO
     }
+    public boolean isValidId(String id) {
+    for (int i = 0; i < id.length(); i++) {
+    if (!Character.isDigit(id.charAt(i))) {
+        return false;
+    }else{
+        return true;
+    }
+    }
+    return true;
+    }
     
     @FXML
     private void update(ActionEvent event) {
@@ -67,6 +79,12 @@ public class UpdateController implements Initializable {
         if (idab.getText().isEmpty()) {
             erreur.setText("Entrez le User ID!");
         } else {
+            String id = idab.getText();
+            Boolean valid=isValidId(id);
+                if(!valid){
+                    er.setText("Entrez un entier!");
+                }
+                else{
             // Créez une boîte de dialogue de confirmation
             Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
             alert.setTitle("Confirmation de modification");
@@ -78,7 +96,7 @@ public class UpdateController implements Initializable {
             // Si l'utilisateur a cliqué sur "Oui", effectuez l'opération de modification
             if (result.get() == ButtonType.YES) {
 
-                String id = idab.getText();
+                
                 TypeAbonnement ta = new TypeAbonnement();
                 Type type = cbox.getValue();
                 switch (type) {
@@ -98,11 +116,10 @@ public class UpdateController implements Initializable {
 
                 Abonnement a = new Abonnement(ta);
                 AbonnementCRUD acd = new AbonnementCRUD();
-                acd.updateEntity(a, Integer.parseInt(id));
-                // Code pour effectuer la modification
+                acd.updateEntity(a, Integer.parseInt(id));   
             }
         }
 
-    }
+        }}}
 
-}
+
