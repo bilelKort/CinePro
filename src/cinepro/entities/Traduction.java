@@ -36,7 +36,6 @@ Request request = new Request.Builder()
 	.addHeader("X-RapidAPI-Key", "73144e7b2emsh6a25e66552f8578p149f24jsnbc2d27f5b046")
 	.addHeader("X-RapidAPI-Host", "rapid-translate-multi-traduction.p.rapidapi.com")
 	.build();
-Response response=null;
         
            
             ObjectMapper objectMapper = new ObjectMapper();

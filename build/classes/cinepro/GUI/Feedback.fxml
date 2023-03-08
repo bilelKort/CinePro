@@ -13,7 +13,7 @@
             <Font name="System Bold Italic" size="26.0" />
          </font></Label>
       <TextField fx:id="feedback" layoutX="289.0" layoutY="272.0" prefHeight="82.0" prefWidth="169.0" />
-      <Button fx:id="btnajouter" layoutX="455.0" layoutY="402.0" mnemonicParsing="false" onAction="#ajouterfeedback" text="Ajouter" textFill="#a81010">
+      <Button fx:id="btnajouter" layoutX="510.0" layoutY="467.0" mnemonicParsing="false" onAction="#ajouterfeedback" text="Ajouter" textFill="#a81010">
          <font>
             <Font name="Tahoma" size="22.0" />
          </font></Button>
@@ -27,7 +27,7 @@
          </font></Label>
       <TextField fx:id="id_user" layoutX="289.0" layoutY="130.0" />
       <TextField fx:id="id_film" layoutX="289.0" layoutY="200.0" />
-      <Label fx:id="erreur" layoutX="482.0" layoutY="183.0" textFill="#1a2edb">
+      <Label fx:id="erreur" layoutX="482.0" layoutY="183.0" prefHeight="27.0" prefWidth="129.0" textFill="WHITE">
          <font>
             <Font size="18.0" />
          </font></Label>
@@ -36,5 +36,7 @@
             <Font name="System Italic" size="58.0" />
          </font>
       </Label>
+      <Label fx:id="idtraduction" layoutX="152.0" layoutY="374.0" prefHeight="17.0" prefWidth="303.0" textFill="WHITE" />
+      <Button layoutX="535.0" layoutY="379.0" mnemonicParsing="false" onAction="#traductionfct" text="traduire" />
    </children>
 </AnchorPane>

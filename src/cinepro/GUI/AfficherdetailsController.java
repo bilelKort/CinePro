@@ -8,6 +8,15 @@ import cinepro.entities.Feedback;
 import cinepro.entities.Traduction;
 import cinepro.services.FeedbackCRUD;
 import cinepro.services.Mail;
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.itextpdf.text.Element;
+import com.itextpdf.text.Font;
+import com.itextpdf.text.Paragraph;
+import com.itextpdf.text.Phrase;
+import com.itextpdf.text.pdf.PdfPCell;
+import com.itextpdf.text.pdf.PdfPTable;
+import com.itextpdf.text.pdf.PdfWriter;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -18,6 +27,8 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
@@ -45,8 +56,9 @@ public class AfficherdetailsController implements Initializable {
     public ObservableList<Feedback> k = FXCollections.observableArrayList();
     @FXML
     private TableColumn<Feedback, Integer> id_feedback;
-    @FXML
-    private TableColumn<Feedback, Void> trad;
+   
+    
+  
 
     /**
      * Initializes the controller class.
@@ -120,5 +132,8 @@ public class AfficherdetailsController implements Initializable {
     public void setId_feedback(TableColumn<Feedback, Integer> id_feedback) {
         this.id_feedback = id_feedback;
     }
+
+   
+       
 
 }
