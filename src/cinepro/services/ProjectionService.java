@@ -24,7 +24,7 @@ public class ProjectionService implements ProjectionCRUD<Projection> {
                 FilmService filmService = new FilmService();
                 Film film = filmService.getFilmById(projection.getId_film());
                 Mail mail = new Mail();
-                mail.envoyer(film.getNom(), film.getTrailer(), projection.getDate_debut());
+                mail.envoyerFilm(film.getNom(), film.getTrailer(), projection.getDate_debut());
             }
 
             String requete = "insert into projection (id_salle, id_film, date_debut, date_fin, nbr_places, diffuse) values (?, ?, str_to_date(?, '%Y-%m-%d %H:%i'), str_to_date(?, '%Y-%m-%d %H:%i'), ?, ?)";

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.AfficherReclamationController">
+   <children>
+      <TableView fx:id="tableview" layoutX="112.0" layoutY="99.0" opacity="0.73" prefHeight="481.0" prefWidth="547.0">
+        <columns>
+          <TableColumn fx:id="description" prefWidth="89.0" text="description" />
+          <TableColumn fx:id="id_reclamation" prefWidth="99.0" text="id_reclamtion" />
+            <TableColumn fx:id="id_user" prefWidth="67.0" text="id_user" />
+            <TableColumn fx:id="id_film" prefWidth="79.0" text="id_film" />
+            <TableColumn fx:id="date" prefWidth="92.0" text="date" />
+            <TableColumn fx:id="etat" prefWidth="120.0" text="etat" />
+        </columns>
+      </TableView>
+      <Label layoutX="73.0" layoutY="14.0" text="Reclamations" textFill="#d70c0c">
+         <font>
+            <Font name="Arial Bold Italic" size="45.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

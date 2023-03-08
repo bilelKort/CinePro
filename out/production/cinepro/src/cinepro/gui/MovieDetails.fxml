@@ -5,6 +5,7 @@
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -15,7 +16,7 @@
    <children>
       <ScrollPane prefHeight="750.0" prefWidth="1400.0">
          <content>
-            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="2700.0" prefWidth="1381.0">
+            <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="3500.0" prefWidth="1381.0">
                <children>
                   <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies">
                      <font>
@@ -120,6 +121,25 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <Label layoutX="120.0" layoutY="2682.0" text="Feedback:">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
+                  <TextArea fx:id="feedback" layoutX="274.0" layoutY="2698.0" prefHeight="200.0" prefWidth="827.0" />
+                  <Button layoutX="1008.0" layoutY="2917.0" mnemonicParsing="false" onAction="#ajouterfeedback" text="Ajouter">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
+                  <TableView fx:id="tableview" layoutX="341.0" layoutY="3038.0" prefHeight="368.0" prefWidth="700.0" style="-fx-background-color: white;">
+                     <columns>
+                        <TableColumn fx:id="feedbacktable" prefWidth="400.0" text="feedback" />
+                        <TableColumn fx:id="usertable" prefWidth="100.0" text="id_user" />
+                        <TableColumn fx:id="datetable" prefWidth="200.0" text="date" />
+                        <TableColumn fx:id="id_feedbacltable" prefWidth="120.0" text="id_feedback" />
+                     </columns>
+                  </TableView>
                </children>
             </AnchorPane>
          </content>

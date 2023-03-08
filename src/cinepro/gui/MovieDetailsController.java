@@ -1,12 +1,7 @@
 package cinepro.gui;
 
-import cinepro.entities.Crew;
-import cinepro.entities.Film;
-import cinepro.entities.Projection;
-import cinepro.entities.TableProjection;
-import cinepro.services.CrewService;
-import cinepro.services.FilmService;
-import cinepro.services.ProjectionService;
+import cinepro.entities.*;
+import cinepro.services.*;
 import edu.cinepro.gui.PlaceController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -31,6 +26,9 @@ import javax.imageio.ImageIO;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.ResourceBundle;
@@ -38,6 +36,21 @@ import java.util.ResourceBundle;
 public class MovieDetailsController implements Initializable {
 
 
+    @FXML
+    private TableView<Feedback> tableview;
+    @FXML
+    private TableColumn<Feedback, String> feedbacktable;
+
+    @FXML
+    private TableColumn<Feedback, Integer> usertable;
+
+    @FXML
+    private TableColumn<Feedback, String> datetable;
+
+    @FXML
+    private TableColumn<Feedback, Integer> id_feedbacltable;
+    @FXML
+    private TextArea feedback;
     @FXML
     private TableView table;
     @FXML
@@ -101,9 +114,11 @@ public class MovieDetailsController implements Initializable {
     private int id_film;
     private List<Projection> list;
     public ObservableList<TableProjection> observableList = FXCollections.observableArrayList();
+    public ObservableList<Feedback> k = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        id_feedbacltable.setVisible(false);
         film = new FilmService().getFilmById(instance.id_film);
         nom.setText(film.getNom());
         categorie.setText(film.getCategorie());
@@ -170,6 +185,22 @@ public class MovieDetailsController implements Initializable {
             }
         };
         tableRes.setCellFactory(update_btn);
+
+
+        FeedbackCRUD cd = new FeedbackCRUD();
+        List<Feedback> liste = new ArrayList<Feedback>();
+        liste = cd.commentaireList(instance.id_film);
+
+        for (Feedback f : liste) {
+            k.add(f);
+        }
+
+        usertable.setCellValueFactory(new PropertyValueFactory<Feedback, Integer>("id_user"));
+        feedbacktable.setCellValueFactory(new PropertyValueFactory<Feedback, String>("feedback"));
+        datetable.setCellValueFactory(new PropertyValueFactory<Feedback, String>("date"));
+        id_feedbacltable.setCellValueFactory(new PropertyValueFactory<Feedback, Integer>("id_feedback"));
+
+        tableview.setItems(k);
     }
 
     public void displayCrew(VBox vBox, String job) {
@@ -277,4 +308,26 @@ public class MovieDetailsController implements Initializable {
         this.id_film = id_film;
     }
 
+    public void ajouterfeedback(ActionEvent actionEvent) {
+        FeedbackCRUD c = new FeedbackCRUD();
+
+        if (c.FeedbackCounter() >= 2) {
+            System.out.println("Vous n'avez pas respecté les reglements");
+
+            Mail nvmail = new Mail();
+            nvmail.envoyerFeedback();
+        } else {
+
+            int resId_user = 1;
+            int resId_film = Integer.valueOf(instance.id_film);
+            DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
+            LocalDateTime now = LocalDateTime.now();
+            String date = dtf.format(now);
+            FeedbackCRUD pcd = new FeedbackCRUD();
+            Feedback f = new Feedback(feedback.getText(), resId_user, resId_film, date);
+
+            pcd.addCommentaire(f);
+            System.out.println("Done!!");
+        }
+    }
 }

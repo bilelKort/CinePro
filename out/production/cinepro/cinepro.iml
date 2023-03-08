@@ -24,5 +24,7 @@
     <orderEntry type="library" name="opencsv-5.7.1" level="project" />
     <orderEntry type="library" name="commons" level="project" />
     <orderEntry type="library" name="controlsfx-8.40.14" level="project" />
+    <orderEntry type="library" name="okhhtp" level="project" />
+    <orderEntry type="library" name="jackson" level="project" />
   </component>
 </module>

@@ -1,0 +1,1 @@
+cinepro.interfaces.CommentaireCRUD

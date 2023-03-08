@@ -5,7 +5,6 @@ import cinepro.entities.Film;
 import cinepro.entities.Projection;
 import cinepro.services.CrewService;
 import cinepro.services.FilmService;
-import cinepro.services.Mail;
 import cinepro.services.ProjectionService;
 import cinepro.utils.MyConnection;
 import javafx.application.Application;

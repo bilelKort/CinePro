@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.ModifierController">
+   <children>
+      <Label fx:id="user" layoutX="75.0" layoutY="101.0" text="id_user" textFill="#e83232">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font></Label>
+      <Label fx:id="Feedback" layoutX="46.0" layoutY="207.0" text="feedback" textFill="#e42525">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font></Label>
+      <Label layoutX="68.0" layoutY="224.0" />
+      <TextField fx:id="id_user" layoutX="161.0" layoutY="106.0" />
+      <TextField fx:id="feedback" layoutX="161.0" layoutY="212.0" prefHeight="72.0" prefWidth="149.0" />
+      <Button fx:id="btnmodifier" layoutX="488.0" layoutY="412.0" mnemonicParsing="false" onAction="#modifier" text="modifier" textFill="#d31c1c">
+         <font>
+            <Font name="System Italic" size="29.0" />
+         </font></Button>
+      <Label fx:id="id_feedback" layoutX="14.0" layoutY="295.0" text="id_feedback" textFill="#ee2f2f">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font></Label>
+      <TextField fx:id="id_f" layoutX="161.0" layoutY="306.0" />
+      <Label layoutX="70.0" layoutY="153.0" text="id_film" textFill="#e41d1d">
+         <font>
+            <Font name="System Bold Italic" size="25.0" />
+         </font></Label>
+      <TextField fx:id="idf" layoutX="161.0" layoutY="158.0" />
+      <Label fx:id="erreur" layoutX="445.0" layoutY="183.0" textFill="#1713dd">
+         <font>
+            <Font size="19.0" />
+         </font></Label>
+   </children>
+</AnchorPane>
