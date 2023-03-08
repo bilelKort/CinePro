@@ -61,6 +61,8 @@ public class AfficheController implements Initializable {
     private AnchorPane stat;
     @FXML
     private Button statbtn;
+    @FXML
+    private Button cancel;
 
     //private Button idbtn;
     /**
@@ -90,6 +92,10 @@ public class AfficheController implements Initializable {
         TableView<Abonnement> tableview = new TableView<>();
         //ObservableList<Abonnement> abs = FXCollections.observableArrayList(); // Initialisation de la liste des abonnements
         tableview.setItems(k);
+        cancel.setOnAction(e -> {
+    Stage stage = (Stage) cancel.getScene().getWindow();
+    stage.close();
+});
         
 
         

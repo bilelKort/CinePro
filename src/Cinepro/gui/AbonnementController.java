@@ -86,6 +86,10 @@ public class AbonnementController implements Initializable {
 
         // Create a layout for the ChoiceBox
         vBox.getChildren().addAll(choiceBox);
+        cancel.setOnAction(e -> {
+    Stage stage = (Stage) cancel.getScene().getWindow();
+    stage.close();
+});
 
         // TODO
     }

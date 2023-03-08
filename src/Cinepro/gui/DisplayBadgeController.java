@@ -57,6 +57,8 @@ public class DisplayBadgeController implements Initializable {
     private Button stat;
     @FXML
     private Button bc;
+    @FXML
+    private Button cancel;
 
     //private Button idbtn;
     /**
@@ -83,6 +85,10 @@ public class DisplayBadgeController implements Initializable {
         //ObservableList<Abonnement> abs = FXCollections.observableArrayList(); // Initialisation de la liste des abonnements
         tableview.setItems(k);
         // TODO
+        cancel.setOnAction(e -> {
+    Stage stage = (Stage) cancel.getScene().getWindow();
+    stage.close();
+});
     }
       @FXML
     public void filtrer(){
@@ -93,6 +99,7 @@ public class DisplayBadgeController implements Initializable {
         cbox.valueProperty().addListener((observable, oldValue, newValue) -> {
             bFiltres.setPredicate(p -> p.trans().equals(newValue));
         });
+        
         
     }
     
