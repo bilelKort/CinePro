@@ -123,17 +123,9 @@ public class AbonnementController implements Initializable {
         int ida = acd.ajoutEntity(a);
         String email = acd.getEmail();
         System.out.println(a.getType().getPrix());
-
-        //sendMail(email,a);
+        sendMail(email,a);
         pay(ida,a);
-        /* FXMLLoader loader = new FXMLLoader(getClass().getResource("paiement.fxml"));
-        Parent root = loader.load();
-        PaiementController pc = loader.getController();
-        pc.setNom(idNom);
-        pc.setPrenom(idPrenom);
-        //pc.setEmail(acd.getEmail());
-        idNom.getScene().setRoot(root);*/
-
+       
     }
 
     public static void sendMail(String recepient, Abonnement a) throws MessagingException, IOException {
@@ -171,7 +163,7 @@ public class AbonnementController implements Initializable {
             MimeBodyPart htmlPart = new MimeBodyPart();
             htmlPart.setContent(template, "text/html");
             multipart.addBodyPart(htmlPart);
-            message.setText("Bonjour cher(e) abonné(e)\n Votres abonnement a été effectué avec succès ! \n Bienvenu(e) parmi nous :) "+"\n Vous avez payé"+a.getType().getPrix());
+            message.setText("Bonjour cher(e) abonné(e)\n votre abonnement a été effectué avec succès ! \n Bienvenu(e) parmi nous :) "+"\n Vous avez payé "+a.getType().getPrix()+"DT pour un abonnement de "+a.getType()+"mois.");
             return message;
         } catch (MessagingException ex) {
             System.out.println(ex.getMessage());
