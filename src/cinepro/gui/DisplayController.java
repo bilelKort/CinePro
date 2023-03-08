@@ -178,7 +178,7 @@ qrCodeCol.setCellFactory(new Callback<TableColumn<reservation, Void>, TableCell<
 // Add QR code column to the table
 tableview.getColumns().add(qrCodeCol);
 ////////////////////////////////////////////////////////////////////////////////////**
-TableColumn<reservation, String> weatherIconCol = new TableColumn<>("Weather Icon");
+/*TableColumn<reservation, String> weatherIconCol = new TableColumn<>("Weather Icon");
 weatherIconCol.setCellValueFactory(cellData -> {
     reservation reservation = cellData.getValue();
     try {
@@ -235,7 +235,7 @@ weatherCol.setCellValueFactory(cellData -> {
 
 // Add weather column to the table
 tableview.getColumns().add(weatherCol);
-
+*/
 //////////////////////////////////////////////////////////////////////////////////////**
 
      Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>> cellFactory = new Callback<TableColumn<reservation, Void>, TableCell<reservation, Void>>() {

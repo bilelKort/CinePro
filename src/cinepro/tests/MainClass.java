@@ -75,5 +75,5 @@ System.out.println(WeatherAPI.displayWeather(date, "Tunisia"));*/
         stage.setScene(scene);
         stage.show();
     }*/  
-}
+
 

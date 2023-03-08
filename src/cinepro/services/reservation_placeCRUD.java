@@ -166,6 +166,30 @@ public class reservation_placeCRUD implements entityCRUD<reservation_place>{
         }
         }
          
+      public static List<reservation_place> getAll() {
+    List<reservation_place> reservationPlaceList = new ArrayList<>();
+    String requete = "SELECT * FROM reservation_place" ;
+    
+    try (
+            PreparedStatement statement=cineproConnexion.getInstance()
+                .getCnx().prepareStatement(requete);
+         ResultSet resultSet = statement.executeQuery()) {
+        while (resultSet.next()) {
+            reservation_place reservationPlace = new reservation_place();
+            reservationPlace.setId_res_place(resultSet.getInt("id_res_place"));
+            reservationPlace.setCoordonnee(resultSet.getString("coordonnee"));
+            reservationPlace.setPrix(resultSet.getFloat("prix"));
+            reservationPlace.setId_reservation(resultSet.getInt("id_reservation"));
+            reservationPlaceList.add(reservationPlace);
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    }
+    return reservationPlaceList;
+}
+     
+     
+     
      
      
      
