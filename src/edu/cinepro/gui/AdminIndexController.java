@@ -27,6 +27,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -38,6 +39,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -82,6 +85,10 @@ public class AdminIndexController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        searchNom.textProperty().addListener((observable, oldValue, newValue) -> {
+            Search(searchNom.getText());
+            show();
+        });
         File file = new File("src/edu/cinepro/gui/images/image5.jpg");
         String localURL = "";
         try {
@@ -103,11 +110,20 @@ public class AdminIndexController implements Initializable {
         UserSession.getInstace().cleanUserSession();
         //System.out.println(UserSession.getInstace().getId());
        
-            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+          /*  Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Account");
             alert.setHeaderText(null);
             alert.setContentText("You have logged out successfully!");
-            alert.showAndWait();
+            alert.showAndWait(); */
+          Notifications notifications = Notifications.create();
+        // notifications.graphic(new ImageView(notif));
+        notifications.text("You have logged out successfully!");
+        notifications.title("Success message!");
+        notifications.hideAfter(Duration.seconds(4));
+        notifications.position(Pos.BOTTOM_LEFT);
+        //notifications.darkStyle();
+        notifications.show();
+            
         
         FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
         
@@ -223,6 +239,14 @@ public class AdminIndexController implements Initializable {
                     } catch (SQLException ex) {
                     System.out.println(ex.getMessage());
                     }
+                Notifications notifications = Notifications.create();
+                // notifications.graphic(new ImageView(notif));
+                notifications.text("Deleted successfully!");
+                notifications.title("Success message");
+                notifications.hideAfter(Duration.seconds(4));
+                notifications.position(Pos.BOTTOM_LEFT);
+                //notifications.darkStyle();
+                notifications.show();
             }
         }
     }

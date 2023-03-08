@@ -18,14 +18,18 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -37,9 +41,9 @@ public class MdpOublieController implements Initializable {
     @FXML
     private TextField codeC;
     @FXML
-    private TextField newPass;
+    private PasswordField newPass;
     @FXML
-    private TextField confirmerNewPass;
+    private PasswordField confirmerNewPass;
     @FXML
     private Button signInM;
     @FXML
@@ -222,11 +226,19 @@ public class MdpOublieController implements Initializable {
            
            ccd.changePass(pseudo, passwordCry);
            
-           Alert alert = new Alert(Alert.AlertType.INFORMATION);
+           /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Account");
             alert.setHeaderText(null);
             alert.setContentText("You have changed your password successfully!");
-            alert.showAndWait();
+            alert.showAndWait(); */
+           Notifications notifications = Notifications.create();
+        // notifications.graphic(new ImageView(notif));
+        notifications.text("You have changed your password successfully!");
+        notifications.title("Success message");
+        notifications.hideAfter(Duration.seconds(4));
+        notifications.position(Pos.BOTTOM_LEFT);
+        //notifications.darkStyle();
+        notifications.show();
            
            FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
         

@@ -19,6 +19,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
@@ -30,6 +31,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -338,6 +341,15 @@ public class UpdateController implements Initializable {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         };
+        Notifications notifications = Notifications.create();
+        // notifications.graphic(new ImageView(notif));
+        notifications.text("Updated successfully!");
+        notifications.title("Success message");
+        notifications.hideAfter(Duration.seconds(4));
+        notifications.position(Pos.BOTTOM_LEFT);
+        //notifications.darkStyle();
+        notifications.show();
+        
       }
     }
     

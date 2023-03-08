@@ -13,6 +13,9 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,17 +26,23 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.geometry.Side;
 import javafx.scene.Parent;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -79,6 +88,32 @@ public class SignUpController implements Initializable {
                 passwordStrength.setText("");
             }
         });
+        
+        ajouterPseudo.setOnMouseClicked(event -> {
+        if (event.getClickCount() == 1) {
+            ContextMenu contextMenu = new ContextMenu();
+            List<String> suggestions = getSuggestions(ajouterNom.getText());
+            for (String suggestion : suggestions) {
+                MenuItem menuItem = new MenuItem(suggestion);
+                menuItem.setOnAction(menuEvent -> {
+                    ajouterPseudo.setText(suggestion);
+                    contextMenu.hide();
+                });
+                contextMenu.getItems().add(menuItem);
+            }
+            ajouterPseudo.setContextMenu(contextMenu);
+            contextMenu.show(ajouterPseudo, Side.BOTTOM, 0, 0);
+        }
+    });
+        
+     /*   ajouterPseudo.setOnAction(event->{
+            ajouterPseudo.setText(generatePseudo(ajouterNom.getText()));
+    });*/
+        
+      /*  ajouterPseudo.textProperty().addListener((observable, oldValue, newValue) -> {
+            
+            ajouterPseudo.setText(generatePseudo(ajouterNom.getText()));
+        }); */
         
         File file = new File("src/edu/cinepro/gui/images/image2.jpg");
         String localURL = "";
@@ -150,7 +185,7 @@ public class SignUpController implements Initializable {
     
     
     private boolean validatePseudo(String pseudo) {
-        String pattern = "[a-z]*$";
+        String pattern = "^[A-Z][a-z0-9]*$";
         return pseudo.matches(pattern);
     }  
     
@@ -159,6 +194,36 @@ public class SignUpController implements Initializable {
         return password.matches(pattern);
         
     }
+    
+    private List<String> getSuggestions(String nom) {
+    List<String> suggestions = new ArrayList<>();
+
+    for (int i = 0; i < 4; i++) {
+        Random random = new Random();
+        int num = random.nextInt(1000);
+        String formatted = String.format("%03d", num);
+        String nameG = nom + formatted;
+        suggestions.add(nameG);
+    }
+
+    return suggestions;
+}
+    
+  /*  private ContextMenu generatePseudo(String nom){
+    
+        
+        
+        Random random = new Random();
+        int num = random.nextInt(1000);
+        String formatted = String.format("%03d", num);
+        // System.out.println(formatted);
+        
+        String nameG = nom+formatted;
+        
+        return ;
+    } */
+    
+    
     
     private int calculatePasswordStrength(String password) {
 
@@ -385,6 +450,18 @@ public class SignUpController implements Initializable {
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         };
+        
+        //Notification
+        Notifications notifications = Notifications.create();
+        // notifications.graphic(new ImageView(notif));
+        notifications.text("You are now logged in!");
+        notifications.title("Success message");
+        notifications.hideAfter(Duration.seconds(4));
+        notifications.position(Pos.BOTTOM_LEFT);
+        //notifications.darkStyle();
+        notifications.show();
+        
+        
       }
       
       

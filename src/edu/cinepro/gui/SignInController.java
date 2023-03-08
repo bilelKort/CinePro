@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -30,6 +31,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
+
+
 /**
  * FXML Controller class
  *
@@ -49,6 +54,10 @@ public class SignInController implements Initializable {
     private ImageView image1;
     @FXML
     private Hyperlink mdpoublie;
+    @FXML
+    private ImageView captchaImage;
+    @FXML
+    private ImageView notif1;
 
     /**
      * Initializes the controller class.
@@ -66,6 +75,9 @@ public class SignInController implements Initializable {
         
       /*  Image image = new Image("..\\images\\image1.png");
         image1.setImage(image); */
+      
+      
+      
         
         // TODO
     }    
@@ -115,7 +127,18 @@ public class SignInController implements Initializable {
                 } catch (IOException ex) {
                  System.out.println(ex.getMessage());
                  }
+                //Notification
+                Notifications notifications = Notifications.create();
+        // notifications.graphic(new ImageView(notif));
+        notifications.text("You are now logged in!");
+        notifications.title("Success message");
+        notifications.hideAfter(Duration.seconds(4));
+        notifications.position(Pos.BOTTOM_LEFT);
+        //notifications.darkStyle();
+        notifications.show();
+        
                 break;
+                
             }
             case "Admin": {
             
@@ -133,6 +156,17 @@ public class SignInController implements Initializable {
                 } catch (IOException ex) {
                  System.out.println(ex.getMessage());
                  }
+                //Notification
+                Notifications notifications = Notifications.create();
+                // notifications.graphic(new ImageView(notif));
+                notifications.text("You are now logged in!");
+                notifications.title("Success message");
+                notifications.hideAfter(Duration.seconds(4));
+                notifications.position(Pos.BOTTOM_LEFT);
+                //notifications.darkStyle();
+                notifications.show();
+        
+                
                 break;
             }
             

@@ -2,24 +2,24 @@
 
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: #20120F;" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="edu.cinepro.gui.MdpOublieController">
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: #20120F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.MdpOublieController">
    <children>
       <AnchorPane layoutX="321.0" layoutY="145.0" prefHeight="460.0" prefWidth="556.0" style="-fx-background-color: #9C2827;">
          <children>
             <TextField fx:id="codeC" layoutX="162.0" layoutY="96.0" prefHeight="34.0" prefWidth="236.0" promptText="code de confirmation" />
-            <TextField fx:id="newPass" layoutX="162.0" layoutY="169.0" prefHeight="34.0" prefWidth="236.0" promptText="nouveau mdp" />
-            <TextField fx:id="confirmerNewPass" layoutX="162.0" layoutY="250.0" prefHeight="34.0" prefWidth="236.0" promptText="confirmer nouveau mdp" />
-            <Button fx:id="signInM" layoutX="162.0" layoutY="342.0" mnemonicParsing="false" onAction="#signInM" prefHeight="26.0" prefWidth="236.0" style="-fx-background-color: #E45652;" text="Sign in" />
-            <Label fx:id="passwordStrength" layoutX="323.0" layoutY="296.0" prefHeight="18.0" prefWidth="74.0" style="-fx-background-color: white;">
+            <Button fx:id="signInM" layoutX="162.0" layoutY="342.0" mnemonicParsing="false" onAction="#signInM" prefHeight="26.0" prefWidth="236.0" style="-fx-background-color: #E45652;" text="Change Password" />
+            <Label fx:id="passwordStrength" layoutX="323.0" layoutY="211.0" prefHeight="18.0" prefWidth="74.0" style="-fx-background-color: white;">
                <font>
                   <Font name="System Bold" size="12.0" />
                </font>
             </Label>
+            <PasswordField fx:id="newPass" layoutX="162.0" layoutY="164.0" prefHeight="34.0" prefWidth="236.0" promptText="nouveau mdp" />
+            <PasswordField fx:id="confirmerNewPass" layoutX="162.0" layoutY="253.0" prefHeight="34.0" prefWidth="236.0" promptText="confirmer nouveau mdp" />
          </children>
       </AnchorPane>
    </children>
