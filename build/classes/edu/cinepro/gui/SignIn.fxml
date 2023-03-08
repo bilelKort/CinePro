@@ -18,16 +18,14 @@
             <Label layoutX="93.0" layoutY="416.0" text="No account?" textFill="WHITE" />
             <PasswordField fx:id="password" layoutX="60.0" layoutY="182.0" prefHeight="26.0" prefWidth="258.0" promptText="password" />
             <TextField fx:id="pseudo" layoutX="60.0" layoutY="117.0" prefHeight="26.0" prefWidth="258.0" promptText="pseudo" />
-            <Button fx:id="signInBtn" layoutX="60.0" layoutY="335.0" onAction="#login" prefHeight="26.0" prefWidth="258.0" style="-fx-background-color: #E45652;" text="Sign in" textFill="#dad6d6" />
+            <Button fx:id="signInBtn" layoutX="59.0" layoutY="249.0" onAction="#login" prefHeight="26.0" prefWidth="258.0" style="-fx-background-color: #E45652;" text="Sign in" textFill="#dad6d6" />
             <Label layoutX="161.0" layoutY="47.0" text="Sign In" textFill="#e1dadafa">
                <font>
                   <Font size="18.0" />
                </font>
             </Label>
             <Hyperlink fx:id="suLink" layoutX="174.0" layoutY="413.0" onAction="#signUp" text="Sign up NOW!" textFill="WHITE" underline="true" />
-            <ImageView fx:id="captchaImage" fitHeight="45.0" fitWidth="107.0" layoutX="65.0" layoutY="224.0" pickOnBounds="true" preserveRatio="true" />
-            <TextField layoutX="65.0" layoutY="283.0" prefHeight="26.0" prefWidth="122.0" />
-            <Hyperlink fx:id="mdpoublie" layoutX="105.0" layoutY="371.0" onAction="#mdpOublie" text="Mot de passe oublié?" textFill="WHITE" underline="true" />
+            <Hyperlink fx:id="mdpoublie" layoutX="113.0" layoutY="293.0" onAction="#mdpOublie" text="Mot de passe oublié?" textFill="WHITE" underline="true" />
          </children>
       </AnchorPane>
       <Label layoutX="42.0" layoutY="195.0" prefHeight="74.0" prefWidth="548.0" text="Welcome to Cinepro" textFill="#e1dada">

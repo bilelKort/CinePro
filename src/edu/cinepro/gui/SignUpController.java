@@ -148,7 +148,7 @@ public class SignUpController implements Initializable {
     private boolean validateForm() {
         
         if (ajouterPassword.getText().equals("") || ajouterNom.getText().equals("") || ajouterPrenom.getText().equals("")
-                || ajouterEmail.getText().equals("") || ajouterDateN.getValue() == null || Integer.valueOf(ajouterTel.getText()) == null
+                || ajouterEmail.getText().equals("") || ajouterDateN.getValue() == null || ajouterTel.getText().equals("")
                 || ajouterPseudo.getText().equals("") ) {
             
             Alert alert = new Alert(Alert.AlertType.WARNING);
@@ -179,7 +179,7 @@ public class SignUpController implements Initializable {
     }
     
     private boolean validateTel(String num) {
-        String pattern = "^[0-9]{8}$";
+        String pattern = "^[925][0-9]{7}$";
         return num.matches(pattern);
     } 
     
@@ -188,6 +188,7 @@ public class SignUpController implements Initializable {
         String pattern = "^[A-Z][a-z0-9]*$";
         return pseudo.matches(pattern);
     }  
+    
     
     private boolean validatePassword(String password) {
         String pattern = "(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^*&+=])(?=\\S+$).{8,}";
@@ -280,6 +281,8 @@ public class SignUpController implements Initializable {
     private boolean isFormValid() {
         
         Alert alert = new Alert(Alert.AlertType.WARNING);
+        
+        CineproCRUD ccd = new CineproCRUD();
         boolean flag = true;
         if (!validateForm()) {
             flag = false;
@@ -309,14 +312,14 @@ public class SignUpController implements Initializable {
             if (!validateTel(ajouterTel.getText())) {
                 alert.setTitle("Validate Phone number");
                 alert.setHeaderText(null);
-                alert.setContentText("Please check the phone number! (Must be 8 digit number!) ");
+                alert.setContentText("The phone number must be of : TELECOM,ORANGE or OOREDOO! (Must be 8 digit number!) ");
                 alert.showAndWait();
                 flag = false;
             }
-            if (!validatePseudo(ajouterPseudo.getText())) {
+            if (!validatePseudo(ajouterPseudo.getText())|| ccd.testUniqueness(ajouterPseudo.getText()) == false ) {
                 alert.setTitle("Validate Pseudo");
                 alert.setHeaderText(null);
-                alert.setContentText("Please check the Pseudo! (Must be LOWERCASE with no spaces!) ");
+                alert.setContentText("Pseudo already exists! Please enter new pseudo (DON'T FORGET! Must be LOWERCASE with no spaces!) ");
                 alert.showAndWait();
                 flag = false;
             }
@@ -399,15 +402,15 @@ public class SignUpController implements Initializable {
         
             ajouterPassword.setStyle(null);
         }
-        /*
-       /if (ajouterTel.getText().length()==0){
+        //Tel
+       if (ajouterTel.getText().length()==0){
         
-            ajouterNom.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
+            ajouterTel.setStyle("-fx-border-color: red ; -fx-border-width: 2px ;");
         }
         else{
         
-            ajouterNom.setStyle(null);
-        } */
+            ajouterTel.setStyle(null);
+        } 
         
       if(isFormValid()) {
         

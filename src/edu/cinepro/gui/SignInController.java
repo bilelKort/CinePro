@@ -54,16 +54,15 @@ public class SignInController implements Initializable {
     private ImageView image1;
     @FXML
     private Hyperlink mdpoublie;
-    @FXML
-    private ImageView captchaImage;
-    @FXML
-    private ImageView notif1;
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        
+        
+        
         File file = new File("src/edu/cinepro/gui/images/image1.jpg");
         String localURL = "";
         try {
@@ -97,6 +96,8 @@ public class SignInController implements Initializable {
 
     @FXML
     private void login(ActionEvent event) {
+  
+        
         String resPseudo = pseudo.getText();
         String resPassword = password.getText();
         

@@ -301,6 +301,34 @@ public class CineproCRUD implements EntityCRUD<Cinepro> {
         }
     }
     
+    public boolean testUniqueness(String pseudo){
+    
+        int count=0;
+        
+        try {
+            String requete="SELECT COUNT(*) FROM user WHERE pseudo = ?";
+            PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            
+            st.setString(1, pseudo);
+            ResultSet rs = st.executeQuery();
+            while(rs.next()){
+            
+                count = rs.getInt(1);
+            }
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        if (count > 0){
+        
+            return false;
+        } else{
+        
+            return true;
+        }
+        
+    }
+    
     
     
 }
