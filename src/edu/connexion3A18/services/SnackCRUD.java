@@ -106,7 +106,7 @@ public class SnackCRUD {
         ArrayList<snack> myList = new ArrayList();
 
         try {
-            String requete = "SELECT * FROM snack ";
+            String requete = "SELECT * FROM snack where quantite != 0 ";
             Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
