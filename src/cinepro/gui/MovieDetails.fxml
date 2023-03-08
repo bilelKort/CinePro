@@ -89,17 +89,18 @@
                   </Label>
                   <Label fx:id="description" alignment="TOP_LEFT" layoutX="279.0" layoutY="353.0" prefHeight="227.0" prefWidth="500.0" />
                   <ImageView fx:id="poster" fitHeight="450.0" fitWidth="303.0" layoutX="923.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true" />
-                  <ScrollPane layoutX="261.0" layoutY="658.0" prefHeight="300.0" prefWidth="859.0">
+                  <ScrollPane layoutX="201.0" layoutY="660.0" prefHeight="300.0" prefWidth="979.0">
                     <content>
-                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="840.0">
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="300.0" prefWidth="960.0">
                            <children>
-                              <TableView fx:id="table" prefHeight="300.0" prefWidth="840.0">
+                              <TableView fx:id="table" prefHeight="300.0" prefWidth="960.0">
                                 <columns>
                                   <TableColumn fx:id="tableProjection" prefWidth="120.0" style="-fx-alignment: center;" text="id_projection" />
                                     <TableColumn fx:id="tableSalle" prefWidth="120.0" style="-fx-alignment: center;" text="id_salle" />
                                     <TableColumn fx:id="tableFilm" prefWidth="180.0" style="-fx-alignment: center;" text="film" />
                                     <TableColumn fx:id="tableDebut" prefWidth="210.0" style="-fx-alignment: center;" text="date_debut" />
                                     <TableColumn fx:id="tableFin" prefWidth="210.0" style="-fx-alignment: center;" text="date_fin" />
+                                   <TableColumn fx:id="tableRes" prefWidth="120.0" style="-fx-alignment: center;" text="réserver" />
                                 </columns>
                               </TableView>
                            </children>

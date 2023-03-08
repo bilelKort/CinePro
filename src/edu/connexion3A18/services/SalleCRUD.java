@@ -4,9 +4,9 @@
  */
 package edu.connexion3A18.services;
 
+import cinepro.utils.MyConnection;
 import edu.cinepro.entities.salle;
-import edu.cinepro.entities.snack;
-import edu.cinepro.utils.MyConnection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +24,7 @@ public class SalleCRUD {
         String requete = "INSERT INTO salle ( nom,longueur,  largeur,  id_cinema ,acces)" + "VALUES(?,?,?,?,?)";
 
         try {
-            PreparedStatement st = MyConnection.getInstance().getCnx()
+            PreparedStatement st = MyConnection.getInstance().getConnection()
                     .prepareStatement(requete);
             st.setString(1, s.getNom());
 
@@ -46,8 +46,8 @@ public class SalleCRUD {
         ArrayList<salle> myList = new ArrayList();
 
         try {
-            String requete = "SELECT * FROM salle ";
-            Statement st = MyConnection.getInstance().getCnx()
+            String requete = "SELECT * FROM salle where acces=true";
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -78,7 +78,7 @@ public class SalleCRUD {
 
         try {
             String requete = "SELECT * FROM salle where id_cinema=" +id;
-            Statement st = MyConnection.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -109,7 +109,7 @@ public class SalleCRUD {
 
         try {
             String requete = "SELECT * FROM salle where id_salle=" +id;
-            Statement st = MyConnection.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -139,7 +139,7 @@ public class SalleCRUD {
 
         try {
             String requete = "UPDATE salle SET acces=?  where id_salle=?";
-            PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            PreparedStatement st = MyConnection.getInstance().getConnection().prepareStatement(requete);
             st.setBoolean(1, acces);
 
             st.setInt(2, id);
@@ -155,7 +155,7 @@ public class SalleCRUD {
     public void deleteEntity(int id) {
         try {
             String requete="DELETE FROM salle WHERE id_cinema=?";
-            PreparedStatement st=MyConnection.getInstance().getCnx().prepareStatement(requete);
+            PreparedStatement st=MyConnection.getInstance().getConnection().prepareStatement(requete);
             st.setInt(1,id);
             st.executeUpdate();
             System.out.println("salle deleted!");
@@ -167,7 +167,7 @@ public class SalleCRUD {
     public void deleteEntity2(int id) {
         try {
             String requete="DELETE FROM salle WHERE id_salle=?";
-            PreparedStatement st=MyConnection.getInstance().getCnx().prepareStatement(requete);
+            PreparedStatement st=MyConnection.getInstance().getConnection().prepareStatement(requete);
             st.setInt(1,id);
             st.executeUpdate();
             System.out.println("salle deleted!");

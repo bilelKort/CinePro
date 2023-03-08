@@ -7,6 +7,7 @@ import cinepro.entities.TableProjection;
 import cinepro.services.CrewService;
 import cinepro.services.FilmService;
 import cinepro.services.ProjectionService;
+import edu.cinepro.gui.PlaceController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -24,6 +25,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
+import javafx.util.Callback;
 
 import javax.imageio.ImageIO;
 import java.io.File;
@@ -82,6 +84,8 @@ public class MovieDetailsController implements Initializable {
     @FXML
     private TableColumn<TableProjection, String> tableFin;
     @FXML
+    private TableColumn<TableProjection, Void> tableRes;
+    @FXML
     private Button listProjections;
     @FXML
     private Button ajoutprojection;
@@ -132,8 +136,40 @@ public class MovieDetailsController implements Initializable {
         tableFilm.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("film"));
         tableDebut.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("date_debut"));
         tableFin.setCellValueFactory(new PropertyValueFactory<TableProjection, String>("date_fin"));
-
         table.setItems(observableList);
+
+        Callback<TableColumn<TableProjection, Void>, TableCell<TableProjection, Void>> update_btn = new Callback<TableColumn<TableProjection, Void>, TableCell<TableProjection, Void>>() {
+            @Override
+            public TableCell<TableProjection, Void> call(final TableColumn<TableProjection, Void> param) {
+                final TableCell<TableProjection, Void> cell = new TableCell<TableProjection, Void>() {
+                    private final Button btn = new Button("Réserver");
+                    {
+                        btn.setOnAction((ActionEvent event) -> {
+                            int rowIndex = getTableRow().getIndex();
+                            try {
+                                PlaceController.getInstance().setId_salle(tableSalle.getCellObservableValue(rowIndex).getValue());
+                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/place.fxml"));
+                                Parent root =loader.load();
+                                listProjections.getScene().setRoot(root);
+                            } catch (Exception e) {
+                                System.out.println(e.getMessage());
+                            }
+                        });
+                    }
+                    @Override
+                    public void updateItem(Void item, boolean empty) {
+                        super.updateItem(item, empty);
+                        if (empty) {
+                            setGraphic(null);
+                        } else {
+                            setGraphic(btn);
+                        }
+                    }
+                };
+                return cell;
+            }
+        };
+        tableRes.setCellFactory(update_btn);
     }
 
     public void displayCrew(VBox vBox, String job) {

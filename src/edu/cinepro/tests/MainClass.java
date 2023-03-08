@@ -4,14 +4,7 @@
  */
 package edu.cinepro.tests;
 
-import edu.cinepro.entities.cinema;
-import edu.cinepro.entities.salle;
-import edu.cinepro.entities.snack;
-import edu.cinepro.utils.MyConnection;
 import edu.connexion3A18.services.CinemaCRUD;
-import edu.connexion3A18.services.SalleCRUD;
-import edu.connexion3A18.services.SnackCRUD;
-import java.util.List;
 
 /**
  *

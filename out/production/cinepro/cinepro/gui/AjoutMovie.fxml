@@ -9,7 +9,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
-<AnchorPane minHeight="600.0" minWidth="800.0" prefHeight="739.0" prefWidth="1350.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.AjoutMovieController">
+<AnchorPane minHeight="600.0" minWidth="800.0" prefHeight="739.0" prefWidth="1350.0" style="-fx-background-color: brown;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.AjoutMovieController">
    <children>
       <Label layoutX="41.0" layoutY="55.0" text="Lien IMDB">
          <font>
@@ -21,7 +21,7 @@
             <Font size="20.0" />
          </font>
       </TextField>
-      <Button fx:id="searchBtn" layoutX="657.0" layoutY="48.0" mnemonicParsing="false" onAction="#searchMovie" prefHeight="44.0" prefWidth="109.0" text="Search" AnchorPane.rightAnchor="34.0">
+      <Button fx:id="searchBtn" layoutX="657.0" layoutY="48.0" mnemonicParsing="false" onAction="#searchMovie" prefHeight="44.0" prefWidth="109.0" style="-fx-background-color: blue;" text="Search" AnchorPane.rightAnchor="34.0">
          <font>
             <Font size="20.0" />
          </font>

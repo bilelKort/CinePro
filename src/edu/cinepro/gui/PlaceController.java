@@ -10,6 +10,9 @@ import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.ResourceBundle;
 import java.util.Set;
+
+import edu.cinepro.entities.salle;
+import edu.connexion3A18.services.SalleCRUD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -35,19 +38,29 @@ public class PlaceController implements Initializable {
 
     @FXML
     private GridPane idmatrice;
-    private static final int ROWS = 9;
-    private static final int COLS =9;
+    private int ROWS;
+    private int COLS;
     @FXML
     private Label msg;
     @FXML
     private Label lista;
+    public static PlaceController insatance = new PlaceController();
+    private int id_salle;
+    public static PlaceController getInstance() {
+        return insatance;
+    }
+    public void setId_salle(int id_salle) {
+        this.id_salle = id_salle;
+    }
 
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-
+        salle s = new SalleCRUD().entitiesList3(insatance.id_salle).get(0);
+        ROWS = s.getLongueur();
+        COLS = s.getLargeur();
         ArrayList<String> coordMap = new ArrayList<String>();
         Set<String> placereservees = new HashSet<String>();
 

@@ -144,7 +144,7 @@ labelsinglefile.setText(b.getPhoto());
         String resNom = idnom.getText();
         String resPrix = idprix.getText();
         String resQuantite = idquantite.getText();
-        float restPrixF = Integer.valueOf(resPrix);
+        float restPrixF = Float.valueOf(resPrix);
         int restquantiteF = Integer.valueOf(resQuantite);
         if ((conditionQuantite) && (conditionnom) && (conditionprix) && (conditionurl)) {
             System.out.println("ok");

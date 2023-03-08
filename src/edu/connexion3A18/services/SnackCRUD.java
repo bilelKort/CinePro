@@ -1,8 +1,8 @@
 package edu.connexion3A18.services;
 
-import edu.cinepro.entities.cinema;
+import cinepro.utils.MyConnection;
 import edu.cinepro.entities.snack;
-import edu.cinepro.utils.MyConnection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +24,7 @@ public class SnackCRUD {
         String requete = "INSERT INTO snack ( nom,  prix,  quantite,  photo,  id_cinema )" + "VALUES(?,?,?,?,?)";
 
         try {
-            PreparedStatement st = MyConnection.getInstance().getCnx()
+            PreparedStatement st = MyConnection.getInstance().getConnection()
                     .prepareStatement(requete);
 
             st.setString(1, s.getNom());
@@ -46,7 +46,7 @@ public class SnackCRUD {
           int count=0;
             try {
            String requete1 = "SELECT count(*) FROM snack where nom='"+s.getNom()+"'";
-            Statement st1 = MyConnection.getInstance().getCnx()
+            Statement st1 = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st1.executeQuery(requete1);
@@ -63,7 +63,7 @@ public class SnackCRUD {
               String requete = "INSERT INTO snack ( nom,  prix,  quantite,  photo,  id_cinema )" + "VALUES(?,?,?,?,?)";
 
         try {
-            PreparedStatement st = MyConnection.getInstance().getCnx()
+            PreparedStatement st = MyConnection.getInstance().getConnection()
                     .prepareStatement(requete);
             
 
@@ -84,7 +84,7 @@ public class SnackCRUD {
               
               System.out.println(s.getQuantite());
             String requete="UPDATE snack SET  quantite=quantite+?   where nom=?";
-            PreparedStatement st=MyConnection.getInstance().getCnx().prepareStatement(requete);
+            PreparedStatement st=MyConnection.getInstance().getConnection().prepareStatement(requete);
                         st.setInt(1,s.getQuantite());
 
             st.setString(2,s.getNom());
@@ -107,7 +107,7 @@ public class SnackCRUD {
 
         try {
             String requete = "SELECT * FROM snack ";
-            Statement st = MyConnection.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -137,7 +137,7 @@ public class SnackCRUD {
 
         try {
             String requete = "SELECT * FROM snack where id_snack=" +id;
-            Statement st = MyConnection.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -167,7 +167,7 @@ public class SnackCRUD {
 
         try {
             String requete = "SELECT * FROM snack where id_cinema="+id;
-            Statement st = MyConnection.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -198,7 +198,7 @@ public class SnackCRUD {
 
         try {
             String requete = "SELECT * FROM snack where id_snack="+id;
-            Statement st = MyConnection.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -229,7 +229,7 @@ public class SnackCRUD {
 
         try {
             String requete="UPDATE snack SET nom=?, quantite=? ,prix=?  where id_snack=?";
-            PreparedStatement st=MyConnection.getInstance().getCnx().prepareStatement(requete);
+            PreparedStatement st=MyConnection.getInstance().getConnection().prepareStatement(requete);
             
             st.setString(1,c.getNom());
             st.setInt(2,c.getQuantite());
@@ -246,12 +246,68 @@ public class SnackCRUD {
     public void deleteEntity(int id) {
         try {
             String requete="DELETE FROM snack WHERE id_snack=?";
-            PreparedStatement st=MyConnection.getInstance().getCnx().prepareStatement(requete);
+            PreparedStatement st=MyConnection.getInstance().getConnection().prepareStatement(requete);
             st.setInt(1,id);
             st.executeUpdate();
             System.out.println("snack deleted!");
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+    public List<snack> entitiesListquantit0() {
+        ArrayList<snack> myList = new ArrayList();
+
+        try {
+            String requete = "SELECT * FROM snack where quantite<5 and quantite>0 ";
+            Statement st = MyConnection.getInstance().getConnection()
+                    .createStatement();
+
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+                snack s = new snack();
+                s.setId_snack(rs.getInt(1));
+                s.setNom(rs.getString("nom"));
+                s.setPrix(rs.getFloat("prix"));
+
+                s.setQuantite(rs.getInt("quantite"));
+                s.setPhoto(rs.getString("photo"));
+                s.setId_cinema(rs.getInt("id_cinema"));
+
+                myList.add(s);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return myList;
+    }
+
+    public List<snack> entitiesListquantit5() {
+        ArrayList<snack> myList = new ArrayList();
+
+        try {
+            String requete = "SELECT * FROM snack where quantite=0 ";
+            Statement st = MyConnection.getInstance().getConnection()
+                    .createStatement();
+
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+                snack s = new snack();
+                s.setId_snack(rs.getInt(1));
+                s.setNom(rs.getString("nom"));
+                s.setPrix(rs.getFloat("prix"));
+
+                s.setQuantite(rs.getInt("quantite"));
+                s.setPhoto(rs.getString("photo"));
+                s.setId_cinema(rs.getInt("id_cinema"));
+
+                myList.add(s);
+
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return myList;
     }
 }

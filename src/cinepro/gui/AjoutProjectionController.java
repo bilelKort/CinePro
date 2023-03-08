@@ -6,6 +6,8 @@ import cinepro.services.FilmService;
 import cinepro.services.ProjectionService;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
+import edu.cinepro.entities.salle;
+import edu.connexion3A18.services.SalleCRUD;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -44,15 +46,15 @@ public class AjoutProjectionController implements Initializable {
     private Button ajoutprojection;
 
     @FXML
-    private TextField salle_id;
-
-    @FXML
     private ComboBox<Film> dropFilm;
-
+    private static final AjoutProjectionController instance = new AjoutProjectionController();
+    private int id_salle;
+    public static AjoutProjectionController getInstance() {
+        return instance;
+    }
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        checkint(salle_id);
         date.setDayCellFactory(picker -> new DateCell() {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
@@ -60,7 +62,6 @@ public class AjoutProjectionController implements Initializable {
                 setDisable(date.isBefore(LocalDate.now()));
             }
         });
-
         dropFilm.setConverter(new StringConverter<Film>() {
             @Override
             public String toString(Film object) {
@@ -73,23 +74,14 @@ public class AjoutProjectionController implements Initializable {
             }
         });
         FilmService filmService = new FilmService();
-        List<Film> list = filmService.filmList();
-        for (int i=0; i<list.size(); i++) {
-            dropFilm.getItems().add(list.get(i));
+        List<Film> listFilm = filmService.filmList();
+        for (int i=0; i<listFilm.size(); i++) {
+            dropFilm.getItems().add(listFilm.get(i));
         }
     }
 
-    public void checkint(TextField input) {
-        input.setTextFormatter(new TextFormatter<Object>(change -> {
-            if (!change.getText().chars().allMatch(Character::isDigit)) {
-                change.setText("");
-            }
-            return change;
-        }));
-    }
-
     public void ajoutProjection(ActionEvent actionEvent) {
-        if (salle_id.getText().isEmpty() || date.getValue() == null || time.getValue() == null || dropFilm.getValue()==null) {
+        if (date.getValue() == null || time.getValue() == null || dropFilm.getValue()==null) {
             alerting("Invalid", "Champ vide !");
         }else {
             String debut_date_time = date.getValue() + " " + time.getValue();
@@ -99,7 +91,7 @@ public class AjoutProjectionController implements Initializable {
             fin_date_time = fin_date_time.plus(Integer.valueOf(dropFilm.getValue().getDuree()) % 60, ChronoUnit.MINUTES);
 
             ProjectionService projectionService = new ProjectionService();
-            Projection projection = new Projection(Integer.valueOf(salle_id.getText()), dropFilm.getValue().getId_film(), debut_date_time, dateTimeFormatter.format(fin_date_time), 0, false);
+            Projection projection = new Projection(instance.id_salle, dropFilm.getValue().getId_film(), debut_date_time, dateTimeFormatter.format(fin_date_time), 0, false);
             if (projectionService.checkDate(projection)) {
                 projectionService.addProjection(projection);
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -150,5 +142,9 @@ public class AjoutProjectionController implements Initializable {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
+    }
+
+    public void setId_salle(int id_salle) {
+        this.id_salle = id_salle;
     }
 }

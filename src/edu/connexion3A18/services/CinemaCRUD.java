@@ -4,10 +4,10 @@
  */
 package edu.connexion3A18.services;
 
+import cinepro.utils.MyConnection;
 import edu.cinepro.entities.cinema;
-import edu.cinepro.entities.salle;
 import edu.cinepro.interfaces.EntityCRUD;
-import edu.cinepro.utils.MyConnection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -26,7 +26,7 @@ public class CinemaCRUD implements EntityCRUD<cinema> {
         String requete = "INSERT INTO cinema (id_user	, nom ,	localisation ,	description ,	photo) " + "VALUES(?,?,?,?,?)";
 
         try {
-            PreparedStatement st = MyConnection.getInstance().getCnx()
+            PreparedStatement st = MyConnection.getInstance().getConnection()
                     .prepareStatement(requete);
             st.setInt(1, c.getId_user());
 
@@ -49,7 +49,7 @@ public class CinemaCRUD implements EntityCRUD<cinema> {
 
         try {
             String requete = "SELECT * FROM cinema ";
-            Statement st = MyConnection.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -80,7 +80,7 @@ public class CinemaCRUD implements EntityCRUD<cinema> {
 
         try {
             String requete = "SELECT * FROM cinema where nom=" + nom;
-            Statement st = MyConnection.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -110,7 +110,7 @@ public class CinemaCRUD implements EntityCRUD<cinema> {
 
         try {
             String requete = "SELECT * FROM cinema where id_cinema=" + id;
-            Statement st = MyConnection.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 
             ResultSet rs = st.executeQuery(requete);
@@ -196,7 +196,7 @@ return myList ;
 
         try {
             String requete = "UPDATE cinema SET nom=?, localisation=?,description=? ,photo=?  where id_cinema=?";
-            PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            PreparedStatement st = MyConnection.getInstance().getConnection().prepareStatement(requete);
 
             st.setString(1, c.getNom());
             st.setString(2, c.getLocalisation());
@@ -213,7 +213,7 @@ return myList ;
 
     public void deleteEntity(int id) throws SQLException {
         
-        PreparedStatement st0 = MyConnection.getInstance().getCnx().prepareStatement("DELETE FROM salle WHERE id_cinema=?");
+        PreparedStatement st0 = MyConnection.getInstance().getConnection().prepareStatement("DELETE FROM salle WHERE id_cinema=?");
             st0.setInt(1, id);
             st0.executeUpdate(); 
         
@@ -221,7 +221,7 @@ return myList ;
             
             
             String requete = "DELETE FROM cinema WHERE id_cinema=?";
-            PreparedStatement st = MyConnection.getInstance().getCnx().prepareStatement(requete);
+            PreparedStatement st = MyConnection.getInstance().getConnection().prepareStatement(requete);
             st.setInt(1, id);
             st.executeUpdate();
             System.out.println("cinema deleted!");

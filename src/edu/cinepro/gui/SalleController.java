@@ -4,6 +4,7 @@
  */
 package edu.cinepro.gui;
 
+import cinepro.gui.AjoutProjectionController;
 import edu.cinepro.entities.salle;
 import edu.connexion3A18.services.SalleCRUD;
 import java.io.IOException;
@@ -172,5 +173,16 @@ Affiche();
 
         longeurid.setText(Integer.toString(actuel.getLargeur()));
 
+    }
+
+    public void ajoutProjection(ActionEvent actionEvent) {
+        try {
+            AjoutProjectionController.getInstance().setId_salle(instance.id);
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AjoutProjection.fxml"));
+            Parent root =loader.load();
+            placeid.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

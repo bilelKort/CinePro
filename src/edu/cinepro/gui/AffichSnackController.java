@@ -20,6 +20,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -32,6 +33,8 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -77,6 +80,7 @@ public class AffichSnackController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        Addnotif();
          snack.getItems().clear();
         SnackCRUD cd = new SnackCRUD();
         List<snack> liste = new ArrayList<snack>();
@@ -223,6 +227,57 @@ public class AffichSnackController implements Initializable {
             cd.deleteEntity(id);
         }
         initialize(new FXMLLoader().getLocation(), new FXMLLoader().getResources());
+    }
+
+    public void Addnotif() {
+        String msg = "";
+        String msg2 = "";
+
+        SnackCRUD pwd = new SnackCRUD();
+
+        List<snack> liste2 = pwd.entitiesListquantit5();
+
+        List<snack> liste = pwd.entitiesListquantit0();
+        System.out.println(liste);
+        if (liste.size() > 0) {
+
+            for (snack sn : liste) {
+                msg = msg + "   " + sn.getNom();
+
+            }
+            Notifications notifications = Notifications.create();
+            notifications.text("il n'y a plus beaucoup de quantité pour " + msg);
+            notifications.title("alert");
+            notifications.hideAfter(Duration.seconds(8));
+            notifications.position(Pos.BASELINE_RIGHT);
+            notifications.darkStyle();
+            notifications.show();
+        }
+        if (liste2.size() > 0) {
+
+            for (snack sn : liste2) {
+                msg2 = msg2 + "   " + sn.getNom();
+
+            }
+
+            /*
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+                            alert.setTitle("pad du snack");
+                            alert.setHeaderText(null);
+                            alert.setContentText("il n'ya pas du snack pour " +msg);
+                           alert.showAndWait();
+
+            */
+
+            Notifications notifications = Notifications.create();
+            notifications.text("il n'y a plus beaucoup de quantité pour " + msg2);
+            notifications.title("alert");
+            notifications.hideAfter(Duration.INDEFINITE);
+            notifications.position(Pos.TOP_CENTER);
+            notifications.show();
+        }
+
+
     }
 
     @FXML
