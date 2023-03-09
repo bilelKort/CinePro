@@ -71,9 +71,8 @@ public class SalleCRUD {
         return myList;
     }
 
-    
-    
-     public List<salle> entitiesList2(int id) {
+
+    public List<salle> entitiesList2(int id) {
         ArrayList<salle> myList = new ArrayList();
 
         try {

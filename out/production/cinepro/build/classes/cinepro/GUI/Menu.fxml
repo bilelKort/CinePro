@@ -5,28 +5,20 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="550.0" prefWidth="700.0" style="-fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.GUI.MenuController">
+<AnchorPane id="red" prefHeight="545.0" prefWidth="751.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.MenuController">
    <children>
-      <Button fx:id="btnajouter" layoutX="14.0" layoutY="247.0" mnemonicParsing="false" onAction="#ajouter" style="-fx-background-color: red;" text="ajouter">
+      <Label contentDisplay="TOP" layoutX="218.0" layoutY="46.0" prefHeight="46.0" prefWidth="333.0" text="      Reservation">
          <font>
-            <Font size="26.0" />
-         </font></Button>
-      <Button fx:id="btnmodifier" layoutX="192.0" layoutY="247.0" mnemonicParsing="false" onAction="#modifier" style="-fx-background-color: red;" text="modifier">
-         <font>
-            <Font size="26.0" />
-         </font></Button>
-      <Button fx:id="btnsupprimer" layoutX="357.0" layoutY="247.0" mnemonicParsing="false" onAction="#supprimer" style="-fx-background-color: red;" text="supprimer">
-         <font>
-            <Font size="26.0" />
-         </font></Button>
-      <Button fx:id="btnafficher" layoutX="528.0" layoutY="247.0" mnemonicParsing="false" onAction="#afficher" style="-fx-background-color: red;" text="afficher">
-         <font>
-            <Font size="26.0" />
-         </font></Button>
-      <Label layoutX="259.0" layoutY="65.0" text="Menu!" textFill="#a13737">
-         <font>
-            <Font name="System Bold" size="38.0" />
+            <Font name="Arial Bold" size="34.0" />
          </font>
       </Label>
+      <Button id="dark" fx:id="affres" layoutX="46.0" layoutY="140.0" mnemonicParsing="false" onAction="#showreservation" prefHeight="35.0" prefWidth="205.0" stylesheets="@../../../../../Downloads/stylesheet.css" text="Afficher resevation" />
+      <Button id="dark" fx:id="affresplace" layoutX="277.0" layoutY="140.0" mnemonicParsing="false" onAction="#showreservationPlace" text="Afficher reservation des places" />
+      <Button id="dark" fx:id="affressnack" layoutX="500.0" layoutY="140.0" mnemonicParsing="false" onAction="#showreservationSnack" text="Afficher reservation des snacks" />
+      <Button id="dark" fx:id="crudglobal" layoutX="218.0" layoutY="220.0" mnemonicParsing="false" onAction="#showreservationCRUD" prefHeight="35.0" prefWidth="322.0" text="(Ajouter,Modifier,Supprimer) Reservation Global" />
+      <Button id="dark" fx:id="crudplace" layoutX="218.0" layoutY="294.0" mnemonicParsing="false" onAction="#showreservationPlaceCRUD" prefHeight="35.0" prefWidth="322.0" text="(Ajouter,Modifier,Supprimer) Reservation Place" />
+      <Button id="dark" fx:id="crudsnack" layoutX="218.0" layoutY="369.0" mnemonicParsing="false" onAction="#showreservationSnackCRUD" prefHeight="35.0" prefWidth="322.0" text="(Ajouter,Modifier,Supprimer) Reservation Snack" />
+      <Button fx:id="btnpie" layoutX="97.0" layoutY="446.0" mnemonicParsing="false" onAction="#DisplayChartPie" prefHeight="25.0" prefWidth="179.0" text="pieChart" />
+      <Button fx:id="btnbar" layoutX="385.0" layoutY="446.0" mnemonicParsing="false" onAction="#DisplayBarChart" prefHeight="25.0" prefWidth="186.0" text="BarChart" />
    </children>
 </AnchorPane>

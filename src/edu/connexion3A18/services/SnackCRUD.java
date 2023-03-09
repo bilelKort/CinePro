@@ -156,17 +156,33 @@ public class SnackCRUD {
         return s;
     }
     
+    public int getCinemaId(int id_projection) {
+        int id=0;
+
+        try {
+            String requete = "SELECT * FROM cinema c left join salle s on c.id_cinema=s.id_cinema left join projection p on p.id_salle=s.id_salle where p.id_projection="+id_projection;
+            Statement st = MyConnection.getInstance().getConnection()
+                    .createStatement();
+
+            ResultSet rs = st.executeQuery(requete);
+            while (rs.next()) {
+               id = rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        }
+        return id;
+    }
     
     
     
     
     
-    
-     public List<snack> entitiesList2(int id) {
+     public List<snack> entitiesList2(int id_projection) {
         ArrayList<snack> myList = new ArrayList();
 
         try {
-            String requete = "SELECT * FROM snack where id_cinema="+id;
+            String requete = "SELECT * FROM snack where id_cinema="+getCinemaId(id_projection);
             Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 

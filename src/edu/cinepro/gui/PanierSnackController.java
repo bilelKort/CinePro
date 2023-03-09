@@ -4,6 +4,12 @@
  */
 package edu.cinepro.gui;
 
+import cinepro.entities.reservation;
+import cinepro.entities.reservation_place;
+import cinepro.entities.reservation_snack;
+import cinepro.services.reservationCRUD;
+import cinepro.services.reservation_placeCRUD;
+import cinepro.services.reservation_snackCRUD;
 import edu.cinepro.entities.UserSession;
 import edu.cinepro.entities.snack;
 import edu.connexion3A18.services.SnackCRUD;
@@ -11,8 +17,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
+import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.collections.FXCollections;
@@ -62,6 +67,28 @@ public class PanierSnackController implements Initializable {
     private AnchorPane anchor;
     @FXML
     private Button Logout;
+    public static PanierSnackController instance = new PanierSnackController();
+
+    public static PanierSnackController getInstance() {
+        return instance;
+    }
+
+    private int id_film;
+    private int id_projection;
+    Set<String> placereservees = new HashSet<String>();
+    private int salle_id;
+
+    public void setId_film(int id_film) {
+        this.id_film = id_film;
+    }
+
+    public void setId_projection(int id_projection) {
+        this.id_projection = id_projection;
+    }
+
+    public void setPlacereservees(Set<String> placereservees) {
+        this.placereservees = placereservees;
+    }
 
     /**
      * Initializes the controller class.
@@ -76,14 +103,58 @@ public class PanierSnackController implements Initializable {
     }
     ObservableList<snack> selection = FXCollections.observableArrayList();
 
+    List<reservation_snack> b = new ArrayList<>();
     private void updateTotalPrice(Label totalPriceLabel, ObservableList<snack> selection) {
         double totalPrice = 0.0;
         for (snack product : selection) {
             totalPrice += product.getPrix();
         }
-        
+
+
+
+        ///////////////
+        List<snack> selection2 = selection;
+        System.out.println(selection);
+
+        for (snack i : selection2) {
+            Boolean duplicate=false;
+            reservation_snack snackreservation1 = new reservation_snack(1, i.getPrix(), 0, i.getId_snack());
+            for (reservation_snack s:b) {
+                System.out.println("i: " + i.getId_snack());
+                System.out.println("s: " + s.getId_snack());
+                if (s.getId_snack() == i.getId_snack()) {
+                    s.setQuantite(s.getQuantite() + 1);
+                    s.setPrix(s.getPrix()+i.getPrix());
+                    duplicate = true;
+                }
+            }
+            if (!duplicate) {
+                b.add(snackreservation1);
+            }
+        }
+        System.out.println("test2: " + b);
         totalPriceLabel.setText("Prix total : " + totalPrice);
          prixgold.setText("prix du badge spéciale"+(totalPrice*0.7));
+    }
+
+    @FXML
+    public void reserver(ActionEvent actionEvent) {
+        reservationCRUD r = new reservationCRUD();
+        r.addEntity(new reservation(UserSession.getInstace().getId(), instance.id_film, true, instance.id_projection));
+        List<String> list = new ArrayList<>(instance.placereservees);
+
+        reservation_placeCRUD rp = new reservation_placeCRUD();
+        for(String c:list){
+            System.out.println("test: " + c);
+            reservation_place place = new reservation_place(c, 10, r.getlast());
+            rp.addEntity(place);
+        }
+
+        reservation_snackCRUD rsc = new reservation_snackCRUD();
+        for (reservation_snack rs:b) {
+            rs.setId_reservation(r.getlast());
+            rsc.addEntity(rs);
+        }
     }
 
     private void vide(Label totalPriceLabel) {
@@ -95,7 +166,7 @@ public class PanierSnackController implements Initializable {
     public void Affiche() {
         ListView<snack> selectionListView = new ListView<>(selection);
         SnackCRUD cr = new SnackCRUD();
-        List<snack> products = cr.entitiesList2(9);
+        List<snack> products = cr.entitiesList2(instance.id_projection);
         for (snack product : products) {
             try {
                 Label nameLabel = new Label("        "+product.getNom());

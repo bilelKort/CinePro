@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane id="AnchorPane" prefHeight="669.0" prefWidth="1659.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.DisplayController">
+   <children>
+      <TableView fx:id="tableview" layoutX="-2.0" layoutY="46.0" prefHeight="619.0" prefWidth="1659.0">
+        <columns>
+          <TableColumn fx:id="col1" prefWidth="91.0" text="ID" />
+          <TableColumn fx:id="col2" prefWidth="71.0" text="Prix Final" />
+            <TableColumn fx:id="col3" prefWidth="98.0" text="ID User" />
+            <TableColumn fx:id="col4" prefWidth="143.0" text="ID Film" />
+            <TableColumn fx:id="col8" prefWidth="142.0" text="projection" />
+            <TableColumn fx:id="col5" prefWidth="91.0" text="State" />
+            <TableColumn fx:id="col6" prefWidth="181.0" text="Start time" />
+            <TableColumn fx:id="col7" prefWidth="142.0" text="End Time" />
+            <TableColumn fx:id="delete" prefWidth="142.0" text="delete" />
+        </columns>
+      </TableView>
+      <Button fx:id="btnresplace" layoutX="32.0" layoutY="14.0" mnemonicParsing="false" onAction="#showPlaceTable" prefHeight="25.0" prefWidth="112.0" text="Reservation Place" />
+      <Button fx:id="btnressnack" layoutX="183.0" layoutY="14.0" mnemonicParsing="false" onAction="#showSnackTable" prefHeight="25.0" prefWidth="137.0" text="Reservaition Snack" />
+      <Button fx:id="Menu" layoutX="901.0" layoutY="14.0" mnemonicParsing="false" onAction="#showMenu" text="Menu" />
+   </children>
+</AnchorPane>

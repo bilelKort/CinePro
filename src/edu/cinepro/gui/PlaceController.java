@@ -6,11 +6,12 @@ package edu.cinepro.gui;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.ResourceBundle;
-import java.util.Set;
+import java.util.*;
 
+import cinepro.entities.reservation;
+import cinepro.entities.reservation_place;
+import cinepro.services.reservationCRUD;
+import cinepro.services.reservation_placeCRUD;
 import edu.cinepro.entities.UserSession;
 import edu.cinepro.entities.salle;
 import edu.connexion3A18.services.SalleCRUD;
@@ -56,6 +57,19 @@ public class PlaceController implements Initializable {
     }
     @FXML
     private Button Logout;
+    private int id_projection;
+    private int id_film;
+
+    public void setId_film(int id_film) {
+        this.id_film = id_film;
+    }
+
+    public void setId_projection(int id_projection) {
+        this.id_projection = id_projection;
+    }
+
+    Set<String> placereservees = new HashSet<String>();
+
     public void setId_salle(int id_salle) {
         this.id_salle = id_salle;
     }
@@ -65,18 +79,18 @@ public class PlaceController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println("id_projection= " + insatance.id_projection);
+        System.out.println();
         salle s = new SalleCRUD().entitiesList3(insatance.id_salle).get(0);
         ROWS = s.getLongueur();
         COLS = s.getLargeur();
         ArrayList<String> coordMap = new ArrayList<String>();
-        Set<String> placereservees = new HashSet<String>();
 
-        coordMap.add("5,5");
-        coordMap.add("5,7");
-        coordMap.add("5,9");
-        coordMap.add("5,8");
-        coordMap.add("4,8");
-        coordMap.add("3,5");
+        List<reservation_place> list = new reservation_placeCRUD().getplaces(insatance.id_projection);
+        for (reservation_place place:list) {
+            coordMap.add(place.getCoordonnee());
+        }
+
         System.out.println(coordMap);
 
         
@@ -87,8 +101,8 @@ public class PlaceController implements Initializable {
         idmatrice.setVgap(10);
 
         // Creation 
-        for (int row = 0; row < ROWS; row++) {
-            for (int col = 0; col < COLS; col++) {
+        for (int row = 1; row <= ROWS; row++) {
+            for (int col = 1; col <= COLS; col++) {
                 for (String i : coordMap) {
                     Pane pane = new Pane();
                     Rectangle rectangle = new Rectangle(30, 30);
@@ -119,8 +133,8 @@ public class PlaceController implements Initializable {
 
 // action onClick pour reserver une place
                         pane.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-                            int clickedRow = GridPane.getRowIndex(pane)+1;
-                            int clickedCol = GridPane.getColumnIndex(pane)+1;
+                            int clickedRow = GridPane.getRowIndex(pane);
+                            int clickedCol = GridPane.getColumnIndex(pane);
                             rectangle.setFill(Color.web("#eb2e66"));
                             rectangle.setStroke(Color.BLACK);
 
@@ -154,6 +168,24 @@ lista.setText(placereservees.toString()  );
 
        // idmatrice.getChildren().add(matrice);
     }
+
+    @FXML
+    private void reserver(ActionEvent actionEvent) {
+        PanierSnackController.getInstance().setId_projection(insatance.id_projection);
+        PanierSnackController.getInstance().setId_film(insatance.id_film);
+        PanierSnackController.getInstance().setPlacereservees(placereservees);
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/PanierSnack.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+
   @FXML
     
     private void back(ActionEvent event) {

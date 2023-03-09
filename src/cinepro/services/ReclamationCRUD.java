@@ -5,7 +5,7 @@
 package cinepro.services;
 
 import cinepro.entities.Reclamation;
-import cinepro.interfaces.EntityCRUD;
+import cinepro.interfaces.ReservationCRUD;
 import cinepro.utils.MyConnection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -18,7 +18,7 @@ import java.util.List;
  *
  * @author acer
  */
-public class ReclamationCRUD implements EntityCRUD<Reclamation> {
+public class ReclamationCRUD implements ReservationCRUD<Reclamation>{
 
     @Override
     public void addEntity(Reclamation t) {

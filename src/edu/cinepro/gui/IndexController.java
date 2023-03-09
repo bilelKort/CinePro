@@ -220,5 +220,18 @@ public class IndexController implements Initializable {
         }
     }
 
+    @FXML
+    void afficherReservations(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/Display.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
     
 }

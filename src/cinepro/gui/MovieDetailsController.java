@@ -171,6 +171,8 @@ public class MovieDetailsController implements Initializable {
                             int rowIndex = getTableRow().getIndex();
                             try {
                                 PlaceController.getInstance().setId_salle(tableSalle.getCellObservableValue(rowIndex).getValue());
+                                PlaceController.getInstance().setId_projection(tableProjection.getCellObservableValue(rowIndex).getValue());
+                                PlaceController.getInstance().setId_film(instance.id_film);
                                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/place.fxml"));
                                 Parent root =loader.load();
                                 listProjections.getScene().setRoot(root);
@@ -439,4 +441,6 @@ public class MovieDetailsController implements Initializable {
             System.out.println(ex.getMessage());
         }
     }
+
+
 }
