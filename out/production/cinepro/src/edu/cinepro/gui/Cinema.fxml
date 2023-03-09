@@ -4,11 +4,38 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.web.WebView?>
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: #7B002C; -fx-text-fill: #6B001F;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.CinemaController">
    <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-10.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" width="1450.0" />
+      <Button fx:id="Logout" layoutX="1287.0" layoutY="9.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: white;" text="Logout" AnchorPane.rightAnchor="46.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#cinema" style="-fx-background-color: white;" text="Cinema">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="190.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="320.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
       <Label layoutX="504.0" layoutY="10.0" prefHeight="58.0" prefWidth="96.0" text="localisation" textFill="WHITE">
          <font>
             <Font name="System Bold" size="14.0" />
@@ -35,9 +62,14 @@
       <Label fx:id="iderrorimage" layoutX="265.0" layoutY="328.0" prefHeight="17.0" prefWidth="181.0" textFill="#110000" />
       <Label fx:id="iderrorlocation" layoutX="574.0" layoutY="24.0" prefHeight="17.0" prefWidth="215.0" textFill="#0a0000" />
       <Button layoutX="97.0" layoutY="540.0" mnemonicParsing="false" onAction="#back" prefHeight="25.0" prefWidth="198.0" style="-fx-background-color: black;" text="back" textFill="WHITE" />
-      <Button disable="true" layoutX="277.0" layoutY="2.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="168.0" style="-fx-background-color: #E6B8B7;" text="ajouter cinema" textFill="#ff4444">
+      <Button disable="true" layoutX="277.0" layoutY="46.0" mnemonicParsing="false" prefHeight="44.0" prefWidth="168.0" style="-fx-background-color: #E6B8B7;" text="ajouter cinema" textFill="#ff4444">
          <font>
             <Font name="System Bold" size="12.0" />
+         </font>
+      </Button>
+      <Button layoutX="315.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Profile">
+         <font>
+            <Font name="System Bold" size="14.0" />
          </font>
       </Button>
    </children>

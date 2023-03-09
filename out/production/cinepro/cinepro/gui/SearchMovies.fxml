@@ -7,43 +7,70 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="750.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.SearchMoviesController">
+<AnchorPane fx:id="test" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: efe6d5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.SearchMoviesController">
    <children>
-      <ScrollPane prefHeight="750.0" prefWidth="1400.0">
+      <ScrollPane prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: efe6d5;">
         <content>
-          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="750.0" prefWidth="1381.0">
+          <AnchorPane fx:id="anchor" minHeight="0.0" minWidth="0.0" prefHeight="825.0" prefWidth="1381.0" style="-fx-background-color: efe6d5;">
                <children>
-                   <Button fx:id="ajoutMovies" layoutX="15.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutMovies" text="Ajout Movies">
+                   <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-10.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" width="1450.0" />
+                   <Button fx:id="Logout" layoutX="1287.0" layoutY="9.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: white;" text="Logout" AnchorPane.rightAnchor="46.0">
                        <font>
-                           <Font size="14.0" />
-                       </font></Button>
-                   <Button fx:id="listMovies" layoutX="121.0" layoutY="14.0" mnemonicParsing="false" text="List Movies">
+                           <Font name="System Bold" size="14.0" />
+                       </font>
+                   </Button>
+                   <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#cinema" style="-fx-background-color: white;" text="Cinema">
                        <font>
-                           <Font size="14.0" />
-                       </font></Button>
-                   <Button fx:id="ajoutprojection" layoutX="214.0" layoutY="14.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection">
+                           <Font name="System Bold" size="14.0" />
+                       </font>
+                   </Button>
+                   <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
                        <font>
-                           <Font size="14.0" />
-                       </font></Button>
-                   <Button fx:id="listProjections" layoutX="338.0" layoutY="14.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections">
+                           <Font name="System Bold" size="14.0" />
+                       </font>
+                   </Button>
+                   <Button layoutX="190.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
                        <font>
-                           <Font size="14.0" />
+                           <Font name="System Bold" size="14.0" />
+                       </font>
+                   </Button>
+                   <Button fx:id="ajoutMovies" layoutX="51.0" layoutY="134.0" mnemonicParsing="false" onAction="#ajoutMovies" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: E9E3E6;" text="Ajout Movies">
+                       <font>
+                           <Font name="System Bold" size="15.0" />
                        </font></Button>
-                  <TextField fx:id="search" alignment="CENTER" layoutX="84.0" layoutY="71.0" prefHeight="51.0" prefWidth="535.0" promptText="Search" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="762.0">
+                   <Button fx:id="listMovies" layoutX="273.0" layoutY="134.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: E9E3E6;" text="List Movies">
+                       <font>
+                           <Font name="System Bold" size="14.0" />
+                       </font></Button>
+                   <Button fx:id="ajoutprojection" layoutX="448.0" layoutY="135.0" mnemonicParsing="false" onAction="#ajoutProjection" prefHeight="30.0" prefWidth="143.0" style="-fx-background-color: E9E3E6;" text="Ajout Projection">
+                       <font>
+                           <Font name="System Bold" size="14.0" />
+                       </font></Button>
+                   <Button fx:id="listProjections" layoutX="626.0" layoutY="134.0" mnemonicParsing="false" onAction="#listProjections" style="-fx-background-color: E9E3E6;" text="List Projections">
+                       <font>
+                           <Font name="System Bold" size="14.0" />
+                       </font></Button>
+                  <TextField fx:id="search" alignment="CENTER" layoutX="84.0" layoutY="71.0" opacity="0.67" prefHeight="51.0" prefWidth="535.0" promptText="Search" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="762.0">
                      <font>
                         <Font size="24.0" />
                      </font>
                   </TextField>
                   <VBox fx:id="vBox" layoutX="100.0" layoutY="166.0" prefHeight="0" prefWidth="1350.0" />
-                  <DatePicker fx:id="date" layoutX="649.0" layoutY="71.0" onAction="#search" prefHeight="51.0" prefWidth="230.0" />
-                  <Button layoutX="1120.0" layoutY="71.0" mnemonicParsing="false" onAction="#searchDelete" prefHeight="51.0" text="Delete Search">
+                  <DatePicker fx:id="date" layoutX="649.0" layoutY="71.0" onAction="#search" opacity="0.67" prefHeight="51.0" prefWidth="230.0" />
+                  <Button layoutX="1120.0" layoutY="71.0" mnemonicParsing="false" onAction="#searchDelete" opacity="0.67" prefHeight="51.0" text="Delete Search">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="genre" layoutX="906.0" layoutY="71.0" prefHeight="51.0" prefWidth="186.0" promptText="Choose Genre" />
+                  <ComboBox fx:id="genre" layoutX="906.0" layoutY="71.0" opacity="0.67" prefHeight="51.0" prefWidth="186.0" promptText="Choose Genre" style="-fx-background-color: 463F3A;" />
+                  <Button layoutX="320.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
+                     <font>
+                        <Font name="System Bold" size="14.0" />
+                     </font>
+                  </Button>
                </children>
             </AnchorPane>
         </content>

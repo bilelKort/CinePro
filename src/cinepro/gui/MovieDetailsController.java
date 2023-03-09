@@ -2,6 +2,7 @@ package cinepro.gui;
 
 import cinepro.entities.*;
 import cinepro.services.*;
+import edu.cinepro.entities.UserSession;
 import edu.cinepro.gui.PlaceController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -11,6 +12,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
@@ -20,10 +22,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
 import javafx.scene.web.WebView;
+import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 import javax.imageio.ImageIO;
 import java.io.File;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
@@ -115,6 +121,8 @@ public class MovieDetailsController implements Initializable {
     private List<Projection> list;
     public ObservableList<TableProjection> observableList = FXCollections.observableArrayList();
     public ObservableList<Feedback> k = FXCollections.observableArrayList();
+    @FXML
+    private Button Logout;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -265,6 +273,7 @@ public class MovieDetailsController implements Initializable {
         }
     }
 
+    @FXML
     public void ajoutMovies(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutMovie.fxml"));
@@ -275,6 +284,7 @@ public class MovieDetailsController implements Initializable {
         }
     }
 
+    @FXML
     public void listMovies(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SearchMovies.fxml"));
@@ -285,6 +295,7 @@ public class MovieDetailsController implements Initializable {
         }
     }
 
+    @FXML
     public void ajoutProjection(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutProjection.fxml"));
@@ -295,6 +306,7 @@ public class MovieDetailsController implements Initializable {
         }
     }
 
+    @FXML
     public void listProjections(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ListProjections.fxml"));
@@ -308,6 +320,7 @@ public class MovieDetailsController implements Initializable {
         this.id_film = id_film;
     }
 
+    @FXML
     public void ajouterfeedback(ActionEvent actionEvent) {
         FeedbackCRUD c = new FeedbackCRUD();
 
@@ -328,6 +341,102 @@ public class MovieDetailsController implements Initializable {
 
             pcd.addCommentaire(f);
             System.out.println("Done!!");
+        }
+    }
+
+    @FXML
+    private void logout(ActionEvent event) {
+        UserSession.getInstace().cleanUserSession();
+        //System.out.println(UserSession.getInstace().getId());
+
+           /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Account");
+            alert.setHeaderText(null);
+            alert.setContentText("You have logged out successfully!");
+            alert.showAndWait(); */
+        Notifications notifications = Notifications.create();
+        // notifications.graphic(new ImageView(notif));
+        notifications.text("You have logged out successfully!");
+        notifications.title("Success message");
+        notifications.hideAfter(Duration.seconds(4));
+        notifications.position(Pos.BOTTOM_LEFT);
+        //notifications.darkStyle();
+        notifications.show();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Stage myWindow = (Stage) listProjections.getScene().getWindow();
+            Scene sc = new Scene(root);
+            myWindow.setScene(sc);
+            myWindow.setTitle("Sign In");
+            myWindow.show();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void film(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/SearchMovies.fxml"));
+
+        try {
+            Parent root = loader.load();
+            listMovies.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AfficherReclamation.fxml"));
+
+        try {
+            Parent root = loader.load();
+            listProjections.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void cinema(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/CinemaAffiche.fxml"));
+
+        try {
+            Parent root = loader.load();
+            listMovies.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void profile(ActionEvent actionEvent) {
+        FXMLLoader loader= new FXMLLoader();
+        if (UserSession.getInstace().getId()==0) {
+            loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
+        }else {
+            if (UserSession.getInstace().getRole().equals("Client")) {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/Index.fxml"));
+
+            }else if (UserSession.getInstace().getRole().equals("Admin")) {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }
+        }
+
+        try {
+            Parent root = loader.load();
+            listMovies.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
         }
     }
 }

@@ -29,7 +29,7 @@ public class MainClass extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/cinepro/gui/ListProjections.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/cinepro/gui/SearchMovies.fxml"));
             Scene scene = new Scene(root);
             primaryStage.setTitle("CinePro");
             primaryStage.setScene(scene);

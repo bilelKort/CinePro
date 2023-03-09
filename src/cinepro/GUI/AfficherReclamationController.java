@@ -130,6 +130,8 @@ public class AfficherReclamationController implements Initializable {
     public void setK(ObservableList<Reclamation> k) {
         this.k = k;
     }
+
+
     
     
 }

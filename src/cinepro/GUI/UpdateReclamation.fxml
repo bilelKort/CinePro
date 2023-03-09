@@ -7,34 +7,35 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.UpdateReclamationController">
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: efe6d5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.UpdateReclamationController">
    <children>
-      <Label fx:id="id_r" layoutX="21.0" layoutY="71.0" text="id_reclamation">
+      <Label fx:id="id_r" layoutX="367.0" layoutY="173.0" prefHeight="53.0" prefWidth="186.0" text="id_reclamation">
          <font>
-            <Font size="26.0" />
+            <Font name="System Bold" size="25.0" />
          </font></Label>
-      <Label fx:id="desc" layoutX="9.0" layoutY="310.0" prefHeight="39.0" prefWidth="141.0" text="description">
+      <Label fx:id="desc" layoutX="389.0" layoutY="356.0" prefHeight="39.0" prefWidth="141.0" text="description">
          <font>
-            <Font size="27.0" />
+            <Font name="System Bold" size="25.0" />
          </font></Label>
-      <Label fx:id="user" layoutX="67.0" layoutY="119.0" text="id_user">
+      <Label fx:id="user" layoutX="404.0" layoutY="279.0" prefHeight="39.0" prefWidth="111.0" text="id_user">
          <font>
-            <Font size="24.0" />
+            <Font name="System Bold" size="25.0" />
          </font></Label>
       <Label fx:id="film" layoutX="86.0" layoutY="155.0" />
-      <TextField fx:id="id_reclamation" layoutX="223.0" layoutY="78.0" />
-      <TextField fx:id="id_user" layoutX="197.0" layoutY="124.0" />
-      <TextField fx:id="description" layoutX="170.0" layoutY="285.0" prefHeight="74.0" prefWidth="165.0" />
-      <Button fx:id="btnModifier" layoutX="389.0" layoutY="396.0" mnemonicParsing="false" onAction="#ModifierReclamation" prefHeight="53.0" prefWidth="99.0" text="Modifier" textFill="#e41919" />
+      <TextField fx:id="id_reclamation" layoutX="614.0" layoutY="173.0" prefHeight="53.0" prefWidth="165.0" />
+      <TextField fx:id="id_user" layoutX="618.0" layoutY="265.0" prefHeight="53.0" prefWidth="165.0" />
+      <TextField fx:id="description" layoutX="618.0" layoutY="358.0" prefHeight="54.0" prefWidth="165.0">
+         <font>
+            <Font size="15.0" />
+         </font></TextField>
+      <Button fx:id="btnModifier" layoutX="634.0" layoutY="490.0" mnemonicParsing="false" onAction="#ModifierReclamation" prefHeight="54.0" prefWidth="149.0" style="-fx-background-color: #463f3a;" text="Modifier" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="25.0" />
+         </font></Button>
       <Label fx:id="erreur" layoutX="468.0" layoutY="164.0" />
-      <Label layoutX="45.0" layoutY="203.0" prefHeight="38.0" prefWidth="82.0" text="id_film">
+      <CheckBox fx:id="etat" layoutX="440.0" layoutY="490.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="99.0" text="etat" textAlignment="CENTER">
          <font>
-            <Font size="26.0" />
-         </font></Label>
-      <TextField fx:id="id_film" layoutX="164.0" layoutY="211.0" prefHeight="35.0" prefWidth="149.0" />
-      <CheckBox fx:id="etat" layoutX="120.0" layoutY="412.0" mnemonicParsing="false" prefHeight="53.0" prefWidth="99.0" text="etat" textAlignment="CENTER">
-         <font>
-            <Font size="22.0" />
+            <Font name="System Bold" size="25.0" />
          </font></CheckBox>
    </children>
 </AnchorPane>

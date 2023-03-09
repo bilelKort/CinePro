@@ -4,6 +4,7 @@
  */
 package edu.cinepro.gui;
 
+import edu.cinepro.entities.UserSession;
 import edu.cinepro.entities.cinema;
 import edu.cinepro.entities.salle;
 import edu.cinepro.entities.snack;
@@ -26,6 +27,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -51,6 +53,8 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -88,6 +92,8 @@ public class ViewmorecinemaController implements Initializable {
         public ObservableList<salle> k = FXCollections.observableArrayList();
     @FXML
     private TableColumn edit;
+    @FXML
+    private Button Logout;
 
     
      
@@ -175,7 +181,6 @@ public class ViewmorecinemaController implements Initializable {
                         this.setImage(a.getPhoto());
     }
 
-    @FXML
     private void affichesalle() {
         
          tableview .getItems().clear();
@@ -388,6 +393,102 @@ public void deletesalle(int id) {
                       Logger.getLogger(ViewmorecinemaController.class.getName()).log(Level.SEVERE, null, ex);
                   }
         
+    }
+
+    @FXML
+    private void logout(ActionEvent event) {
+        UserSession.getInstace().cleanUserSession();
+        //System.out.println(UserSession.getInstace().getId());
+
+           /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Account");
+            alert.setHeaderText(null);
+            alert.setContentText("You have logged out successfully!");
+            alert.showAndWait(); */
+        Notifications notifications = Notifications.create();
+        // notifications.graphic(new ImageView(notif));
+        notifications.text("You have logged out successfully!");
+        notifications.title("Success message");
+        notifications.hideAfter(Duration.seconds(4));
+        notifications.position(Pos.BOTTOM_LEFT);
+        //notifications.darkStyle();
+        notifications.show();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Stage myWindow = (Stage) Logout.getScene().getWindow();
+            Scene sc = new Scene(root);
+            myWindow.setScene(sc);
+            myWindow.setTitle("Sign In");
+            myWindow.show();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void film(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/SearchMovies.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AfficherReclamation.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void cinema(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/CinemaAffiche.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void profile(ActionEvent actionEvent) {
+        FXMLLoader loader= new FXMLLoader();
+        if (UserSession.getInstace().getId()==0) {
+            loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
+        }else {
+            if (UserSession.getInstace().getRole().equals("Client")) {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/Index.fxml"));
+
+            }else if (UserSession.getInstace().getRole().equals("Admin")) {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }
+        }
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
 }

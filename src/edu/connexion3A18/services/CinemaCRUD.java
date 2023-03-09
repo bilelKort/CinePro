@@ -5,6 +5,7 @@
 package edu.connexion3A18.services;
 
 import cinepro.utils.MyConnection;
+import edu.cinepro.entities.User;
 import edu.cinepro.entities.cinema;
 import edu.cinepro.interfaces.EntityCRUD;
 
@@ -19,7 +20,7 @@ import java.util.List;
  *
  * @author rayen
  */
-public class CinemaCRUD implements EntityCRUD<cinema> {
+public class CinemaCRUD implements EntityCRUD<User> {
 
     @Override
     public void addEntity(cinema c) {

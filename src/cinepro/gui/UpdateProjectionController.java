@@ -6,15 +6,22 @@ import cinepro.services.FilmService;
 import cinepro.services.ProjectionService;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
+import edu.cinepro.entities.UserSession;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import javafx.util.Duration;
 import javafx.util.StringConverter;
+import org.controlsfx.control.Notifications;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -187,5 +194,101 @@ public class UpdateProjectionController implements Initializable {
     }
 
     public void diffuse(ActionEvent actionEvent) {
+    }
+
+    @FXML
+    private void logout(ActionEvent event) {
+        UserSession.getInstace().cleanUserSession();
+        //System.out.println(UserSession.getInstace().getId());
+
+           /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Account");
+            alert.setHeaderText(null);
+            alert.setContentText("You have logged out successfully!");
+            alert.showAndWait(); */
+        Notifications notifications = Notifications.create();
+        // notifications.graphic(new ImageView(notif));
+        notifications.text("You have logged out successfully!");
+        notifications.title("Success message");
+        notifications.hideAfter(Duration.seconds(4));
+        notifications.position(Pos.BOTTOM_LEFT);
+        //notifications.darkStyle();
+        notifications.show();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Stage myWindow = (Stage) date.getScene().getWindow();
+            Scene sc = new Scene(root);
+            myWindow.setScene(sc);
+            myWindow.setTitle("Sign In");
+            myWindow.show();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void film(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/SearchMovies.fxml"));
+
+        try {
+            Parent root = loader.load();
+            date.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AfficherReclamation.fxml"));
+
+        try {
+            Parent root = loader.load();
+            date.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void cinema(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/CinemaAffiche.fxml"));
+
+        try {
+            Parent root = loader.load();
+            date.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void profile(ActionEvent actionEvent) {
+        FXMLLoader loader= new FXMLLoader();
+        if (UserSession.getInstace().getId()==0) {
+            loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
+        }else {
+            if (UserSession.getInstace().getRole().equals("Client")) {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/Index.fxml"));
+
+            }else if (UserSession.getInstace().getRole().equals("Admin")) {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }
+        }
+
+        try {
+            Parent root = loader.load();
+            date.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 }

@@ -26,5 +26,6 @@
     <orderEntry type="library" name="controlsfx-8.40.14" level="project" />
     <orderEntry type="library" name="okhhtp" level="project" />
     <orderEntry type="library" name="jackson" level="project" />
+    <orderEntry type="library" name="guava" level="project" />
   </component>
 </module>
