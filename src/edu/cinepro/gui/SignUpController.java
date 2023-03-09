@@ -5,6 +5,9 @@
  */
 package edu.cinepro.gui;
 
+import cinerpo.entities.Badge;
+import cinerpo.entities.Type_Badge;
+import cinerpo.services.BadgeCRUD;
 import com.google.common.hash.Hashing;
 import edu.cinepro.entities.User;
 import edu.cinepro.entities.UserSession;
@@ -423,10 +426,15 @@ public class SignUpController implements Initializable {
 
         String passwordCry = Hashing.sha256().hashString(resPassword, StandardCharsets.UTF_8).toString();
         //Ajout
-        CineproCRUD ccd = new CineproCRUD();
-        User c = new User(resEmail,passwordCry,resNom,resPrenom,resDateN,resPseudo,resTel,"Client",0, 1);
+
+          BadgeCRUD badgeCRUD = new BadgeCRUD();
+          int id_badge = badgeCRUD.addEntity1(new Badge(Type_Badge.bronze, 0));
+
+          CineproCRUD ccd = new CineproCRUD();
+          User c = new User(resEmail,passwordCry,resNom,resPrenom,resDateN,resPseudo,resTel,"Client",0, id_badge);
           System.out.println(c);
-        
+
+
         ccd.addEntity(c);
        /* Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setContentText("User ajoutée");

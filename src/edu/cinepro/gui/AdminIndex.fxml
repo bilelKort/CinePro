@@ -28,7 +28,7 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
+      <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Profile">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -61,5 +61,7 @@
          </font>
       </Button>
       <Button fx:id="update" layoutX="1113.0" layoutY="363.0" mnemonicParsing="false" onAction="#updateRole" style="-fx-background-color: #E45652;" text="Update User" />
+      <Button fx:id="search1" layoutX="890.0" layoutY="472.0" mnemonicParsing="false" onAction="#afficherAbonnement" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #E45652;" text="Afficher Abonnement" />
+      <Button fx:id="search11" layoutX="891.0" layoutY="511.0" mnemonicParsing="false" onAction="#afficherBadges" prefHeight="26.0" prefWidth="150.0" style="-fx-background-color: #E45652;" text="Afficher Badges" />
    </children>
 </AnchorPane>

@@ -164,7 +164,7 @@ public class SignInController implements Initializable {
                     break;
                 }case "Gerant": {
 
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("Index.fxml"));
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("GerantIndex.fxml"));
 
                     try {
                         Parent root = loader.load();

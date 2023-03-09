@@ -10,6 +10,7 @@ import cinepro.entities.reservation_snack;
 import cinepro.services.reservationCRUD;
 import cinepro.services.reservation_placeCRUD;
 import cinepro.services.reservation_snackCRUD;
+import cinerpo.services.BadgeCRUD;
 import edu.cinepro.entities.UserSession;
 import edu.cinepro.entities.snack;
 import edu.connexion3A18.services.SnackCRUD;
@@ -17,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.sql.SQLException;
 import java.util.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -114,33 +116,31 @@ public class PanierSnackController implements Initializable {
 
         ///////////////
         List<snack> selection2 = selection;
-        System.out.println(selection);
-
-        for (snack i : selection2) {
+        System.out.println("selected: " + selection);
+        System.out.println("before: " + b);
             Boolean duplicate=false;
-            reservation_snack snackreservation1 = new reservation_snack(1, i.getPrix(), 0, i.getId_snack());
+            reservation_snack snackreservation1 = new reservation_snack(1, selection2.get(selection2.size()-1).getPrix(), 0, selection2.get(selection2.size()-1).getId_snack());
             for (reservation_snack s:b) {
-                System.out.println("i: " + i.getId_snack());
-                System.out.println("s: " + s.getId_snack());
-                if (s.getId_snack() == i.getId_snack()) {
+                if (s.getId_snack() == selection2.get(selection2.size()-1).getId_snack()) {
                     s.setQuantite(s.getQuantite() + 1);
-                    s.setPrix(s.getPrix()+i.getPrix());
+                    s.setPrix(s.getPrix()+selection2.get(selection2.size()-1).getPrix());
                     duplicate = true;
+                    break;
                 }
             }
             if (!duplicate) {
                 b.add(snackreservation1);
             }
-        }
-        System.out.println("test2: " + b);
+
+        System.out.println("after: " + b);
         totalPriceLabel.setText("Prix total : " + totalPrice);
-         prixgold.setText("prix du badge spéciale"+(totalPrice*0.7));
-    }
+   }
 
     @FXML
     public void reserver(ActionEvent actionEvent) {
         reservationCRUD r = new reservationCRUD();
         r.addEntity(new reservation(UserSession.getInstace().getId(), instance.id_film, true, instance.id_projection));
+        new BadgeCRUD().updateNbr(UserSession.getInstace().getId_badge());
         List<String> list = new ArrayList<>(instance.placereservees);
 
         reservation_placeCRUD rp = new reservation_placeCRUD();
@@ -150,11 +150,14 @@ public class PanierSnackController implements Initializable {
             rp.addEntity(place);
         }
 
-        reservation_snackCRUD rsc = new reservation_snackCRUD();
-        for (reservation_snack rs:b) {
-            rs.setId_reservation(r.getlast());
-            rsc.addEntity(rs);
+        if (b.size()>0) {
+            reservation_snackCRUD rsc = new reservation_snackCRUD();
+            for (reservation_snack rs:b) {
+                rs.setId_reservation(r.getlast());
+                rsc.addEntity(rs);
+            }
         }
+
     }
 
     private void vide(Label totalPriceLabel) {

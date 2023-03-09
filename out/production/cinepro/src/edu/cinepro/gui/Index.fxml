@@ -90,6 +90,12 @@
                   <Font size="17.0" />
                </font>
             </Button>
+            <Button fx:id="modifier11" layoutX="420.0" layoutY="490.0" mnemonicParsing="false" onAction="#sabonner" style="-fx-background-color: #E45652;" text="S'abonner">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Button>
+            <ImageView fx:id="badge" fitHeight="300.0" fitWidth="300.0" layoutX="977.0" layoutY="236.0" pickOnBounds="true" preserveRatio="true" />
          </children>
       </AnchorPane>
    </children>

@@ -348,7 +348,32 @@ public class AdminIndexController implements Initializable {
         }
     }
 
-    
+    @FXML
+    public void afficherAbonnement(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/Affiche.fxml"));
+
+        try {
+            Parent root = loader.load();
+            search.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+
+    @FXML
+    public void afficherBadges(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/DisplayBadge.fxml"));
+
+        try {
+            Parent root = loader.load();
+            search.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }
 
 

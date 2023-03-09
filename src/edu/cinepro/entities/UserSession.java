@@ -25,6 +25,7 @@ public final class UserSession {
     private String pseudo;
     private int tel;
     private float montant;
+    private int id_badge;
 
     public UserSession() {
     }
@@ -43,6 +44,7 @@ public final class UserSession {
         instance.role = c.getRole();
         instance.password = c.getPassword();
         instance.montant = c.getMontant();
+        instance.id_badge = c.getId_badge();
     }
 
     public String getEmail() {
@@ -80,6 +82,14 @@ public final class UserSession {
     public static UserSession getInstace(int id) {
         new UserSession(id);
         return instance;
+    }
+
+    public int getId_badge() {
+        return id_badge;
+    }
+
+    public void setId_badge(int id_badge) {
+        this.id_badge = id_badge;
     }
 
     public int getId() {

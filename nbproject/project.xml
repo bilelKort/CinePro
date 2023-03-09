@@ -3,7 +3,11 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <data xmlns="http://www.netbeans.org/ns/j2se-project/3">
+<<<<<<< HEAD
             <name>cinepro</name>
+=======
+            <name>cinerpo</name>
+>>>>>>> 913f833ad8d9e5eb5f4f075660922a73cb79756b
             <source-roots>
                 <root id="src.dir"/>
             </source-roots>

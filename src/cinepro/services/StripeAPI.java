@@ -5,21 +5,9 @@
  */
 package cinepro.services;
 
-import cinepro.entities.*;
-import cinepro.services.*;
-import cinepro.utils.cineproConnexion;
 import static com.sun.org.apache.xalan.internal.lib.ExsltDatetime.time;
-import java.net.URI;
-import java.sql.Timestamp;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.StackPane;
-import javafx.stage.Stage;
-import com.stripe.Stripe; 
+
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException; 
 import com.stripe.model.*; 
 import java.util.HashMap;

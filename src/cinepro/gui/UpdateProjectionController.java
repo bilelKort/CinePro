@@ -81,6 +81,7 @@ public class UpdateProjectionController implements Initializable {
         time.setValue(LocalTime.parse(projection.getDate_debut().substring(11, 16)));
         places.setText(Integer.toString(projection.getNbr_places()));
 
+
         dropFilm.setConverter(new StringConverter<Film>() {
             @Override
             public String toString(Film object) {

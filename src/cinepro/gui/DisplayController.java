@@ -7,34 +7,21 @@ package cinepro.gui;
 
 import cinepro.entities.reservation;
 import cinepro.services.QRCodeGenerator;
-import cinepro.services.ReservationDAO;
 import cinepro.services.StripeAPI;
 import cinepro.services.WeatherAPI;
 import cinepro.services.reservationCRUD;
-import cinepro.utils.cineproConnexion;
-import com.google.zxing.WriterException;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Card;
+
 import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.sql.Timestamp;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import edu.cinepro.entities.UserSession;
-import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;

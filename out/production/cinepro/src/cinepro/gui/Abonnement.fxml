@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import javafx.scene.shape.Rectangle?>
+<AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.AbonnementController">
+   <children>
+      <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-10.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" width="1450.0" />
+      <Button fx:id="Logout" layoutX="1287.0" layoutY="9.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: white;" text="Logout" AnchorPane.rightAnchor="46.0">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Profile">
+         <font>
+            <Font name="System Bold" size="14.0" />
+         </font>
+      </Button>
+      <Label layoutX="308.0" layoutY="169.0" text="Nom">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="300.0" layoutY="224.0" text="Prénom">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="260.0" layoutY="281.0" text="Durée de l'abonnement">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="idNom" editable="false" layoutX="486.0" layoutY="166.0" />
+      <TextField fx:id="idPrenom" editable="false" layoutX="485.0" layoutY="221.0" />
+      <VBox fx:id="vBox" layoutX="484.0" layoutY="263.0" prefHeight="97.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="choiceBox" layoutX="185.0" layoutY="81.0" prefWidth="150.0" />
+      <Button fx:id="cancel" layoutX="324.0" layoutY="411.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="79.0" text="Quitter" />
+      <Button fx:id="valider" layoutX="520.0" layoutY="411.0" mnemonicParsing="false" onAction="#saveAbonnement" prefHeight="26.0" prefWidth="79.0" text="Valider" />
+      <Label layoutX="263.0" layoutY="361.0" text="Numéro carte bancaire" />
+      <TextField fx:id="ncb" layoutX="487.0" layoutY="357.0" />
+      <Separator layoutX="917.0" layoutY="197.0" orientation="VERTICAL" prefHeight="200.0" />
+      <Separator layoutX="817.0" layoutY="235.0" prefWidth="200.0" />
+      <Separator layoutX="817.0" layoutY="275.0" prefWidth="200.0" />
+      <Separator layoutX="817.0" layoutY="315.0" prefWidth="200.0" />
+      <Separator layoutX="817.0" layoutY="356.0" prefWidth="200.0" />
+      <Label layoutX="841.0" layoutY="206.0" text="Type " textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="947.0" layoutY="206.0" text="Prix(DT)" textFill="RED">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label layoutX="841.0" layoutY="249.0" text="1 mois">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="954.0" layoutY="249.0" text="50">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="845.0" layoutY="289.0" text="3 mois">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="954.0" layoutY="289.0" text="150">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="845.0" layoutY="330.0" text="6 mois">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="954.0" layoutY="330.0" text="300" />
+      <Label layoutX="845.0" layoutY="371.0" text="1 an">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <Label layoutX="954.0" layoutY="371.0" text="500">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

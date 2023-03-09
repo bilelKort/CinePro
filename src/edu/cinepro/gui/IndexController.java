@@ -5,11 +5,14 @@
  */
 package edu.cinepro.gui;
 
+import cinerpo.entities.Type_Badge;
+import cinerpo.services.BadgeCRUD;
 import edu.cinepro.entities.User;
 import edu.cinepro.entities.UserSession;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Period;
@@ -37,6 +40,8 @@ import org.controlsfx.control.Notifications;
 public class IndexController implements Initializable {
 
     @FXML
+    private ImageView badge;
+    @FXML
     private TextField affichagePseudo;
     @FXML
     private TextField affichagePrenom;
@@ -60,6 +65,29 @@ public class IndexController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        System.out.println(UserSession.getInstace().getId_badge());
+        String urlBadge = "";
+        switch (new BadgeCRUD().getBadge(UserSession.getInstace().getId())) {
+            case "gold":
+                urlBadge = "src/image/gold.png";
+                break;
+            case "silver":
+                urlBadge = "src/image/silver.png";
+                break;
+            case "bronze":
+                urlBadge = "src/image/bronze.png";
+                break;
+        }
+
+        File filebadge = new File(urlBadge);
+        String localURl = "";
+        try {
+            localURl = filebadge.toURI().toURL().toString();
+        } catch (MalformedURLException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println(localURl);
+        badge.setImage(new Image(localURl));
 
         affichagePseudo.setText(UserSession.getInstace().getPseudo());
         affichageNom.setText(UserSession.getInstace().getNom());
@@ -198,5 +226,15 @@ public class IndexController implements Initializable {
         }
     }
 
-    
+
+    public void sabonner(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader();
+        try {
+            loader = new FXMLLoader(getClass().getResource("/cinepro/gui/Abonnement.fxml"));
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
 }

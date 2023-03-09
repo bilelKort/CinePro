@@ -117,6 +117,7 @@ public class CineproCRUD implements UserCRUD<User> {
                 c.setTel(rs.getInt("tel"));
                 c.setRole(rs.getString("role"));
                 c.setMontant(rs.getFloat("montant"));
+                c.setId_badge(rs.getInt("id_badge"));
                 
                 myList.add(c);
             }
@@ -241,6 +242,7 @@ public class CineproCRUD implements UserCRUD<User> {
                 c.setTel(rs.getInt("tel"));
                 c.setRole(rs.getString("role"));
                 c.setMontant(rs.getFloat("montant"));
+                c.setId_badge(rs.getInt("id_badge"));
                 
             }
             return c;

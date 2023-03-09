@@ -10,27 +10,6 @@
 
 <AnchorPane id="AnchorPane" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: #7B002C;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="edu.cinepro.gui.PanierSnackController">
    <children>
-       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-10.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" width="1450.0" />
-       <Button fx:id="Logout" layoutX="1287.0" layoutY="9.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: white;" text="Logout" AnchorPane.rightAnchor="46.0">
-           <font>
-               <Font name="System Bold" size="14.0" />
-           </font>
-       </Button>
-       <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
-           <font>
-               <Font name="System Bold" size="14.0" />
-           </font>
-       </Button>
-       <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
-           <font>
-               <Font name="System Bold" size="14.0" />
-           </font>
-       </Button>
-       <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
-           <font>
-               <Font name="System Bold" size="14.0" />
-           </font>
-       </Button>
 
       <ScrollPane prefHeight="779.0" prefWidth="1363.0">
         <content>
@@ -60,5 +39,26 @@
             </AnchorPane>
         </content>
       </ScrollPane>
+       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-10.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" width="1450.0" />
+       <Button fx:id="Logout" layoutX="1287.0" layoutY="9.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: white;" text="Logout" AnchorPane.rightAnchor="46.0">
+           <font>
+               <Font name="System Bold" size="14.0" />
+           </font>
+       </Button>
+       <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
+           <font>
+               <Font name="System Bold" size="14.0" />
+           </font>
+       </Button>
+       <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
+           <font>
+               <Font name="System Bold" size="14.0" />
+           </font>
+       </Button>
+       <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
+           <font>
+               <Font name="System Bold" size="14.0" />
+           </font>
+       </Button>
    </children>
 </AnchorPane>

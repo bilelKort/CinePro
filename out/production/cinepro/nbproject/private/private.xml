@@ -6,6 +6,7 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/Snackupdate.fxml</file>
             <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/AjoutsnackcsvController.java</file>
             <file>file:/C:/Users/rayen/Documents/NetBeansProjects/cinepro/src/edu/cinepro/gui/SnackupdateController.java</file>
@@ -73,6 +74,23 @@
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/gui/detailPlace.fxml</file>
             <file>file:/C:/Users/kortb/Desktop/cinepro/src/cinepro/services/ReservationDAO.java</file>
 >>>>>>> f2e1869c8283d5ceace110cead0908babb9c00f6
+=======
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/Cinepro/gui/StatbController.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/Cinepro/gui/AbonnementController.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/Cinepro/gui/ADDBadgeController.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/cinerpo/services/BadgeCRUD.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/cinerpo/tests/MainClass.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/cinerpo/entities/Abonnement.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/cinerpo/services/AbonnementCRUD.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/Cinepro/gui/StatController.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/Cinepro/gui/AfficheController.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/Cinepro/gui/Client.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/Cinepro/gui/Abonnement.fxml</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/Cinepro/gui/Admin.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/Cinepro/gui/DisplayBadgeController.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/cinerpo/entities/Badge.java</file>
+            <file>file:/C:/Users/Home/Documents/NetBeansProjects/cinerpo/src/cinerpo/tests/NewClass.java</file>
+>>>>>>> 913f833ad8d9e5eb5f4f075660922a73cb79756b
         </group>
     </open-files>
 </project-private>

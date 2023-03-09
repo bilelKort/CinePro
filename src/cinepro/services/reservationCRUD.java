@@ -5,9 +5,8 @@
 package cinepro.services;
 
 import cinepro.entities.reservation;
-import cinepro.entities.reservation_place;
 import cinepro.interfaces.entityCRUD;
-import cinepro.utils.cineproConnexion;
+import cinepro.utils.MyConnection;
 import edu.cinepro.entities.UserSession;
 
 import java.sql.PreparedStatement;
@@ -33,7 +32,7 @@ public class reservationCRUD implements entityCRUD<reservation>{
         try {
             String requete = "SELECT COUNT(*) FROM user u WHERE u.id_user = ? ";
                                         
-            PreparedStatement stmp = cineproConnexion.getInstance().getCnx()
+            PreparedStatement stmp = MyConnection.getInstance().getConnection()
                     .prepareStatement(requete);
             
             stmp.setInt(1, r.getId_user());
@@ -52,8 +51,8 @@ public int checkFilm(reservation r){
    int count=0;
         try {
             String requete = "SELECT COUNT(*) FROM film f WHERE f.id_film = ?";
- 
-            PreparedStatement stmp = cineproConnexion.getInstance().getCnx()
+
+            PreparedStatement stmp = MyConnection.getInstance().getConnection()
                     .prepareStatement(requete);
             
             stmp.setInt(1, r.getId_film());
@@ -91,12 +90,12 @@ public int checkFilm(reservation r){
 
     // Retrieve the start and end times from the projection table
     String selectProjectionQuery = "SELECT date_debut, date_fin FROM projection WHERE id_projection = ?";
-    PreparedStatement selectProjectionStmt = cineproConnexion.getInstance().getCnx().prepareStatement(selectProjectionQuery);
+    PreparedStatement selectProjectionStmt = MyConnection.getInstance().getConnection().prepareStatement(selectProjectionQuery);
     selectProjectionStmt.setInt(1, r.getId_projection());
     ResultSet projectionResult = selectProjectionStmt.executeQuery();
     projectionResult.next();    // Insert the reservation into the database
     String insertReservationQuery = "INSERT INTO reservation (Prix_final, id_user, id_film, state, start_time, end_time, id_projection) VALUES (?, ?, ?, ?, ?, ?, ?)";
-    PreparedStatement insertReservationStmt = cineproConnexion.getInstance().getCnx().prepareStatement(insertReservationQuery);
+    PreparedStatement insertReservationStmt = MyConnection.getInstance().getConnection().prepareStatement(insertReservationQuery);
     insertReservationStmt.setFloat(1, prixFinal);
     insertReservationStmt.setInt(2, userId);
     insertReservationStmt.setInt(3, filmId);
@@ -131,7 +130,7 @@ public int checkFilm(reservation r){
             }else if (UserSession.getInstace().getRole().equals("Client")) {
                 requete = "SELECT * FROM reservation where id_user='" + UserSession.getInstace().getId() + "'";
             }
-            Statement st = cineproConnexion.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
             ResultSet rs = st.executeQuery(requete);
 
@@ -164,8 +163,8 @@ public int checkFilm(reservation r){
         */
         try {
             String requete="DELETE FROM reservation WHERE id_reservation=?";
-            PreparedStatement st=cineproConnexion.getInstance()
-                    .getCnx().prepareStatement(requete);
+            PreparedStatement st = MyConnection.getInstance().getConnection()
+                    .prepareStatement(requete);
             
             st.setInt(1,id_reservation);
             //st.setInt(2,id_user);
@@ -182,8 +181,8 @@ public int checkFilm(reservation r){
         
          try{
         String requete = "UPDATE reservation set prix_final = ?,id_user = ?,id_film = ?,state  = ?,id_projection=? WHERE id_reservation = ?";
-        PreparedStatement st=cineproConnexion.getInstance()
-                .getCnx().prepareStatement(requete);
+        PreparedStatement st=MyConnection.getInstance()
+                .getConnection().prepareStatement(requete);
             
               st.setFloat(1, prix_final);
               st.setInt(2, id_user);
@@ -201,8 +200,8 @@ public int checkFilm(reservation r){
         
          try{
         String requete = "UPDATE reservation set prix_final = ?,id_user = ? WHERE id_reservation = ?";
-        PreparedStatement st=cineproConnexion.getInstance()
-                .getCnx().prepareStatement(requete);
+        PreparedStatement st=MyConnection.getInstance()
+                .getConnection().prepareStatement(requete);
             
               st.setFloat(1, prix_final);
               st.setInt(2, id_user);
@@ -222,8 +221,8 @@ public int checkFilm(reservation r){
                     "INNER JOIN film f ON r.id_film = f.id_film " +
                     "GROUP BY f.nom";
             
-        PreparedStatement st=cineproConnexion.getInstance()
-                    .getCnx().prepareStatement(requete);
+        PreparedStatement st=MyConnection.getInstance()
+                    .getConnection().prepareStatement(requete);
             ResultSet rs = st.executeQuery(requete);
             
             Map<String, Integer> filmReservationCounts = new HashMap<>();
@@ -246,8 +245,8 @@ public int checkFilm(reservation r){
         public int getlast() {
             try {
                 String requete="select id_reservation from reservation order by id_reservation desc";
-                Statement st=cineproConnexion.getInstance()
-                        .getCnx().createStatement();
+                Statement st=MyConnection.getInstance()
+                        .getConnection().createStatement();
 
 
                 ResultSet rs = st.executeQuery(requete);

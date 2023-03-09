@@ -1,7 +1,8 @@
 package cinepro.services;
 
 
-import cinepro.utils.cineproConnexion;
+import cinepro.utils.MyConnection;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -20,7 +21,7 @@ public class ReservationDAO {
                 + "FROM user JOIN reservation ON user.id_user = reservation.id_user "
                 + "WHERE reservation.id_reservation = ?";
         
-         PreparedStatement stmp = cineproConnexion.getInstance().getCnx()
+         PreparedStatement stmp = MyConnection.getInstance().getConnection()
                     .prepareStatement(requete);
        
         stmp.setInt(1, reservationId);

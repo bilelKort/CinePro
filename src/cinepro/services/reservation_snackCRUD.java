@@ -6,7 +6,8 @@ package cinepro.services;
 
 import cinepro.entities.*;
 import cinepro.interfaces.entityCRUD;
-import cinepro.utils.cineproConnexion;
+import cinepro.utils.MyConnection;
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -24,7 +25,7 @@ public class reservation_snackCRUD implements entityCRUD<reservation_snack>{
     public void addEntity(reservation_snack r) {
         try {
             String requete = "INSERT INTO reservation_snack (quantite,prix,id_reservation,id_snack)" + "VALUES (?, ?, ?, ?)";
-            PreparedStatement st = cineproConnexion.getInstance().getCnx()
+            PreparedStatement st = MyConnection.getInstance().getConnection()
                     .prepareStatement(requete);
             
             st.setInt(1, r.getQuantite());
@@ -35,7 +36,7 @@ public class reservation_snackCRUD implements entityCRUD<reservation_snack>{
             st.executeUpdate();
             
              String requete2 = "UPDATE reservation SET prix_final = (prix_final + ?) WHERE (id_reservation=?)";
-             PreparedStatement st2 = cineproConnexion.getInstance().getCnx()
+             PreparedStatement st2 = MyConnection.getInstance().getConnection()
                     .prepareStatement(requete2);
 
              st2.setFloat(1, r.getPrix());             
@@ -56,7 +57,7 @@ public class reservation_snackCRUD implements entityCRUD<reservation_snack>{
         
         try {
             String requete = "SELECT * FROM reservation_snack";
-            Statement st = cineproConnexion.getInstance().getCnx()
+            Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
             ResultSet rs = st.executeQuery(requete);
             
@@ -82,8 +83,8 @@ public class reservation_snackCRUD implements entityCRUD<reservation_snack>{
     public void deleteEntity(int id_reservation) {
         try {
             String requete="DELETE FROM reservation_snack WHERE id_res_snack=?";
-            PreparedStatement st=cineproConnexion.getInstance()
-                    .getCnx().prepareStatement(requete);
+            PreparedStatement st=MyConnection.getInstance()
+                    .getConnection().prepareStatement(requete);
             
             st.setInt(1,id_reservation);
             st.executeUpdate();
@@ -96,8 +97,8 @@ public class reservation_snackCRUD implements entityCRUD<reservation_snack>{
     public void updateEntity(int quantite,float prix,int id_reservation,int id_snack,int id_res_snack){
         try{
         String requete = "UPDATE reservation_snack set quantite=?,prix=?,id_reservation=?,id_snack=? WHERE id_res_snack=?";
-        PreparedStatement st=cineproConnexion.getInstance()
-                .getCnx().prepareStatement(requete);
+        PreparedStatement st=MyConnection.getInstance()
+                .getConnection().prepareStatement(requete);
             
         st.setInt(1, quantite);
         st.setFloat(2, prix);

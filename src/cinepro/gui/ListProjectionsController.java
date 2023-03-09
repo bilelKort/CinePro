@@ -275,6 +275,8 @@ public class ListProjectionsController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
             }
         }
 
