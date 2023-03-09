@@ -18,26 +18,22 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#cinema" style="-fx-background-color: white;" text="Cinema">
+      <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
+      <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="190.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
+      <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-      <Button layoutX="320.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
+
       <ImageView fx:id="image4" fitHeight="400.0" fitWidth="600.0" opacity="0.3" pickOnBounds="true" preserveRatio="true" />
       <TextField fx:id="modifierNom" layoutX="536.0" layoutY="140.0" prefHeight="48.0" prefWidth="337.0" promptText="nom">
          <font>

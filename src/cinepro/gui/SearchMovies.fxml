@@ -22,21 +22,22 @@
                            <Font name="System Bold" size="14.0" />
                        </font>
                    </Button>
-                   <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#cinema" style="-fx-background-color: white;" text="Cinema">
+                   <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" style="-fx-background-color: white;" text="Film">
                        <font>
                            <Font name="System Bold" size="14.0" />
                        </font>
                    </Button>
-                   <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
+                   <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
                        <font>
                            <Font name="System Bold" size="14.0" />
                        </font>
                    </Button>
-                   <Button layoutX="190.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
+                   <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
                        <font>
                            <Font name="System Bold" size="14.0" />
                        </font>
                    </Button>
+
                    <Button fx:id="ajoutMovies" layoutX="51.0" layoutY="134.0" mnemonicParsing="false" onAction="#ajoutMovies" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: E9E3E6;" text="Ajout Movies">
                        <font>
                            <Font name="System Bold" size="15.0" />
@@ -66,11 +67,6 @@
                      </font>
                   </Button>
                   <ComboBox fx:id="genre" layoutX="906.0" layoutY="71.0" opacity="0.67" prefHeight="51.0" prefWidth="186.0" promptText="Choose Genre" style="-fx-background-color: 463F3A;" />
-                  <Button layoutX="320.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
-                     <font>
-                        <Font name="System Bold" size="14.0" />
-                     </font>
-                  </Button>
                </children>
             </AnchorPane>
         </content>

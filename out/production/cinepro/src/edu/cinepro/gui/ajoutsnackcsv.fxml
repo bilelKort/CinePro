@@ -16,26 +16,22 @@
                <Font name="System Bold" size="14.0" />
            </font>
        </Button>
-       <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#cinema" style="-fx-background-color: white;" text="Cinema">
+       <Button layoutX="17.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
            <font>
                <Font name="System Bold" size="14.0" />
            </font>
        </Button>
-       <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#film" style="-fx-background-color: white;" text="Film">
+       <Button layoutX="112.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
            <font>
                <Font name="System Bold" size="14.0" />
            </font>
        </Button>
-       <Button layoutX="190.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Reclamation">
+       <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
            <font>
                <Font name="System Bold" size="14.0" />
            </font>
        </Button>
-       <Button layoutX="320.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
-           <font>
-               <Font name="System Bold" size="14.0" />
-           </font>
-       </Button>
+
       <Button fx:id="idbtn" layoutX="685.0" layoutY="64.0" mnemonicParsing="false" onAction="#load" prefHeight="25.0" prefWidth="167.0" style="-fx-background-color: #E6B8B7; -fx-text-fill: #6B001F;" text="load" />
       <TableView fx:id="snack" layoutX="214.0" layoutY="114.0" prefHeight="200.0" prefWidth="467.0" style="-fx-background-color: #E6B8B7;">
         <columns>

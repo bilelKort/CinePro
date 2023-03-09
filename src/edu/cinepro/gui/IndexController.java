@@ -173,7 +173,7 @@ public class IndexController implements Initializable {
 
     @FXML
     void reclamation(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AfficherReclamation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AjouterReclamation.fxml"));
 
         try {
             Parent root = loader.load();
@@ -184,41 +184,6 @@ public class IndexController implements Initializable {
         }
     }
 
-    @FXML
-    void cinema(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/CinemaAffiche.fxml"));
-
-        try {
-            Parent root = loader.load();
-            affichagePseudo.getScene().setRoot(root);
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    @FXML
-    void profile(ActionEvent actionEvent) {
-        FXMLLoader loader= new FXMLLoader();
-        if (UserSession.getInstace().getId()==0) {
-            loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
-        }else {
-            if (UserSession.getInstace().getRole().equals("Client")) {
-                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/Index.fxml"));
-
-            }else if (UserSession.getInstace().getRole().equals("Admin")) {
-                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
-            }
-        }
-
-        try {
-            Parent root = loader.load();
-            Logout.getScene().setRoot(root);
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
 
     @FXML
     void afficherReservations(ActionEvent actionEvent) {

@@ -146,7 +146,7 @@ public class AjouterReclamationController implements Initializable {
 
     @FXML
     void reclamation(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AfficherReclamation.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AjouterReclamation.fxml"));
 
         try {
             Parent root = loader.load();
@@ -157,18 +157,6 @@ public class AjouterReclamationController implements Initializable {
         }
     }
 
-    @FXML
-    void cinema(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/CinemaAffiche.fxml"));
-
-        try {
-            Parent root = loader.load();
-            desc.getScene().setRoot(root);
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
 
     @FXML
     void profile(ActionEvent actionEvent) {

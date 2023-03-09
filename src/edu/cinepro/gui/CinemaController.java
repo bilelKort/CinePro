@@ -302,20 +302,7 @@ mapb = false;
 
     @FXML
     void reclamation(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AfficherReclamation.fxml"));
-
-        try {
-            Parent root = loader.load();
-            Logout.getScene().setRoot(root);
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-    @FXML
-    void cinema(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/CinemaAffiche.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AjouterReclamation.fxml"));
 
         try {
             Parent root = loader.load();
