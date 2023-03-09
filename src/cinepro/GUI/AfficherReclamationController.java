@@ -8,17 +8,32 @@ import cinepro.entities.Feedback;
 import cinepro.entities.Reclamation;
 import cinepro.services.FeedbackCRUD;
 import cinepro.services.ReclamationCRUD;
+
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+
+import com.mysql.cj.log.Log;
+import edu.cinepro.entities.User;
+import edu.cinepro.entities.UserSession;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Pos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.util.Duration;
+import org.controlsfx.control.Notifications;
 
 /**
  * FXML Controller class
@@ -34,104 +49,135 @@ public class AfficherReclamationController implements Initializable {
     @FXML
     private TableColumn<Reclamation,Integer> id_reclamation;
     @FXML
-    private TableColumn<Reclamation,Integer> id_user;
-    @FXML
-    private TableColumn<Reclamation,Integer> id_film;
-    @FXML
     private TableColumn<Reclamation,String> date;
-    public ObservableList<Reclamation> k = FXCollections.observableArrayList();
     @FXML
     private TableColumn<Reclamation,String> etat;
+    public ObservableList<Reclamation> k = FXCollections.observableArrayList();
+
+
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private Button Logout;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        tableview.getItems().clear();
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         // TODO
           ReclamationCRUD cd = new ReclamationCRUD();
         List<Reclamation> liste =new ArrayList<Reclamation>();
         liste=cd.EntityList();
-        
+
         System.out.println(liste);
         for (Reclamation f : liste) {
             k.add(f);
         }
-        
-        id_user.setCellValueFactory(new PropertyValueFactory<Reclamation, Integer>("id_user"));
-        id_film.setCellValueFactory(new PropertyValueFactory<Reclamation, Integer>("id_film"));
+
+
         description.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("description"));
         date.setCellValueFactory(new PropertyValueFactory<Reclamation, String>("date"));
         id_reclamation.setCellValueFactory(new PropertyValueFactory<Reclamation,Integer>("id_reclamation"));
         etat.setCellValueFactory(new PropertyValueFactory<Reclamation,String>("etat"));
-        
+
         tableview.setItems(k);
-    }    
-
-    public TableColumn<Reclamation, String> getEtat() {
-        return etat;
-    }
-
-    public void setEtat(TableColumn<Reclamation, String> etat) {
-        this.etat = etat;
-    }
-
-    public TableView<Reclamation> getTableview() {
-        return tableview;
-    }
-
-    public TableColumn<Reclamation, String> getDescription() {
-        return description;
-    }
-
-    public TableColumn<Reclamation, Integer> getId_reclamation() {
-        return id_reclamation;
-    }
-
-    public TableColumn<Reclamation, Integer> getId_user() {
-        return id_user;
-    }
-
-    public TableColumn<Reclamation, Integer> getId_film() {
-        return id_film;
-    }
-
-    public TableColumn<Reclamation, String> getDate() {
-        return date;
-    }
-
-    public ObservableList<Reclamation> getK() {
-        return k;
-    }
-
-    public void setTableview(TableView<Reclamation> tableview) {
-        this.tableview = tableview;
-    }
-
-    public void setDescription(TableColumn<Reclamation, String> description) {
-        this.description = description;
-    }
-
-    public void setId_reclamation(TableColumn<Reclamation, Integer> id_reclamation) {
-        this.id_reclamation = id_reclamation;
-    }
-
-    public void setId_user(TableColumn<Reclamation, Integer> id_user) {
-        this.id_user = id_user;
-    }
-
-    public void setId_film(TableColumn<Reclamation, Integer> id_film) {
-        this.id_film = id_film;
-    }
-
-    public void setDate(TableColumn<Reclamation, String> date) {
-        this.date = date;
-    }
-
-    public void setK(ObservableList<Reclamation> k) {
-        this.k = k;
+        System.out.println(tableview.getItems());
     }
 
 
-    
-    
+    @FXML
+    public void logout(ActionEvent event) {
+        UserSession.getInstace().cleanUserSession();
+        //System.out.println(UserSession.getInstace().getId());
+
+           /* Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Account");
+            alert.setHeaderText(null);
+            alert.setContentText("You have logged out successfully!");
+            alert.showAndWait(); */
+        Notifications notifications = Notifications.create();
+        // notifications.graphic(new ImageView(notif));
+        notifications.text("You have logged out successfully!");
+        notifications.title("Success message");
+        notifications.hideAfter(Duration.seconds(4));
+        notifications.position(Pos.BOTTOM_LEFT);
+        //notifications.darkStyle();
+        notifications.show();
+
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Stage myWindow = (Stage) Logout.getScene().getWindow();
+            Scene sc = new Scene(root);
+            myWindow.setScene(sc);
+            myWindow.setTitle("Sign In");
+            myWindow.show();
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void film(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/SearchMovies.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    @FXML
+    void reclamation(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AjouterReclamation.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+
+    @FXML
+    void profile(ActionEvent actionEvent) {
+        FXMLLoader loader= new FXMLLoader();
+        if (UserSession.getInstace().getId()==0) {
+            loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
+        }else {
+            if (UserSession.getInstace().getRole().equals("Client")) {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/Index.fxml"));
+
+            }else if (UserSession.getInstace().getRole().equals("Admin")) {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
+            }
+        }
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void updateEtat(ActionEvent actionEvent) {
+        int selectedIndex = tableview.getSelectionModel().getSelectedIndex();
+        Reclamation c = (Reclamation) tableview.getSelectionModel().getSelectedItem();
+        new ReclamationCRUD().updateEtat(c.getId_reclamation(), !c.isEtat());
+        initialize(new FXMLLoader().getLocation(), new FXMLLoader().getResources());
+    }
 }

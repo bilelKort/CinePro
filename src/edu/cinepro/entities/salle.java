@@ -99,14 +99,13 @@ public class salle {
 
     @Override
     public String toString() {
-        return   "nom=" + nom  ;
+        return "salle{" +
+                "id_salle=" + id_salle +
+                ", nom='" + nom + '\'' +
+                ", longueur=" + longueur +
+                ", largeur=" + largeur +
+                ", id_cinema=" + id_cinema +
+                ", acces=" + acces +
+                '}';
     }
-
-    
-
-   
-    
-    
-    
-
 }

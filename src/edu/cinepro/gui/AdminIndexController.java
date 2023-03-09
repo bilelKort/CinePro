@@ -72,8 +72,6 @@ public class AdminIndexController implements Initializable {
     @FXML
     private TextField searchNom;
     @FXML
-    private Button search;
-    @FXML
     private ImageView image5;
     
 
@@ -311,7 +309,7 @@ public class AdminIndexController implements Initializable {
 
         try {
             Parent root = loader.load();
-            Stage myWindow = (Stage) search.getScene().getWindow();
+            Stage myWindow = (Stage) Logout.getScene().getWindow();
             Scene sc = new Scene(root);
             myWindow.setScene(sc);
             myWindow.setTitle("Sign In");
@@ -328,7 +326,7 @@ public class AdminIndexController implements Initializable {
 
         try {
             Parent root = loader.load();
-            search.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -341,7 +339,7 @@ public class AdminIndexController implements Initializable {
 
         try {
             Parent root = loader.load();
-            search.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -354,7 +352,7 @@ public class AdminIndexController implements Initializable {
 
         try {
             Parent root = loader.load();
-            search.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -368,7 +366,18 @@ public class AdminIndexController implements Initializable {
 
         try {
             Parent root = loader.load();
-            search.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
+    }
+
+    public void afficherReclamations(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AfficherReclamation.fxml"));
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

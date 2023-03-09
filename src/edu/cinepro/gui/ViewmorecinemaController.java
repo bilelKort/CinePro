@@ -171,6 +171,9 @@ public class ViewmorecinemaController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         System.out.println("nnnn"+instance.id1);
         affichesalle();
         CinemaCRUD c =new CinemaCRUD();
@@ -466,6 +469,9 @@ public void deletesalle(int id) {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

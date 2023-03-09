@@ -251,7 +251,7 @@ public class AbonnementController implements Initializable {
         //notifications.darkStyle();
         notifications.show();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
 
         try {
             Parent root = loader.load();

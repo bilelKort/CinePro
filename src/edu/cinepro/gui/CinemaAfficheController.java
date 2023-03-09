@@ -82,6 +82,9 @@ public class CinemaAfficheController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         CinemaCRUD cd = new CinemaCRUD();
         List<cinema> liste = new ArrayList<cinema>();
         liste = cd.entitiesList();
@@ -470,6 +473,9 @@ btn.setStyle("-fx-background-color: #000000; -fx-text-fill: white; -fx-font-size
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

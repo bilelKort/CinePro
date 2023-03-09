@@ -70,9 +70,14 @@ public class UpdateProjectionController implements Initializable {
     public static UpdateProjectionController getInstance() {
         return instance;
     }
+    @FXML
+    private Button Logout;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         checkint(salle_id);
         checkint(places);
         projection = new ProjectionService().getProjection(instance.id_projection);
@@ -216,11 +221,11 @@ public class UpdateProjectionController implements Initializable {
         //notifications.darkStyle();
         notifications.show();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
 
         try {
             Parent root = loader.load();
-            Stage myWindow = (Stage) date.getScene().getWindow();
+            Stage myWindow = (Stage) Logout.getScene().getWindow();
             Scene sc = new Scene(root);
             myWindow.setScene(sc);
             myWindow.setTitle("Sign In");
@@ -237,7 +242,7 @@ public class UpdateProjectionController implements Initializable {
 
         try {
             Parent root = loader.load();
-            date.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -250,7 +255,7 @@ public class UpdateProjectionController implements Initializable {
 
         try {
             Parent root = loader.load();
-            date.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -268,12 +273,15 @@ public class UpdateProjectionController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 
         try {
             Parent root = loader.load();
-            date.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

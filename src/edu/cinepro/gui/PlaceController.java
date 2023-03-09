@@ -35,6 +35,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import org.controlsfx.control.Notifications;
 
+import javax.swing.*;
+
 /**
  * FXML Controller class
  *
@@ -61,17 +63,17 @@ public class PlaceController implements Initializable {
     private int id_film;
 
     public void setId_film(int id_film) {
-        this.id_film = id_film;
+        insatance.id_film = id_film;
     }
 
     public void setId_projection(int id_projection) {
-        this.id_projection = id_projection;
+        insatance.id_projection = id_projection;
     }
 
     Set<String> placereservees = new HashSet<String>();
 
     public void setId_salle(int id_salle) {
-        this.id_salle = id_salle;
+        insatance.id_salle = id_salle;
     }
 
     /**
@@ -79,9 +81,11 @@ public class PlaceController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        System.out.println("id_projection= " + insatance.id_projection);
-        System.out.println();
-        salle s = new SalleCRUD().entitiesList3(insatance.id_salle).get(0);
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
+
+        salle s = new SalleCRUD().entitiesList3(insatance.id_salle);
         ROWS = s.getLongueur();
         COLS = s.getLargeur();
         ArrayList<String> coordMap = new ArrayList<String>();
@@ -90,8 +94,6 @@ public class PlaceController implements Initializable {
         for (reservation_place place:list) {
             coordMap.add(place.getCoordonnee());
         }
-
-        System.out.println(coordMap);
 
         
         //permet d'organiser des nœuds graphiques en lignes et en colonnes.cellule peut contenir un nœud graphique.
@@ -103,67 +105,61 @@ public class PlaceController implements Initializable {
         // Creation 
         for (int row = 1; row <= ROWS; row++) {
             for (int col = 1; col <= COLS; col++) {
-                for (String i : coordMap) {
-                    Pane pane = new Pane();
-                    Rectangle rectangle = new Rectangle(30, 30);
-                    rectangle.setFill(Color.WHITE);
+
+
+                Pane pane = new Pane();
+                Rectangle rectangle = new Rectangle(30, 30);
+                System.out.println("colorrrrr");
+                rectangle.setFill(Color.WHITE);
+                rectangle.setStroke(Color.BLACK);
+                pane.getChildren().add(rectangle);
+                idmatrice.add(pane, col, row);
+
+                if(coordMap.contains(""+row+","+col)) {
+                    rectangle.setFill(Color.web("#7899b9"));
                     rectangle.setStroke(Color.BLACK);
-                    
-                    
-                    pane.getChildren().add(rectangle);
-                   
-                    
-                    idmatrice.add(pane, col, row);
+                    pane.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
+                        msg.setText("impossible cette place est déja reservé");
+                        lista.setText(placereservees.toString()  );
 
-                   
-                    
-                    String coordMatriceVide = row + "," + col;
+                    });
 
-                    if (coordMatriceVide.equals(i)) {
-                        rectangle.setFill(Color.web("#7899b9"));
+                }else {
+                    pane.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
+                        int clickedRow = GridPane.getRowIndex(pane);
+                        int clickedCol = GridPane.getColumnIndex(pane);
+                        rectangle.setFill(Color.web("#eb2e66"));
                         rectangle.setStroke(Color.BLACK);
-                        pane.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-                            msg.setText("impossible cette place est déja reservé");
+
+                        msg.setText("chaise cliquée : " + clickedRow + "," + clickedCol);
+                        lista.setText(placereservees.toString()  );
+
+                        String b = clickedRow + "," + clickedCol;
+                        if (placereservees.contains(b)) {
+                            placereservees.remove(b);
+                            msg.setText("annulation");
+                            System.out.println("annulation"+placereservees);
+                            Set<String> k =placereservees;
+
                             lista.setText(placereservees.toString()  );
 
-                        });
-                        break;
-
-                    } else {
-
-// action onClick pour reserver une place
-                        pane.addEventHandler(javafx.scene.input.MouseEvent.MOUSE_CLICKED, event -> {
-                            int clickedRow = GridPane.getRowIndex(pane);
-                            int clickedCol = GridPane.getColumnIndex(pane);
-                            rectangle.setFill(Color.web("#eb2e66"));
+                            rectangle.setFill(Color.WHITE);
                             rectangle.setStroke(Color.BLACK);
 
-                             msg.setText("chaise cliquée : " + clickedRow + "," + clickedCol);
-lista.setText(placereservees.toString()  );
+                        } else {
+                            placereservees.add(b);
+                            System.out.println("ajouut"+placereservees);
+                            lista.setText(placereservees.toString()  );
+                        }
 
-                            String b = clickedRow + "," + clickedCol;
-                            if (placereservees.contains(b)) {
-                                placereservees.remove(b);
-                                 msg.setText("annulation");
-                            System.out.println("annulation"+placereservees);
-                                Set<String> k =placereservees;
-
-lista.setText(placereservees.toString()  );
-
-                                rectangle.setFill(Color.WHITE);
-                                rectangle.setStroke(Color.BLACK);
-
-                            } else {
-                                placereservees.add(b);
-                                System.out.println("ajouut"+placereservees);
-                                lista.setText(placereservees.toString()  );
-                            }
-
-                        });
-
-                    }
+                    });
                 }
-            }
+
+
+
+
+                }
+
         }
 
        // idmatrice.getChildren().add(matrice);
@@ -280,6 +276,9 @@ lista.setText(placereservees.toString()  );
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

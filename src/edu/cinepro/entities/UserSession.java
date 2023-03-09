@@ -16,7 +16,7 @@ public final class UserSession {
     private static UserSession instance = new UserSession();
 
     private int id=0;
-    private String role;
+    private String role="";
     private String email;
     private String password;
     private String nom;

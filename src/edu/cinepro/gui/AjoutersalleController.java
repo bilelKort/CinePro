@@ -61,6 +61,9 @@ public class AjoutersalleController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         System.out.println("test"+instance.id);
         nomid.clear();
         longeurid.clear();
@@ -275,6 +278,9 @@ largeurtest=true;
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

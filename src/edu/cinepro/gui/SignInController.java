@@ -55,9 +55,13 @@ public class SignInController implements Initializable {
     /**
      * Initializes the controller class.
      */
+    @FXML
+    private Button Logout;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         
         
         File file = new File("src/edu/cinepro/gui/images/image1.jpg");
@@ -286,6 +290,9 @@ public class SignInController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

@@ -39,23 +39,20 @@ import org.controlsfx.control.Notifications;
  */
 public class AjouterReclamationController implements Initializable {
 
-   
-    @FXML
-    private Label idfilm;
+
+
     @FXML
     private Label desc;
     @FXML
     private Button btnajouter;
-    @FXML
-    private TextField id_film;
+
     @FXML
     private TextField description;
     @FXML
     private Label erreur;
+
     @FXML
-    private Label user;
-    @FXML
-    private TextField id_user;
+    private Button Logout;
     
     
 
@@ -64,7 +61,9 @@ public class AjouterReclamationController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setText("Sign In");
+        }
     }    
 
     @FXML
@@ -72,22 +71,17 @@ public class AjouterReclamationController implements Initializable {
         erreur.setText("");
         if (description.getText().isEmpty()) {
             erreur.setText("Entrez reclamation!");
-        } else if (id_user.getText().isEmpty()) {
-            erreur.setText("Entrez id_user!");
-        } else if (id_film.getText().isEmpty()) {
-            erreur.setText("Entrez id_film!");
-        } else {
+        }else {
+
 
             
 
                 String resReclamation = description.getText();
-                int resId_user = Integer.valueOf(id_user.getText());
-                int resId_film = Integer.valueOf(id_film.getText());
                 DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy-HH:mm");
                 LocalDateTime now = LocalDateTime.now();
                 String date = dtf.format(now);
                 ReclamationCRUD rcd = new ReclamationCRUD();
-                Reclamation f = new Reclamation(resReclamation, resId_user, resId_film, date,false);
+                Reclamation f = new Reclamation(resReclamation, date,false);
                 rcd.addEntity(f);
                 
                 System.out.println("Done!!");
@@ -116,7 +110,7 @@ public class AjouterReclamationController implements Initializable {
         //notifications.darkStyle();
         notifications.show();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
 
         try {
             Parent root = loader.load();
@@ -146,15 +140,7 @@ public class AjouterReclamationController implements Initializable {
 
     @FXML
     void reclamation(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/cinepro/gui/AjouterReclamation.fxml"));
 
-        try {
-            Parent root = loader.load();
-            desc.getScene().setRoot(root);
-
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
     }
 
 
@@ -169,6 +155,9 @@ public class AjouterReclamationController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

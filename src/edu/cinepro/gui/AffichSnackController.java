@@ -83,6 +83,9 @@ public class AffichSnackController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         Addnotif();
          snack.getItems().clear();
         SnackCRUD cd = new SnackCRUD();
@@ -375,6 +378,9 @@ public class AffichSnackController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

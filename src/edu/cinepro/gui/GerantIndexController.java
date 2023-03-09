@@ -54,7 +54,13 @@ public class GerantIndexController implements Initializable {
 
     @FXML
     void afficherCinemas(ActionEvent actionEvent) {
-
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("CinemaAffiche.fxml"));
+            Parent root =loader.load();
+            search11.getScene().setRoot(root);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @FXML

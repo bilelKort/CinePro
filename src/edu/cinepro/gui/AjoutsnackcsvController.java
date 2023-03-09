@@ -85,6 +85,9 @@ boolean err=false;
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
     }
 
     @FXML
@@ -196,8 +199,18 @@ else {veriff.setText("");}
         for (snack i : data1) {
             System.out.println(i);
             pc.addEntitycsv(i);
+
         }
         affiche();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/CinemaAffiche.fxml"));
+
+        try {
+            Parent root = loader.load();
+            Logout.getScene().setRoot(root);
+
+        } catch (IOException ex) {
+            System.out.println(ex.getMessage());
+        }
     }
 
     @FXML
@@ -293,6 +306,9 @@ else {veriff.setText("");}
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

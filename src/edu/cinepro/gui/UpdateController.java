@@ -69,6 +69,9 @@ public class UpdateController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         modifierPassword.textProperty().addListener((ObservableValue<? extends String> observable, String oldValue, String newValue) -> {
             if (!"".equals(newValue)) {
                 updatePasswordStrength(newValue);
@@ -427,6 +430,9 @@ public class UpdateController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

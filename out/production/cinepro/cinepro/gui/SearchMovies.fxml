@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="test" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: efe6d5;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.SearchMoviesController">
+<AnchorPane fx:id="test" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: efe6d5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.SearchMoviesController">
    <children>
       <ScrollPane prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: efe6d5;">
         <content>
@@ -37,23 +37,6 @@
                            <Font name="System Bold" size="14.0" />
                        </font>
                    </Button>
-
-                   <Button fx:id="ajoutMovies" layoutX="51.0" layoutY="134.0" mnemonicParsing="false" onAction="#ajoutMovies" prefHeight="31.0" prefWidth="121.0" style="-fx-background-color: E9E3E6;" text="Ajout Movies">
-                       <font>
-                           <Font name="System Bold" size="15.0" />
-                       </font></Button>
-                   <Button fx:id="listMovies" layoutX="273.0" layoutY="134.0" mnemonicParsing="false" prefHeight="30.0" prefWidth="138.0" style="-fx-background-color: E9E3E6;" text="List Movies">
-                       <font>
-                           <Font name="System Bold" size="14.0" />
-                       </font></Button>
-                   <Button fx:id="ajoutprojection" layoutX="448.0" layoutY="135.0" mnemonicParsing="false" onAction="#ajoutProjection" prefHeight="30.0" prefWidth="143.0" style="-fx-background-color: E9E3E6;" text="Ajout Projection">
-                       <font>
-                           <Font name="System Bold" size="14.0" />
-                       </font></Button>
-                   <Button fx:id="listProjections" layoutX="626.0" layoutY="134.0" mnemonicParsing="false" onAction="#listProjections" style="-fx-background-color: E9E3E6;" text="List Projections">
-                       <font>
-                           <Font name="System Bold" size="14.0" />
-                       </font></Button>
                   <TextField fx:id="search" alignment="CENTER" layoutX="84.0" layoutY="71.0" opacity="0.67" prefHeight="51.0" prefWidth="535.0" promptText="Search" AnchorPane.leftAnchor="84.0" AnchorPane.rightAnchor="762.0">
                      <font>
                         <Font size="24.0" />
@@ -66,7 +49,7 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <ComboBox fx:id="genre" layoutX="906.0" layoutY="71.0" opacity="0.67" prefHeight="51.0" prefWidth="186.0" promptText="Choose Genre" style="-fx-background-color: 463F3A;" />
+                  <ComboBox fx:id="genre" layoutX="906.0" layoutY="71.0" opacity="0.67" prefHeight="51.0" prefWidth="186.0" promptText="Choose Genre" />
                </children>
             </AnchorPane>
         </content>

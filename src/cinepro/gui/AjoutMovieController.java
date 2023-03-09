@@ -81,6 +81,9 @@ public class AjoutMovieController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
     }
 
     @FXML
@@ -385,11 +388,11 @@ public class AjoutMovieController implements Initializable {
         //notifications.darkStyle();
         notifications.show();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
 
         try {
             Parent root = loader.load();
-            Stage myWindow = (Stage) ajoutprojection.getScene().getWindow();
+            Stage myWindow = (Stage) Logout.getScene().getWindow();
             Scene sc = new Scene(root);
             myWindow.setScene(sc);
             myWindow.setTitle("Sign In");
@@ -406,7 +409,7 @@ public class AjoutMovieController implements Initializable {
 
         try {
             Parent root = loader.load();
-            ajoutprojection.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -419,7 +422,7 @@ public class AjoutMovieController implements Initializable {
 
         try {
             Parent root = loader.load();
-            ajoutprojection.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -438,12 +441,15 @@ public class AjoutMovieController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 
         try {
             Parent root = loader.load();
-            search.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

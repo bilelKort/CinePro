@@ -97,7 +97,7 @@ public class UpdateReclamationController implements Initializable {
               boolean etaat
                         = etat.isSelected();
                 
-                Reclamation f = new Reclamation(Integer.parseInt(id_r), desc, Integer.parseInt(user), Integer.parseInt(film), daate,etaat);
+                Reclamation f = new Reclamation(Integer.parseInt(id_r), desc, daate,etaat);
                 System.out.println(f);
                 ReclamationCRUD rcd = new ReclamationCRUD();
                

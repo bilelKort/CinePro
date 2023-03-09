@@ -6,6 +6,7 @@ import cinepro.services.FilmService;
 import cinepro.services.ProjectionService;
 import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXTimePicker;
+import com.mysql.cj.log.Log;
 import edu.cinepro.entities.UserSession;
 import edu.cinepro.entities.salle;
 import edu.connexion3A18.services.SalleCRUD;
@@ -59,9 +60,14 @@ public class AjoutProjectionController implements Initializable {
     public static AjoutProjectionController getInstance() {
         return instance;
     }
+    @FXML
+    private Button Logout;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         date.setDayCellFactory(picker -> new DateCell() {
             @Override
             public void updateItem(LocalDate date, boolean empty) {
@@ -125,7 +131,7 @@ public class AjoutProjectionController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutMovie.fxml"));
             Parent root =loader.load();
-            ajoutMovies.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -135,7 +141,7 @@ public class AjoutProjectionController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("SearchMovies.fxml"));
             Parent root =loader.load();
-            listMovies.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -145,7 +151,7 @@ public class AjoutProjectionController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ListProjections.fxml"));
             Parent root =loader.load();
-            listProjections.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -170,11 +176,11 @@ public class AjoutProjectionController implements Initializable {
         //notifications.darkStyle();
         notifications.show();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
 
         try {
             Parent root = loader.load();
-            Stage myWindow = (Stage) listProjections.getScene().getWindow();
+            Stage myWindow = (Stage) Logout.getScene().getWindow();
             Scene sc = new Scene(root);
             myWindow.setScene(sc);
             myWindow.setTitle("Sign In");
@@ -191,7 +197,7 @@ public class AjoutProjectionController implements Initializable {
 
         try {
             Parent root = loader.load();
-            listProjections.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -204,7 +210,7 @@ public class AjoutProjectionController implements Initializable {
 
         try {
             Parent root = loader.load();
-            listProjections.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -222,12 +228,15 @@ public class AjoutProjectionController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 
         try {
             Parent root = loader.load();
-            listProjections.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

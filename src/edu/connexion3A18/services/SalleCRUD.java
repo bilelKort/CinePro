@@ -103,8 +103,8 @@ public class SalleCRUD {
      
      
      
-     public List<salle> entitiesList3(int id) {
-        ArrayList<salle> myList = new ArrayList();
+     public salle entitiesList3(int id) {
+        salle s = new salle();
 
         try {
             String requete = "SELECT * FROM salle where id_salle=" +id;
@@ -113,7 +113,6 @@ public class SalleCRUD {
 
             ResultSet rs = st.executeQuery(requete);
             while (rs.next()) {
-                salle s = new salle();
 
                 s.setId_salle(rs.getInt("id_salle"));
                 s.setNom(rs.getString("nom"));
@@ -123,13 +122,14 @@ public class SalleCRUD {
                 s.setLargeur(rs.getInt("Largeur"));
                 s.setAcces(rs.getBoolean("acces"));
 
-                myList.add(s);
+
 
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
         }
-        return myList;
+         System.out.println(s);
+        return s;
     }
      
 

@@ -72,7 +72,10 @@ public class SalleController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-Affiche();
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
+        Affiche();
     }
 
     @FXML
@@ -103,7 +106,7 @@ Affiche();
     private void update(ActionEvent event) {
         System.out.println("test" + instance.id);
         SalleCRUD s = new SalleCRUD();
-        salle actuel = s.entitiesList3(instance.id).get(0);
+        salle actuel = s.entitiesList3(instance.id);
 
         if (actuel.isAcces()) {
 
@@ -135,14 +138,15 @@ Affiche();
     public void Affiche() {
         System.out.println("test" + instance.id);
         SalleCRUD s = new SalleCRUD();
-        salle actuel = s.entitiesList3(instance.id).get(0);
+        salle actuel = s.entitiesList3(instance.id);
         nom.setText(actuel.getNom());
         largeurid.setText(Integer.toString(actuel.getLongueur()));
 
         placeid.setHgap(10);
         placeid.setVgap(10);
-
+        System.out.println("test1");
         if (actuel.isAcces() == false) {
+            System.out.println("test2");
             etatid.setText("la salle n'est pas disponible");
             for (int row = 0; row < actuel.getLongueur(); row++) {
                 for (int col = 0; col < actuel.getLargeur(); col++) {
@@ -160,10 +164,10 @@ Affiche();
             }
 
         } else {
+            System.out.println("test3");
             etatid.setText("la salle est disponible");
             for (int row = 0; row < actuel.getLongueur(); row++) {
                 for (int col = 0; col < actuel.getLargeur(); col++) {
-
                     Pane pane = new Pane();
                     Rectangle rectangle = new Rectangle(30, 30);
                     rectangle.setFill(Color.WHEAT);
@@ -265,6 +269,9 @@ Affiche();
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 

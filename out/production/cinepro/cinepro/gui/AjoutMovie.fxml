@@ -126,22 +126,6 @@
             <Font size="18.0" />
          </font>
       </Label>
-      <Button fx:id="ajoutMovies" layoutX="176.0" layoutY="162.0" mnemonicParsing="false" text="Ajout Movies">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
-      <Button fx:id="listMovies" layoutX="282.0" layoutY="162.0" mnemonicParsing="false" onAction="#listMovies" text="List Movies">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
-      <Button fx:id="ajoutprojection" layoutX="375.0" layoutY="162.0" mnemonicParsing="false" onAction="#ajoutProjection" text="Ajout Projection">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
-      <Button fx:id="listProjections" layoutX="499.0" layoutY="162.0" mnemonicParsing="false" onAction="#listProjections" text="List Projections">
-         <font>
-            <Font size="14.0" />
-         </font></Button>
 
    </children>
 </AnchorPane>

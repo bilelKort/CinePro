@@ -22,11 +22,13 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 
+
 /**
  * FXML Controller class
  *
  * @author Home
  */
+
 public class UpdateBadgeController implements Initializable {
 
     @FXML

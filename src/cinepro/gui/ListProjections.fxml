@@ -31,27 +31,6 @@
             <Font name="System Bold" size="14.0" />
          </font>
       </Button>
-
-      <Button fx:id="ajoutMovies" layoutX="17.0" layoutY="53.0" mnemonicParsing="false" onAction="#ajoutMovies" style="-fx-background-color: E9E3E6;" text="Ajout Movies">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="listMovies" layoutX="139.0" layoutY="53.0" mnemonicParsing="false" onAction="#listMovies" prefHeight="30.0" prefWidth="108.0" style="-fx-background-color: E9E3E6;" text="List Movies">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="ajoutprojection" layoutX="268.0" layoutY="53.0" mnemonicParsing="false" onAction="#ajoutProjection" style="-fx-background-color: E9E3E6;" text="Ajout Projection">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="listProjections" layoutX="424.0" layoutY="54.0" mnemonicParsing="false" style="-fx-background-color: E9E3E6;" text="List Projections">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
       <ScrollPane layoutX="86.0" layoutY="97.0" prefHeight="600.0" prefWidth="1229.0">
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="600.0" prefWidth="1210.0">

@@ -126,6 +126,12 @@ public class MovieDetailsController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (!UserSession.getInstace().getRole().equals("Gerant")) {
+            deleteBtn.setVisible(false);
+        }
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         id_feedbacltable.setVisible(false);
         film = new FilmService().getFilmById(instance.id_film);
         nom.setText(film.getNom());
@@ -168,16 +174,24 @@ public class MovieDetailsController implements Initializable {
                     private final Button btn = new Button("Réserver");
                     {
                         btn.setOnAction((ActionEvent event) -> {
-                            int rowIndex = getTableRow().getIndex();
-                            try {
-                                PlaceController.getInstance().setId_salle(tableSalle.getCellObservableValue(rowIndex).getValue());
-                                PlaceController.getInstance().setId_projection(tableProjection.getCellObservableValue(rowIndex).getValue());
-                                PlaceController.getInstance().setId_film(instance.id_film);
-                                FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/place.fxml"));
-                                Parent root =loader.load();
-                                listProjections.getScene().setRoot(root);
-                            } catch (Exception e) {
-                                System.out.println(e.getMessage());
+                            if (UserSession.getInstace().getRole().equals("Client")) {
+                                int rowIndex = getTableRow().getIndex();
+                                try {
+                                    PlaceController.getInstance().setId_salle(tableSalle.getCellObservableValue(rowIndex).getValue());
+                                    PlaceController.getInstance().setId_projection(tableProjection.getCellObservableValue(rowIndex).getValue());
+                                    PlaceController.getInstance().setId_film(instance.id_film);
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/place.fxml"));
+                                    Parent root =loader.load();
+                                    Logout.getScene().setRoot(root);
+                                } catch (Exception e) {
+                                    System.out.println(e.getMessage());
+                                }
+                            }else {
+                                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                                alert.setTitle("Account");
+                                alert.setHeaderText(null);
+                                alert.setContentText("You have to log in as a Client");
+                                alert.showAndWait();
                             }
                         });
                     }
@@ -197,6 +211,10 @@ public class MovieDetailsController implements Initializable {
         tableRes.setCellFactory(update_btn);
 
 
+        displayFeedback();
+    }
+
+    public void displayFeedback() {
         FeedbackCRUD cd = new FeedbackCRUD();
         List<Feedback> liste = new ArrayList<Feedback>();
         liste = cd.commentaireList(instance.id_film);
@@ -324,6 +342,7 @@ public class MovieDetailsController implements Initializable {
 
     @FXML
     public void ajouterfeedback(ActionEvent actionEvent) {
+
         FeedbackCRUD c = new FeedbackCRUD();
 
         if (c.FeedbackCounter() >= 2) {
@@ -342,6 +361,9 @@ public class MovieDetailsController implements Initializable {
             Feedback f = new Feedback(feedback.getText(), resId_user, resId_film, date);
 
             pcd.addCommentaire(f);
+            feedback.setText("");
+            tableview.getItems().clear();
+            displayFeedback();
             System.out.println("Done!!");
         }
     }
@@ -365,11 +387,11 @@ public class MovieDetailsController implements Initializable {
         //notifications.darkStyle();
         notifications.show();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
 
         try {
             Parent root = loader.load();
-            Stage myWindow = (Stage) listProjections.getScene().getWindow();
+            Stage myWindow = (Stage) Logout.getScene().getWindow();
             Scene sc = new Scene(root);
             myWindow.setScene(sc);
             myWindow.setTitle("Sign In");
@@ -386,7 +408,7 @@ public class MovieDetailsController implements Initializable {
 
         try {
             Parent root = loader.load();
-            listMovies.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -399,7 +421,7 @@ public class MovieDetailsController implements Initializable {
 
         try {
             Parent root = loader.load();
-            listProjections.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -416,12 +438,15 @@ public class MovieDetailsController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 
         try {
             Parent root = loader.load();
-            listMovies.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

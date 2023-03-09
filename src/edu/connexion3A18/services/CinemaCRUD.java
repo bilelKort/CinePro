@@ -6,6 +6,7 @@ package edu.connexion3A18.services;
 
 import cinepro.utils.MyConnection;
 import edu.cinepro.entities.User;
+import edu.cinepro.entities.UserSession;
 import edu.cinepro.entities.cinema;
 import edu.cinepro.interfaces.EntityCRUD;
 
@@ -49,7 +50,7 @@ public class CinemaCRUD implements EntityCRUD<User> {
         ArrayList<cinema> myList = new ArrayList();
 
         try {
-            String requete = "SELECT * FROM cinema ";
+            String requete = "SELECT * FROM cinema where id_user=" + UserSession.getInstace().getId();
             Statement st = MyConnection.getInstance().getConnection()
                     .createStatement();
 

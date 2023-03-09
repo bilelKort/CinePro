@@ -68,6 +68,9 @@ public class SearchMoviesController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+        if (UserSession.getInstace().getId()==0) {
+            Logout.setVisible(false);
+        }
         list = filmService.filmList();
         genre.setConverter(new StringConverter<String>() {
             @Override
@@ -173,7 +176,7 @@ public class SearchMoviesController implements Initializable {
             MovieDetailsController.getInstance().setId_film(id);
             FXMLLoader loader = new FXMLLoader(getClass().getResource("MovieDetails.fxml"));
             Parent root =loader.load();
-            ajoutMovies.getScene().setRoot(root);
+            vBox.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -184,7 +187,7 @@ public class SearchMoviesController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutMovie.fxml"));
             Parent root =loader.load();
-            ajoutMovies.getScene().setRoot(root);
+            vBox.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -195,7 +198,7 @@ public class SearchMoviesController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("AjoutProjection.fxml"));
             Parent root =loader.load();
-            ajoutprojection.getScene().setRoot(root);
+            vBox.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -206,7 +209,7 @@ public class SearchMoviesController implements Initializable {
         try {
             FXMLLoader loader = new FXMLLoader(getClass().getResource("ListProjections.fxml"));
             Parent root =loader.load();
-            listProjections.getScene().setRoot(root);
+            vBox.getScene().setRoot(root);
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -231,11 +234,11 @@ public class SearchMoviesController implements Initializable {
         //notifications.darkStyle();
         notifications.show();
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("SignIn.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/SignIn.fxml"));
 
         try {
             Parent root = loader.load();
-            Stage myWindow = (Stage) search.getScene().getWindow();
+            Stage myWindow = (Stage) Logout.getScene().getWindow();
             Scene sc = new Scene(root);
             myWindow.setScene(sc);
             myWindow.setTitle("Sign In");
@@ -252,7 +255,7 @@ public class SearchMoviesController implements Initializable {
 
         try {
             Parent root = loader.load();
-            search.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -265,7 +268,7 @@ public class SearchMoviesController implements Initializable {
 
         try {
             Parent root = loader.load();
-            search.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
@@ -283,12 +286,15 @@ public class SearchMoviesController implements Initializable {
 
             }else if (UserSession.getInstace().getRole().equals("Admin")) {
                 loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/AdminIndex.fxml"));
+            }else {
+                loader = new FXMLLoader(getClass().getResource("/edu/cinepro/gui/GerantIndex.fxml"));
+
             }
         }
 
         try {
             Parent root = loader.load();
-            search.getScene().setRoot(root);
+            Logout.getScene().setRoot(root);
 
         } catch (IOException ex) {
             System.out.println(ex.getMessage());

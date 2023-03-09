@@ -8,7 +8,7 @@
 <?import javafx.scene.shape.Rectangle?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane fx:id="anchor" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: #761217;" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.ListProjectionsController">
+<AnchorPane fx:id="anchor" prefHeight="750.0" prefWidth="1400.0" style="-fx-background-color: #761217;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="cinepro.gui.ListProjectionsController">
    <children>
       <Rectangle arcHeight="5.0" arcWidth="5.0" fill="WHITE" height="58.0" layoutX="-10.0" layoutY="-12.0" stroke="BLACK" strokeType="INSIDE" width="1450.0" />
       <Button fx:id="Logout" layoutX="1287.0" layoutY="9.0" mnemonicParsing="false" onAction="#logout" style="-fx-background-color: white;" text="Logout" AnchorPane.rightAnchor="46.0">
@@ -27,27 +27,6 @@
          </font>
       </Button>
       <Button layoutX="246.0" layoutY="9.0" mnemonicParsing="false" onAction="#profile" style="-fx-background-color: white;" text="Profile">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-
-      <Button fx:id="ajoutMovies" layoutX="17.0" layoutY="53.0" mnemonicParsing="false" onAction="#ajoutMovies" style="-fx-background-color: E9E3E6;" text="Ajout Movies">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="listMovies" layoutX="139.0" layoutY="53.0" mnemonicParsing="false" onAction="#listMovies" prefHeight="30.0" prefWidth="108.0" style="-fx-background-color: E9E3E6;" text="List Movies">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="ajoutprojection" layoutX="268.0" layoutY="53.0" mnemonicParsing="false" onAction="#ajoutProjection" style="-fx-background-color: E9E3E6;" text="Ajout Projection">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
-      <Button fx:id="listProjections" layoutX="424.0" layoutY="54.0" mnemonicParsing="false" style="-fx-background-color: E9E3E6;" text="List Projections">
          <font>
             <Font name="System Bold" size="14.0" />
          </font>
@@ -73,10 +52,5 @@
             </AnchorPane>
          </content>
       </ScrollPane>
-      <Button layoutX="312.0" layoutY="9.0" mnemonicParsing="false" onAction="#reclamation" style="-fx-background-color: white;" text="Profile">
-         <font>
-            <Font name="System Bold" size="14.0" />
-         </font>
-      </Button>
    </children>
 </AnchorPane>
